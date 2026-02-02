@@ -1,156 +1,74 @@
 ---
 import Image from "astro/components/Image.astro";
-import { ArrowRightIcon } from "./icons";
+import { ArrowRightIcon, CheckmarkIcon } from "./icons";
 
-const stats = [
-  {
-    number: "38",
-    label: "Yıllık İnşaat Deneyimi"
-  },
-  {
-    number: "14",
-    label: "Yıllık Kentsel Dönüşüm Deneyimi"
-  },
-  {
-    number: "54+",
-    label: "Devam Eden Proje"
-  },
-  {
-    number: "342+",
-    label: "Tamamlanan Proje"
-  }
+const features = [
+  "Doğru yönlendirme",
+  "Hızlı bir dönüşüm",
+  "38 yıllık inşaat tecrübesi",
+  "14 yıllık kentsel dönüşüm deneyimi",
+  "Hukuki, teknik ve idari danışmanlık",
+  "Uzman kadro"
 ];
 ---
 
-<section class="w-full bg-gray-50 py-20 px-6">
-  <div class="max-w-7xl mx-auto">
-    <div class="flex flex-col lg:flex-row items-center gap-8 mb-20">
-      <div class="w-full lg:w-1/3">
-        <Image 
-          src="/building.png" 
-          alt="Building" 
-          width={600} 
-          height={800} 
-          class="w-full h-auto rounded-2xl object-cover"
-        />
-      </div>
+<section class="relative w-full py-24 px-6 overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    <Image 
+      src="/building-modern.jpg" 
+      alt="Modern Building" 
+      width={1920} 
+      height={1080} 
+      class="w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-black/20 backdrop-blur-xs "></div>
+  </div>
 
-      <div class="w-full lg:w-1/3 text-center lg:text-left">
-        <p class="text-[#E30A17] text-sm font-bold mb-4 tracking-wider">
-          2012'DEN GÜNÜMÜZE
+  <div class="relative z-10 max-w-7xl mx-auto">
+    <div class="bg-white rounded-3xl p-8 md:p-12 lg:p-16 shadow-2xl">
+      <p class="text-[#E30A17] text-sm md:text-base font-medium mb-4 tracking-wider uppercase">
+        38 YILI AŞKIN TECRÜBE
+      </p>
+
+      <h2 class="text-black text-4xl md:text-5xl lg:text-6xl font-semibold mb-6 leading-tight">
+        Hakkımızda
+      </h2>
+
+      <div class="text-[#585858] text-base md:text-lg leading-relaxed mb-8 space-y-4">
+        <p>
+          İnşaat sektöründe 38 yılı aşkın sürede oluşan tecrübesini, 2012 yılından buyana kentsel dönüşüm alanında uygulayarak 300 adedi aşkın binanın kentsel dönüşümünü başarıyla tamamlayan ve MEKA KENTSEL DÖNÜŞÜM PROJE YÖNETİMİ VE DANIŞMANLIK LTD. ŞİRKETİNİN sahibi olan NURDOĞAN BABADAĞ, bu alanda ilk olduğu gibi bundan sonra da konusunda yüksek tecrübeye sahip 3 avukat, 3 inşaat mühendisi, 2 mimar, 1 iç mimar, 1 elektrik mühendisi ve diğer yardımcı idari personelden oluşan toplam 16 kişilik uzman kadrosuyla kentsel dönüşüme ihtiyaç duyan bina maliklerine sürecin başından sonuna kadar tam kapsamlı olarak hizmet verilmesinde öncü kuruluş olmaya devam edecektir. Özellikle Türkiye’nin kalbi niteliğindeki İstanbul’un Kadıköy ilçesinde yoğun kentsel dönüşüm faaliyetleri ile bilinen NURDOĞAN BABADAĞ, yine kentsel dönüşüm ihtiyacının en çok görüldüğü İstanbul’un Etiler, Şişli, Beşiktaş ve Küçükyalı bölgeleri ile Antalya’nın Lara mevkiinde de dönüşüm faaliyetlerini yoğun bir şekilde sürdürmektedir. 
         </p>
-        <h2 class="text-black text-4xl md:text-5xl font-bold mb-6 leading-tight">
-          Kentsel Dönüşüme Yön Veren Öncü Kuruluş
-        </h2>
-        <p class="text-gray-600 text-base md:text-lg mb-8 leading-relaxed">
-          2012 yılından bu yana danışanlarımızı güvenli ve en avantajlı şekilde yeni binalarına kavuşturuyoruz.
-        </p>
-        <a
-          href="/hakkimizda"
-          class="inline-flex items-center gap-2 rounded-full bg-[#E30A17] px-8 py-4 text-base font-medium text-white hover:bg-[#e30a18df] transition"
-        >
-          Daha Fazla
-          <ArrowRightIcon />
-        </a>
       </div>
 
-      <div class="w-full lg:w-1/3">
-        <Image 
-          src="/planning.png" 
-          alt="Planning" 
-          width={600} 
-          height={800} 
-          class="w-full h-auto rounded-2xl object-cover"
-        />
-      </div>
-    </div>
-
-    <!-- Statistics Section -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12" id="stats-container">
-      {stats.map((stat, index) => {
-        const hasPlus = stat.number.includes('+');
-        const targetNumber = parseInt(stat.number.replace('+', ''));
-        return (
-          <div class="text-center stat-item">
-            <div 
-              class="text-black text-5xl md:text-6xl font-bold mb-2 stat-number"
-              data-target={targetNumber}
-              data-has-plus={hasPlus}
-            >
-              0{hasPlus ? '+' : ''}
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-10">
+        {features.map((feature) => (
+          <div class="flex items-center gap-3">
+            <div class="shrink-0 bg-[#E30A17] rounded-full">
+              <CheckmarkIcon />
             </div>
-            <div class="text-gray-600 text-sm md:text-base">
-              {stat.label}
-            </div>
+            <span class="text-[#262322] text-base md:text-lg">{feature}</span>
           </div>
-        );
-      })}
+        ))}
+      </div>
+
+      <a
+        href="/hakkimizda"
+        class="inline-flex items-center gap-3 rounded-full bg-[#E30A17] pl-2 pr-6 py-2 text-base font-medium text-white hover:bg-[#e30a18df] transition-all duration-300 shadow-lg hover:shadow-xl"
+      >
+        <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0">
+          <ArrowRightIcon color="#E30A17"/>
+        </div>
+        Daha Fazla
+      </a>
     </div>
   </div>
 </section>
 
-<script>
-  function animateNumber(element: HTMLElement, target: number, hasPlus: boolean, duration: number = 2000) {
-    const start = 0;
-    const startTime = performance.now();
-    
-    function update(currentTime: number) {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      
-      // Easing function (ease-out)
-      const easeOut = 1 - Math.pow(1 - progress, 3);
-      const current = Math.floor(start + (target - start) * easeOut);
-      
-      element.textContent = current.toString() + (hasPlus ? '+' : '');
-      
-      if (progress < 1) {
-        requestAnimationFrame(update);
-      } else {
-        element.textContent = target.toString() + (hasPlus ? '+' : '');
-      }
-    }
-    
-    requestAnimationFrame(update);
+<style>
+  section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
   }
-
-  function initStatsAnimation() {
-    const statsContainer = document.getElementById('stats-container');
-    if (!statsContainer) return;
-
-    const statItems = statsContainer.querySelectorAll('.stat-item');
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const statItem = entry.target as HTMLElement;
-          const numberElement = statItem.querySelector('.stat-number') as HTMLElement;
-          
-          if (numberElement && !numberElement.dataset.animated) {
-            const target = parseInt(numberElement.dataset.target || '0');
-            const hasPlus = numberElement.dataset.hasPlus === 'true';
-            
-            animateNumber(numberElement, target, hasPlus);
-            numberElement.dataset.animated = 'true';
-            
-            observer.unobserve(statItem);
-          }
-        }
-      });
-    }, {
-      threshold: 0.5
-    });
-
-    statItems.forEach((item) => {
-      observer.observe(item);
-    });
-  }
-
-  // Sayfa yüklendiğinde veya DOM hazır olduğunda çalıştır
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initStatsAnimation);
-  } else {
-    initStatsAnimation();
-  }
-</script>
+</style>
 

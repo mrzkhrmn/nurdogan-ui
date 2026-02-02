@@ -1,0 +1,155 @@
+---
+import Image from "astro/components/Image.astro";
+import { ArrowRightIcon } from "./icons";
+
+const stats = [
+  {
+    number: "38",
+    label: "Yıllık İnşaat Deneyimi"
+  },
+  {
+    number: "14",
+    label: "Yıllık Kentsel Dönüşüm Deneyimi"
+  },
+  {
+    number: "54+",
+    label: "Devam Eden Proje"
+  },
+  {
+    number: "342+",
+    label: "Tamamlanan Proje"
+  }
+];
+---
+
+<section class="w-full bg-gray-50 py-20 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col lg:flex-row items-center gap-8 mb-20">
+      <div class="w-full lg:w-1/3">
+        <Image 
+          src="/building.png" 
+          alt="Building" 
+          width={300} 
+          height={360} 
+          class="w-full h-auto rounded-2xl object-contain"
+        />
+      </div>
+
+      <div class="w-full lg:w-1/2 text-center lg:text-left">
+        <p class="text-[#E30A17] text-sm font-bold mb-4 tracking-wider">
+          2012'DEN GÜNÜMÜZE
+        </p>
+        <h2 class="text-[#262322] text-4xl md:text-5xl font-semibold mb-6 leading-tight">
+          Kentsel Dönüşüme Yön Veren Öncü Kuruluş
+        </h2>
+        <p class="text-[#585858] text-base md:text-lg mb-8 leading-relaxed">
+          2012 yılından bu yana danışanlarımızı güvenli ve en avantajlı şekilde yeni binalarına kavuşturuyoruz.
+        </p>
+        <a
+        href="/hakkimizda"
+        class="inline-flex items-center gap-3 rounded-full bg-[#E30A17] pl-2 pr-8 py-2 text-base font-medium text-white hover:bg-[#e30a18df] transition"
+        >
+        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shrink-0">
+          <ArrowRightIcon color="#E30A17"/>
+        </div>
+          Daha Fazla
+        </a>
+      </div>
+
+      <div class="w-full lg:w-1/3">
+        <Image 
+          src="/planning.png" 
+          alt="Planning" 
+          width={600} 
+          height={800} 
+          class="w-full h-auto rounded-2xl object-cover"
+        />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12" id="stats-container">
+      {stats.map((stat, index) => {
+        const hasPlus = stat.number.includes('+');
+        const targetNumber = parseInt(stat.number.replace('+', ''));
+        return (
+          <div class={`${index != 0 && "border-l border-[#DFDEDC]"} text-center stat-item`}>
+            <div 
+              class="text-[#262322] text-5xl md:text-6xl font-semibold mb-2 stat-number"
+              data-target={targetNumber}
+              data-has-plus={hasPlus}
+            >
+              0{hasPlus ? '+' : ''}
+            </div>
+            <div class="text-[#262322] text-sm md:text-base">
+              {stat.label}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<script>
+  function animateNumber(element: HTMLElement, target: number, hasPlus: boolean, duration: number = 2000) {
+    const start = 0;
+    const startTime = performance.now();
+    
+    function update(currentTime: number) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      const current = Math.floor(start + (target - start) * easeOut);
+      
+      element.textContent = current.toString() + (hasPlus ? '+' : '');
+      
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
+        element.textContent = target.toString() + (hasPlus ? '+' : '');
+      }
+    }
+    
+    requestAnimationFrame(update);
+  }
+
+  function initStatsAnimation() {
+    const statsContainer = document.getElementById('stats-container');
+    if (!statsContainer) return;
+
+    const statItems = statsContainer.querySelectorAll('.stat-item');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const statItem = entry.target as HTMLElement;
+          const numberElement = statItem.querySelector('.stat-number') as HTMLElement;
+          
+          if (numberElement && !numberElement.dataset.animated) {
+            const target = parseInt(numberElement.dataset.target || '0');
+            const hasPlus = numberElement.dataset.hasPlus === 'true';
+            
+            animateNumber(numberElement, target, hasPlus);
+            numberElement.dataset.animated = 'true';
+            
+            observer.unobserve(statItem);
+          }
+        }
+      });
+    }, {
+      threshold: 0.5
+    });
+
+    statItems.forEach((item) => {
+      observer.observe(item);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initStatsAnimation);
+  } else {
+    initStatsAnimation();
+  }
+</script>
+
