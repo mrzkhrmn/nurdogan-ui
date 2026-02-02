@@ -1,0 +1,57 @@
+---
+import Image from "astro/components/Image.astro";
+import SearchIcon from "./icons/SearchIcon.jsx";
+import { TurkeyFlag, ArrowRightIcon } from "./icons";
+const navItems = [
+  { label: "Hakkımızda", href: "/hakkimizda" },
+  { label: "Projeler", href: "/projeler" },
+  { label: "Hizmetlerimiz", href: "/hizmetlerimiz" },
+  { label: "Haber Portalı", href: "/haberler" },
+  { label: "İletişim", href: "/iletisim" },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 py-10 px-20 w-full">
+  <div class="w-full mx-auto px-6">
+    <div class="flex items-center justify-between h-16">
+
+      <a href="/" class="text-xl font-bold tracking-tight">
+        <Image src="/nurdogan-logo.png" alt="Logo" width={170} height={100} />
+      </a>
+
+      <nav class="hidden md:flex items-center gap-10">
+        {navItems.map(item => (
+          <a
+            href={item.href}
+            class="text-sm font-medium text-white hover:text-gray-200 transition"
+          >
+            {item.label}
+          </a>
+        ))}
+            <div class="flex items-center  bg-[#F0F0F0]/30 rounded-full px-4 py-1.5 w-40 focus:ring-2  ">
+                <input
+                type="text"
+                placeholder="Ara"
+                class="w-full text-sm outline-none text-white placeholder:text-white/70 "
+                />
+                <SearchIcon />
+            </div>
+            <a
+                href="/teklif-al"
+                class="rounded-full bg-red-600 px-6 py-3 text-sm font-medium text-white hover:bg-red-700 transition flex items-center gap-2"
+            >
+                Teklif Al
+                <ArrowRightIcon />
+            </a>
+            <button class="w-10 h-10">
+                <TurkeyFlag />
+            </button>
+      </nav>
+
+      <div class="flex items-center gap-4">
+
+
+      </div>
+    </div>
+  </div>
+</header>
