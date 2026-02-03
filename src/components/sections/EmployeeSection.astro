@@ -1,11 +1,12 @@
 ---
 import Image from "astro/components/Image.astro";
 
+const baseUrl = import.meta.env.BASE_URL;
 const employees = [
   {
     name: "Andrew Richard",
     position: "Civil Engineer",
-    image: "/worker-1.png",
+    image: `${baseUrl}worker-1.png`,
     description: "38 yılı aşkın inşaat sektörü deneyimiyle, kentsel dönüşüm projelerinde uzmanlaşmış bir mühendis. Projelerin teknik yönetiminden sorumlu.",
     startDate: "2010",
     email: "andrew@nurdogan.com",
@@ -14,7 +15,7 @@ const employees = [
   {
     name: "Amber Johnson",
     position: "Engineer",
-    image: "/worker-2.png",
+    image: `${baseUrl}worker-2.png`,
     description: "Kentsel dönüşüm süreçlerinde teknik danışmanlık sağlayan deneyimli mühendis. Proje planlama ve uygulama aşamalarında aktif rol alıyor.",
     startDate: "2012",
     email: "amber@nurdogan.com",
@@ -23,7 +24,7 @@ const employees = [
   {
     name: "Michel Smith",
     position: "Architecture",
-    image: "/worker-3.png",
+    image: `${baseUrl}worker-3.png`,
     description: "Mimari tasarım ve proje yönetiminde uzman. Modern ve güvenli yapıların tasarımında öncü rol oynuyor.",
     startDate: "2015",
     email: "michel@nurdogan.com",
@@ -32,7 +33,7 @@ const employees = [
   {
     name: "Mehmet Yılmaz",
     position: "İnşaat Mühendisi",
-    image: "/worker-1.png",
+    image: `${baseUrl}worker-1.png`,
     description: "Kentsel dönüşüm projelerinde teknik kontrol ve kalite yönetimi konusunda uzman. 300'den fazla projede görev aldı.",
     startDate: "2013",
     email: "mehmet@nurdogan.com",
@@ -41,7 +42,7 @@ const employees = [
   {
     name: "Ahmet Demir",
     position: "Proje Müdürü",
-    image: "/worker-2.png",
+    image: `${baseUrl}worker-2.png`,
     description: "Proje yönetimi ve koordinasyon alanında deneyimli. Müşteri ilişkileri ve proje takibinde başarılı bir geçmişe sahip.",
     startDate: "2014",
     email: "ahmet@nurdogan.com",
@@ -50,7 +51,7 @@ const employees = [
   {
     name: "Ali Kaya",
     position: "Mimar",
-    image: "/worker-3.png",
+    image: `${baseUrl}worker-3.png`,
     description: "Yenilikçi mimari çözümler üreten, kentsel dönüşüm projelerinde tasarım liderliği yapan deneyimli mimar.",
     startDate: "2016",
     email: "ali@nurdogan.com",
