@@ -1,0 +1,234 @@
+---
+import Image from "astro/components/Image.astro";
+
+const projects = [
+  {
+    name: "Nigar Apartmanı",
+    image: "/interior-1.png"
+  },
+  {
+    name: "Mumcuoğlu Apartmanı",
+    image: "/interior-1.png"
+  },
+  {
+    name: "Kuzu Apartmanı",
+    image: "/interior-1.png"
+  },
+  {
+    name: "Oda Apartmanı",
+    image: "/interior-1.png"
+  },
+  {
+    name: "Yıldız Apartmanı",
+    image: "/interior-1.png"
+  },
+  {
+    name: "Şahin Apartmanı",
+    image: "/interior-1.png"
+  }
+];
+---
+
+<section id="projeler" class="w-full bg-white py-12 md:py-20 px-4 md:px-6">
+  <div class="max-w-[1480px] mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-6 md:mb-10 gap-4 md:gap-0">
+      <div>
+        <p class="text-[#E30A17] text-xs md:text-sm font-bold mb-2 md:mb-4 tracking-wider uppercase">
+          342+ TAMAMLANAN PROJE
+        </p>
+        <h2 class="text-[#262322] text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight">
+          Projeler
+        </h2>
+      </div>
+      
+      <div class="hidden md:flex items-center gap-3">
+        <button 
+          class="projects-carousel-btn projects-carousel-btn-prev w-12 h-12 rounded-full bg-[#E30A17] flex items-center justify-center hover:bg-[#c00914] transition-colors z-10"
+          id="projects-prev-btn"
+          aria-label="Önceki"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        
+        <button 
+          class="projects-carousel-btn projects-carousel-btn-next w-12 h-12 rounded-full bg-[#E30A17] flex items-center justify-center hover:bg-[#c00914] transition-colors z-10"
+          id="projects-next-btn"
+          aria-label="Sonraki"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="relative">
+      <div class="projects-carousel-container overflow-hidden">
+        <div class="projects-carousel-track flex transition-transform duration-500 ease-in-out" id="projects-carousel-track">
+          {projects.map((project, index) => (
+            <div class="projects-carousel-slide min-w-full md:min-w-[25%] px-2 md:px-3" data-index={index}>
+              <div class="relative w-full overflow-hidden rounded-2xl bg-white shadow-lg group cursor-pointer">
+                <div class="aspect-2/3 relative overflow-hidden">
+                  <Image 
+                    src={project.image}
+                    alt={project.name}
+                    width={600}
+                    height={450}
+                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                  <div class="absolute top-2 right-2 md:top-4 md:right-4 bg-white px-2 py-1 md:px-4 md:py-2 rounded-lg shadow-md">
+                    <p class="text-[#262322] text-xs md:text-sm lg:text-base font-semibold">
+                      {project.name}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      <!-- Mobil butonlar -->
+      <div class="flex md:hidden items-center justify-center gap-4 mt-6">
+        <button 
+          class="projects-carousel-btn projects-carousel-btn-prev w-12 h-12 rounded-full bg-[#E30A17] flex items-center justify-center hover:bg-[#c00914] active:bg-[#a00811] transition-colors z-10"
+          id="projects-prev-btn-mobile"
+          aria-label="Önceki"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        
+        <button 
+          class="projects-carousel-btn projects-carousel-btn-next w-12 h-12 rounded-full bg-[#E30A17] flex items-center justify-center hover:bg-[#c00914] active:bg-[#a00811] transition-colors z-10"
+          id="projects-next-btn-mobile"
+          aria-label="Sonraki"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initProjectsCarousel() {
+    const track = document.getElementById('projects-carousel-track');
+    const prevBtn = document.getElementById('projects-prev-btn');
+    const nextBtn = document.getElementById('projects-next-btn');
+    const prevBtnMobile = document.getElementById('projects-prev-btn-mobile');
+    const nextBtnMobile = document.getElementById('projects-next-btn-mobile');
+    const slides = document.querySelectorAll('.projects-carousel-slide');
+    
+    if (!track) return;
+
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    let isMobile = window.innerWidth < 768;
+    let slidesToShow = isMobile ? 1 : 4;
+
+    function updateCarousel() {
+      if (!track) return;
+      
+      const translateX = isMobile 
+        ? -currentIndex * 100 
+        : -currentIndex * (100 / slidesToShow);
+      
+      track.style.transform = `translateX(${translateX}%)`;
+    }
+
+    function goToNext() {
+      if (isMobile) {
+        currentIndex = (currentIndex + 1) % totalSlides;
+      } else {
+        if (currentIndex >= totalSlides - slidesToShow) {
+          currentIndex = 0;
+        } else {
+          currentIndex = currentIndex + 1;
+        }
+      }
+      updateCarousel();
+      stopAutoPlay();
+      startAutoPlay();
+    }
+
+    function goToPrev() {
+      if (isMobile) {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      } else {
+        currentIndex = Math.max(currentIndex - 1, 0);
+      }
+      updateCarousel();
+      stopAutoPlay();
+      startAutoPlay();
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', goToPrev);
+    if (nextBtn) nextBtn.addEventListener('click', goToNext);
+    if (prevBtnMobile) prevBtnMobile.addEventListener('click', goToPrev);
+    if (nextBtnMobile) nextBtnMobile.addEventListener('click', goToNext);
+
+    let autoPlayInterval: number | null = null;
+    
+    function startAutoPlay() {
+      autoPlayInterval = setInterval(goToNext, 4000) as unknown as number;
+    }
+
+    function stopAutoPlay() {
+      if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = null;
+      }
+    }
+
+    const carouselContainer = document.querySelector('.projects-carousel-container');
+    if (carouselContainer) {
+      carouselContainer.addEventListener('mouseenter', stopAutoPlay);
+      carouselContainer.addEventListener('mouseleave', startAutoPlay);
+    }
+
+    let resizeTimeout: number;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        const wasMobile = isMobile;
+        isMobile = window.innerWidth < 768;
+        slidesToShow = isMobile ? 1 : 4;
+        if (wasMobile !== isMobile) {
+          currentIndex = 0;
+          updateCarousel();
+        }
+      }, 250) as unknown as number;
+    });
+
+    updateCarousel();
+    startAutoPlay();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initProjectsCarousel);
+  } else {
+    initProjectsCarousel();
+  }
+</script>
+
+<style>
+  .projects-carousel-container {
+    position: relative;
+  }
+
+  .projects-carousel-track {
+    display: flex;
+    will-change: transform;
+  }
+
+  .projects-carousel-slide {
+    flex-shrink: 0;
+  }
+</style>
+

@@ -1,0 +1,369 @@
+---
+import Image from "astro/components/Image.astro";
+
+const employees = [
+  {
+    name: "Andrew Richard",
+    position: "Civil Engineer",
+    image: "/worker-1.png",
+    description: "38 yılı aşkın inşaat sektörü deneyimiyle, kentsel dönüşüm projelerinde uzmanlaşmış bir mühendis. Projelerin teknik yönetiminden sorumlu.",
+    startDate: "2010",
+    email: "andrew@nurdogan.com",
+    experience: "14 Yıl"
+  },
+  {
+    name: "Amber Johnson",
+    position: "Engineer",
+    image: "/worker-2.png",
+    description: "Kentsel dönüşüm süreçlerinde teknik danışmanlık sağlayan deneyimli mühendis. Proje planlama ve uygulama aşamalarında aktif rol alıyor.",
+    startDate: "2012",
+    email: "amber@nurdogan.com",
+    experience: "12 Yıl"
+  },
+  {
+    name: "Michel Smith",
+    position: "Architecture",
+    image: "/worker-3.png",
+    description: "Mimari tasarım ve proje yönetiminde uzman. Modern ve güvenli yapıların tasarımında öncü rol oynuyor.",
+    startDate: "2015",
+    email: "michel@nurdogan.com",
+    experience: "9 Yıl"
+  },
+  {
+    name: "Mehmet Yılmaz",
+    position: "İnşaat Mühendisi",
+    image: "/worker-1.png",
+    description: "Kentsel dönüşüm projelerinde teknik kontrol ve kalite yönetimi konusunda uzman. 300'den fazla projede görev aldı.",
+    startDate: "2013",
+    email: "mehmet@nurdogan.com",
+    experience: "11 Yıl"
+  },
+  {
+    name: "Ahmet Demir",
+    position: "Proje Müdürü",
+    image: "/worker-2.png",
+    description: "Proje yönetimi ve koordinasyon alanında deneyimli. Müşteri ilişkileri ve proje takibinde başarılı bir geçmişe sahip.",
+    startDate: "2014",
+    email: "ahmet@nurdogan.com",
+    experience: "10 Yıl"
+  },
+  {
+    name: "Ali Kaya",
+    position: "Mimar",
+    image: "/worker-3.png",
+    description: "Yenilikçi mimari çözümler üreten, kentsel dönüşüm projelerinde tasarım liderliği yapan deneyimli mimar.",
+    startDate: "2016",
+    email: "ali@nurdogan.com",
+    experience: "8 Yıl"
+  }
+];
+---
+
+<section class="w-full bg-gray-100 py-20 px-6">
+  <div class="max-w-[1340px] mx-auto">
+    <div class="text-center mb-12">
+      <p class="text-[#E30A17] text-sm font-bold mb-4 tracking-wider uppercase">
+        UZMAN KADROMUZ
+      </p>
+      <h2 class="text-[#262322] text-4xl md:text-5xl font-semibold leading-tight">
+        Ekibimiz
+      </h2>
+    </div>
+
+    <div class="relative">
+      <div class="carousel-container overflow-hidden">
+        <div class="carousel-track flex transition-transform duration-500 ease-in-out" id="carousel-track">
+          {employees.map((employee, index) => (
+            <div class="carousel-slide min-w-full sm:min-w-[50%] md:min-w-[33.333%] lg:min-w-[25%] px-2 md:px-3" data-index={index}>
+              <div class="employee-card-container h-full">
+                <div class="employee-card h-full">
+                  <div class="employee-card-front w-full h-full">
+                    <div class="relative w-full h-full overflow-hidden rounded-2xl bg-white shadow-lg">
+                      <Image 
+                        src={employee.image}
+                        alt={employee.name}
+                        width={400}
+                        height={533}
+                        class="w-full h-full object-cover"
+                      />
+                      <div class="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 via-black/70 to-transparent p-4 md:p-5">
+                        <div class="flex items-center justify-between">
+                          <div>
+                            <h3 class="text-white text-lg md:text-xl font-bold mb-1">
+                              {employee.name}
+                            </h3>
+                            <p class="text-white text-sm md:text-base opacity-90">
+                              {employee.position}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="employee-card-back w-full h-full">
+                    <div class="w-full h-full bg-linear-to-br from-[#262322] to-[#1a1817] rounded-2xl p-5 sm:p-6 md:p-4 lg:p-5 xl:p-6 flex flex-col justify-between text-white shadow-lg">
+                      <div>
+                        <h3 class="text-white text-lg sm:text-xl md:text-lg lg:text-xl xl:text-2xl font-bold mb-2 sm:mb-2 md:mb-1.5 lg:mb-2 xl:mb-2">
+                          {employee.name}
+                        </h3>
+                        <p class="text-[#E30A17] text-sm sm:text-base md:text-xs lg:text-sm xl:text-base font-medium mb-3 sm:mb-4 md:mb-2.5 lg:mb-3 xl:mb-4">
+                          {employee.position}
+                        </p>
+                        <p class="text-white/90 text-sm sm:text-base md:text-xs lg:text-sm xl:text-base leading-relaxed mb-4 sm:mb-5 md:mb-3 lg:mb-4 xl:mb-6">
+                          {employee.description}
+                        </p>
+                      </div>
+                      
+                      <div class="space-y-3 sm:space-y-3 md:space-y-2 lg:space-y-2.5 xl:space-y-3 border-t border-white/20 pt-4 sm:pt-4 md:pt-2.5 lg:pt-3 xl:pt-4">
+                        <div class="flex items-center gap-3 sm:gap-3 md:gap-2 lg:gap-2.5 xl:gap-3">
+                          <div class="w-8 h-8 sm:w-8 sm:h-8 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-8 xl:h-8 rounded-full bg-[#E30A17]/20 flex items-center justify-center shrink-0">
+                            <svg width="16" height="16" class="sm:w-4 sm:h-4 md:w-3 md:h-3 lg:w-3.5 lg:h-3.5 xl:w-4 xl:h-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M8 1V15M1 8H15" stroke="#E30A17" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                          </div>
+                          <div class="min-w-0">
+                            <p class="text-white/70 text-xs sm:text-xs md:text-[10px] lg:text-xs xl:text-xs">İşe Başlama</p>
+                            <p class="text-white font-semibold text-sm sm:text-sm md:text-xs lg:text-xs xl:text-sm">{employee.startDate}</p>
+                          </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-3 sm:gap-3 md:gap-2 lg:gap-2.5 xl:gap-3">
+                          <div class="w-8 h-8 sm:w-8 sm:h-8 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-8 xl:h-8 rounded-full bg-[#E30A17]/20 flex items-center justify-center shrink-0">
+                            <svg width="16" height="16" class="sm:w-4 sm:h-4 md:w-3 md:h-3 lg:w-3.5 lg:h-3.5 xl:w-4 xl:h-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M2 4L8 8L14 4M2 4H14M2 4V12H14V4" stroke="#E30A17" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                          </div>
+                          <div class="min-w-0">
+                            <p class="text-white/70 text-xs sm:text-xs md:text-[10px] lg:text-xs xl:text-xs">E-posta</p>
+                            <p class="text-white font-semibold text-sm sm:text-sm md:text-xs lg:text-xs xl:text-sm truncate">{employee.email}</p>
+                          </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-3 sm:gap-3 md:gap-2 lg:gap-2.5 xl:gap-3">
+                          <div class="w-8 h-8 sm:w-8 sm:h-8 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-8 xl:h-8 rounded-full bg-[#E30A17]/20 flex items-center justify-center shrink-0">
+                            <svg width="16" height="16" class="sm:w-4 sm:h-4 md:w-3 md:h-3 lg:w-3.5 lg:h-3.5 xl:w-4 xl:h-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M8 1L10.5 5.5L15.5 6.5L12 10L12.5 15L8 12.5L3.5 15L4 10L0.5 6.5L5.5 5.5L8 1Z" stroke="#E30A17" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                          </div>
+                          <div class="min-w-0">
+                            <p class="text-white/70 text-xs sm:text-xs md:text-[10px] lg:text-xs xl:text-xs">Deneyim</p>
+                            <p class="text-white font-semibold text-sm sm:text-sm md:text-xs lg:text-xs xl:text-sm">{employee.experience}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <button 
+        class="carousel-btn carousel-btn-prev absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors z-10"
+        id="prev-btn"
+        aria-label="Önceki"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18L9 12L15 6" stroke="#262322" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      
+      <button 
+        class="carousel-btn carousel-btn-next absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors z-10"
+        id="next-btn"
+        aria-label="Sonraki"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 18L15 12L9 6" stroke="#262322" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  function initCarousel() {
+    const track = document.getElementById('carousel-track');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const slides = document.querySelectorAll('.carousel-slide');
+    
+    if (!track || !prevBtn || !nextBtn) return;
+
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    
+    function getSlidesToShow() {
+      const width = window.innerWidth;
+      if (width < 640) return 1; // Mobile (< sm)
+      if (width < 768) return 2; // Small (sm to md)
+      if (width < 1024) return 3; // Tablet (md to lg)
+      return 4; // Desktop (lg and above)
+    }
+    
+    function isMobileView() {
+      return window.innerWidth < 640;
+    }
+    
+    let slidesToShow = getSlidesToShow();
+
+    function updateCarousel() {
+      if (!track) return;
+      
+      slidesToShow = getSlidesToShow();
+      const mobile = isMobileView();
+      const translateX = mobile 
+        ? -currentIndex * 100 
+        : -currentIndex * (100 / slidesToShow);
+      
+      track.style.transform = `translateX(${translateX}%)`;
+    }
+
+    function goToNext() {
+      slidesToShow = getSlidesToShow();
+      const mobile = isMobileView();
+      if (mobile) {
+        currentIndex = (currentIndex + 1) % totalSlides;
+      } else {
+        if (currentIndex >= totalSlides - slidesToShow) {
+          currentIndex = 0;
+        } else {
+          currentIndex = currentIndex + 1;
+        }
+      }
+      updateCarousel();
+      stopAutoPlay();
+      startAutoPlay();
+    }
+
+    function goToPrev() {
+      const mobile = isMobileView();
+      if (mobile) {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      } else {
+        currentIndex = Math.max(currentIndex - 1, 0);
+      }
+      updateCarousel();
+      stopAutoPlay();
+      startAutoPlay();
+    }
+
+    nextBtn.addEventListener('click', goToNext);
+    prevBtn.addEventListener('click', goToPrev);
+
+    let autoPlayInterval: number | null = null;
+    
+    function startAutoPlay() {
+      autoPlayInterval = setInterval(goToNext, 4000) as unknown as number;
+    }
+
+    function stopAutoPlay() {
+      if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = null;
+      }
+    }
+
+    const carouselContainer = document.querySelector('.carousel-container');
+    if (carouselContainer) {
+      carouselContainer.addEventListener('mouseenter', stopAutoPlay);
+      carouselContainer.addEventListener('mouseleave', startAutoPlay);
+    }
+
+    let resizeTimeout: number;
+    let previousSlidesToShow = slidesToShow;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        const newSlidesToShow = getSlidesToShow();
+        if (previousSlidesToShow !== newSlidesToShow) {
+          currentIndex = 0;
+          previousSlidesToShow = newSlidesToShow;
+          updateCarousel();
+        }
+      }, 250) as unknown as number;
+    });
+
+    updateCarousel();
+    startAutoPlay();
+
+    // Touch support for mobile cards
+    const cardContainers = document.querySelectorAll('.employee-card-container');
+    cardContainers.forEach((container) => {
+      container.addEventListener('click', function(this: HTMLElement) {
+        if (window.innerWidth < 768) {
+          this.classList.toggle('touched');
+        }
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCarousel);
+  } else {
+    initCarousel();
+  }
+</script>
+
+<style>
+  .carousel-container {
+    position: relative;
+  }
+
+  .carousel-track {
+    display: flex;
+    will-change: transform;
+  }
+
+  .carousel-slide {
+    flex-shrink: 0;
+  }
+
+  .employee-card-container {
+    perspective: 1000px;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+  }
+
+  .employee-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease-in-out;
+  }
+
+  .employee-card-front,
+  .employee-card-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .employee-card-back {
+    transform: rotateY(180deg);
+  }
+
+  .employee-card-container:hover .employee-card {
+    transform: rotateY(180deg);
+  }
+
+  .employee-card-container.touched .employee-card {
+    transform: rotateY(180deg);
+  }
+
+  @media (max-width: 767px) {
+    .carousel-btn-prev,
+    .carousel-btn-next {
+      display: none;
+    }
+  }
+</style>

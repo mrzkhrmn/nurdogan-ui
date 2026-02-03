@@ -1,0 +1,86 @@
+---
+import Image from "astro/components/Image.astro";
+import { ArrowRightIcon, CheckmarkIcon } from "../icons";
+
+const features = [
+  "Doğru yönlendirme",
+  "Hızlı bir dönüşüm",
+  "38 yıllık inşaat tecrübesi",
+  "14 yıllık kentsel dönüşüm deneyimi",
+  "Hukuki, teknik ve idari danışmanlık",
+  "Uzman kadro"
+];
+---
+
+<section id="hakkimizda" class="relative w-full py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    <Image 
+      src="/building-modern.jpg" 
+      alt="Modern Building" 
+      width={1920} 
+      height={1080} 
+      class="w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-black/20 backdrop-blur-xs "></div>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto">
+    <div class="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-10 lg:p-12 xl:p-16 shadow-2xl">
+      <p class="text-[#E30A17] text-xs sm:text-sm md:text-base font-medium mb-3 sm:mb-4 tracking-wider uppercase">
+        38 YILI AŞKIN TECRÜBE
+      </p>
+
+      <h2 class="text-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold mb-4 sm:mb-5 md:mb-6 leading-tight">
+        Hakkımızda
+      </h2>
+
+      <div class="text-[#585858] text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-7 md:mb-8 space-y-3 sm:space-y-4">
+        <p>
+          İnşaat sektöründe 38 yılı aşkın sürede oluşan tecrübesini, 2012 yılından buyana kentsel dönüşüm alanında uygulayarak 300 adedi aşkın binanın kentsel dönüşümünü başarıyla tamamlayan ve MEKA KENTSEL DÖNÜŞÜM PROJE YÖNETİMİ VE DANIŞMANLIK LTD. ŞİRKETİNİN sahibi olan NURDOĞAN BABADAĞ, bu alanda ilk olduğu gibi bundan sonra da konusunda yüksek tecrübeye sahip 3 avukat, 3 inşaat mühendisi, 2 mimar, 1 iç mimar, 1 elektrik mühendisi ve diğer yardımcı idari personelden oluşan toplam 16 kişilik uzman kadrosuyla kentsel dönüşüme ihtiyaç duyan bina maliklerine sürecin başından sonuna kadar tam kapsamlı olarak hizmet verilmesinde öncü kuruluş olmaya devam edecektir. Özellikle Türkiye'nin kalbi niteliğindeki İstanbul'un Kadıköy ilçesinde yoğun kentsel dönüşüm faaliyetleri ile bilinen NURDOĞAN BABADAĞ, yine kentsel dönüşüm ihtiyacının en çok görüldüğü İstanbul'un Etiler, Şişli, Beşiktaş ve Küçükyalı bölgeleri ile Antalya'nın Lara mevkiinde de dönüşüm faaliyetlerini yoğun bir şekilde sürdürmektedir. 
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8 md:mb-10">
+        {features.map((feature) => (
+          <div class="flex items-center gap-2 sm:gap-3">
+            <div class="shrink-0 bg-[#E30A17] rounded-full">
+              <CheckmarkIcon />
+            </div>
+            <span class="text-[#262322] text-sm sm:text-base md:text-lg">{feature}</span>
+          </div>
+        ))}
+      </div>
+
+      <a
+        href="/hakkimizda"
+        class="inline-flex items-center gap-2 sm:gap-3 rounded-full bg-[#E30A17] pl-1.5 sm:pl-2 pr-4 sm:pr-6 py-1.5 sm:py-2 text-sm sm:text-base font-medium text-white hover:bg-[#e30a18df] transition-all duration-300 shadow-lg hover:shadow-xl"
+      >
+        <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white flex items-center justify-center shrink-0">
+          <ArrowRightIcon color="#E30A17"/>
+        </div>
+        Daha Fazla
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  section {
+    min-height: auto;
+    display: flex;
+    align-items: center;
+  }
+
+  @media (min-width: 640px) {
+    section {
+      min-height: 80vh;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    section {
+      min-height: 100vh;
+    }
+  }
+</style>
+
