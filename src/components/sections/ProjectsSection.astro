@@ -2,7 +2,8 @@
 import Image from "astro/components/Image.astro";
 
 const baseUrl = import.meta.env.BASE_URL;
-const projects = [
+
+const completedProjects = [
   {
     name: "Nigar Apartmanı",
     image: `${baseUrl}interior-1.png`
@@ -26,11 +27,46 @@ const projects = [
   {
     name: "Şahin Apartmanı",
     image: `${baseUrl}interior-1.png`
+  },
+  {
+    name: "Güneş Apartmanı",
+    image: `${baseUrl}interior-1.png`
+  },
+  {
+    name: "Ay Apartmanı",
+    image: `${baseUrl}interior-1.png`
+  }
+];
+
+const ongoingProjects = [
+  {
+    name: "Merkez Kentsel Dönüşüm Projesi",
+    image: `${baseUrl}interior-1.png`
+  },
+  {
+    name: "Bahçelievler Yeni Yaşam",
+    image: `${baseUrl}interior-1.png`
+  },
+  {
+    name: "Modern Konut Kompleksi",
+    image: `${baseUrl}interior-1.png`
+  },
+  {
+    name: "Şehir Merkezi Rezidans",
+    image: `${baseUrl}interior-1.png`
+  },
+  {
+    name: "Yeşil Vadisi Projesi",
+    image: `${baseUrl}interior-1.png`
+  },
+  {
+    name: "Premium Residence",
+    image: `${baseUrl}interior-1.png`
   }
 ];
 ---
 
-<section id="projeler" class="w-full bg-white py-12 md:py-20 px-4 md:px-6">
+<section id="projeler" class="w-full bg-white pb-12 md:py-20 px-4 md:px-6">
   <div class="max-w-[1480px] mx-auto">
     <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-6 md:mb-10 gap-4 md:gap-0">
       <div>
@@ -65,13 +101,58 @@ const projects = [
       </div>
     </div>
 
+    <!-- Sekmeler -->
+    <div class="flex items-center gap-4 mb-8 md:mb-12 border-b border-gray-200">
+      <button 
+        class="project-tab px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-semibold border-b-2 border-transparent transition-colors active-tab"
+        data-tab="completed"
+        id="tab-completed"
+      >
+        Tamamlanan Projelerimiz
+      </button>
+      <button 
+        class="project-tab px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-semibold border-b-2 border-transparent transition-colors"
+        data-tab="ongoing"
+        id="tab-ongoing"
+      >
+        Devam Eden Projelerimiz
+      </button>
+    </div>
+
     <div class="relative">
-      <div class="projects-carousel-container overflow-hidden">
-        <div class="projects-carousel-track flex transition-transform duration-500 ease-in-out" id="projects-carousel-track">
-          {projects.map((project, index) => (
-            <div class="projects-carousel-slide min-w-full md:min-w-[25%] px-2 md:px-3" data-index={index}>
+      <!-- Tamamlanan Projeler -->
+      <div class="projects-carousel-container overflow-hidden" id="carousel-completed">
+        <div class="projects-carousel-track flex transition-transform duration-500 ease-in-out" id="projects-carousel-track-completed">
+          {completedProjects.map((project, index) => (
+            <div class="projects-carousel-slide min-w-[85%] sm:min-w-[70%] md:min-w-[25%] px-2 md:px-3" data-index={index}>
               <div class="relative w-full overflow-hidden rounded-2xl bg-white shadow-lg group cursor-pointer">
-                <div class="aspect-2/3 relative overflow-hidden">
+                <div class="aspect-[3/4] md:aspect-[2/3] relative overflow-hidden">
+                  <Image 
+                    src={project.image}
+                    alt={project.name}
+                    width={600}
+                    height={450}
+                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                  <div class="absolute top-2 right-2 md:top-4 md:right-4 bg-white px-2 py-1 md:px-4 md:py-2 rounded-lg shadow-md">
+                    <p class="text-[#262322] text-xs md:text-sm lg:text-base font-semibold">
+                      {project.name}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Devam Eden Projeler -->
+      <div class="projects-carousel-container overflow-hidden hidden" id="carousel-ongoing">
+        <div class="projects-carousel-track flex transition-transform duration-500 ease-in-out" id="projects-carousel-track-ongoing">
+          {ongoingProjects.map((project, index) => (
+            <div class="projects-carousel-slide min-w-[85%] sm:min-w-[70%] md:min-w-[25%] px-2 md:px-3" data-index={index}>
+              <div class="relative w-full overflow-hidden rounded-2xl bg-white shadow-lg group cursor-pointer">
+                <div class="aspect-[3/4] md:aspect-[2/3] relative overflow-hidden">
                   <Image 
                     src={project.image}
                     alt={project.name}
@@ -118,36 +199,41 @@ const projects = [
 </section>
 
 <script>
-  function initProjectsCarousel() {
-    const track = document.getElementById('projects-carousel-track');
-    const prevBtn = document.getElementById('projects-prev-btn');
-    const nextBtn = document.getElementById('projects-next-btn');
-    const prevBtnMobile = document.getElementById('projects-prev-btn-mobile');
-    const nextBtnMobile = document.getElementById('projects-next-btn-mobile');
-    const slides = document.querySelectorAll('.projects-carousel-slide');
-    
-    if (!track) return;
+  let currentTab = 'completed';
+  let carouselInstances: { [key: string]: any } = {};
 
+  function initCarousel(tabType: string) {
+    const trackId = `projects-carousel-track-${tabType}`;
+    const track = document.getElementById(trackId);
+    if (!track) return null;
+
+    const slides = track.querySelectorAll('.projects-carousel-slide');
     let currentIndex = 0;
-    const totalSlides = slides.length;
-    let isMobile = window.innerWidth < 768;
+    let isMobile = window.innerWidth < 640;
+    let isTablet = window.innerWidth >= 640 && window.innerWidth < 768;
     let slidesToShow = isMobile ? 1 : 4;
+    let autoPlayInterval: number | null = null;
 
     function updateCarousel() {
       if (!track) return;
       
-      const translateX = isMobile 
-        ? -currentIndex * 100 
-        : -currentIndex * (100 / slidesToShow);
+      let translateX;
+      if (isMobile) {
+        translateX = -currentIndex * 85;
+      } else if (isTablet) {
+        translateX = -currentIndex * 70;
+      } else {
+        translateX = -currentIndex * (100 / slidesToShow);
+      }
       
       track.style.transform = `translateX(${translateX}%)`;
     }
 
     function goToNext() {
       if (isMobile) {
-        currentIndex = (currentIndex + 1) % totalSlides;
+        currentIndex = (currentIndex + 1) % slides.length;
       } else {
-        if (currentIndex >= totalSlides - slidesToShow) {
+        if (currentIndex >= slides.length - slidesToShow) {
           currentIndex = 0;
         } else {
           currentIndex = currentIndex + 1;
@@ -160,7 +246,7 @@ const projects = [
 
     function goToPrev() {
       if (isMobile) {
-        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
       } else {
         currentIndex = Math.max(currentIndex - 1, 0);
       }
@@ -169,13 +255,6 @@ const projects = [
       startAutoPlay();
     }
 
-    if (prevBtn) prevBtn.addEventListener('click', goToPrev);
-    if (nextBtn) nextBtn.addEventListener('click', goToNext);
-    if (prevBtnMobile) prevBtnMobile.addEventListener('click', goToPrev);
-    if (nextBtnMobile) nextBtnMobile.addEventListener('click', goToNext);
-
-    let autoPlayInterval: number | null = null;
-    
     function startAutoPlay() {
       autoPlayInterval = setInterval(goToNext, 4000) as unknown as number;
     }
@@ -187,28 +266,116 @@ const projects = [
       }
     }
 
-    const carouselContainer = document.querySelector('.projects-carousel-container');
+    const carouselContainer = document.getElementById(`carousel-${tabType}`);
     if (carouselContainer) {
       carouselContainer.addEventListener('mouseenter', stopAutoPlay);
       carouselContainer.addEventListener('mouseleave', startAutoPlay);
     }
 
+    function handleResize() {
+      const wasMobile = isMobile;
+      const wasTablet = isTablet;
+      isMobile = window.innerWidth < 640;
+      isTablet = window.innerWidth >= 640 && window.innerWidth < 768;
+      slidesToShow = isMobile ? 1 : 4;
+      if (wasMobile !== isMobile || wasTablet !== isTablet) {
+        currentIndex = 0;
+        updateCarousel();
+      }
+    }
+
+    updateCarousel();
+    startAutoPlay();
+
+    return {
+      goToNext,
+      goToPrev,
+      stopAutoPlay,
+      handleResize
+    };
+  }
+
+  function initProjectsCarousel() {
+    // Sekme değiştirme
+    const tabs = document.querySelectorAll('.project-tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const tabType = tab.getAttribute('data-tab');
+        if (!tabType) return;
+
+        // Sekme stillerini güncelle
+        tabs.forEach(t => {
+          t.classList.remove('active-tab', 'border-[#E30A17]', 'text-[#E30A17]');
+          t.classList.add('border-transparent', 'text-[#262322]');
+        });
+        tab.classList.add('active-tab', 'border-[#E30A17]', 'text-[#E30A17]');
+        tab.classList.remove('border-transparent', 'text-[#262322]');
+
+        // Carousel'ları göster/gizle
+        const completedCarousel = document.getElementById('carousel-completed');
+        const ongoingCarousel = document.getElementById('carousel-ongoing');
+        
+        if (tabType === 'completed') {
+          if (completedCarousel) completedCarousel.classList.remove('hidden');
+          if (ongoingCarousel) ongoingCarousel.classList.add('hidden');
+          currentTab = 'completed';
+        } else {
+          if (completedCarousel) completedCarousel.classList.add('hidden');
+          if (ongoingCarousel) ongoingCarousel.classList.remove('hidden');
+          currentTab = 'ongoing';
+        }
+
+        // Aktif carousel'ı yeniden başlat
+        Object.keys(carouselInstances).forEach(key => {
+          if (carouselInstances[key] && carouselInstances[key].stopAutoPlay) {
+            carouselInstances[key].stopAutoPlay();
+          }
+        });
+        
+        if (carouselInstances[currentTab]) {
+          carouselInstances[currentTab].stopAutoPlay();
+        }
+        carouselInstances[currentTab] = initCarousel(currentTab);
+      });
+    });
+
+    // Her iki carousel'ı başlat
+    carouselInstances.completed = initCarousel('completed');
+    carouselInstances.ongoing = initCarousel('ongoing');
+
+    // Buton event listener'ları - aktif carousel'ı kontrol eder
+    const prevBtn = document.getElementById('projects-prev-btn');
+    const nextBtn = document.getElementById('projects-next-btn');
+    const prevBtnMobile = document.getElementById('projects-prev-btn-mobile');
+    const nextBtnMobile = document.getElementById('projects-next-btn-mobile');
+
+    function handlePrev() {
+      const currentCarousel = carouselInstances[currentTab];
+      if (currentCarousel) currentCarousel.goToPrev();
+    }
+
+    function handleNext() {
+      const currentCarousel = carouselInstances[currentTab];
+      if (currentCarousel) currentCarousel.goToNext();
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', handlePrev);
+    if (nextBtn) nextBtn.addEventListener('click', handleNext);
+    if (prevBtnMobile) prevBtnMobile.addEventListener('click', handlePrev);
+    if (nextBtnMobile) nextBtnMobile.addEventListener('click', handleNext);
+
+    // Resize handler
     let resizeTimeout: number;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
-        const wasMobile = isMobile;
-        isMobile = window.innerWidth < 768;
-        slidesToShow = isMobile ? 1 : 4;
-        if (wasMobile !== isMobile) {
-          currentIndex = 0;
-          updateCarousel();
-        }
+        Object.keys(carouselInstances).forEach(key => {
+          if (carouselInstances[key] && carouselInstances[key].handleResize) {
+            carouselInstances[key].handleResize();
+          }
+        });
       }, 250) as unknown as number;
     });
-
-    updateCarousel();
-    startAutoPlay();
   }
 
   if (document.readyState === 'loading') {
@@ -230,6 +397,20 @@ const projects = [
 
   .projects-carousel-slide {
     flex-shrink: 0;
+  }
+
+  .project-tab {
+    color: #262322;
+    cursor: pointer;
+  }
+
+  .project-tab:hover {
+    color: #E30A17;
+  }
+
+  .project-tab.active-tab {
+    color: #E30A17;
+    border-bottom-color: #E30A17;
   }
 </style>
 

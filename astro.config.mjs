@@ -5,11 +5,14 @@ import react from '@astrojs/react';
 
 import tailwindcss from '@tailwindcss/vite';
 
+const isDev = import.meta.env.DEV;
+const baseUrl = isDev ? 'http://localhost:4321' : 'https://mrzkhrmn.github.io';
+
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://mrzkhrmn.github.io',
-  base: '/nurdogan-ui/',
+  site: baseUrl,
+  base: isDev ? '/' : '/nurdogan-ui/',
   integrations: [react()],
 
   vite: {
