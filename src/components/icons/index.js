@@ -9,4 +9,5 @@ export { default as TwitterIcon } from "./TwitterIcon.jsx";
 export { default as FacebookIcon } from "./FacebookIcon.jsx";
 export { default as LinkedInIcon } from "./LinkedInIcon.jsx";
 export { default as YouTubeIcon } from "./YouTubeIcon.jsx";
+export { default as KepIcon } from "./KepIcon.jsx";
 export { default as InstagramIcon } from "./InstagramIcon.jsx";

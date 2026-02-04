@@ -1,6 +1,6 @@
 ---
 import Image from "astro/components/Image.astro";
-import { ArrowRightIcon, LocationIcon, MailIcon, FacebookIcon, TwitterIcon, LinkedInIcon, YouTubeIcon, InstagramIcon } from "./icons";
+import { ArrowRightIcon, LocationIcon, MailIcon, FacebookIcon, TwitterIcon, LinkedInIcon, YouTubeIcon, InstagramIcon, KepIcon } from "./icons";
 ---
 
 <footer id="iletisim" class="w-full bg-[#1A1A1A] text-white">
@@ -48,6 +48,14 @@ import { ArrowRightIcon, LocationIcon, MailIcon, FacebookIcon, TwitterIcon, Link
         <div class="space-y-6 w-1/5">
           <h4 class="text-white text-lg md:text-xl font-semibold">İletişim</h4>
           <div class="space-y-4">
+            <div class="flex items-center gap-3">
+              <div>
+                <KepIcon />
+              </div>
+              <div class="space-y-1">
+                <a href="mekakentseldonusum@hs01.kep.tr" class="block text-white/70 text-sm md:text-base hover:text-white transition-colors">mekakentseldonusum@hs01.kep.tr</a>
+              </div>
+            </div>
             <div class="flex items-start gap-3">
               <div class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center shrink-0 mt-1">
                 <LocationIcon />
@@ -61,7 +69,6 @@ import { ArrowRightIcon, LocationIcon, MailIcon, FacebookIcon, TwitterIcon, Link
                 <MailIcon />
               </div>
               <div class="space-y-1">
-                <a href="mekakentseldonusum@hs01.kep.tr" class="block text-white/70 text-sm md:text-base hover:text-white transition-colors">mekakentseldonusum@hs01.kep.tr</a>
                 <a href="mailto:infomailrealar@gmail.com" class="block text-white/70 text-sm md:text-base hover:text-white transition-colors">
                   infomailrealar@gmail.com
                 </a>
