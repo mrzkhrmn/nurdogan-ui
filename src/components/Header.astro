@@ -6,15 +6,16 @@ const navItems = [
   { label: "Hakkımızda", href: "#hakkimizda" },
   { label: "Projeler", href: "#projeler" },
   { label: "Hizmetlerimiz", href: "#hizmetlerimiz" },
+  {label:"Bina Yönetimi", href: "#bina-yonetimi" },
   { label: "Haberler", href: "#haberler" },
   { label: "Dernek", href: "#hakkimizda" },
   { label: "İletişim", href: "#iletisim" },
 ];
 ---
 
-<header class="absolute top-0 left-0 right-0 z-50 py-5 sm:py-7 md:py-9 lg:py-12 px-4 sm:px-6 md:px-12 lg:px-20 w-full">
-  <div class="w-full mx-auto">
-    <div class="flex items-center justify-between lg:justify-center h-14 sm:h-16 md:h-18 lg:h-20 2xl:gap-32 gap-10">
+<header class="absolute top-0 left-0 right-0 z-50 py-5 sm:py-7 md:py-9 lg:py-12 w-full">
+  <div class="w-full mx-auto max-w-[1920px]">
+    <div class="flex items-center justify-between lg:justify-center h-14 sm:h-16 md:h-18 lg:h-20 gap-4 lg:gap-6 xl:gap-8 2xl:gap-12">
 
       <a href="/" class="text-xl font-bold tracking-tight shrink-0">
         <Image 
@@ -22,11 +23,11 @@ const navItems = [
           alt="Logo" 
           width={170} 
           height={100} 
-          class="w-32 sm:w-36 md:w-44 lg:w-48 h-auto"
+          class="w-32 sm:w-36 md:w-40 lg:w-44 xl:w-48 h-auto"
         />
       </a>
 
-      <nav class="hidden lg:flex items-center gap-4 xl:gap-6 2xl:gap-10">
+      <nav class="hidden lg:flex items-center gap-4 xl:gap-6 2xl:gap-10 flex-wrap lg:flex-nowrap">
         {navItems.map(item => (
           <a
             href={item.href}
@@ -35,29 +36,29 @@ const navItems = [
             {item.label}
           </a>
         ))}
-        <div class="hidden lg:flex items-center bg-[#F0F0F0]/30 rounded-full px-4 py-2 lg:px-5 lg:py-2.5 xl:px-6 xl:py-3 w-36 lg:w-40 xl:w-44 2xl:w-48 focus:ring-2">
+        <div class="hidden lg:flex items-center bg-[#F0F0F0]/30 rounded-full px-3 py-2 lg:px-4 lg:py-2 xl:px-5 xl:py-2.5 2xl:px-6 2xl:py-3 w-32 lg:w-36 xl:w-40 2xl:w-44 focus:ring-2 shrink-0">
           <input
             type="text"
             placeholder="Ara"
-            class="w-full text-sm lg:text-base xl:text-base outline-none text-white placeholder:text-white/70 bg-transparent"
+            class="w-full text-xs lg:text-sm xl:text-base outline-none text-white placeholder:text-white/70 bg-transparent"
           />
           <SearchIcon />
         </div>
         <a
           href="/teklif-al"
-          class="rounded-full bg-red-600 px-4  xl:px-7 py-2 2xl:px-8 2xl:py-3 text-sm xl:text-base 2xl:text-lg font-medium text-white hover:bg-red-700 transition flex items-center gap-1.5 xl:gap-2 whitespace-nowrap"
+          class="rounded-full bg-red-600 px-3 xl:px-5 py-2 2xl:px-6 2xl:py-3 text-xs xl:text-sm 2xl:text-base font-medium text-white hover:bg-red-700 transition flex items-center gap-1 xl:gap-1.5 whitespace-nowrap shrink-0"
         >
           Teklif Al
           <ArrowRightIcon />
         </a>
-        <a href="https://www.instagram.com/nurdoganbabadag/" target="_blank" class="cursor-pointer flex items-center justify-center">
-          <div class="w-7 h-7 xl:w-8 xl:h-8 2xl:w-9 2xl:h-9 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full">
-            <InstagramIcon width={28} height={28} />
+        <a href="https://www.instagram.com/nurdoganbabadag/" target="_blank" class="cursor-pointer flex items-center justify-center shrink-0">
+          <div class="w-6 h-6 xl:w-7 xl:h-7 2xl:w-8 2xl:h-8 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full">
+            <InstagramIcon width={24} height={24} />
           </div>
         </a>
-        <button class="w-10 h-10 xl:w-10 xl:h-10 2xl:w-16 2xl:h-16 shrink-0 flex items-center justify-center overflow-hidden">
+        <button class="w-8 h-8 xl:w-10 xl:h-10 2xl:w-14 2xl:h-14 shrink-0 flex items-center justify-center overflow-hidden">
           <div class="w-full h-full flex items-center justify-center [&>svg]:w-full [&>svg]:h-full">
-            <TurkeyFlag width={10} height={10} />
+            <TurkeyFlag width={39} height={26} />
           </div>
         </button>
       </nav>
@@ -246,5 +247,33 @@ const navItems = [
   
   #mobile-menu-btn.active .mobile-menu-line:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -6px);
+  }
+
+  /* 1650px altı için özel optimizasyon */
+  @media (max-width: 1650px) {
+    header nav {
+      gap: 0.5rem !important;
+    }
+    
+    header nav a {
+      font-size: 0.875rem !important;
+      padding: 0.25rem 0.5rem !important;
+    }
+    
+    header .max-w-\[1920px\] {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
+  /* 1400px altı için daha agresif optimizasyon */
+  @media (max-width: 1400px) {
+    header nav {
+      gap: 0.375rem !important;
+    }
+    
+    header nav a {
+      font-size: 0.8125rem !important;
+    }
   }
 </style>

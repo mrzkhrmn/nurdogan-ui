@@ -254,7 +254,7 @@ const ongoingProjects = [
       stopAutoPlay();
       startAutoPlay();
     }
-
+    
     function startAutoPlay() {
       autoPlayInterval = setInterval(goToNext, 4000) as unknown as number;
     }
@@ -372,7 +372,7 @@ const ongoingProjects = [
         Object.keys(carouselInstances).forEach(key => {
           if (carouselInstances[key] && carouselInstances[key].handleResize) {
             carouselInstances[key].handleResize();
-          }
+        }
         });
       }, 250) as unknown as number;
     });
