@@ -11,7 +11,7 @@ const baseUrl = isDev ? "http://localhost:4321" : "https://mrzkhrmn.github.io";
 // https://astro.build/config
 export default defineConfig({
   site: baseUrl,
-  base: "/",
+  base: isDev ? "/" : "/nurdogan-ui",
   integrations: [react()],
 
   vite: {
