@@ -15,7 +15,7 @@ const features = [
 <section id="hakkimizda" class="relative w-full py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 overflow-hidden">
   <div class="absolute inset-0 z-0">
     <Image 
-      src={`${import.meta.env.BASE_URL}building-modern.jpg`} 
+      src={`${(import.meta.env.BASE_URL || '/').replace(/\/?$/, '/')}building-modern.jpg`} 
       alt="Modern Building" 
       width={1920} 
       height={1080} 
