@@ -1,0 +1,93 @@
+---
+import Image from "astro/components/Image.astro";
+import { ArrowRightIcon } from "../icons";
+
+const baseUrl = import.meta.env.BASE_URL;
+
+const managedBuildings = [
+  { number: "01", name: "Çam Apartmanı" },
+  { number: "02", name: "Ekşioğlu Apartmanı" },
+  { number: "03", name: "Dostlar Apartmanı" },
+  { number: "04", name: "Şans Apartmanı" },
+  { number: "05", name: "Güven Apartmanı" },
+];
+---
+
+<section
+  id="bina-yonetimi"
+  class="relative w-full py-16 md:py-24 px-4 md:px-6 mb-24"
+>
+  <div class="absolute inset-0 -z-10">
+    <Image
+      src={`${baseUrl}building-management-bg.jpg`}
+      alt="Bina yönetimi arka planı"
+      width={1920}
+      height={800}
+      class="w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-black/40 md:bg-black/55"></div>
+  </div>
+
+  <div class="relative max-w-[1440px] mx-auto">
+    <div class="text-center max-w-[980px] mx-auto">
+      <p class="text-white/80 text-xs sm:text-sm md:text-base font-semibold tracking-[0.25em] mb-3 uppercase">
+        BİNA YÖNETİMİ
+      </p>
+      <h2 class="text-white text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-semibold leading-snug md:leading-tight mb-6 md:mb-8">
+        7 Yıldan Bu Yana Kadıköy ve Çevre İlçelerde Apartman &amp; Site
+        Yönetimi Faaliyetlerimizi Başarı ile Sürdürmekteyiz.
+      </h2>
+
+      <a
+        href="/bina-yonetimi"
+        class="inline-flex items-center gap-3 rounded-full bg-[#E30A17] pl-2 pr-8 py-2 text-base font-medium text-white hover:bg-[#e30a18df] transition"
+        >
+        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shrink-0">
+          <ArrowRightIcon color="#E30A17"/>
+        </div>
+         Daha Fazla
+        </a>
+    </div>
+
+    <div class="mt-10 md:mt-14 lg:mt-16 flex flex-col lg:flex-row items-stretch gap-8 lg:gap-10">
+      <div class="w-full lg:w-[60%]">
+        <div class="bg-white/95 rounded-3xl overflow-hidden shadow-2xl">
+          <Image
+            src={`${baseUrl}bulding-management-interior.jpg`}
+            alt="Yönetilen apartman örneği"
+            width={800}
+            height={400}
+            class="w-[900px] h-[475px] object-cover"
+          />
+        </div>
+      </div>
+
+      <div class="w-full lg:w-[40%]">
+        <div class="h-full bg-black/55 border border-white/10 rounded-3xl px-5 py-6 sm:px-7 sm:py-8 md:px-8 md:py-9 text-white backdrop-blur-md flex flex-col">
+          <div class="space-y-2 sm:space-y-3 grow">
+            {managedBuildings.map((building, index) => (
+              <div
+                class={`flex items-center justify-between py-3 sm:py-4 border-t ${
+                  index === 0
+                    ? "border-[#E30A17]/70 text-[#E30A17]"
+                    : "border-white/10 text-white/85 hover:text-white cursor-pointer"
+                }`}
+              >
+                <div class="flex items-center gap-3 sm:gap-4">
+                  <span class="text-sm sm:text-base font-semibold tracking-wide">
+                    {building.number}.
+                  </span>
+                  <span class="text-sm sm:text-base md:text-lg font-medium">
+                    {building.name}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
