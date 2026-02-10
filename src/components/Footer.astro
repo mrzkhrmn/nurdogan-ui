@@ -1,6 +1,7 @@
 ---
 import Image from "astro/components/Image.astro";
 import { ArrowRightIcon, LocationIcon, MailIcon, FacebookIcon, TwitterIcon, LinkedInIcon, YouTubeIcon, InstagramIcon, KepIcon } from "./icons";
+const base = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
 ---
 
 <footer id="iletisim" class="w-full bg-[#1A1A1A] text-white">
@@ -83,31 +84,31 @@ import { ArrowRightIcon, LocationIcon, MailIcon, FacebookIcon, TwitterIcon, Link
         <div class="space-y-6 ">
           <h4 class="text-white text-lg md:text-xl font-semibold">Bağlantılar</h4>
           <nav class="space-y-3">
-            <a href="/hakkimizda" class="flex items-center gap-2 text-white/70 text-sm md:text-base hover:text-white transition-colors group">
+            <a href={`${base}hakkimizda`} class="flex items-center gap-2 text-white/70 text-sm md:text-base hover:text-white transition-colors group">
               <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-50 group-hover:opacity-100 transition-opacity">
                 <path d="M1 1L5 5L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               Hakkımızda
             </a>
-            <a href="/iletisim" class="flex items-center gap-2 text-white/70 text-sm md:text-base hover:text-white transition-colors group">
+            <a href={`${base}iletisim`} class="flex items-center gap-2 text-white/70 text-sm md:text-base hover:text-white transition-colors group">
               <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-50 group-hover:opacity-100 transition-opacity">
                 <path d="M1 1L5 5L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               İletişim
             </a>
-            <a href="/projeler" class="flex items-center gap-2 text-white/70 text-sm md:text-base hover:text-white transition-colors group">
+            <a href={`${base}projeler`} class="flex items-center gap-2 text-white/70 text-sm md:text-base hover:text-white transition-colors group">
               <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-50 group-hover:opacity-100 transition-opacity">
                 <path d="M1 1L5 5L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               Projeler
             </a>
-            <a href="/haberler" class="flex items-center gap-2 text-white/70 text-sm md:text-base hover:text-white transition-colors group">
+            <a href={`${base}haberler`} class="flex items-center gap-2 text-white/70 text-sm md:text-base hover:text-white transition-colors group">
               <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-50 group-hover:opacity-100 transition-opacity">
                 <path d="M1 1L5 5L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               Haberler
             </a>
-            <a href="/teklif-al" class="flex items-center gap-2 text-white/70 text-sm md:text-base hover:text-white transition-colors group">
+            <a href={`${base}teklif-al`} class="flex items-center gap-2 text-white/70 text-sm md:text-base hover:text-white transition-colors group">
               <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-50 group-hover:opacity-100 transition-opacity">
                 <path d="M1 1L5 5L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
@@ -126,13 +127,13 @@ import { ArrowRightIcon, LocationIcon, MailIcon, FacebookIcon, TwitterIcon, Link
         Copyright © {new Date().getFullYear()} <span class="text-[#E30A17]">Nurdoğan Babadağ</span>, tüm hakları saklıdır.
       </p>
       <div class="flex flex-wrap items-center justify-center gap-4 md:gap-6">
-        <a href="/kullanim-sartlari" class="text-white hover:text-white transition-colors">
+        <a href={`${base}kullanim-sartlari`} class="text-white hover:text-white transition-colors">
           Kullanım Şartları
         </a>
-        <a href="/gizlilik-politikasi" class="text-white hover:text-white transition-colors">
+        <a href={`${base}gizlilik-politikasi`} class="text-white hover:text-white transition-colors">
           Gizlilik Politikası
         </a>
-        <a href="/cerezler" class="text-white hover:text-white transition-colors">
+        <a href={`${base}cerezler`} class="text-white hover:text-white transition-colors">
           Çerezler
         </a>
       </div>

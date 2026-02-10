@@ -1,7 +1,7 @@
 ---
 import Image from "astro/components/Image.astro";
 import { ArrowRightIcon } from "../icons";
-
+const base = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
 const stats = [
   {
     number: "38",
@@ -46,7 +46,7 @@ const stats = [
           2012 yılından bu yana danışanlarımızı güvenli ve en avantajlı şekilde yeni binalarına kavuşturuyoruz.
         </p>
         <a
-        href="/hakkimizda"
+        href={`${base}hakkimizda`}
         class="inline-flex items-center gap-3 rounded-full bg-[#E30A17] pl-2 pr-8 py-2 text-base font-medium text-white hover:bg-[#e30a18df] transition"
         >
         <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shrink-0">
