@@ -2,6 +2,7 @@
 import Image from "astro/components/Image.astro";
 import SearchIcon from "./icons/SearchIcon.jsx";
 import { TurkeyFlag, ArrowRightIcon, InstagramIcon } from "./icons";
+const base = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
 const navItems = [
   { label: "Hakkımızda", href: "#hakkimizda" },
   { label: "Projeler", href: "#projeler" },
@@ -17,13 +18,13 @@ const navItems = [
   <div class="w-full mx-auto max-w-[1920px]">
     <div class="flex items-center justify-between lg:justify-center h-14 sm:h-16 md:h-18 lg:h-20 gap-4 lg:gap-6 xl:gap-8 2xl:gap-12">
 
-      <a href="/" class="text-xl font-bold tracking-tight shrink-0">
+      <a href={base} class="text-xl font-bold tracking-tight shrink-0">
         <Image 
-          src={`${import.meta.env.BASE_URL}nurdogan-logo.png`} 
+          src={`${(import.meta.env.BASE_URL || '/').replace(/\/?$/, '/')}nurdogan-logo.png`} 
           alt="Logo" 
           width={170} 
           height={100} 
-          class="w-32 sm:w-36 md:w-40 lg:w-44 xl:w-48 h-auto"
+          class="w-32 sm:w-36 md:w-40 lg:w-24 xl:w-48 h-auto"
         />
       </a>
 
@@ -45,7 +46,7 @@ const navItems = [
           <SearchIcon />
         </div>
         <a
-          href="/teklif-al"
+          href={`${base}teklif-al`}
           class="rounded-full bg-red-600 px-3 xl:px-5 py-2 2xl:px-6 2xl:py-3 text-xs xl:text-sm 2xl:text-base font-medium text-white hover:bg-red-700 transition flex items-center gap-1 xl:gap-1.5 whitespace-nowrap shrink-0"
         >
           Teklif Al
@@ -125,7 +126,7 @@ const navItems = [
       
       <div class="mt-8 flex flex-col gap-4">
         <a
-          href="/teklif-al"
+          href={`${base}teklif-al`}
           class="rounded-full bg-red-600 px-8 py-4 text-lg font-medium text-white hover:bg-red-700 transition flex items-center justify-center gap-2"
         >
           Teklif Al

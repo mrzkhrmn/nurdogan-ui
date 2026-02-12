@@ -1,12 +1,12 @@
 ---
 import Image from "astro/components/Image.astro";
 import { ArrowRightIcon } from "./icons";
-
+const base = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
 const hero = {
   subtitle: "2012'DEN GÜNÜMÜZE",
   title: "KENTSEL DÖNÜŞÜME YÖN\nVEREN ÖNCÜ KURULUŞ",
   ctaText: "Projelere Göz At",
-  ctaLink: "/projeler",
+  ctaLink: `${base}projeler`,
 };
 ---
 

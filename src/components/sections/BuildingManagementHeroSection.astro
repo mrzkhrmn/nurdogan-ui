@@ -1,0 +1,105 @@
+---
+import Image from "astro/components/Image.astro";
+import { ArrowRightIcon } from "../icons";
+import CheckmarkIcon from "../icons/CheckmarkIcon.jsx";
+
+const baseUrl = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
+
+const services = [
+  "Aylık işlemler.",
+  "Dönemsel işlemler.",
+  "Kanuni işlemler.",
+  "İdari, mali ve teknik sorunların çözülmesi.",
+];
+---
+
+<section class="w-full bg-white pt-24 sm:pt-32 md:pt-36 lg:pt-44 pb-12 md:pb-20 px-4 md:px-6 mt-24">
+  <div class="max-w-[1440px] mx-auto">
+    <div class="flex flex-col lg:flex-row items-center gap-32 sm:gap-24 md:gap-32 lg:gap-12">
+      <div class="w-full lg:w-[50%] relative">
+        <div class="relative h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] xl:h-[500px] pt-4 sm:pt-5 lg:pt-6">
+          <div class="w-[75%] sm:w-[70%] md:w-[68%] lg:w-[70%] h-full overflow-hidden rounded-2xl sm:rounded-3xl border-2 border-white shadow-xl">
+            <Image src={`${baseUrl}construction1.png`} alt="Bina yönetimi arka planı" width={1920} height={800} class="w-full h-full object-cover" />
+          </div>
+        </div>
+        <div class="absolute -bottom-12 sm:-bottom-16 md:-bottom-18 lg:-bottom-20 right-0 w-[30%] sm:w-[32%] md:w-[35%] lg:w-[40%]">
+          <div class="w-[70%] sm:w-[72%] lg:w-[70%] h-[120px] sm:h-[140px] md:h-[160px] lg:h-[180px] xl:h-[200px] overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl border-2 border-white shadow-lg">
+            <Image src={`${baseUrl}construction1.png`} alt="Bina yönetimi arka planı" width={1920} height={800} class="w-full h-full object-cover" />
+          </div>
+        </div>
+        <div class="absolute -top-6 sm:-top-8 md:-top-10 lg:-top-10 -left-8 sm:-left-12 md:-left-16 lg:-left-24 xl:-left-32 w-[30%] sm:w-[32%] md:w-[35%] lg:w-[40%]">
+          <div class="w-[70%] sm:w-[72%] lg:w-[70%] h-[120px] sm:h-[140px] md:h-[160px] lg:h-[180px] xl:h-[200px] overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl border-2 border-white shadow-lg">
+            <Image src={`${baseUrl}construction1.png`} alt="Bina yönetimi arka planı" width={1920} height={800} class="w-full h-full object-cover" />
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full lg:w-[50%] flex flex-col justify-center">
+        <h1 class="text-[#262322] text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6">
+          Apartmanınızın & Sitenizin Yönetimi Bize Emanet
+        </h1>
+        
+        <p class="text-[#585858] text-base md:text-lg leading-relaxed mb-8">
+          Nurdoğan Babadağ Apartman ve Site Yönetimi olarak 7 yıldan bu yana Kadıköy ve çevre ilçelerde apartman ve site yönetimi faaliyetlerimizi başarı ile sürdürmekteyiz. Apartmanınız için aşağıda belirtilen görev ve sorumluluklar kapsamında tarafımızca yönetim hizmeti sunulması konusunda teklifimizi saygılarımızla sunarız.
+        </p>
+
+        <div class="space-y-4 mb-10">
+          {services.map((service) => (
+            <div class="flex items-start gap-3">
+              <div class="mt-1 shrink-0">
+                <div class="w-6 h-6 rounded-full bg-[#E30A17] flex items-center justify-center">
+                  <CheckmarkIcon />
+                </div>
+              </div>
+              <p class="text-[#262322] text-base md:text-lg font-medium">
+                {service}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div class="flex items-center gap-16 mb-10 pb-8 ">
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-16 rounded-full overflow-hidden shrink-0">
+              <Image
+                src={`${baseUrl}nurdogan-profile.png`}
+                alt="Nurdoğan Babadağ"
+                width={64}
+                height={64}
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="grow">
+              <p class="text-[#262322] text-lg font-bold mb-1">
+                Nurdoğan Babadağ
+              </p>
+              <p class="text-[#585858] text-sm">
+                Kurucu, CEO
+              </p>
+            </div>
+          </div>
+          <div class="w-24 h-24 rounded-full ">
+            <Image
+              src={`${baseUrl}nurdogan-signature.png`}
+              alt="Nurdoğan Babadağ"
+              width={64}
+              height={64}
+              class="w-full h-full object-contain"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-full flex items-center justify-center mt-4 lg:mt-12">
+      <a
+        href={`${baseUrl}iletisim`}
+        class="inline-flex items-center gap-3 rounded-full bg-[#E30A17] pl-2 pr-8 py-3 text-base font-semibold text-white hover:bg-[#c00914] transition-colors group w-fit"
+      >
+        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shrink-0">
+          <ArrowRightIcon color="#E30A17" />
+        </div>
+        Apartman ve Site Yönetimi İçin Teklif Alın
+      </a>
+    </div>
+  </div>
+</section>
