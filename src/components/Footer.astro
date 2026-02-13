@@ -106,13 +106,13 @@ import { ArrowRightIcon, LocationIcon, MailIcon, FacebookIcon, TwitterIcon, Link
         Copyright © {new Date().getFullYear()} <span class="text-[#E30A17]">Nurdoğan Babadağ</span>, tüm hakları saklıdır.
       </p>
       <div class="flex flex-wrap items-center justify-center gap-4 md:gap-6">
-        <a href={`${base}kullanim-sartlari`} class="text-white hover:text-white transition-colors">
+        <a href={`${(import.meta.env.BASE_URL || '/').replace(/\/?$/, '/')}kullanim-sartlari`} class="text-white hover:text-white transition-colors">
           Kullanım Şartları
         </a>
-        <a href={`${base}gizlilik-politikasi`} class="text-white hover:text-white transition-colors">
+        <a href={`${(import.meta.env.BASE_URL || '/').replace(/\/?$/, '/')}gizlilik-politikasi`} class="text-white hover:text-white transition-colors">
           Gizlilik Politikası
         </a>
-        <a href={`${base}cerezler`} class="text-white hover:text-white transition-colors">
+        <a href={`${(import.meta.env.BASE_URL || '/').replace(/\/?$/, '/')}cerezler`} class="text-white hover:text-white transition-colors">
           Çerezler
         </a>
       </div>

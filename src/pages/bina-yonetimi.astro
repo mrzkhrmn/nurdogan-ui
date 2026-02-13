@@ -2,21 +2,17 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import Footer from "../components/Footer.astro";
 import BuildingManagementHeroSection from "../components/sections/BuildingManagementHeroSection.astro";
+import BuildingManagementServicesSection from "../components/sections/BuildingManagementServicesSection.astro";
 import ReferencesSection from "../components/sections/ReferencesSection.astro";
 ---
 
 <MainLayout>
   <BuildingManagementHeroSection />
+  <BuildingManagementServicesSection />
   <ReferencesSection />
 
   <Footer />
 </MainLayout>
-
-<style is:global>
-  body header {
-    background-color: rgba(94, 95, 99, 0.71) !important;
-  }
-</style>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -30,6 +26,30 @@ import ReferencesSection from "../components/sections/ReferencesSection.astro";
 <style is:global>
   header.bina-yonetimi-header,
   body header.bina-yonetimi-header {
-    background-color: rgba(94, 95, 99, 0.71) !important;
+    background-color: rgba(0, 0, 0, 0.1) !important;
+  }
+  header.bina-yonetimi-header nav a:not([href*="teklif-al"]),
+  header.bina-yonetimi-header .smooth-scroll-link {
+    color: #171717 !important;
+  }
+  header.bina-yonetimi-header nav a:not([href*="teklif-al"]):hover,
+  header.bina-yonetimi-header .smooth-scroll-link:hover {
+    color: #404040 !important;
+  }
+  header.bina-yonetimi-header nav a[href*="teklif-al"] {
+    color: #fff !important;
+  }
+  header.bina-yonetimi-header nav a[href*="teklif-al"] svg path {
+    stroke: #fff !important;
+  }
+  /* Arama inputu içi (yazı/placeholder) aynı kalır; sadece dıştaki arama ikonu siyah */
+  header.bina-yonetimi-header .mobile-menu-line {
+    background-color: #171717 !important;
+  }
+  header.bina-yonetimi-header nav div.rounded-full:has(input) svg path,
+  header.bina-yonetimi-header #mobile-search svg path,
+  header.bina-yonetimi-header #mobile-search-btn svg path,
+  header.bina-yonetimi-header a[href*="instagram"] svg path {
+    fill: #171717 !important;
   }
 </style>

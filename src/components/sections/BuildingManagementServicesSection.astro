@@ -1,0 +1,157 @@
+---
+import { ArrowRightIcon } from "../icons";
+
+const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
+
+const serviceCards = [
+  {
+    title: "Aylık İşlemler",
+    icon: "building",
+    items: [
+      "Aidat listelerinin hazırlanması, tebliğ edilmesi ve toplanması.",
+      "Asansör, hidrofor, yangın pompası vb. bakımlarının yaptırılması.",
+      "Site-Apartman Görevlisi, Bahçe & Peyzaj hizmeti, Güvenlik Hizmeti, Bakım Onarım, Enerji Yönetimi ve İşletme Projesi gibi çalışan personelin görevlerinin tanımlanması, aylık ödemelerinin yapılması, yapılan işlerin kontrolü.",
+    ],
+  },
+  {
+    title: "Dönemsel İşlemler",
+    icon: "document",
+    items: [
+      "Yıllık bütçenin hazırlanması ve Kat maliklerine sunulması sureti ile karar altına alınması.",
+      "Yangın Yönetmeliğine göre yangın tüplerinin periyodik kontrollerinin yapılması.",
+      "Düzenli ilaçlamanın yapılması.",
+    ],
+  },
+  {
+    title: "Kanunen Yapılacak İşlemler",
+    icon: "legal",
+    items: [
+      "Kat Mülkiyeti kanununa göre Olağan ve Olağanüstü Genel Kurul Toplantılarının çağrılarının yapılması ve düzenlenmesi, İşletme projesinin hazırlanması ve uygulanması için genel kuruldan yetkilendirilmelerin alınması.",
+      "Apartmanın 3. Şahıslar ile veya Yönetim ile Kat Malikleri arasındaki ihtilafların çözülmesi ve gerekmesi halinde apartman aidatlarının hukuki yolla tahsilatının yapılmasının sağlanması amacı ile avukat desteğinin sağlanması.",
+    ],
+  },
+  {
+    title: "İdari, Mali ve Teknik Konulardaki Sorunların Çözümlenmesine İlişkin Hizmetler",
+    icon: "technical",
+    items: [
+      "Apartmanın daha önceki dönemlere dayanan borçların tasnifi ve tahsili ile ilgili mali çalışmaların raporlarının hazırlanması ve olağanüstü genel kurul yapılması sureti ile sitenin onayına sunulması.",
+      "Apartman ortak kullanımı dahilindeki su, elektrik ve doğalgaz aboneliklerinin bireysel abonelik sistemine geçişi ile ilgili gerekli çözümlerin oluşturulması ve teknik, idari olarak uygulamaya alınması.",
+    ],
+  },
+];
+---
+
+<section class="w-full bg-white py-16 md:py-24 px-4 md:px-6">
+  <div class="max-w-[1200px] mx-auto">
+    <div class="text-center mb-12 md:mb-16">
+      <p class="text-[#E30A17] text-xs md:text-sm font-bold tracking-[0.2em] uppercase mb-3">
+        APARTMAN VE SİTE YÖNETİMİ
+      </p>
+      <h2 class="text-[#262322] text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-bold leading-tight">
+        Bina Yönetimi Hizmetiyle Neler Sunuyoruz?
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-14 md:mb-16">
+      {serviceCards.map((card) => (
+        <div
+          class="group/card bg-white rounded-2xl border border-gray-200 shadow-sm p-6 md:p-8 flex flex-col transition-colors duration-300 hover:bg-[#E30A17] hover:border-[#E30A17]"
+        >
+          <div class="flex items-start gap-4 mb-4">
+            <div
+              class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center shrink-0 transition-colors duration-300 group-hover/card:bg-white/20"
+              aria-hidden
+            >
+              {card.icon === "building" && (
+                <svg
+                  class="w-6 h-6 text-[#E30A17] transition-colors duration-300 group-hover/card:text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                  />
+                </svg>
+              )}
+              {card.icon === "document" && (
+                <svg
+                  class="w-6 h-6 text-[#E30A17] transition-colors duration-300 group-hover/card:text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
+                </svg>
+              )}
+              {card.icon === "legal" && (
+                <svg
+                  class="w-6 h-6 text-[#E30A17] transition-colors duration-300 group-hover/card:text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"
+                  />
+                </svg>
+              )}
+              {card.icon === "technical" && (
+                <svg
+                  class="w-6 h-6 text-[#E30A17] transition-colors duration-300 group-hover/card:text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+              )}
+            </div>
+            <h3 class="text-[#262322] text-lg md:text-xl font-bold leading-snug pt-1 transition-colors duration-300 group-hover/card:text-white">
+              {card.title}
+            </h3>
+          </div>
+          <ul class="space-y-2 text-[#585858] text-sm md:text-base leading-relaxed list-disc list-inside transition-colors duration-300 group-hover/card:text-white">
+            {card.items.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="flex justify-center">
+      <a
+        href={`${baseUrl}iletisim`}
+        class="inline-flex items-center gap-3 rounded-full bg-[#E30A17] pl-2 pr-8 py-3 text-base  text-white hover:bg-[#c00914] transition-colors group w-fit"
+      >
+       <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shrink-0">
+        <ArrowRightIcon color="#E30A17"/>
+       </div>
+        Apartman ve Site Yönetimi İçin Teklif Alın
+      </a>
+    </div>
+  </div>
+</section>

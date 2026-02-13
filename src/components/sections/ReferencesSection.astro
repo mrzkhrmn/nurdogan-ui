@@ -1,62 +1,266 @@
 ---
 import Image from "astro/components/Image.astro";
 
-const baseUrl = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
+const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
+
+const references = [
+  { image: `${baseUrl}construction1.png`, name: "Çam Apartmanı", location: "İstanbul / Ataşehir" },
+  { image: `${baseUrl}interior-1.png`, name: "Ekşioğlu Apartmanı", location: "İstanbul / Maltepe" },
+  { image: `${baseUrl}construction1.png`, name: "Dostlar Apartmanı", location: "İstanbul / Kadıköy" },
+  { image: `${baseUrl}interior-1.png`, name: "Şans Apartmanı", location: "İstanbul / Ataşehir" },
+  { image: `${baseUrl}construction1.png`, name: "Güven Apartmanı", location: "İstanbul / Maltepe" },
+  { image: `${baseUrl}interior-1.png`, name: "Nigar Apartmanı", location: "İstanbul / Kadıköy" },
+  { image: `${baseUrl}construction1.png`, name: "Mumcuoğlu Apartmanı", location: "İstanbul / Ataşehir" },
+  { image: `${baseUrl}interior-1.png`, name: "Kuzu Apartmanı", location: "İstanbul / Maltepe" },
+];
 ---
 
-<section class="relative w-full py-16 md:py-24 px-4 md:px-6 overflow-hidden">
-  <div class="absolute inset-0 -z-10">
-    <Image
-      src={`${baseUrl}building-management-bg.jpg`}
-      alt="Referanslar arka planı"
-      width={1920}
-      height={800}
-      class="w-full h-full object-cover"
-    />
-    <div class="absolute inset-0 bg-black/50"></div>
-  </div>
+<section class="relative w-full py-16 md:py-24 px-0 overflow-hidden">
 
   <div class="relative max-w-[1440px] mx-auto">
-    <h2 class="text-white text-3xl md:text-4xl lg:text-5xl font-semibold text-center mb-12 md:mb-16">
+    <h2 class="text-black text-3xl md:text-4xl lg:text-5xl font-semibold text-center mb-12 md:mb-16 px-4">
       Referanslarımız
     </h2>
+  </div>
 
-    <div class="relative">
-      <button class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#E30A17] flex items-center justify-center hover:bg-[#c00914] transition-colors shadow-lg">
-        <svg class="w-6 h-6 md:w-7 md:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-
-      <button class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#E30A17] flex items-center justify-center hover:bg-[#c00914] transition-colors shadow-lg">
-        <svg class="w-6 h-6 md:w-7 md:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-
-      <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 px-12 md:px-16 lg:px-20">
-        <div class="w-full lg:w-[60%] shrink-0">
-          <div class="rounded-3xl overflow-hidden shadow-2xl">
-            <Image 
-              src={`${baseUrl}construction1.png`} 
-              alt="Referans proje" 
-              width={800} 
-              height={600} 
-              class="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover" 
+  <div class="references-band-wrapper relative">
+    <div
+      class="references-band flex gap-6 md:gap-8 overflow-x-auto overflow-y-hidden scroll-smooth scrollbar-hide py-2 pb-4 px-4 md:px-6"
+      id="references-band"
+      data-dragging="false"
+    >
+      {references.map((ref) => {
+        const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ref.location)}`;
+        return (
+        <a
+          href={mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="references-band-item shrink-0 w-[280px] sm:w-[320px] md:w-[360px] rounded-2xl overflow-hidden bg-white/95 shadow-lg group/card block"
+        >
+          <div class="aspect-4/3 relative overflow-hidden">
+            <Image
+              src={ref.image}
+              alt={ref.name}
+              width={360}
+              height={270}
+              class="w-full h-full object-cover transition-transform duration-300 group-hover/card:scale-105"
             />
+            <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
+              <div class="flex flex-col items-center gap-2 text-white px-4">
+                <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <span class="text-sm md:text-base font-medium text-center">{ref.location}</span>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div class="w-full lg:w-[40%] bg-black/60 backdrop-blur-md rounded-3xl p-6 md:p-8 lg:p-10 border border-white/10">
-          <div class="text-[#E30A17] text-2xl md:text-3xl font-bold mb-2">
-            01 - Çam Apartmanı
+          <div class="p-4 flex items-center gap-3 bg-white">
+            <div
+              class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center shrink-0"
+              aria-hidden
+            >
+              <svg
+                class="w-5 h-5 text-[#E30A17]"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                />
+              </svg>
+            </div>
+            <span class="text-[#262322] font-semibold text-base md:text-lg truncate">
+              {ref.name}
+            </span>
           </div>
-          <div class="h-0.5 bg-[#E30A17] w-16 mb-4"></div>
-          <div class="text-white text-lg md:text-xl font-medium">
-            Erenköy
+        </a>
+        );
+      })}
+      <!-- Duplicate set for infinite scroll effect -->
+      {references.map((ref) => {
+        const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ref.location)}`;
+        return (
+        <a
+          href={mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="references-band-item shrink-0 w-[280px] sm:w-[320px] md:w-[360px] rounded-2xl overflow-hidden bg-white/95 shadow-lg group/card block"
+          aria-hidden
+        >
+          <div class="aspect-4/3 relative overflow-hidden">
+            <Image
+              src={ref.image}
+              alt=""
+              width={360}
+              height={270}
+              class="w-full h-full object-cover transition-transform duration-300 group-hover/card:scale-105"
+            />
+            <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
+              <div class="flex flex-col items-center gap-2 text-white px-4">
+                <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <span class="text-sm md:text-base font-medium text-center">{ref.location}</span>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+          <div class="p-4 flex items-center gap-3 bg-white">
+            <div
+              class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center shrink-0"
+              aria-hidden
+            >
+              <svg
+                class="w-5 h-5 text-[#E30A17]"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                />
+              </svg>
+            </div>
+            <span class="text-[#262322] font-semibold text-base md:text-lg truncate">
+              {ref.name}
+            </span>
+          </div>
+        </a>
+        );
+      })}
     </div>
   </div>
 </section>
+
+<style>
+  .references-band {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    cursor: grab;
+    user-select: none;
+  }
+  .references-band:active {
+    cursor: grabbing;
+  }
+  .references-band-item {
+    scroll-snap-align: start;
+  }
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+<script>
+  (function () {
+    const band = document.getElementById("references-band");
+    if (!band) return;
+
+    let autoScrollId: number;
+    const speed = 1;
+    const pauseOnHover = true;
+    let isPaused = false;
+
+    function startAutoScroll() {
+      if (isPaused) return;
+      autoScrollId = window.setInterval(() => {
+        if (!band) return;
+        band.scrollLeft += speed;
+        const half = band.scrollWidth / 2;
+        if (half > 0 && band.scrollLeft >= half - 10) {
+          band.scrollLeft = 0;
+        }
+      }, 20);
+    }
+
+    function stopAutoScroll() {
+      if (autoScrollId) {
+        clearInterval(autoScrollId);
+        autoScrollId = 0;
+      }
+    }
+
+    band.addEventListener("mouseenter", () => {
+      if (pauseOnHover) {
+        isPaused = true;
+        stopAutoScroll();
+      }
+    });
+    band.addEventListener("mouseleave", () => {
+      if (pauseOnHover) {
+        isPaused = false;
+        startAutoScroll();
+      }
+    });
+
+    let isDown = false;
+    let didDrag = false;
+    let startX: number;
+    let scrollLeftStart: number;
+
+    band.addEventListener("mousedown", (e) => {
+      isDown = true;
+      didDrag = false;
+      band.setAttribute("data-dragging", "true");
+      startX = e.pageX - band.offsetLeft;
+      scrollLeftStart = band.scrollLeft;
+    });
+
+    band.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      didDrag = true;
+      const x = e.pageX - band.offsetLeft;
+      const walk = (x - startX) * 1.2;
+      band.scrollLeft = scrollLeftStart - walk;
+    });
+
+    band.addEventListener("mouseup", () => {
+      isDown = false;
+      band.setAttribute("data-dragging", "false");
+    });
+
+    band.addEventListener("mouseleave", () => {
+      isDown = false;
+      band.setAttribute("data-dragging", "false");
+    });
+
+    band.addEventListener("click", (e) => {
+      const link = (e.target as HTMLElement).closest("a[href*='google.com/maps']");
+      if (link && didDrag) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      didDrag = false;
+    }, true);
+
+    band.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].pageX - band.offsetLeft;
+      scrollLeftStart = band.scrollLeft;
+    }, { passive: true });
+
+    band.addEventListener("touchmove", (e) => {
+      const x = e.touches[0].pageX - band.offsetLeft;
+      const walk = (x - startX) * 1.2;
+      band.scrollLeft = scrollLeftStart - walk;
+    }, { passive: true });
+
+    startAutoScroll();
+  })();
+</script>
