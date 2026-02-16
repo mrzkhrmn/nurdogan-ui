@@ -42,13 +42,26 @@ import ReferencesSection from "../components/sections/ReferencesSection.astro";
   header.bina-yonetimi-header nav a[href*="teklif-al"] svg path {
     stroke: #fff !important;
   }
-  /* Arama inputu içi (yazı/placeholder) aynı kalır; sadece dıştaki arama ikonu siyah */
+  /* Arama kutusu: header'dan ayrışsın, daha koyu ve okunaklı */
+  header.bina-yonetimi-header nav div.rounded-full:has(input) {
+    background-color: rgba(255, 255, 255, 0.85) !important;
+  }
+  header.bina-yonetimi-header nav div.rounded-full:has(input) input {
+    color: #171717 !important;
+  }
+  header.bina-yonetimi-header nav div.rounded-full:has(input) input::placeholder {
+    color: #525252 !important;
+  }
+  /* Arama ikonu sadece çizgi (outline) siyah, dolu değil */
   header.bina-yonetimi-header .mobile-menu-line {
     background-color: #171717 !important;
   }
   header.bina-yonetimi-header nav div.rounded-full:has(input) svg path,
   header.bina-yonetimi-header #mobile-search svg path,
-  header.bina-yonetimi-header #mobile-search-btn svg path,
+  header.bina-yonetimi-header #mobile-search-btn svg path {
+    stroke: #171717 !important;
+    fill: none !important;
+  }
   header.bina-yonetimi-header a[href*="instagram"] svg path {
     fill: #171717 !important;
   }

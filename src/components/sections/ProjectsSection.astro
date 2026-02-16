@@ -1,69 +1,12 @@
 ---
 import Image from "astro/components/Image.astro";
+import { completedProjects as completedData, ongoingProjects as ongoingData } from "../../data/projects";
+import { ArrowRightIcon } from "../icons";
 
 const baseUrl = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
-
-const completedProjects = [
-  {
-    name: "Nigar Apartmanı",
-    image: `${baseUrl}interior-1.png`
-  },
-  {
-    name: "Mumcuoğlu Apartmanı",
-    image: `${baseUrl}interior-1.png`
-  },
-  {
-    name: "Kuzu Apartmanı",
-    image: `${baseUrl}interior-1.png`
-  },
-  {
-    name: "Oda Apartmanı",
-    image: `${baseUrl}interior-1.png`
-  },
-  {
-    name: "Yıldız Apartmanı",
-    image: `${baseUrl}interior-1.png`
-  },
-  {
-    name: "Şahin Apartmanı",
-    image: `${baseUrl}interior-1.png`
-  },
-  {
-    name: "Güneş Apartmanı",
-    image: `${baseUrl}interior-1.png`
-  },
-  {
-    name: "Ay Apartmanı",
-    image: `${baseUrl}interior-1.png`
-  }
-];
-
-const ongoingProjects = [
-  {
-    name: "Merkez Kentsel Dönüşüm Projesi",
-    image: `${baseUrl}interior-1.png`
-  },
-  {
-    name: "Bahçelievler Yeni Yaşam",
-    image: `${baseUrl}interior-1.png`
-  },
-  {
-    name: "Modern Konut Kompleksi",
-    image: `${baseUrl}interior-1.png`
-  },
-  {
-    name: "Şehir Merkezi Rezidans",
-    image: `${baseUrl}interior-1.png`
-  },
-  {
-    name: "Yeşil Vadisi Projesi",
-    image: `${baseUrl}interior-1.png`
-  },
-  {
-    name: "Premium Residence",
-    image: `${baseUrl}interior-1.png`
-  }
-];
+const projectsPageUrl = `${baseUrl}projeler`;
+const completedProjects = completedData.map((p) => ({ ...p, image: `${baseUrl}${p.image}` }));
+const ongoingProjects = ongoingData.map((p) => ({ ...p, image: `${baseUrl}${p.image}` }));
 ---
 
 <section id="projeler" class="w-full bg-white pb-12 md:py-20 px-4 md:px-6">
@@ -78,7 +21,34 @@ const ongoingProjects = [
         </h2>
       </div>
       
-      <div class="hidden md:flex items-center gap-3">
+      <a
+      href={projectsPageUrl}
+      class="ml-auto inline-flex justify-end items-center gap-2 sm:gap-3 rounded-full bg-[#E30A17] pl-1.5 sm:pl-2 pr-4 sm:pr-6 py-1.5 sm:py-2 text-sm sm:text-base font-medium text-white hover:bg-[#e30a18df] transition-all duration-300 shadow-lg hover:shadow-xl"
+    >
+      <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white flex items-center justify-center shrink-0">
+        <ArrowRightIcon color="#E30A17"/>
+      </div>
+      Daha Fazla
+    </a>
+    </div>
+
+    <!-- Sekmeler -->
+    <div class="flex flex-wrap items-center gap-4 mb-8 md:mb-12 border-b border-gray-200">
+      <button 
+        class="project-tab px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-semibold border-b-2 border-transparent transition-colors active-tab"
+        data-tab="completed"
+        id="tab-completed"
+      >
+        Tamamlanan Projelerimiz
+      </button>
+      <button 
+        class="project-tab px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-semibold border-b-2 border-transparent transition-colors"
+        data-tab="ongoing"
+        id="tab-ongoing"
+      >
+        Devam Eden Projelerimiz
+      </button>
+      <div class="hidden md:flex items-center gap-3 ml-auto">
         <button 
           class="projects-carousel-btn projects-carousel-btn-prev w-12 h-12 rounded-full bg-[#E30A17] flex items-center justify-center hover:bg-[#c00914] transition-colors z-10"
           id="projects-prev-btn"
@@ -99,24 +69,6 @@ const ongoingProjects = [
           </svg>
         </button>
       </div>
-    </div>
-
-    <!-- Sekmeler -->
-    <div class="flex items-center gap-4 mb-8 md:mb-12 border-b border-gray-200">
-      <button 
-        class="project-tab px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-semibold border-b-2 border-transparent transition-colors active-tab"
-        data-tab="completed"
-        id="tab-completed"
-      >
-        Tamamlanan Projelerimiz
-      </button>
-      <button 
-        class="project-tab px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-semibold border-b-2 border-transparent transition-colors"
-        data-tab="ongoing"
-        id="tab-ongoing"
-      >
-        Devam Eden Projelerimiz
-      </button>
     </div>
 
     <div class="relative">

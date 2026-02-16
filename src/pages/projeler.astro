@@ -1,0 +1,284 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Footer from "../components/Footer.astro";
+import Image from "astro/components/Image.astro";
+import { completedProjects as completedData, ongoingProjects as ongoingData } from "../data/projects";
+
+const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
+const completedProjects = completedData.map((p) => ({
+  ...p,
+  image: `${baseUrl}${p.image}`,
+  gallery: p.gallery.map((img) => `${baseUrl}${img}`),
+}));
+const ongoingProjects = ongoingData.map((p) => ({
+  ...p,
+  image: `${baseUrl}${p.image}`,
+  gallery: p.gallery.map((img) => `${baseUrl}${img}`),
+}));
+---
+
+<MainLayout>
+  <div class="w-full min-h-screen bg-white">
+    <!-- Header arkasında kalmaması için üst boşluk -->
+    <section class="w-full pt-28 md:pt-42 pb-12 md:py-20 px-4 md:px-6">
+      <div class="max-w-[1480px] mx-auto">
+        <p class="text-[#E30A17] text-xs md:text-sm font-bold mb-2 tracking-wider uppercase">
+          342+ TAMAMLANAN PROJE
+        </p>
+        <h1 class="text-[#262322] text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight mb-4 md:mb-6">
+          Projeler
+        </h1>
+
+        <!-- Sekmeler: varsayılan Devam Eden -->
+        <div class="flex flex-wrap items-center gap-4 mb-8 border-b border-gray-200">
+          <button
+            type="button"
+            class="project-page-tab px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-semibold border-b-2 border-transparent transition-colors active-tab"
+            data-tab="ongoing"
+            id="tab-ongoing"
+          >
+            Devam Eden Projelerimiz
+          </button>
+          <button
+            type="button"
+            class="project-page-tab px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-semibold border-b-2 border-transparent transition-colors"
+            data-tab="completed"
+            id="tab-completed"
+          >
+            Tamamlanan Projelerimiz
+          </button>
+        </div>
+
+        <!-- Arama -->
+        <div class="flex justify-center mb-10 md:mb-12">
+          <div class="w-full max-w-xl relative">
+            <input
+              type="search"
+              id="projects-search"
+              placeholder="Proje ara..."
+              class="w-full px-4 py-3 md:px-5 md:py-4 pl-11 md:pl-12 rounded-xl border-2 border-gray-200 text-[#262322] placeholder-gray-400 focus:border-[#E30A17] focus:outline-none transition-colors"
+              aria-label="Proje ara"
+            />
+            <svg class="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Devam Eden Projeler (varsayılan görünen) -->
+        <div class="projects-panel" id="panel-ongoing">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6" id="ongoing-list">
+            {ongoingProjects.map((project) => (
+              <a
+                href={`${baseUrl}projeler/${project.slug}`}
+                class="project-card relative w-full overflow-hidden rounded-2xl bg-white shadow-lg group border border-gray-100 block"
+                data-project-name={project.name.toLowerCase()}
+              >
+                <div class="aspect-[3/4] md:aspect-[2/3] relative overflow-hidden">
+                  <Image
+                    src={project.image}
+                    alt={project.name}
+                    width={400}
+                    height={300}
+                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div class="absolute bottom-0 left-0 right-0 p-3 md:p-4 bg-gradient-to-t from-black/70 to-transparent space-y-1.5">
+                    <p class="text-white text-sm md:text-base font-semibold flex items-center gap-2">
+                      <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                      </svg>
+                      {project.name}
+                    </p>
+                    <p class="text-white/90 text-xs md:text-sm flex items-center gap-2">
+                      <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                      {project.location}
+                    </p>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+          <p class="text-gray-500 text-sm mt-4 hidden" id="ongoing-empty">
+            Arama kriterine uygun devam eden proje bulunamadı.
+          </p>
+        </div>
+
+        <!-- Tamamlanan Projeler (gizli) -->
+        <div class="projects-panel hidden" id="panel-completed">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6" id="completed-list">
+            {completedProjects.map((project) => (
+              <a
+                href={`${baseUrl}projeler/${project.slug}`}
+                class="project-card relative w-full overflow-hidden rounded-2xl bg-white shadow-lg group border border-gray-100 block"
+                data-project-name={project.name.toLowerCase()}
+              >
+                <div class="aspect-[3/4] md:aspect-[2/3] relative overflow-hidden">
+                  <Image
+                    src={project.image}
+                    alt={project.name}
+                    width={400}
+                    height={300}
+                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div class="absolute bottom-0 left-0 right-0 p-3 md:p-4 bg-gradient-to-t from-black/70 to-transparent space-y-1.5">
+                    <p class="text-white text-sm md:text-base font-semibold flex items-center gap-2">
+                      <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                      </svg>
+                      {project.name}
+                    </p>
+                    <p class="text-white/90 text-xs md:text-sm flex items-center gap-2">
+                      <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                      {project.location}
+                    </p>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+          <p class="text-gray-500 text-sm mt-4 hidden" id="completed-empty">
+            Arama kriterine uygun tamamlanan proje bulunamadı.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <Footer />
+</MainLayout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const header = document.querySelector("header");
+    if (header) header.classList.add("bina-yonetimi-header");
+  });
+
+  const searchInput = document.getElementById("projects-search") as HTMLInputElement;
+  const completedList = document.getElementById("completed-list");
+  const ongoingList = document.getElementById("ongoing-list");
+  const completedEmpty = document.getElementById("completed-empty");
+  const ongoingEmpty = document.getElementById("ongoing-empty");
+
+  // Sekme geçişi
+  const tabs = document.querySelectorAll(".project-page-tab");
+  const panelOngoing = document.getElementById("panel-ongoing");
+  const panelCompleted = document.getElementById("panel-completed");
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const tabType = tab.getAttribute("data-tab");
+      if (!tabType) return;
+
+      tabs.forEach((t) => {
+        t.classList.remove("active-tab", "border-[#E30A17]", "text-[#E30A17]");
+        t.classList.add("border-transparent", "text-[#262322]");
+      });
+      tab.classList.add("active-tab", "border-[#E30A17]", "text-[#E30A17]");
+      tab.classList.remove("border-transparent", "text-[#262322]");
+
+      if (tabType === "ongoing") {
+        panelOngoing?.classList.remove("hidden");
+        panelCompleted?.classList.add("hidden");
+      } else {
+        panelOngoing?.classList.add("hidden");
+        panelCompleted?.classList.remove("hidden");
+      }
+    });
+  });
+
+  function normalize(str: string) {
+    return str
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+  }
+
+  function filterProjects() {
+    const query = searchInput?.value?.trim() || "";
+    const q = normalize(query);
+
+    function filterInContainer(container: HTMLElement | null, emptyEl: HTMLElement | null) {
+      if (!container) return;
+      const cards = container.querySelectorAll(".project-card");
+      let visible = 0;
+      cards.forEach((card) => {
+        const name = (card.getAttribute("data-project-name") || "").toLowerCase();
+        const nameNorm = normalize(name);
+        const show = !q || nameNorm.includes(q);
+        (card as HTMLElement).style.display = show ? "" : "none";
+        if (show) visible++;
+      });
+      if (emptyEl) emptyEl.classList.toggle("hidden", visible > 0 || !q);
+    }
+
+    filterInContainer(completedList, completedEmpty);
+    filterInContainer(ongoingList, ongoingEmpty);
+  }
+
+  searchInput?.addEventListener("input", filterProjects);
+  searchInput?.addEventListener("search", filterProjects);
+</script>
+
+<style>
+  .project-page-tab {
+    color: #262322;
+    cursor: pointer;
+  }
+  .project-page-tab:hover {
+    color: #E30A17;
+  }
+  .project-page-tab.active-tab {
+    color: #E30A17;
+    border-bottom-color: #E30A17;
+  }
+</style>
+
+<style is:global>
+  header.bina-yonetimi-header,
+  body header.bina-yonetimi-header {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+  }
+  header.bina-yonetimi-header nav a:not([href*="teklif-al"]),
+  header.bina-yonetimi-header .smooth-scroll-link {
+    color: #171717 !important;
+  }
+  header.bina-yonetimi-header nav a:not([href*="teklif-al"]):hover,
+  header.bina-yonetimi-header .smooth-scroll-link:hover {
+    color: #404040 !important;
+  }
+  header.bina-yonetimi-header nav a[href*="teklif-al"] {
+    color: #fff !important;
+  }
+  header.bina-yonetimi-header nav a[href*="teklif-al"] svg path {
+    stroke: #fff !important;
+  }
+  header.bina-yonetimi-header nav div.rounded-full:has(input) {
+    background-color: rgba(255, 255, 255, 0.85) !important;
+  }
+  header.bina-yonetimi-header nav div.rounded-full:has(input) input {
+    color: #171717 !important;
+  }
+  header.bina-yonetimi-header nav div.rounded-full:has(input) input::placeholder {
+    color: #525252 !important;
+  }
+  header.bina-yonetimi-header .mobile-menu-line {
+    background-color: #171717 !important;
+  }
+  header.bina-yonetimi-header nav div.rounded-full:has(input) svg path,
+  header.bina-yonetimi-header #mobile-search svg path,
+  header.bina-yonetimi-header #mobile-search-btn svg path {
+    stroke: #171717 !important;
+    fill: none !important;
+  }
+  header.bina-yonetimi-header a[href*="instagram"] svg path {
+    fill: #171717 !important;
+  }
+</style>
