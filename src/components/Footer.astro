@@ -10,8 +10,8 @@ const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
 
   <div class="border-b border-white/10">
     <div class="max-w-[1600px] mx-auto px-4 md:px-6 lg:px-12 py-12 md:py-16">
-      <div class="flex items-start justify-between  ">
-        <div class="space-y-6 w-1/4">
+      <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-10 lg:gap-12">
+        <div class="space-y-6 w-full lg:w-1/4">
           <Image src={`${baseUrl}nurdogan-logo.png`} alt="Nurdoğan Babadağ" width={170} height={100} class="w-28 sm:w-32 md:w-40 lg:w-42.5 h-auto bg-white p-2" />
           <p class="text-white text-sm md:text-base leading-relaxed ">
             Rapidiously myocardinate cross-platform intellectual capital model. Appropriately create interactive infrastructures.
@@ -26,7 +26,7 @@ const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
           </div>
         </div>
 
-        <div class="space-y-6 w-1/5">
+        <div class="space-y-6 w-full lg:w-1/5">
           <h4 class="text-white text-lg md:text-xl font-semibold">İletişim</h4>
           <div class="space-y-4">
             <div class="flex items-center gap-3">
@@ -62,7 +62,7 @@ const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
         </div>
 
         <!-- Right Column - Navigation Links -->
-        <div class="space-y-6 ">
+        <div class="space-y-6 w-full lg:w-auto">
           <h4 class="text-white text-lg md:text-xl font-semibold">Bağlantılar</h4>
           <nav class="space-y-3">
             <a href="/hakkimizda" class="flex items-center gap-2 text-white text-sm md:text-base hover:text-white transition-colors group">

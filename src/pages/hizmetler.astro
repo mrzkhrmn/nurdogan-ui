@@ -1,0 +1,297 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Footer from "../components/Footer.astro";
+import Image from "astro/components/Image.astro";
+import { ArrowRightIcon } from "../components/icons";
+import { allServicesList } from "../data/services";
+
+const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
+const allServices = allServicesList.map((s) => ({ ...s, image: `${baseUrl}${s.image}` }));
+const heroImage = `${baseUrl}service-image2.png`;
+---
+
+<MainLayout>
+  <div class="w-full min-h-screen bg-white">
+    <!-- Hero -->
+    <section class="w-full pt-24 sm:pt-28 md:pt-48 pb-16 md:pb-20 px-4 md:px-6">
+      <div class="max-w-[1200px] mx-auto">
+        <div class="flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-14">
+          <div class="flex-1 order-2 lg:order-1">
+            <h1 class="text-[#262322] text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-5 md:mb-6">
+              Güvenli, Planlı ve Profesyonel Süreç Yönetimi
+            </h1>
+            <p class="text-[#525252] text-base md:text-lg leading-relaxed mb-8 md:mb-10 max-w-xl">
+              Nurdoğan Babadağ Apartman ve Site Yönetimi olarak 7 yılı aşkın tecrübemizle yaşam alanlarınızı şeffaf ve hukuka uygun şekilde yönetiyoruz.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a
+                href="#hizmetler-listesi"
+                class="inline-flex items-center justify-center gap-2 rounded-full bg-[#E30A17] px-6 py-3.5 text-base font-medium text-white hover:bg-[#c00914] transition-colors w-fit"
+              >
+                Hizmetleri Keşfedin
+                <ArrowRightIcon color="#fff" />
+              </a>
+              <button
+                type="button"
+                id="hizmetler-teklif-btn"
+                class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#E30A17] px-6 py-3.5 text-base font-medium text-[#E30A17] hover:bg-[#E30A17]/5 transition-colors w-fit"
+              >
+                Hemen Teklif Al
+              </button>
+            </div>
+          </div>
+          <div class="flex-1 order-1 lg:order-2 shrink-0 max-w-lg lg:max-w-md xl:max-w-lg mx-auto lg:mx-0">
+            <div class="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl bg-gray-100">
+              <Image
+                src={heroImage}
+                alt="Hizmetlerimiz"
+                width={560}
+                height={420}
+                class="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ne Sunuyoruz - 3 kart (görsel tasarım) -->
+    <section class="w-full py-16 md:py-24 px-4 md:px-6 bg-gray-100">
+      <div class="max-w-[1200px] mx-auto">
+        <h2 class="text-[#262322] text-2xl md:text-3xl lg:text-4xl font-bold leading-tight text-center mb-12 md:mb-16">
+          Ne Sunuyoruz
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          <!-- Kart 1: Bina & Site Yönetimi -->
+          <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 md:p-8 flex flex-col h-full">
+            <div class="flex items-start gap-4 mb-5">
+              <div class="w-16 h-16 md:w-20 md:h-20 shrink-0 flex items-center justify-center text-[#E30A17]">
+                <svg class="w-full h-full" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M12 52V24l20-12 20 12v28H12z" stroke="#E30A17" stroke-width="2" fill="#E30A17" fill-opacity="0.2" stroke-linejoin="round"/>
+                  <path d="M32 12v40M12 24h40M20 52V36h8v16M36 52V36h8v16" stroke="#E30A17" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h3 class="text-[#262322] text-lg md:text-xl font-bold leading-tight pt-1">Bina & Site Yönetimi</h3>
+            </div>
+            <p class="text-[#525252] text-sm md:text-base leading-relaxed mb-6 flex-1">
+              Günlük operasyonel ve idari yönetim süreçleri.
+            </p>
+            <a href="#hizmetler-listesi" class="inline-flex items-center justify-center rounded-lg bg-[#E30A17] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#c00914] transition-colors w-fit">
+              Kategoriye Git
+            </a>
+          </div>
+
+          <!-- Kart 2: Proje & Teknik Hizmetler -->
+          <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 md:p-8 flex flex-col h-full">
+            <div class="flex items-start gap-4 mb-5">
+              <div class="w-16 h-16 md:w-20 md:h-20 shrink-0 flex items-center justify-center text-[#525252]">
+                <svg class="w-full h-full" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M12 52L52 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M52 12v20L32 52H12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M20 44V52h8M32 32v20M44 20v12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <h3 class="text-[#262322] text-lg md:text-xl font-bold leading-tight pt-1">Proje & Teknik Hizmetler</h3>
+            </div>
+            <p class="text-[#525252] text-sm md:text-base leading-relaxed mb-6 flex-1">
+              Teknik şartnameler, mimari projeler ve bakım onarım süreçleri.
+            </p>
+            <a href="#hizmetler-listesi" class="inline-flex items-center justify-center rounded-lg bg-[#E30A17] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#c00914] transition-colors w-fit">
+              Kategoriye Git
+            </a>
+          </div>
+
+          <!-- Kart 3: Hukuki & Resmi Süreçler -->
+          <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 md:p-8 flex flex-col h-full">
+            <div class="flex items-start gap-4 mb-5">
+              <div class="w-16 h-16 md:w-20 md:h-20 shrink-0 flex items-center justify-center text-[#525252]">
+                <svg class="w-full h-full" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M32 12v40M18 20h28M32 20l-8 12v12h16V32l-8-12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M24 32l-6 8h12l-6-8zM40 32l-6 8h12l-6-8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h3 class="text-[#262322] text-lg md:text-xl font-bold leading-tight pt-1">Hukuki & Resmi Süreçler</h3>
+            </div>
+            <p class="text-[#525252] text-sm md:text-base leading-relaxed mb-6 flex-1">
+              Kat Mülkiyeti Kanunu ve resmi mevzuata uyum desteği.
+            </p>
+            <a href="#hizmetler-listesi" class="inline-flex items-center justify-center rounded-lg bg-[#E30A17] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#c00914] transition-colors w-fit">
+              Kategoriye Git
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tüm Hizmetler - görsel + başlık görünür, hover'da açıklama -->
+    <section id="hizmetler-listesi" class="w-full py-16 md:py-24 px-4 md:px-6 scroll-mt-24 bg-white">
+      <div class="max-w-[1200px] mx-auto">
+        <p class="text-[#E30A17] text-xs md:text-sm font-bold mb-2 tracking-wider uppercase">
+          TÜM HİZMETLER
+        </p>
+        <h2 class="text-[#262322] text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight mb-10 md:mb-14">
+          Hizmetlerimiz
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+          {allServices.map((item) => (
+            <article class="tum-hizmet-card group bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col">
+              <div class="relative aspect-video overflow-hidden bg-gray-100">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  width={400}
+                  height={225}
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+              <div class="p-4 md:p-5 flex flex-col flex-1">
+                <h3 class="text-[#262322] text-base md:text-lg font-semibold leading-snug mb-2">
+                  {item.title}
+                </h3>
+                <p class="text-[#525252] text-sm leading-relaxed overflow-hidden max-h-0 opacity-0 group-hover:max-h-[280px] group-hover:opacity-100 group-hover:overflow-y-auto transition-all duration-300">
+                  {item.description}
+                </p>
+                <a
+                  href={`${baseUrl}hizmetler/${item.slug}`}
+                  class="mt-4 inline-flex items-center justify-center rounded-lg bg-[#E30A17] px-4 py-2.5 text-sm font-medium text-white hover:bg-[#c00914] transition-colors w-fit"
+                >
+                  Hizmet detay
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <Footer />
+
+  <!-- Teklif Formu Modal -->
+  <div
+    id="teklif-form-modal"
+    class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/50 p-4"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="teklif-form-title"
+    aria-hidden="true"
+  >
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-xl max-h-[90vh] overflow-y-auto">
+      <div class="relative p-6 sm:p-8">
+        <button type="button" id="teklif-form-close" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-[#404040] text-white hover:bg-[#525252] flex items-center justify-center transition-colors" aria-label="Kapat">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+        <h2 id="teklif-form-title" class="text-center text-[#262322] font-bold mb-6 sm:mb-8">
+          <span class="block text-lg sm:text-xl">Apartman & Site Yönetimi</span>
+          <span class="block text-xl sm:text-2xl mt-0.5">Teklif Formu</span>
+        </h2>
+        <form id="teklif-form" class="space-y-4 sm:space-y-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+            <div>
+              <label for="teklif-ad-soyad" class="block text-[#262322] text-sm font-medium mb-1.5">Ad Soyad</label>
+              <input type="text" id="teklif-ad-soyad" name="adSoyad" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-[#262322] placeholder-gray-400 focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17]" placeholder="Adınız Soyadınız" />
+            </div>
+            <div>
+              <label for="teklif-telefon" class="block text-[#262322] text-sm font-medium mb-1.5">İletişim Telefonu</label>
+              <input type="tel" id="teklif-telefon" name="telefon" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-[#262322] placeholder-gray-400 focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17]" placeholder="05XX XXX XX XX" />
+            </div>
+          </div>
+          <div>
+            <label for="teklif-email" class="block text-[#262322] text-sm font-medium mb-1.5">E-posta</label>
+            <input type="email" id="teklif-email" name="email" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-[#262322] placeholder-gray-400 focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17]" placeholder="ornek@email.com" />
+          </div>
+          <div>
+            <label for="teklif-bina-adi" class="block text-[#262322] text-sm font-medium mb-1.5">Bina Adı & Adresi</label>
+            <input type="text" id="teklif-bina-adi" name="binaAdi" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-[#262322] placeholder-gray-400 focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17]" placeholder="Bina adı ve adres bilgisi" />
+          </div>
+          <div>
+            <label for="teklif-mesaj" class="block text-[#262322] text-sm font-medium mb-1.5">Mesajınız</label>
+            <textarea id="teklif-mesaj" name="mesaj" rows="4" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-[#262322] placeholder-gray-400 focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17] resize-y min-h-[100px]" placeholder="Mesajınızı yazınız..."></textarea>
+          </div>
+          <div class="flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 pt-2">
+            <button type="submit" class="w-full sm:flex-1 px-6 py-3 rounded-lg bg-[#E30A17] text-white font-medium hover:bg-[#c00914] transition-colors">Gönder</button>
+            <button type="button" id="teklif-form-iptal" class="w-full sm:flex-1 px-6 py-3 rounded-lg bg-white border-2 border-[#E30A17] text-[#E30A17] font-medium hover:bg-[#E30A17]/5 transition-colors">İptal</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</MainLayout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const header = document.querySelector("header");
+    if (header) header.classList.add("bina-yonetimi-header");
+
+    const teklifBtn = document.getElementById("hizmetler-teklif-btn");
+    const modal = document.getElementById("teklif-form-modal");
+    const closeBtn = document.getElementById("teklif-form-close");
+    const iptalBtn = document.getElementById("teklif-form-iptal");
+    const form = document.getElementById("teklif-form");
+
+    function openTeklifModal() {
+      if (!modal) return;
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+    function closeTeklifModal() {
+      if (!modal) return;
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    teklifBtn?.addEventListener("click", openTeklifModal);
+    closeBtn?.addEventListener("click", closeTeklifModal);
+    iptalBtn?.addEventListener("click", closeTeklifModal);
+    modal?.addEventListener("click", (e) => { if (e.target === modal) closeTeklifModal(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && modal && !modal.classList.contains("hidden")) closeTeklifModal(); });
+    form?.addEventListener("submit", (e) => { e.preventDefault(); closeTeklifModal(); });
+  });
+</script>
+
+<style is:global>
+  header.bina-yonetimi-header,
+  body header.bina-yonetimi-header {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+  }
+  header.bina-yonetimi-header nav a:not([href*="teklif-al"]),
+  header.bina-yonetimi-header .smooth-scroll-link {
+    color: #171717 !important;
+  }
+  header.bina-yonetimi-header nav a:not([href*="teklif-al"]):hover,
+  header.bina-yonetimi-header .smooth-scroll-link:hover {
+    color: #404040 !important;
+  }
+  header.bina-yonetimi-header nav a[href*="teklif-al"] {
+    color: #fff !important;
+  }
+  header.bina-yonetimi-header nav a[href*="teklif-al"] svg path {
+    stroke: #fff !important;
+  }
+  header.bina-yonetimi-header nav div.rounded-full:has(input) {
+    background-color: rgba(255, 255, 255, 0.85) !important;
+  }
+  header.bina-yonetimi-header nav div.rounded-full:has(input) input {
+    color: #171717 !important;
+  }
+  header.bina-yonetimi-header nav div.rounded-full:has(input) input::placeholder {
+    color: #525252 !important;
+  }
+  header.bina-yonetimi-header .mobile-menu-line {
+    background-color: #171717 !important;
+  }
+  header.bina-yonetimi-header nav div.rounded-full:has(input) svg path,
+  header.bina-yonetimi-header #mobile-search svg path,
+  header.bina-yonetimi-header #mobile-search-btn svg path {
+    stroke: #171717 !important;
+    fill: none !important;
+  }
+  header.bina-yonetimi-header a[href*="instagram"] svg path {
+    fill: #171717 !important;
+  }
+</style>
