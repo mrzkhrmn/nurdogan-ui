@@ -1,126 +1,134 @@
 ---
 import Image from "astro/components/Image.astro";
-import { ArrowRightIcon } from "./icons";
 const base = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
-const hero = {
-  subtitle: "2012'DEN GÜNÜMÜZE",
-  title: "KENTSEL DÖNÜŞÜME YÖN\nVEREN ÖNCÜ KURULUŞ",
-  ctaText: "Projelere Göz At",
-  ctaLink: `${base}projeler`,
+const left = {
+  title: `KENTSEL DÖNÜŞÜM HİZMETLERİ`,
+  description: "Riskli yapı tespitinden yenileme projelerine kadar kentsel dönüşüm süreçlerinizin tüm aşamalarında yanınızdayız.",
+  image: `${base}initial-1.jpg`,
+  href: `${base}bina-yonetimi`,
+};
+const right = {
+  title: "BİNA SİTE YÖNETİM HİZMETİ",
+  description: "Profesyonel bina ve site yönetimi ile güvenli, düzenli ve değerini koruyan yaşam alanları sunuyoruz.",
+  image: `${base}initial-2.jpg`,
+  href: `${base}hizmetler`,
 };
 ---
 
-<section class="relative w-full min-h-screen flex items-center justify-center overflow-hidden" id="hero-slider">
-  <div class="absolute inset-0 z-0">
-    <Image 
-      src={`${base}landing-photo.png`} 
-      alt="Construction Image" 
-      width={1920} 
-      height={1080} 
-      class="w-full h-full object-cover" 
+<section
+  class="split-landing relative flex w-full min-h-[calc(100vh-5rem)] overflow-hidden"
+  id="hero-slider"
+  aria-label="Hizmet seçimi"
+>
+  <a
+    href={left.href}
+    class="panel panel-left relative flex-1 flex items-center justify-center min-w-0 overflow-hidden transition-all duration-800 ease-out cursor-pointer group"
+  >
+    <div class="absolute inset-0 z-0">
+      <Image
+        src={left.image}
+        alt="Kentsel dönüşüm"
+        width={1920}
+        height={1080}
+        class="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
+      />
+    </div>
+    <div class="absolute inset-0 z-10 bg-black/40 group-hover:bg-black/30 transition-colors duration-500"></div>
+    <div class="relative z-20 flex flex-col items-center justify-center gap-3 sm:gap-4 px-4 text-center">
+      <h2 class="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold tracking-wide drop-shadow-lg">
+        {left.title}
+      </h2>
+      <p class="panel-desc text-white text-sm sm:text-base md:text-lg max-w-md transition-all duration-500 ease-out drop-shadow-md">
+        {left.description}
+      </p>
+    </div>
+  </a>
+
+  <div
+    class="center-line absolute top-0 bottom-0 w-1 sm:w-1.5 bg-white z-30 pointer-events-none transition-opacity duration-300 shadow-[0_0_16px_rgba(255,255,255,0.5)]"
+    style="left: 50%; transform: translateX(-50%);"
+    aria-hidden="true"
+  ></div>
+
+  <div
+    class="center-desk absolute left-1/2 bottom-0 z-40 pointer-events-none -translate-x-1/2 w-[85%] max-w-7xl"
+    aria-hidden="true"
+  >
+    <Image
+      src={`${base}desk.png`}
+      alt=""
+      width={960}
+      height={640}
+      class="w-full h-auto object-contain object-bottom drop-shadow-2xl"
     />
   </div>
-  
-  <div class="absolute inset-0 z-10 bg-black/25"></div>
-  
-  <div class="relative z-20 w-full h-full py-16 sm:py-20 md:py-24">
-    <div class="absolute inset-0 flex items-center justify-center px-4 sm:px-6 ">
-      <div class="hero-text text-center w-full max-w-[1400px] mx-auto" data-hero-text>
-        <p class="text-[#E30A17] text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-3xl font-bold mb-3 sm:mb-4 md:mb-5 tracking-wider ">
-          {hero.subtitle}
-        </p>
-        <h1 class="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-8xl font-medium mb-6 sm:mb-7 md:mb-8 leading-tight whitespace-pre-line">
-          {hero.title}
-        </h1>
-        <a
-          href={hero.ctaLink}
-          class="inline-flex items-center gap-2 rounded-full bg-[#E30A17] px-4 py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-4 text-sm sm:text-base font-medium text-white hover:bg-[#e30a18df] transition"
-        >
-          {hero.ctaText}
-          <ArrowRightIcon />
-        </a>
-      </div>
+
+  <a
+    href={right.href}
+    class="panel panel-right relative flex-1 flex items-center justify-center min-w-0 overflow-hidden transition-all duration-500 ease-out cursor-pointer group"
+  >
+    <div class="absolute inset-0 z-0">
+      <Image
+        src={right.image}
+        alt="Bina site yönetimi"
+        width={1920}
+        height={1080}
+        class="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
+      />
     </div>
-  </div>
+    <div class="absolute inset-0 z-10 bg-black/40 group-hover:bg-black/30 transition-colors duration-500"></div>
+    <div class="relative z-20 flex flex-col items-center justify-center gap-3 sm:gap-4 px-4 text-center">
+      <h2 class="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold tracking-wide drop-shadow-lg">
+        {right.title}
+      </h2>
+      <p class="panel-desc text-white text-sm sm:text-base md:text-lg max-w-md transition-all duration-500 ease-out drop-shadow-md">
+        {right.description}
+      </p>
+    </div>
+  </a>
 </section>
 
-<script>
-  const heroText = document.querySelector('[data-hero-text]');
-  if (!heroText) {
-    // no-op
-  } else {
-    const el = heroText as HTMLElement;
-    let hasStarted = false;
-    let hideTimer: number | undefined;
-
-    const start = () => {
-      if (hasStarted) return;
-      hasStarted = true;
-
-      el.classList.add('is-visible');
-
-      // birkaç saniye sonra kaybolsun
-      hideTimer = window.setTimeout(() => {
-        el.classList.add('is-hidden');
-      }, 3500);
-    };
-
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver(
-        (entries) => {
-          const entry = entries[0];
-          if (entry?.isIntersecting) {
-            start();
-            io.disconnect();
-          }
-        },
-        { threshold: 0.35 }
-      );
-
-      io.observe(el);
-      window.addEventListener('beforeunload', () => {
-        if (hideTimer) window.clearTimeout(hideTimer);
-        io.disconnect();
-      });
-    } else {
-      start();
-    }
-  }
-</script>
-
 <style>
-  .hero-text {
-    opacity: 0;
-    transform: translateY(16px);
-    filter: blur(6px);
-    transition: opacity 700ms ease, transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 700ms ease;
-    will-change: opacity, transform, filter;
+  .split-landing {
+    /* Hover: sol panel üzerindeyken sol genişler, sağ daralır */
   }
-
-  .hero-text.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
+  .split-landing:has(.panel-left:hover) .panel-left {
+    flex: 1 1 100%;
   }
-
-  .hero-text.is-hidden {
+  .split-landing:has(.panel-left:hover) .panel-right {
+    flex: 0 0 0%;
+    min-width: 0;
     opacity: 0;
-    transform: translateY(-10px);
-    filter: blur(6px);
     pointer-events: none;
   }
-
+  .split-landing:has(.panel-right:hover) .panel-right {
+    flex: 1 1 100%;
+  }
+  .split-landing:has(.panel-right:hover) .panel-left {
+    flex: 0 0 0%;
+    min-width: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .split-landing:has(.panel-left:hover) .center-line,
+  .split-landing:has(.panel-right:hover) .center-line {
+    opacity: 0;
+  }
+  .panel {
+    flex: 1 1 50%;
+  }
+  .panel-desc {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  .panel:hover .panel-desc {
+    opacity: 1;
+    transform: translateY(0);
+  }
   @media (prefers-reduced-motion: reduce) {
-    .hero-text {
+    .panel,
+    .panel img {
       transition: none;
-      transform: none;
-      filter: none;
-    }
-    .hero-text.is-visible {
-      opacity: 1;
-    }
-    .hero-text.is-hidden {
-      opacity: 0;
     }
   }
 </style>

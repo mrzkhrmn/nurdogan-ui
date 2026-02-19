@@ -7,18 +7,25 @@ const navItems = [
   { label: "Hakkımızda", href: "#hakkimizda" },
   { label: "Projeler", href: "#projeler" },
   { label: "Hizmetlerimiz", href: "#hizmetlerimiz" },
-  {label:"Bina Yönetimi", href: "#bina-yonetimi" },
   { label: "Haberler", href: "#haberler" },
   { label: "Dernek", href: "#hakkimizda" },
-  { label: "İletişim", href: "#iletisim" },
+  { label: "İletişim", href: `${base}iletisim` },
+  {label:"Bina Yönetimi", href: "#bina-yonetimi" },
 ];
+interface Props {
+  isHomePage?: boolean;
+}
+const { isHomePage = false } = Astro.props;
+const headerClass = isHomePage
+  ? "relative z-50 py-5 sm:py-7 md:py-9 lg:py-8 w-full bg-[#E30A17]"
+  : "absolute top-0 left-0 right-0 z-50 py-5 sm:py-7 md:py-9 lg:py-8 w-full bg-[#E30A17]";
 ---
 
-<header class="absolute top-0 left-0 right-0 z-50 py-5 sm:py-7 md:py-9 lg:py-8 w-full bg-black/10 backdrop-blur-sm">
+<header class={headerClass}>
   <div class="w-full mx-auto max-w-[1920px]">
     <div class="flex items-center justify-between lg:justify-center h-14 sm:h-16 md:h-18 lg:h-20 gap-4 lg:gap-6 xl:gap-8 2xl:gap-12">
 
-      <a href={base} class="text-xl font-bold tracking-tight shrink-0">
+      <a href={base} class="text-xl font-bold tracking-tight shrink-0 bg-white rounded-lg p-1 inline-flex items-center justify-center">
         <Image 
           src={`${(import.meta.env.BASE_URL || '/').replace(/\/?$/, '/')}nurdogan-logo.png`} 
           alt="Logo" 
@@ -32,32 +39,32 @@ const navItems = [
         {navItems.map(item => (
           <a
             href={item.href}
-            class="text-sm xl:text-base 2xl:text-lg font-medium text-white hover:text-gray-200 transition whitespace-nowrap smooth-scroll-link"
+            class="text-sm xl:text-base 2xl:text-lg font-medium text-white hover:text-white/90 transition whitespace-nowrap smooth-scroll-link"
           >
             {item.label}
           </a>
         ))}
-        <div class="hidden lg:flex items-center bg-[#F0F0F0]/30 rounded-full px-3 py-2 lg:px-4 lg:py-2 xl:px-5 xl:py-2.5 2xl:px-6 2xl:py-3 w-32 lg:w-36 xl:w-40 2xl:w-44 focus:ring-2 shrink-0">
+        <div class="hidden lg:flex items-center bg-white/20 rounded-full px-3 py-2 lg:px-4 lg:py-2 xl:px-5 xl:py-2.5 2xl:px-6 2xl:py-3 w-32 lg:w-36 xl:w-40 2xl:w-44 focus:ring-2 shrink-0 text-white">
           <input
             type="text"
             placeholder="Ara"
-            class="w-full text-xs lg:text-sm xl:text-base outline-none text-white placeholder:text-white/70 bg-transparent"
+            class="w-full text-xs lg:text-sm xl:text-base outline-none text-white placeholder:text-white/80 bg-transparent"
           />
           <SearchIcon />
         </div>
         <a
           href={`${base}teklif-al`}
-          class="rounded-full bg-red-600 px-3 xl:px-5 py-2 2xl:px-6 2xl:py-3 text-xs xl:text-sm 2xl:text-base font-medium text-white hover:bg-red-700 transition flex items-center gap-1 xl:gap-1.5 whitespace-nowrap shrink-0"
+          class="rounded-full bg-white px-3 xl:px-5 py-2 2xl:px-6 2xl:py-3 text-xs xl:text-sm 2xl:text-base font-medium text-[#E30A17] hover:bg-gray-100 transition flex items-center gap-1 xl:gap-1.5 whitespace-nowrap shrink-0"
         >
           Teklif Al
-          <ArrowRightIcon />
+          <ArrowRightIcon color="#E30A17" />
         </a>
-        <a href="https://www.instagram.com/nurdoganbabadag/" target="_blank" class="cursor-pointer flex items-center justify-center shrink-0">
+        <a href="https://www.instagram.com/nurdoganbabadag/" target="_blank" class="cursor-pointer flex items-center justify-center shrink-0 text-white">
           <div class="w-6 h-6 xl:w-7 xl:h-7 2xl:w-8 2xl:h-8 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full">
-            <InstagramIcon width={24} height={24} />
+            <InstagramIcon width={24} height={24} color="#FFFFFF" />
           </div>
         </a>
-        <button class="w-8 h-8 xl:w-10 xl:h-10 2xl:w-14 2xl:h-14 shrink-0 flex items-center justify-center overflow-hidden">
+        <button class="w-8 h-8 xl:w-10 xl:h-10 2xl:w-14 2xl:h-14 shrink-0 flex items-center justify-center overflow-hidden bg-white rounded-full p-1.5 xl:p-2 2xl:p-2.5">
           <div class="w-full h-full flex items-center justify-center [&>svg]:w-full [&>svg]:h-full">
             <TurkeyFlag width={39} height={26} />
           </div>
@@ -65,17 +72,17 @@ const navItems = [
       </nav>
 
       <div class="flex items-center gap-2 sm:gap-3 md:gap-4 lg:hidden">
-        <button 
-          id="mobile-search-btn"
-          class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center bg-[#F0F0F0]/30 rounded-full"
-          aria-label="Ara"
-        >
-          <SearchIcon />
-        </button>
+<button 
+        id="mobile-search-btn"
+        class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center bg-white/20 rounded-full text-white"
+        aria-label="Ara"
+      >
+        <SearchIcon />
+      </button>
         
         <button 
           id="mobile-menu-btn"
-          class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex flex-col items-center justify-center gap-1.5"
+          class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex flex-col items-center justify-center gap-1.5 text-white"
           aria-label="Menü"
         >
           <span class="mobile-menu-line w-7 h-0.5 sm:w-8 sm:h-1 bg-white transition-all"></span>
@@ -86,11 +93,11 @@ const navItems = [
     </div>
 
     <div id="mobile-search" class="hidden mt-4">
-      <div class="flex items-center bg-[#F0F0F0]/30 rounded-full px-5 py-3 w-full">
+      <div class="flex items-center bg-white/20 rounded-full px-5 py-3 w-full text-white">
         <input
           type="text"
           placeholder="Ara"
-          class="w-full text-base outline-none text-white placeholder:text-white/70 bg-transparent"
+          class="w-full text-base outline-none text-white placeholder:text-white/80 bg-transparent"
         />
         <SearchIcon />
       </div>
@@ -104,7 +111,7 @@ const navItems = [
     <div class="flex flex-col h-full pt-6 px-6 relative">
       <button 
         id="mobile-menu-close-btn"
-        class="absolute top-6 right-6 w-12 h-12 flex items-center justify-center text-white hover:text-gray-300 transition"
+        class="absolute top-6 right-6 w-12 h-12 flex items-center justify-center text-white hover:text-white/90 transition"
         aria-label="Menüyü Kapat"
       >
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -116,7 +123,7 @@ const navItems = [
         {navItems.map(item => (
           <a
             href={item.href}
-            class="text-xl font-medium text-white hover:text-gray-200 transition py-3 border-b border-white/10 smooth-scroll-link"
+            class="text-xl font-medium text-white hover:text-white/90 transition py-3 border-b border-white/20 smooth-scroll-link"
             onclick="document.getElementById('mobile-menu').classList.add('translate-x-full'); document.getElementById('mobile-menu-btn').classList.remove('active'); return true;"
           >
             {item.label}
@@ -127,12 +134,12 @@ const navItems = [
       <div class="mt-8 flex flex-col gap-4">
         <a
           href={`${base}teklif-al`}
-          class="rounded-full bg-red-600 px-8 py-4 text-lg font-medium text-white hover:bg-red-700 transition flex items-center justify-center gap-2"
+          class="rounded-full bg-white px-8 py-4 text-lg font-medium text-[#E30A17] hover:bg-gray-100 transition flex items-center justify-center gap-2"
         >
           Teklif Al
-          <ArrowRightIcon />
+          <ArrowRightIcon color="#E30A17" />
         </a>
-        <button class="w-16 h-16 mx-auto flex items-center justify-center overflow-hidden">
+        <button class="w-16 h-16 mx-auto flex items-center justify-center overflow-hidden bg-white rounded-full p-2">
           <div class="w-full h-full flex items-center justify-center [&>svg]:w-full [&>svg]:h-full">
             <TurkeyFlag width={39} height={26} />
           </div>

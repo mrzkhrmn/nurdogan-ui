@@ -2,7 +2,7 @@
 import MainLayout from "../../layouts/MainLayout.astro";
 import Footer from "../../components/Footer.astro";
 import Image from "astro/components/Image.astro";
-import { allServicesList } from "../../data/services";
+import { allServicesList, projeTeknikSlugs, hukukiSlugs, RELATED_SERVICES_LIMIT } from "../../data/services";
 import type { AllServiceItem } from "../../data/services";
 
 const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
@@ -19,6 +19,20 @@ const service: AllServiceItem & { imageFull: string } = {
   ...raw,
   imageFull: `${baseUrl}${raw.image}`,
 };
+
+const allServicesWithImage = allServicesList.map((s) => ({ ...s, imageFull: `${baseUrl}${s.image}` }));
+const serviceBySlug = Object.fromEntries(allServicesWithImage.map((s) => [s.slug, s]));
+
+const sameCategorySlugs =
+  projeTeknikSlugs.includes(raw.slug)
+    ? projeTeknikSlugs.filter((slug) => slug !== raw.slug)
+    : hukukiSlugs.includes(raw.slug)
+      ? hukukiSlugs.filter((slug) => slug !== raw.slug)
+      : [];
+const relatedServices = sameCategorySlugs
+  .slice(0, RELATED_SERVICES_LIMIT)
+  .map((slug) => serviceBySlug[slug])
+  .filter(Boolean);
 ---
 
 <MainLayout>
@@ -90,6 +104,44 @@ const service: AllServiceItem & { imageFull: string } = {
         </div>
       </div>
     </section>
+
+    <!-- İlgili Hizmetler (aynı kategoriden) -->
+    {relatedServices.length > 0 && (
+      <section class="w-full py-16 md:py-20 px-4 md:px-6 bg-gray-50 border-t border-gray-100">
+        <div class="max-w-[1200px] mx-auto">
+          <h2 class="text-[#262322] text-xl md:text-2xl font-bold leading-tight mb-8">
+            Bu kategorideki diğer hizmetler
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+            {relatedServices.map((item) => (
+              <a
+                href={`${baseUrl}hizmetler/${item.slug}`}
+                class="group bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col"
+              >
+                <div class="relative aspect-video overflow-hidden bg-gray-100">
+                  <Image
+                    src={item.imageFull}
+                    alt={item.title}
+                    width={400}
+                    height={225}
+                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+                <div class="p-4 md:p-5 flex flex-col flex-1">
+                  <h3 class="text-[#262322] text-base md:text-lg font-semibold leading-snug group-hover:text-[#E30A17] transition-colors">
+                    {item.title}
+                  </h3>
+                  <span class="mt-3 inline-flex items-center gap-1.5 text-[#E30A17] text-sm font-medium">
+                    Detay
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
   </div>
 
   <Footer />
@@ -140,10 +192,6 @@ const service: AllServiceItem & { imageFull: string } = {
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const header = document.querySelector("header");
-    if (header) header.classList.add("bina-yonetimi-header");
-  });
-
   const teklifBtn = document.getElementById("hizmet-detay-teklif-btn");
   const modal = document.getElementById("teklif-form-modal");
   const closeBtn = document.getElementById("teklif-form-close");
@@ -171,46 +219,5 @@ const service: AllServiceItem & { imageFull: string } = {
   modal?.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && modal && !modal.classList.contains("hidden")) closeModal(); });
   form?.addEventListener("submit", (e) => { e.preventDefault(); closeModal(); });
+  });
 </script>
-
-<style is:global>
-  header.bina-yonetimi-header,
-  body header.bina-yonetimi-header {
-    background-color: rgba(0, 0, 0, 0.1) !important;
-  }
-  header.bina-yonetimi-header nav a:not([href*="teklif-al"]),
-  header.bina-yonetimi-header .smooth-scroll-link {
-    color: #171717 !important;
-  }
-  header.bina-yonetimi-header nav a:not([href*="teklif-al"]):hover,
-  header.bina-yonetimi-header .smooth-scroll-link:hover {
-    color: #404040 !important;
-  }
-  header.bina-yonetimi-header nav a[href*="teklif-al"] {
-    color: #fff !important;
-  }
-  header.bina-yonetimi-header nav a[href*="teklif-al"] svg path {
-    stroke: #fff !important;
-  }
-  header.bina-yonetimi-header nav div.rounded-full:has(input) {
-    background-color: rgba(255, 255, 255, 0.85) !important;
-  }
-  header.bina-yonetimi-header nav div.rounded-full:has(input) input {
-    color: #171717 !important;
-  }
-  header.bina-yonetimi-header nav div.rounded-full:has(input) input::placeholder {
-    color: #525252 !important;
-  }
-  header.bina-yonetimi-header .mobile-menu-line {
-    background-color: #171717 !important;
-  }
-  header.bina-yonetimi-header nav div.rounded-full:has(input) svg path,
-  header.bina-yonetimi-header #mobile-search svg path,
-  header.bina-yonetimi-header #mobile-search-btn svg path {
-    stroke: #171717 !important;
-    fill: none !important;
-  }
-  header.bina-yonetimi-header a[href*="instagram"] svg path {
-    fill: #171717 !important;
-  }
-</style>
