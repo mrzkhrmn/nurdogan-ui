@@ -1,6 +1,7 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
 import Footer from "../../components/Footer.astro";
+import ReferencesSection from "../../components/sections/ReferencesSection.astro";
 import Image from "astro/components/Image.astro";
 import { allServicesList, projeTeknikSlugs, hukukiSlugs, RELATED_SERVICES_LIMIT } from "../../data/services";
 import type { AllServiceItem } from "../../data/services";
@@ -142,6 +143,9 @@ const relatedServices = sameCategorySlugs
         </div>
       </section>
     )}
+
+    <!-- Referanslarımız -->
+    <ReferencesSection />
   </div>
 
   <Footer />

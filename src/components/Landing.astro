@@ -4,14 +4,14 @@ const base = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
 const left = {
   title: `KENTSEL DÖNÜŞÜM HİZMETLERİ`,
   description: "Riskli yapı tespitinden yenileme projelerine kadar kentsel dönüşüm süreçlerinizin tüm aşamalarında yanınızdayız.",
-  image: `${base}initial-1.jpg`,
-  href: `${base}bina-yonetimi`,
+  image: `${base}kentsel-donusum.png`,
+  href: `${base}hizmetler`,
 };
 const right = {
   title: "BİNA SİTE YÖNETİM HİZMETİ",
   description: "Profesyonel bina ve site yönetimi ile güvenli, düzenli ve değerini koruyan yaşam alanları sunuyoruz.",
   image: `${base}binaa.png`,
-  href: `${base}hizmetler`,
+  href: `${base}bina-yonetimi`,
 };
 ---
 
@@ -49,19 +49,6 @@ const right = {
     style="left: 50%; transform: translateX(-50%);"
     aria-hidden="true"
   ></div>
-
-  <div
-    class="center-desk absolute left-1/2 bottom-0 z-40 pointer-events-none -translate-x-1/2 w-[85%] max-w-7xl"
-    aria-hidden="true"
-  >
-    <Image
-      src={`${base}desk.png`}
-      alt=""
-      width={960}
-      height={640}
-      class="w-full h-auto object-contain object-bottom drop-shadow-2xl"
-    />
-  </div>
 
   <a
     href={right.href}
