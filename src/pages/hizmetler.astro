@@ -9,7 +9,7 @@ const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
 const allServices = allServicesList.map((s) => ({ ...s, image: `${baseUrl}${s.image}` }));
 const serviceBySlug = Object.fromEntries(allServices.map((s) => [s.slug, s]));
 
-const heroImage = `${baseUrl}service-image2.png`;
+const heroImage = `${baseUrl}hizmetler-main.png`;
 ---
 
 <MainLayout>
