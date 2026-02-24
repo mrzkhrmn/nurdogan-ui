@@ -1,59 +1,29 @@
 ---
+import StatIcon from "../StatIcon.jsx";
 const base = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
 const youtubeEmbedId = "YT9AUXiJTV4";
 const stats = [
-  {
-    number: "38",
-    label: "Yıllık İnşaat Deneyimi"
-  },
-  {
-    number: "14",
-    label: "Yıllık Kentsel Dönüşüm Deneyimi"
-  },
-  {
-    number: "54+",
-    label: "Devam Eden Proje"
-  },
-  {
-    number: "342+",
-    label: "Tamamlanan Proje"
-  }
+  { number: "38", label: "Yıllık İnşaat Deneyimi", icon: "building" },
+  { number: "14", label: "Yıllık Kentsel Dönüşüm Deneyimi", icon: "kentsel-donusum" },
+  { number: "54+", label: "Devam Eden Proje", icon: "construction" },
+  { number: "342+", label: "Tamamlanan Proje", icon: "document" },
 ];
 ---
 
-<section class="w-full bg-gray-50 py-20 px-6">
-  <div class="max-w-7xl mx-auto">
+<section 
+  class="w-full py-20 px-6 relative bg-gray-50 bg-cover bg-center bg-no-repeat"
+  style="background-image: url('/scetchbg.png');"
+>
+  <div 
+    class="absolute inset-0 z-0 pointer-events-none " 
+    style="background: linear-gradient(to right, transparent 0%, rgba(249, 250, 251, 1) 50%);"
+    aria-hidden="true"
+  />
+  <div class="max-w-7xl mx-auto relative z-10">
     <div class="flex flex-col lg:flex-row items-stretch gap-8 lg:gap-12 mb-20">
-      <!-- Sol: Yazılar -->
-      <div class="w-full lg:max-w-xl lg:shrink-0 flex flex-col justify-center text-left order-1">
-        <p class="text-[#E30A17] text-sm font-bold mb-4 tracking-wider">
-          2012'DEN GÜNÜMÜZE
-        </p>
-        <h2 class="text-[#262322] text-4xl md:text-5xl font-semibold mb-6 leading-tight">
-          Kentsel Dönüşüme Yön Veren Öncü Kuruluş
-        </h2>
-        <p class="text-[#585858] text-base md:text-lg mb-8 leading-relaxed">
-          2012 yılından bu yana danışanlarımızı güvenli ve en avantajlı şekilde yeni binalarına kavuşturuyoruz.
-        </p>
-        <a
-          href={`${base}nurdogan.pdf`}
-          download="nurdogan.pdf"
-          class="inline-flex items-center gap-3 rounded-full bg-[#E30A17] pl-2 pr-8 py-2 text-base font-medium text-white hover:bg-[#e30a18df] transition w-fit"
-        >
-          <span class="w-10 h-10 rounded-full bg-white flex items-center justify-center shrink-0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E30A17" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-              <polyline points="7 10 12 15 17 10"/>
-              <line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
-          </span>
-          Tanıtım PDF
-        </a>
-      </div>
-
-      <!-- Sağ: Video full width full height -->
-      <div class="w-full lg:flex-1 min-h-[280px] lg:min-h-[360px] order-2">
-        <div class="relative w-full h-full min-h-[280px] lg:min-h-[360px] rounded-2xl overflow-hidden bg-black/5">
+      <!-- Sol: Video + Tanıtım PDF (videonun genişliği kadar) -->
+      <div class="w-full lg:w-1/2 lg:max-w-xl lg:shrink-0 flex flex-col gap-4 order-2 lg:order-1">
+        <div class="relative w-full aspect-video min-h-[280px] rounded-2xl overflow-hidden bg-black/5">
           <iframe
             src={`https://www.youtube.com/embed/${youtubeEmbedId}?rel=0`}
             title="YouTube video"
@@ -62,6 +32,33 @@ const stats = [
             allowfullscreen
           />
         </div>
+        <a
+          href={`${base}nurdogan.pdf`}
+          download="nurdogan.pdf"
+          class="w-full inline-flex items-center justify-center gap-3 rounded-full bg-[#E30A17] px-6 py-3 text-base font-medium text-white hover:bg-[#e30a18df] transition"
+        >
+          <span class="w-10 h-10 rounded-full bg-white flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E30A17" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+          </span>
+          Kentsel Dönüşüm Tanıtım PDF
+        </a>
+      </div>
+
+      <!-- Sağ: Yazılar -->
+      <div class="w-full lg:flex-1 flex flex-col justify-center text-left order-1 lg:order-2">
+        <p class="inline-block text-[#E30A17] text-base md:text-lg font-bold mb-4 tracking-wider bg-[#E30A17]/10 px-5 py-2.5 rounded-xl">
+          2012'DEN GÜNÜMÜZE
+        </p>
+        <h2 class="text-[#262322] text-4xl md:text-5xl font-semibold mb-6 leading-tight">
+          Kentsel Dönüşüme Yön Veren Öncü Kuruluş
+        </h2>
+        <p class="text-[#585858] text-base md:text-lg leading-relaxed">
+          2012 yılından bu yana danışanlarımızı güvenli ve en avantajlı şekilde yeni binalarına kavuşturuyoruz.
+        </p>
       </div>
     </div>
 
@@ -70,7 +67,10 @@ const stats = [
         const hasPlus = stat.number.includes('+');
         const targetNumber = parseInt(stat.number.replace('+', ''));
         return (
-          <div class={`${index != 0 && "border-l border-[#DFDEDC]"} text-center stat-item`}>
+          <div class={`${index != 0 && "border-l border-[#DFDEDC]"} text-center stat-item flex flex-col items-center`}>
+            <div class="stat-icon-wrapper opacity-0 scale-75 transition-all duration-500 ease-out">
+              <StatIcon client:load type={stat.icon} />
+            </div>
             <div 
               class="text-[#262322] text-5xl md:text-6xl font-semibold mb-2 stat-number"
               data-target={targetNumber}
@@ -89,26 +89,33 @@ const stats = [
 </section>
 
 <script>
-  function animateNumber(element: HTMLElement, target: number, hasPlus: boolean, duration: number = 2000) {
+  function animateNumber(
+    element: HTMLElement,
+    target: number,
+    hasPlus: boolean,
+    duration: number = 2000,
+    onComplete?: () => void
+  ) {
     const start = 0;
     const startTime = performance.now();
-    
+
     function update(currentTime: number) {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      
+
       const easeOut = 1 - Math.pow(1 - progress, 3);
       const current = Math.floor(start + (target - start) * easeOut);
-      
+
       element.textContent = current.toString() + (hasPlus ? '+' : '');
-      
+
       if (progress < 1) {
         requestAnimationFrame(update);
       } else {
         element.textContent = target.toString() + (hasPlus ? '+' : '');
+        onComplete?.();
       }
     }
-    
+
     requestAnimationFrame(update);
   }
 
@@ -117,20 +124,26 @@ const stats = [
     if (!statsContainer) return;
 
     const statItems = statsContainer.querySelectorAll('.stat-item');
-    
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const statItem = entry.target as HTMLElement;
           const numberElement = statItem.querySelector('.stat-number') as HTMLElement;
-          
+
           if (numberElement && !numberElement.dataset.animated) {
             const target = parseInt(numberElement.dataset.target || '0');
             const hasPlus = numberElement.dataset.hasPlus === 'true';
-            
-            animateNumber(numberElement, target, hasPlus);
+
+            animateNumber(numberElement, target, hasPlus, 2000, () => {
+              const iconWrapper = statItem.querySelector('.stat-icon-wrapper') as HTMLElement;
+              if (iconWrapper) {
+                iconWrapper.classList.remove('opacity-0', 'scale-75');
+                iconWrapper.classList.add('opacity-100', 'scale-100');
+              }
+            });
             numberElement.dataset.animated = 'true';
-            
+
             observer.unobserve(statItem);
           }
         }

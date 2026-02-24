@@ -2,8 +2,9 @@
 import Image from "astro/components/Image.astro";
 import CheckmarkIcon from "../icons/CheckmarkIcon.jsx";
 import { ArrowRightIcon } from "../icons";
+import { binaYonetimiGorselleri } from "../../data/binaYonetimi";
 
-const baseUrl = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
+const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
 
 const services = [
   "Aylık işlemler.",
@@ -11,34 +12,51 @@ const services = [
   "Kanuni işlemler.",
   "İdari, mali ve teknik sorunların çözülmesi.",
 ];
+
+const anaGorsel = baseUrl + binaYonetimiGorselleri.anaGorsel;
+const altGorseller = binaYonetimiGorselleri.altGorseller;
 ---
 
 <section class="w-full bg-white pt-24 sm:pt-32 md:pt-36 lg:pt-44 pb-12 md:pb-20 px-4 md:px-6 mt-24">
   <div class="max-w-[1440px] mx-auto">
-    <div class="flex flex-col lg:flex-row items-center gap-32 sm:gap-24 md:gap-32 lg:gap-12">
-      <div class="w-full lg:w-[50%] relative">
-        <div class="relative h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] xl:h-[500px] pt-4 sm:pt-5 lg:pt-6">
-          <div class="w-[75%] sm:w-[70%] md:w-[68%] lg:w-[70%] h-full overflow-hidden rounded-2xl sm:rounded-3xl border-2 border-white shadow-xl">
-            <Image src={`${baseUrl}construction1.png`} alt="Bina yönetimi arka planı" width={1920} height={800} class="w-full h-full object-cover" />
+    <div class="flex flex-col lg:flex-row items-stretch gap-10 lg:gap-12">
+      <!-- Sol: Yeni görsel bloğu (ana + 3 alt absolute, ortadaki büyük, yer değişir) -->
+      <div class="w-full lg:w-[50%] shrink-0 relative pb-[42%] md:pb-[38%]">
+        <div class="absolute inset-0 flex flex-col">
+          <div class="rounded-2xl overflow-hidden shadow-lg flex-1 min-h-0">
+            <img
+              src={anaGorsel}
+              alt="Bina yönetimi - Toplantı ve yönetim"
+              class="w-full h-full min-h-[200px] object-cover"
+              loading="eager"
+            />
           </div>
-        </div>
-        <div class="absolute -bottom-12 sm:-bottom-16 md:-bottom-18 lg:-bottom-20 right-0 w-[30%] sm:w-[32%] md:w-[35%] lg:w-[40%]">
-          <div class="w-[70%] sm:w-[72%] lg:w-[70%] h-[120px] sm:h-[140px] md:h-[160px] lg:h-[180px] xl:h-[200px] overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl border-2 border-white shadow-lg">
-            <Image src={`${baseUrl}construction1.png`} alt="Bina yönetimi arka planı" width={1920} height={800} class="w-full h-full object-cover" />
-          </div>
-        </div>
-        <div class="absolute -top-6 sm:-top-8 md:-top-10 lg:-top-10 -left-8 sm:-left-12 md:-left-16 lg:-left-24 xl:-left-32 w-[30%] sm:w-[32%] md:w-[35%] lg:w-[40%]">
-          <div class="w-[70%] sm:w-[72%] lg:w-[70%] h-[120px] sm:h-[140px] md:h-[160px] lg:h-[180px] xl:h-[200px] overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl border-2 border-white shadow-lg">
-            <Image src={`${baseUrl}construction1.png`} alt="Bina yönetimi arka planı" width={1920} height={800} class="w-full h-full object-cover" />
+          <!-- Alttaki 3 görsel: absolute, en altta, ortadaki büyük, kendi aralarında yer değişir -->
+          <div class="absolute bottom-0 left-0 right-0 h-[38%] md:h-[42%] flex items-end justify-center gap-0 pointer-events-none">
+            {altGorseller.map((src, index) => (
+              <div
+                class="bina-alt-gorsel absolute bottom-0 rounded-xl overflow-hidden border-2 shadow-lg pointer-events-auto cursor-pointer"
+                data-index={index}
+                data-src={baseUrl + src}
+              >
+                <img
+                  src={baseUrl + src}
+                  alt={`Bina yönetimi projesi ${index + 6}`}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
-      <div class="w-full lg:w-[50%] flex flex-col justify-center">
+      <!-- Sağ: Yazılar -->
+      <div class="w-full lg:flex-1 flex flex-col justify-center">
         <h1 class="text-[#262322] text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6">
           Apartmanınızın & Sitenizin Yönetimi Bize Emanet
         </h1>
-        
+
         <p class="text-[#585858] text-base md:text-lg leading-relaxed mb-8">
           Nurdoğan Babadağ Apartman ve Site Yönetimi olarak 7 yıldan bu yana Kadıköy ve çevre ilçelerde apartman ve site yönetimi faaliyetlerimizi başarı ile sürdürmekteyiz. Apartmanınız için aşağıda belirtilen görev ve sorumluluklar kapsamında tarafımızca yönetim hizmeti sunulması konusunda teklifimizi saygılarımızla sunarız.
         </p>
@@ -58,7 +76,7 @@ const services = [
           ))}
         </div>
 
-        <div class="flex items-center gap-16  pb-8 ">
+        <div class="flex items-center gap-8 sm:gap-16 pb-8">
           <div class="flex items-center gap-4">
             <div class="w-16 h-16 rounded-full overflow-hidden shrink-0">
               <Image
@@ -69,7 +87,7 @@ const services = [
                 class="w-full h-full object-cover"
               />
             </div>
-            <div class="grow">
+            <div>
               <p class="text-[#262322] text-lg font-bold mb-1">
                 Nurdoğan Babadağ
               </p>
@@ -78,30 +96,95 @@ const services = [
               </p>
             </div>
           </div>
-          
-          <div class="w-24 h-24 rounded-full ">
+          <div class="w-24 h-24 rounded-full shrink-0">
             <Image
               src={`${baseUrl}nurdogan-signature.png`}
-              alt="Nurdoğan Babadağ"
-              width={64}
-              height={64}
+              alt="İmza"
+              width={96}
+              height={96}
               class="w-full h-full object-contain"
             />
           </div>
         </div>
-        <div class="flex justify-start">
-          <button
-            type="button"
-            id="bina-yonetimi-teklif-btn"
-            class="inline-flex items-center gap-3 rounded-full bg-[#E30A17] pl-2 pr-8 py-3 text-base text-white hover:bg-[#c00914] transition-colors group w-fit cursor-pointer border-0"
-          >
-            <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shrink-0">
-              <ArrowRightIcon color="#E30A17"/>
-            </div>
-            Apartman ve Site Yönetimi İçin Teklif Alın
-          </button>
-        </div>
+
+        <button
+          type="button"
+          id="bina-yonetimi-teklif-btn"
+          class="inline-flex items-center gap-3 rounded-full bg-[#E30A17] pl-2 pr-8 py-3 text-base text-white hover:bg-[#c00914] transition-colors w-fit cursor-pointer border-0"
+        >
+          <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shrink-0">
+            <ArrowRightIcon color="#E30A17" />
+          </div>
+          Apartman ve Site Yönetimi İçin Teklif Alın
+        </button>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  (function () {
+    var container = document.querySelector(".bina-alt-gorsel")?.closest(".flex.items-end");
+    if (!container) return;
+    var items = container.querySelectorAll(".bina-alt-gorsel");
+    if (items.length !== 3) return;
+
+    var centerIndex = 1;
+
+    // @ts-ignore - script is JS, index is number from data-index
+    function getPosition(index) {
+      var rel = (index - centerIndex + 3) % 3;
+      if (rel === 0) return "left";
+      if (rel === 1) return "center";
+      return "right";
+    }
+
+    function applyLayout() {
+      items.forEach(function (el) {
+        var index = parseInt(el.getAttribute("data-index") || "0", 10);
+        var pos = getPosition(index);
+        el.classList.remove("pos-left", "pos-center", "pos-right");
+        el.classList.add("pos-" + pos);
+        if (pos === "center") {
+          el.classList.add("border-[#E30A17]", "ring-2", "ring-[#E30A17]/30");
+          el.classList.remove("border-gray-200");
+        } else {
+          el.classList.remove("border-[#E30A17]", "ring-2", "ring-[#E30A17]/30");
+          el.classList.add("border-gray-200");
+        }
+      });
+    }
+
+    applyLayout();
+    setInterval(function () {
+      centerIndex = (centerIndex + 1) % 3;
+      applyLayout();
+    }, 4000);
+  })();
+</script>
+
+<style>
+  /* Tüm pozisyonlar sadece left + width ile; yana kayma animasyonu için */
+  .bina-alt-gorsel {
+    transition: left 0.6s ease-in-out, width 0.6s ease-in-out, height 0.6s ease-in-out,
+      border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .bina-alt-gorsel.pos-left {
+    left: 0;
+    width: 26%;
+    height: 85%;
+    z-index: 1;
+  }
+  .bina-alt-gorsel.pos-center {
+    left: 28%;
+    width: 44%;
+    height: 100%;
+    z-index: 10;
+  }
+  .bina-alt-gorsel.pos-right {
+    left: 74%;
+    width: 26%;
+    height: 85%;
+    z-index: 1;
+  }
+</style>

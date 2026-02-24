@@ -5,12 +5,12 @@ import { TurkeyFlag, ArrowRightIcon, InstagramIcon } from "./icons";
 const base = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
 const navItems = [
   { label: "Hakkımızda", href: "#hakkimizda" },
-  { label: "Projeler", href: "#projeler" },
-  { label: "Hizmetlerimiz", href: "#hizmetlerimiz" },
+  { label: "Projeler", href: `${base}projeler` },
+  { label: "Hizmetlerimiz", href: `${base}hizmetler` },
   { label: "Haberler", href: "#haberler" },
   { label: "Dernek", href: "#hakkimizda" },
   { label: "İletişim", href: `${base}iletisim` },
-  {label:"Bina Yönetimi", href: "#bina-yonetimi" },
+  { label: "Bina Yönetimi", href: `${base}bina-yonetimi` },
 ];
 interface Props {
   isHomePage?: boolean;

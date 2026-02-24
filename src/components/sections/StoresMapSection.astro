@@ -1,0 +1,230 @@
+---
+import { stores } from "../../data/stores";
+---
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+  crossorigin=""
+/>
+
+<section id="subelerimiz-harita" class="w-full py-16 md:py-24 px-4 md:px-6 bg-gray-50">
+  <div class="max-w-[1480px] mx-auto">
+    <h2 class="text-[#262322] text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-2">
+      Şubelerimiz & İletişim Noktaları
+    </h2>
+    <p class="text-[#585858] text-base md:text-lg mb-8 md:mb-12 max-w-2xl">
+      Belirli bölgelerdeki şubelerimizi harita üzerinden inceleyebilir, adres ve iletişim bilgilerine ulaşabilirsiniz.
+    </p>
+
+    <div class="flex flex-col lg:flex-row gap-6 md:gap-8">
+      <!-- Sol: Şube listesi -->
+      <div class="w-full lg:w-80 shrink-0 flex flex-col gap-3 max-h-[400px] lg:max-h-[520px] overflow-y-auto">
+        {stores.map((store, index) => (
+          <button
+            type="button"
+            class="store-map-btn group flex flex-col w-full px-4 py-3 rounded-xl border border-gray-200 text-left transition-all duration-300 hover:border-[#E30A17]/40 data-[active=true]:border-transparent data-[active=true]:bg-gradient-to-r data-[active=true]:from-[#E30A17] data-[active=true]:to-[#E30A17]/80"
+            data-store-id={store.id}
+            data-active={index === 0}
+            data-lat={store.lat}
+            data-lng={store.lng}
+            data-name={store.name}
+            data-address={store.address}
+            data-region={store.region}
+            data-phone={store.phone ?? ""}
+          >
+            <span class="font-semibold text-[#262322] group-data-[active=true]:text-white">{store.name}</span>
+            <span class="text-sm text-[#585858] group-data-[active=true]:text-white/90 mt-0.5">{store.region}</span>
+            <span class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 bg-gray-100 group-data-[active=true]:bg-white/20 transition-colors absolute right-4 top-3">
+              <svg class="w-4 h-4 text-[#E30A17] group-data-[active=true]:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </span>
+          </button>
+        ))}
+      </div>
+
+      <!-- Sağ: Harita + Seçili şube detayı -->
+      <div class="flex-1 min-w-0 flex flex-col gap-4">
+        <div id="stores-map" class="w-full h-[400px] md:h-[520px] rounded-2xl overflow-hidden bg-gray-200 border border-gray-200"></div>
+        <div id="store-detail" class="flex flex-col gap-1 p-4 rounded-xl bg-white border border-gray-100">
+          <h3 id="store-detail-name" class="text-[#262322] text-lg md:text-xl font-bold">
+            {stores[0].name}
+          </h3>
+          <p id="store-detail-region" class="text-[#E30A17] text-sm font-medium">
+            {stores[0].region}
+          </p>
+          <p id="store-detail-address" class="text-[#525252] text-sm md:text-base flex items-start gap-2 mt-1">
+            <svg class="w-5 h-5 text-[#E30A17] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span>{stores[0].address}</span>
+          </p>
+          {stores[0].phone && (
+            <p id="store-detail-phone-wrap" class="text-[#525252] text-sm md:text-base flex items-center gap-2 mt-1">
+              <svg class="w-5 h-5 text-[#E30A17] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              <a id="store-detail-phone" href={`tel:${stores[0].phone?.replace(/\s/g, "")}`} class="hover:text-[#E30A17] transition-colors">{stores[0].phone}</a>
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script id="stores-map-data" type="application/json" set:html={JSON.stringify(stores).replace(/<\/script/gi, "<\\/script")}></script>
+<script is:inline>
+  var MOCK_BINALAR = [
+    { id: "kadikoy", name: "Kadıköy Şube", address: "Caferağa Mah. Moda Cad. No: 24, Kadıköy / İstanbul", region: "İstanbul - Anadolu Yakası", lat: 40.9906, lng: 29.0288, phone: "+90 216 555 00 01" },
+    { id: "bostanci", name: "Bostancı Şube", address: "Bostancı Mah. Şehit Ömer Cad. No: 42, Kadıköy / İstanbul", region: "İstanbul - Anadolu Yakası", lat: 40.9708, lng: 29.0828, phone: "+90 216 555 00 02" },
+    { id: "maltepe", name: "Maltepe Şube", address: "Küçükyalı Mah. Atatürk Cad. No: 15, Maltepe / İstanbul", region: "İstanbul - Anadolu Yakası", lat: 40.9353, lng: 29.1289, phone: "+90 216 555 00 03" },
+    { id: "pendik", name: "Pendik Şube", address: "Esenyalı Mah. 100. Yıl Cad. No: 28, Pendik / İstanbul", region: "İstanbul - Anadolu Yakası", lat: 40.8756, lng: 29.2333, phone: "+90 216 555 00 04" },
+    { id: "ankara", name: "Ankara Ofis", address: "Çankaya Mah. Atatürk Bulvarı No: 88, Çankaya / Ankara", region: "Ankara", lat: 39.9334, lng: 32.8597, phone: "+90 312 555 00 05" },
+    { id: "izmir", name: "İzmir Ofis", address: "Alsancak Mah. Kıbrıs Şehitleri Cad. No: 120, Konak / İzmir", region: "İzmir", lat: 38.4192, lng: 27.1287, phone: "+90 232 555 00 06" },
+  ];
+  function getStoresData() {
+    var el = document.getElementById("stores-map-data");
+    if (!el || !el.textContent) return MOCK_BINALAR;
+    try {
+      var data = JSON.parse(el.textContent);
+      return Array.isArray(data) && data.length > 0 ? data : MOCK_BINALAR;
+    } catch (e) { return MOCK_BINALAR; }
+  }
+  function runMapInit() {
+    var L = window.L;
+    if (!L) return;
+    var stores = getStoresData();
+    var mapEl = document.getElementById("stores-map");
+    if (!mapEl || stores.length === 0) return;
+
+    function updateDetail(name, region, address, phone) {
+      var nameEl = document.getElementById("store-detail-name");
+      var regionEl = document.getElementById("store-detail-region");
+      var addressBlock = document.getElementById("store-detail-address");
+      var addressSpan = addressBlock ? addressBlock.querySelector("span") : null;
+      var phoneWrap = document.getElementById("store-detail-phone-wrap");
+      var phoneEl = document.getElementById("store-detail-phone");
+      if (nameEl) nameEl.textContent = name || "";
+      if (regionEl) regionEl.textContent = region || "";
+      if (addressSpan) addressSpan.textContent = address || "";
+      if (phoneWrap) phoneWrap.style.display = phone ? "" : "none";
+      if (phoneEl) {
+        phoneEl.textContent = phone || "";
+        phoneEl.href = phone ? "tel:" + String(phone).replace(/\s/g, "") : "#";
+      }
+    }
+
+    delete L.Icon.Default.prototype._getIconUrl;
+    L.Icon.Default.mergeOptions({
+      iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+      iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+      shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+    });
+
+    var map = L.map("stores-map", { scrollWheelZoom: true }).setView(
+      [stores[0].lat, stores[0].lng],
+      11
+    );
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png", {
+      attribution: "&copy; OpenStreetMap &copy; CARTO",
+      subdomains: "abcd",
+      maxZoom: 19,
+    }).addTo(map);
+
+    for (var i = 0; i < stores.length; i++) {
+      (function (store) {
+        var marker = L.marker([store.lat, store.lng])
+          .addTo(map)
+          .bindTooltip(store.name || "Bina", { permanent: false, direction: "top", className: "store-marker-tooltip" })
+          .bindPopup("<strong>" + (store.name || "Bina") + "</strong><br/>" + (store.address || ""));
+        marker.on("click", function () {
+          map.setView([store.lat, store.lng], 14);
+          updateDetail(store.name, store.region, store.address, store.phone);
+          document.querySelectorAll(".store-map-btn").forEach(function (b) { b.setAttribute("data-active", "false"); });
+          var btn = document.querySelector(".store-map-btn[data-store-id=\"" + (store.id || "") + "\"]");
+          if (btn) btn.setAttribute("data-active", "true");
+        });
+      })(stores[i]);
+    }
+
+    var section = document.getElementById("subelerimiz-harita");
+    if (section) {
+      var obs = new IntersectionObserver(
+        function (entries) {
+          if (entries[0].isIntersecting) map.invalidateSize();
+        },
+        { threshold: 0.1 }
+      );
+      obs.observe(section);
+    }
+
+    document.querySelectorAll(".store-map-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        document.querySelectorAll(".store-map-btn").forEach(function (b) { b.setAttribute("data-active", "false"); });
+        btn.setAttribute("data-active", "true");
+        var lat = parseFloat(btn.getAttribute("data-lat") || "40.97");
+        var lng = parseFloat(btn.getAttribute("data-lng") || "29.08");
+        map.setView([lat, lng], 14);
+        updateDetail(
+          btn.getAttribute("data-name") || "",
+          btn.getAttribute("data-region") || "",
+          btn.getAttribute("data-address") || "",
+          btn.getAttribute("data-phone") || ""
+        );
+      });
+    });
+  }
+
+  function initStoresMap() {
+    var mapEl = document.getElementById("stores-map");
+    if (!mapEl) return;
+    var stores = getStoresData();
+    if (stores.length === 0) {
+      mapEl.innerHTML = "<div class=\"flex items-center justify-center h-full bg-gray-200 text-gray-500 text-sm p-4 text-center\">Şube verisi bulunamadı.</div>";
+      return;
+    }
+    if (window.L) {
+      runMapInit();
+      return;
+    }
+    var s = document.createElement("script");
+    s.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+    s.crossOrigin = "";
+    s.onload = runMapInit;
+    s.onerror = function () {
+      mapEl.innerHTML = "<div class=\"flex items-center justify-center h-full bg-gray-200 text-gray-600 text-sm p-4 text-center\">Harita yüklenemedi. Sayfayı yenileyin.</div>";
+    };
+    document.head.appendChild(s);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initStoresMap);
+  } else {
+    initStoresMap();
+  }
+</script>
+
+<style>
+  .store-map-btn {
+    position: relative;
+    padding-right: 3rem;
+  }
+  .store-marker-tooltip {
+    font-weight: 600;
+    font-size: 0.875rem;
+    border: none;
+    background: #262322;
+    color: #fff;
+    padding: 0.35rem 0.6rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .store-marker-tooltip::before {
+    border-top-color: #262322;
+  }
+</style>

@@ -1,10 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --font-family-montserrat: 'Montserrat', sans-serif;
+  --font-family-manrope: "Manrope", sans-serif;
+  --font-family-playfair-display: "Playfair Display", serif;
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
-  background-color: #F9F9F9;
+  font-family: var(--font-family-montserrat);
+  background-color: #f9f9f9;
 }

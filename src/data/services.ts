@@ -11,63 +11,63 @@ export const services: Service[] = [
     title: "Mevcut Yapıya Alt Konum Ve Net Alan Tespiti (Rölöve Çalışması)",
     description:
       "Konusunda uzman mimarlarımız tarafından Belediyeden veya Tapu Müdürlüğünden mevcut binaya alt mimari proje temin edilerek, mevcut konumlar ve mevcut net metrekareler belirlenir.",
-    image: "service-image2.png",
+    image: "services/1.png",
   },
   {
     number: "02",
     title: "Yeni Yapılacak Binanın Tasarımı Ve Projelendirme",
     description:
       "Bölge koşulları ve arsa sahiplerinin metrekare talepleri doğrultusunda yüklenici firma ile paylaşım oranı belirlenir. Mevcut konum ve metrekareler esas alınarak adil kat paylaşımı yapılır. Malikler arasında uzlaşma sağlanamazsa SPK lisanslı değerleme desteğiyle paylaşım gerçekleştirilir. Nihai kat paylaşımına göre alternatif mimari projeler hazırlanır ve arsa sahiplerinin görüşleri doğrultusunda projeler son haline getirilir.",
-    image: "service-image2.png",
+    image: "services/2.png",
   },
   {
     number: "03",
     title: "Sözleşme (Hukuki Şartname)",
     description:
       "Konusunda uzman mimarlarımız tarafından Belediyeden veya Tapu Müdürlüğünden mevcut binaya ait mimari proje temin edilerek, mevcut konumlar ve mevcut net metrekareler belirlenir.",
-    image: "service-image2.png",
+    image: "services/3.png",
   },
   {
     number: "04",
     title: "Sözleşme (Hukuki Şartname)",
     description:
       "Konusunda uzman mimarlarımız tarafından Belediyeden veya Tapu Müdürlüğünden mevcut binaya ait mimari proje temin edilerek, mevcut konumlar ve mevcut net metrekareler belirlenir.",
-    image: "service-image2.png",
+    image: "services/4.png",
   },
   {
     number: "05",
     title: "Sözleşme (Hukuki Şartname)",
     description:
       "Konusunda uzman mimarlarımız tarafından Belediyeden veya Tapu Müdürlüğünden mevcut binaya ait mimari proje temin edilerek, mevcut konumlar ve mevcut net metrekareler belirlenir.",
-    image: "service-image2.png",
+    image: "services/5.png",
   },
   {
     number: "06",
     title: "Sözleşme (Hukuki Şartname)",
     description:
       "Konusunda uzman mimarlarımız tarafından Belediyeden veya Tapu Müdürlüğünden mevcut binaya ait mimari proje temin edilerek, mevcut konumlar ve mevcut net metrekareler belirlenir.",
-    image: "service-image2.png",
+    image: "services/6.png",
   },
   {
     number: "07",
     title: "Sözleşme (Hukuki Şartname)",
     description:
       "Konusunda uzman mimarlarımız tarafından Belediyeden veya Tapu Müdürlüğünden mevcut binaya ait mimari proje temin edilerek, mevcut konumlar ve mevcut net metrekareler belirlenir.",
-    image: "service-image2.png",
+    image: "services/7.png",
   },
   {
     number: "08",
     title: "Sözleşme (Hukuki Şartname)",
     description:
       "Konusunda uzman mimarlarımız tarafından Belediyeden veya Tapu Müdürlüğünden mevcut binaya ait mimari proje temin edilerek, mevcut konumlar ve mevcut net metrekareler belirlenir.",
-    image: "service-image2.png",
+    image: "services/8.png",
   },
   {
     number: "09",
     title: "Sözleşme (Hukuki Şartname)",
     description:
       "Konusunda uzman mimarlarımız tarafından Belediyeden veya Tapu Müdürlüğünden mevcut binaya ait mimari proje temin edilerek, mevcut konumlar ve mevcut net metrekareler belirlenir.",
-    image: "service-image2.png",
+    image: "services/9.png",
   },
 ];
 
@@ -203,7 +203,7 @@ export const allServicesList: AllServiceItem[] = [
     title: "Mevcut Yapıya Ait Konum ve Net Alan Tespiti (Rölöve Çalışması)",
     description:
       "Konusunda uzman mimarlarımız tarafından Belediyeden veya Tapu Müdürlüğünden mevcut binaya ait mimari proje temin edilerek, mevcut konumlar ve mevcut net metrekareler belirlenir.",
-    image: "service-image2.png",
+    image: "services/1.png",
     advantages: [
       "Mevcut mimari proje temini",
       "Konum ve net alan tespiti",
@@ -215,7 +215,7 @@ export const allServicesList: AllServiceItem[] = [
     title: "Yeni Yapılacak Binanın Tasarımı ve Projelendirme",
     description:
       "Mevcut konum ve metrekareler esas alınarak adil kat paylaşımı ve mimari projeler hazırlanır, malik görüşleriyle son haline getirilir.",
-    image: "service-image2.png",
+    image: "services/2.png",
     advantages: [
       "Adil kat paylaşımı",
       "Mimari proje alternatifleri",
@@ -227,7 +227,7 @@ export const allServicesList: AllServiceItem[] = [
     title: "Teknik Şartname Hazırlanması",
     description:
       "İnşaat ve tadilat işleri için teknik şartnameler, idari şartnameler ve ihale dokümanları uzman kadromuzca hazırlanır.",
-    image: "service-image2.png",
+    image: "services/3.png",
     advantages: [
       "Uzman teknik ekip",
       "Şartname ve ihale dokümanları",
@@ -239,7 +239,7 @@ export const allServicesList: AllServiceItem[] = [
     title: "İnşaat İmalat Kontrolü",
     description:
       "Şantiyede imalatların projeye ve şartnameye uygunluğu, mühendislik kontrolleri ile denetlenir ve raporlanır.",
-    image: "service-image2.png",
+    image: "services/4.png",
     advantages: [
       "Sahada mühendislik kontrolü",
       "Proje uyum denetimi",
@@ -251,7 +251,7 @@ export const allServicesList: AllServiceItem[] = [
     title: "Yapı ve Yıkım Ruhsatlarına Ait İş Takibi",
     description:
       "Yapı ruhsatı, yıkım ruhsatı ve gerekli belediye işlemlerinin takibi ve tamamlanması süreçleri yürütülür.",
-    image: "service-image2.png",
+    image: "services/5.png",
     advantages: [
       "Ruhsat başvuru takibi",
       "Belediye koordinasyonu",
@@ -263,7 +263,7 @@ export const allServicesList: AllServiceItem[] = [
     title: "Bağımsız Bölüm Değerleme Raporlarının Oluşturulması",
     description:
       "SPK lisanslı değerleme kuruluşları ile bağımsız bölüm değerleme raporları hazırlatılır ve paylaşım süreçlerinde kullanılır.",
-    image: "service-image2.png",
+    image: "services/6.png",
     advantages: [
       "SPK lisanslı değerleme",
       "Adil paylaşım desteği",
@@ -275,7 +275,7 @@ export const allServicesList: AllServiceItem[] = [
     title: "Sözleşme (Hukuki Şartname) Hazırlanması",
     description:
       "Yüklenici-malik sözleşmeleri, kat irtifakı ve kat mülkiyeti sözleşmeleri hukuki danışmanlık eşliğinde hazırlanır.",
-    image: "service-image2.png",
+    image: "services/7.png",
     advantages: [
       "Hukuki danışmanlık",
       "Sözleşme hazırlığı",
@@ -287,7 +287,7 @@ export const allServicesList: AllServiceItem[] = [
     title: "Vekaletname ve Muvafakatnameler",
     description:
       "Genel kurul, tapu ve banka işlemleri için gerekli vekaletname ve muvafakatname metinleri hazırlanır ve süreçler yönetilir.",
-    image: "service-image2.png",
+    image: "services/8.png",
     advantages: ["Metin hazırlığı", "Resmi işlem desteği", "Süreç yönetimi"],
   },
   {
@@ -295,7 +295,7 @@ export const allServicesList: AllServiceItem[] = [
     title: "Arsa Payı Satışı Süreç Yönetimi",
     description:
       "Arsa payı satış sözleşmeleri, tapu işlemleri ve alıcı-satıcı koordinasyonu profesyonel olarak yürütülür.",
-    image: "service-image2.png",
+    image: "services/9.png",
     advantages: [
       "Sözleşme ve tapu takibi",
       "Alıcı-satıcı koordinasyonu",
@@ -307,7 +307,7 @@ export const allServicesList: AllServiceItem[] = [
     title: "Devlet Hibe ve Kredi Desteği Alımı",
     description:
       "Kentsel dönüşüm ve konut finansmanına yönelik devlet hibe ve kredi başvurularının hazırlanması ve takibi yapılır.",
-    image: "service-image2.png",
+    image: "services/10.png",
     advantages: [
       "Başvuru hazırlığı",
       "Takip ve koordinasyon",
@@ -319,7 +319,7 @@ export const allServicesList: AllServiceItem[] = [
     title: "Tüm Sürece Ait Hukuki Destek Hizmeti",
     description:
       "Kentsel dönüşüm ve yönetim sürecinin her aşamasında avukat desteği, uyuşmazlık çözümü ve hukuki danışmanlık sağlanır.",
-    image: "service-image2.png",
+    image: "services/11.png",
     advantages: ["Avukat desteği", "Uyuşmazlık çözümü", "Süreç danışmanlığı"],
   },
 ];

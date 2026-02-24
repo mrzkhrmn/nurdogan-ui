@@ -1,0 +1,233 @@
+---
+import { mapDistricts, mapMarkerLocations } from "../../data/mapDistricts";
+const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
+---
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+  crossorigin=""
+/>
+
+<section id="projelerimiz-harita" class="w-full py-16 md:py-24 px-4 md:px-6 bg-white">
+  <div class="max-w-[1480px] mx-auto">
+    <h2 class="text-[#262322] text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-8 md:mb-12">
+      Projelerimiz
+    </h2>
+
+    <div class="flex flex-col lg:flex-row gap-6 md:gap-8">
+      <!-- Sol: Bölge listesi -->
+      <div class="w-full lg:w-72 shrink-0 flex flex-col gap-3">
+        {mapDistricts.map((district, index) => (
+          <button
+            type="button"
+            class="map-district-btn group flex items-center justify-between w-full px-4 py-3 rounded-xl border border-gray-200 text-left transition-all duration-300 data-[active=true]:border-transparent data-[active=true]:bg-gradient-to-r data-[active=true]:from-[#E30A17] data-[active=true]:to-[#E30A17]/80"
+            data-district-id={district.id}
+            data-active={index === 0}
+            data-lat={district.lat}
+            data-lng={district.lng}
+            data-project-name={district.projects[0]?.name}
+            data-project-address={district.projects[0]?.address}
+            data-project-slug={district.projects[0]?.slug}
+            data-project-status={district.projects[0]?.status ?? "tamamlandi"}
+          >
+            <span class="font-medium text-[#262322] group-data-[active=true]:text-white">{district.name}</span>
+            <span class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 bg-gray-100 group-data-[active=true]:bg-white/20 transition-colors relative">
+              <svg class="map-btn-icon-active w-4 h-4 text-[#E30A17] group-data-[active=true]:text-white absolute hidden group-data-[active=true]:inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+              <svg class="map-btn-icon-inactive w-4 h-4 text-gray-500 inline group-data-[active=true]:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </span>
+          </button>
+        ))}
+      </div>
+
+      <!-- Sağ: Harita + Proje detayı -->
+      <div class="flex-1 min-w-0 flex flex-col gap-4">
+        <div id="projects-map" class="w-full h-[400px] md:h-[520px] rounded-2xl overflow-hidden bg-gray-100 border border-gray-200"></div>
+        <div id="map-project-detail" class="flex flex-col gap-1">
+          <div class="flex items-center gap-2 flex-wrap">
+            <h3 id="map-project-name" class="text-[#262322] text-lg md:text-xl font-bold">
+              {mapDistricts[0].projects[0]?.name}
+            </h3>
+            <span id="map-project-status" class={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${(mapDistricts[0].projects[0]?.status === "devam-ediyor" ? "bg-amber-100 text-amber-800" : "bg-emerald-100 text-emerald-800")}`}>
+              {mapDistricts[0].projects[0]?.status === "devam-ediyor" ? "Devam ediyor" : "Tamamlandı"}
+            </span>
+          </div>
+          <p id="map-project-address" class="text-[#525252] text-sm md:text-base flex items-start gap-2">
+            <svg class="w-5 h-5 text-[#E30A17] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span>{mapDistricts[0].projects[0]?.address}</span>
+          </p>
+          <a
+            id="map-project-link"
+            href={`${baseUrl}projeler/${mapDistricts[0].projects[0]?.slug || ""}`}
+            class="inline-flex items-center gap-2 text-[#E30A17] text-sm font-medium hover:underline mt-2"
+          >
+            Proje detayı
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script id="projects-map-data" type="application/json" set:html={JSON.stringify({ districts: mapDistricts, markers: mapMarkerLocations, baseUrl }).replace(/<\/script/gi, "<\\/script")}></script>
+<script is:inline>
+  (function() {
+    function getProjectsMapData() {
+      var el = document.getElementById("projects-map-data");
+      if (!el || !el.textContent) return { districts: [], markers: [], baseUrl: "/" };
+      try { return JSON.parse(el.textContent); } catch (e) { return { districts: [], markers: [], baseUrl: "/" }; }
+    }
+    function runProjectsMapInit() {
+      var L = window.L;
+      if (!L) return;
+      var data = getProjectsMapData();
+      var baseUrl = data.baseUrl || "/";
+      var mapEl = document.getElementById("projects-map");
+      if (!mapEl) return;
+      var districts = data.districts || [];
+      var allMarkers = data.markers || [];
+      if (districts.length === 0) {
+        mapEl.innerHTML = "<div class=\"flex items-center justify-center h-full bg-gray-100 text-gray-500 text-sm p-4 text-center\">Proje verisi bulunamadı.</div>";
+        return;
+      }
+      var centerLat = districts[0].lat;
+      var centerLng = districts[0].lng;
+      delete L.Icon.Default.prototype._getIconUrl;
+      L.Icon.Default.mergeOptions({
+        iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+        iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+        shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+      });
+      var map = L.map("projects-map", { scrollWheelZoom: true }).setView([centerLat, centerLng], 12);
+      L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png", {
+        attribution: "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> &copy; <a href=\"https://carto.com/attributions\">CARTO</a>",
+        subdomains: "abcd",
+        maxZoom: 19,
+      }).addTo(map);
+      var projectNameEl = document.getElementById("map-project-name");
+      var projectAddressEl = document.getElementById("map-project-address");
+      var projectLinkEl = document.getElementById("map-project-link");
+      var projectStatusEl = document.getElementById("map-project-status");
+      var addressSpan = projectAddressEl && projectAddressEl.querySelector("span");
+      var STATUS_COLORS = { "tamamlandi": "#059669", "devam-ediyor": "#E30A17" };
+      function updateProjectDetail(name, address, slug, status) {
+        if (projectNameEl) projectNameEl.textContent = name || "";
+        if (addressSpan) addressSpan.textContent = address || "";
+        if (projectLinkEl) projectLinkEl.href = baseUrl + "projeler/" + (slug || "");
+        if (projectStatusEl) {
+          var isDevam = status === "devam-ediyor";
+          projectStatusEl.textContent = isDevam ? "Devam ediyor" : "Tamamlandı";
+          projectStatusEl.className = "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium " + (isDevam ? "bg-amber-100 text-amber-800" : "bg-emerald-100 text-emerald-800");
+        }
+      }
+      function makeMarkerIcon(color) {
+        var svg = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 25 41\" width=\"25\" height=\"41\"><path fill=\"" + color + "\" stroke=\"#fff\" stroke-width=\"1.5\" d=\"M12.5 0C5.6 0 0 5.6 0 12.5c0 9.4 12.5 28 12.5 28s12.5-18.6 12.5-28C25 5.6 19.4 0 12.5 0z\"/><circle fill=\"#fff\" cx=\"12.5\" cy=\"12.5\" r=\"5\"/></svg>";
+        return L.divIcon({
+          className: "project-status-marker",
+          html: "<span style=\"display:inline-block;line-height:0;filter:drop-shadow(0 1px 3px rgba(0,0,0,0.35));\">" + svg + "</span>",
+          iconSize: [25, 41],
+          iconAnchor: [12, 41],
+        });
+      }
+      for (var i = 0; i < districts.length; i++) {
+        (function(d) {
+          var proj = d.projects && d.projects[0];
+          var projName = proj ? proj.name : d.name;
+          var projAddress = proj ? proj.address : "";
+          var projSlug = proj ? proj.slug : "";
+          var projStatus = proj ? (proj.status || "tamamlandi") : "tamamlandi";
+          var color = STATUS_COLORS[projStatus] || STATUS_COLORS.tamamlandi;
+          var marker = L.marker([d.lat, d.lng], { icon: makeMarkerIcon(color) })
+            .addTo(map)
+            .bindTooltip(projName + (projStatus === "devam-ediyor" ? " (Devam ediyor)" : " (Tamamlandı)"), { permanent: false, direction: "top", className: "project-marker-tooltip" })
+            .bindPopup("<strong>" + projName + "</strong><br/><span style=\"font-size:11px;color:#666;\">" + (projStatus === "devam-ediyor" ? "Devam ediyor" : "Tamamlandı") + "</span><br/>" + (projAddress || ""));
+          marker.on("click", function() {
+            map.setView([d.lat, d.lng], 14);
+            updateProjectDetail(projName, projAddress, projSlug, projStatus);
+            document.querySelectorAll(".map-district-btn").forEach(function(b) { b.setAttribute("data-active", "false"); });
+            var btn = document.querySelector(".map-district-btn[data-district-id=\"" + (d.id || "") + "\"]");
+            if (btn) btn.setAttribute("data-active", "true");
+          });
+        })(districts[i]);
+      }
+      var section = document.getElementById("projelerimiz-harita");
+      if (section) {
+        var obs = new IntersectionObserver(function(entries) {
+          if (entries[0].isIntersecting) map.invalidateSize();
+        }, { threshold: 0.1 });
+        obs.observe(section);
+      }
+      document.querySelectorAll(".map-district-btn").forEach(function(btn) {
+        btn.addEventListener("click", function() {
+          document.querySelectorAll(".map-district-btn").forEach(function(b) { b.setAttribute("data-active", "false"); });
+          btn.setAttribute("data-active", "true");
+          var lat = parseFloat(btn.getAttribute("data-lat") || "40.97");
+          var lng = parseFloat(btn.getAttribute("data-lng") || "29.08");
+          map.setView([lat, lng], 14);
+          updateProjectDetail(
+            btn.getAttribute("data-project-name") || "",
+            btn.getAttribute("data-project-address") || "",
+            btn.getAttribute("data-project-slug") || "",
+            btn.getAttribute("data-project-status") || "tamamlandi"
+          );
+        });
+      });
+    }
+    function initProjectsMap() {
+      var mapEl = document.getElementById("projects-map");
+      if (!mapEl) return;
+      var data = getProjectsMapData();
+      if ((data.districts || []).length === 0) {
+        mapEl.innerHTML = "<div class=\"flex items-center justify-center h-full bg-gray-100 text-gray-500 text-sm p-4 text-center\">Proje verisi bulunamadı.</div>";
+        return;
+      }
+      if (window.L) {
+        runProjectsMapInit();
+        return;
+      }
+      var s = document.createElement("script");
+      s.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+      s.crossOrigin = "";
+      s.onload = runProjectsMapInit;
+      s.onerror = function() {
+        mapEl.innerHTML = "<div class=\"flex items-center justify-center h-full bg-gray-100 text-gray-600 text-sm p-4 text-center\">Harita yüklenemedi. Sayfayı yenileyin.</div>";
+      };
+      document.head.appendChild(s);
+    }
+    window.initProjectsMap = initProjectsMap;
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initProjectsMap);
+    } else {
+      initProjectsMap();
+    }
+  })();
+</script>
+
+<style>
+  .map-district-btn span:first-child {
+    transition: color 0.2s;
+  }
+  .project-marker-tooltip {
+    font-weight: 600;
+    font-size: 0.875rem;
+    border: none;
+    background: #262322;
+    color: #fff;
+    padding: 0.35rem 0.6rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .project-status-marker {
+    background: none !important;
+    border: none !important;
+  }
+</style>
