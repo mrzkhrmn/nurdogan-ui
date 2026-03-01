@@ -764,9 +764,17 @@ function HakkimizdaContent({ baseUrl = "/" }) {
 }
 
 const MANAGED_BUILDINGS = [
-  { number: "01", name: "Çam Apartmanı", imageKey: "bulding-management-interior.jpg" },
+  {
+    number: "01",
+    name: "Çam Apartmanı",
+    imageKey: "bulding-management-interior.jpg",
+  },
   { number: "02", name: "Ekşioğlu Apartmanı", imageKey: "building-modern.jpg" },
-  { number: "03", name: "Dostlar Apartmanı", imageKey: "construction-image.png" },
+  {
+    number: "03",
+    name: "Dostlar Apartmanı",
+    imageKey: "construction-image.png",
+  },
   { number: "04", name: "Şans Apartmanı", imageKey: "landing-photo.png" },
   { number: "05", name: "Güven Apartmanı", imageKey: "interior-1.png" },
 ];
@@ -775,24 +783,36 @@ const MANAGED_BUILDINGS = [
 function BinaYonetimiSectionContent({ baseUrl = "/" }) {
   const { data, isLoading, error } = useGetWebsiteTabQuery("main");
   const section = getSectionByCode(data, "bina-yonetimi");
-  const title = getItemByCode(section, "bina-yonetimi-title") || "Bina Yönetimi";
+  const title =
+    getItemByCode(section, "bina-yonetimi-title") || "Bina Yönetimi";
   const description =
     getItemByCode(section, "bina-yonetimi-description") ||
     "7 Yıldan Bu Yana Kadıköy ve Çevre İlçelerde Apartman & Site Yönetimi Faaliyetlerimizi Başarı ile Sürdürmekteyiz.";
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const buildings = MANAGED_BUILDINGS.map((b) => ({ ...b, image: `${baseUrl}${b.imageKey}` }));
+  const buildings = MANAGED_BUILDINGS.map((b) => ({
+    ...b,
+    image: `${baseUrl}${b.imageKey}`,
+  }));
 
   if (isLoading) {
     return (
-      <section id="bina-yonetimi" className="relative w-full py-12 sm:py-16 md:py-20 lg:py-20 px-4 md:px-6 mb-12 md:mb-16 lg:mb-20 min-h-[300px] flex items-center justify-center">
+      <section
+        id="bina-yonetimi"
+        className="relative w-full py-12 sm:py-16 md:py-20 lg:py-20 px-4 md:px-6 mb-12 md:mb-16 lg:mb-20 min-h-[300px] flex items-center justify-center"
+      >
         <div className="animate-pulse h-12 w-64 bg-white/20 rounded" />
       </section>
     );
   }
   if (error) {
     return (
-      <section id="bina-yonetimi" className="relative w-full py-12 px-4 md:px-6">
-        <div className="max-w-[1440px] mx-auto text-white/90">Bina yönetimi içeriği yüklenemedi.</div>
+      <section
+        id="bina-yonetimi"
+        className="relative w-full py-12 px-4 md:px-6"
+      >
+        <div className="max-w-[1440px] mx-auto text-white/90">
+          Bina yönetimi içeriği yüklenemedi.
+        </div>
       </section>
     );
   }
@@ -848,12 +868,18 @@ function BinaYonetimiSectionContent({ baseUrl = "/" }) {
                     type="button"
                     onClick={() => setSelectedIndex(index)}
                     className={`bina-yonetimi-secenek w-full flex items-center justify-between py-2 sm:py-3 md:py-4 border-b border-white/10 text-left transition-colors hover:text-white cursor-pointer text-white/85 ${
-                      index === selectedIndex ? "active border-[#E30A17] border-b-2 text-[#E30A17]" : ""
+                      index === selectedIndex
+                        ? "active border-[#E30A17] border-b-2 text-[#E30A17]"
+                        : ""
                     }`}
                   >
                     <div className="flex items-center gap-3 sm:gap-4">
-                      <span className="text-sm sm:text-base font-semibold tracking-wide">{building.number}.</span>
-                      <span className="text-sm sm:text-base md:text-lg font-medium">{building.name}</span>
+                      <span className="text-sm sm:text-base font-semibold tracking-wide">
+                        {building.number}.
+                      </span>
+                      <span className="text-sm sm:text-base md:text-lg font-medium">
+                        {building.name}
+                      </span>
                     </div>
                   </button>
                 ))}
