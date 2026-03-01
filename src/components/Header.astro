@@ -52,8 +52,8 @@ const headerClass = isHomePage
           <SearchIcon />
         </div>
         <a
-          href={`${base}teklif-al`}
-          class="rounded-full bg-white px-3 xl:px-5 py-2 2xl:px-6 2xl:py-3 text-xs xl:text-sm 2xl:text-base font-medium text-[#E30A17] hover:bg-gray-100 transition flex items-center gap-1 xl:gap-1.5 whitespace-nowrap shrink-0"
+          href="#"
+          class="open-teklif-modal rounded-full bg-white px-3 xl:px-5 py-2 2xl:px-6 2xl:py-3 text-xs xl:text-sm 2xl:text-base font-medium text-[#E30A17] hover:bg-gray-100 transition flex items-center gap-1 xl:gap-1.5 whitespace-nowrap shrink-0"
         >
           Teklif Al
           <ArrowRightIcon color="#E30A17" />
@@ -132,8 +132,9 @@ const headerClass = isHomePage
       
       <div class="mt-8 flex flex-col gap-4">
         <a
-          href={`${base}teklif-al`}
-          class="rounded-full bg-white px-8 py-4 text-lg font-medium text-[#E30A17] hover:bg-gray-100 transition flex items-center justify-center gap-2"
+          href="#"
+          class="open-teklif-modal rounded-full bg-white px-8 py-4 text-lg font-medium text-[#E30A17] hover:bg-gray-100 transition flex items-center justify-center gap-2"
+          onclick="document.getElementById('mobile-menu').classList.add('translate-x-full'); document.getElementById('mobile-menu-btn').classList.remove('active');"
         >
           Teklif Al
           <ArrowRightIcon color="#E30A17" />

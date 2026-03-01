@@ -9,3 +9,51 @@ body {
   font-family: var(--font-family-montserrat);
   background-color: #f9f9f9;
 }
+
+/* Anasayfa split landing (API verisi ile React’ta render edildiği için global) */
+.split-landing:has(.panel-left:hover) .panel-left {
+  flex: 1 1 100%;
+}
+.split-landing:has(.panel-left:hover) .panel-right {
+  flex: 0 0 0%;
+  min-width: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.split-landing:has(.panel-right:hover) .panel-right {
+  flex: 1 1 100%;
+}
+.split-landing:has(.panel-right:hover) .panel-left {
+  flex: 0 0 0%;
+  min-width: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.split-landing:has(.panel-left:hover) .center-line,
+.split-landing:has(.panel-right:hover) .center-line {
+  opacity: 0;
+}
+.split-landing .panel {
+  flex: 1 1 50%;
+}
+.split-landing .panel-desc {
+  opacity: 0;
+  transform: translateY(8px);
+}
+.split-landing .panel:hover .panel-desc {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .split-landing .panel,
+  .split-landing .panel img {
+    transition: none;
+  }
+}
+
+/* Anasayfa bina yönetimi blok seçili satır */
+.bina-yonetimi-secenek.active {
+  border-bottom-color: #e30a17 !important;
+  border-bottom-width: 2px;
+  color: #e30a17;
+}

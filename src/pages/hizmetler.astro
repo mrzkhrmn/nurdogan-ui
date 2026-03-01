@@ -2,60 +2,17 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import Footer from "../components/Footer.astro";
 import Image from "astro/components/Image.astro";
-import { ArrowRightIcon } from "../components/icons";
 import { allServicesList, projeTeknikSlugs, hukukiSlugs } from "../data/services";
+import { HizmetlerWithData } from "../components/WebsiteTabFetcher.jsx";
 
 const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
 const allServices = allServicesList.map((s) => ({ ...s, image: `${baseUrl}${s.image}` }));
 const serviceBySlug = Object.fromEntries(allServices.map((s) => [s.slug, s]));
-
-const heroImage = `${baseUrl}hizmetler-main.png`;
 ---
 
 <MainLayout>
   <div class="w-full min-h-screen bg-white">
-    <!-- Hero -->
-    <section class="w-full pt-24 sm:pt-28 md:pt-48 pb-16 md:pb-20 px-4 md:px-6">
-      <div class="max-w-[1200px] mx-auto">
-        <div class="flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-14">
-          <div class="flex-1 order-2 lg:order-1">
-            <h1 class="text-[#262322] text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-5 md:mb-6">
-              Güvenli, Planlı ve Profesyonel Süreç Yönetimi
-            </h1>
-            <p class="text-[#525252] text-base md:text-lg leading-relaxed mb-8 md:mb-10 max-w-xl">
-              Nurdoğan Babadağ Apartman ve Site Yönetimi olarak 7 yılı aşkın tecrübemizle yaşam alanlarınızı şeffaf ve hukuka uygun şekilde yönetiyoruz.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4">
-              <a
-                href="#hizmetler-listesi"
-                class="inline-flex items-center justify-center gap-2 rounded-full bg-[#E30A17] px-6 py-3.5 text-base font-medium text-white hover:bg-[#c00914] transition-colors w-fit"
-              >
-                Hizmetleri Keşfedin
-                <ArrowRightIcon color="#fff" />
-              </a>
-              <button
-                type="button"
-                id="hizmetler-teklif-btn"
-                class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#E30A17] px-6 py-3.5 text-base font-medium text-[#E30A17] hover:bg-[#E30A17]/5 transition-colors w-fit"
-              >
-                Hemen Teklif Al
-              </button>
-            </div>
-          </div>
-          <div class="flex-1 order-1 lg:order-2 shrink-0 max-w-lg lg:max-w-md xl:max-w-lg mx-auto lg:mx-0">
-            <div class="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl bg-gray-100">
-              <Image
-                src={heroImage}
-                alt="Hizmetlerimiz"
-                width={560}
-                height={420}
-                class="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <HizmetlerWithData client:load />
 
     <!-- Ne Sunuyoruz - icon + 2 kategori (Proje & Teknik / Hukuki & Resmi) + kartlar -->
     <section id="hizmetler-listesi" class="w-full py-16 md:py-24 px-4 md:px-6 scroll-mt-24 bg-gray-100">

@@ -23,5 +23,196 @@ const { isHomePage = false } = Astro.props;
     <main class="w-full">
       <slot />
     </main>
+
+    <!-- Teklif Formu Modal (tüm sayfalarda; header "Teklif Al" ve bina yönetimi butonu ile açılır) -->
+    <div
+      id="teklif-form-modal"
+      class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/50 p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="teklif-form-title"
+      aria-hidden="true"
+    >
+      <div class="bg-white rounded-2xl shadow-xl w-full max-w-xl max-h-[90vh] overflow-y-auto">
+        <div class="relative p-6 sm:p-8">
+          <button
+            type="button"
+            id="teklif-form-close"
+            class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-[#404040] text-white hover:bg-[#525252] flex items-center justify-center transition-colors"
+            aria-label="Kapat"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          <h2 id="teklif-form-title" class="text-center text-[#262322] font-bold mb-6 sm:mb-8">
+            <span class="block text-lg sm:text-xl">Apartman & Site Yönetimi</span>
+            <span class="block text-xl sm:text-2xl mt-0.5">Teklif Formu</span>
+          </h2>
+
+          <form id="teklif-form" class="space-y-4 sm:space-y-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+              <div>
+                <label for="teklif-ad-soyad" class="block text-[#262322] text-sm font-medium mb-1.5">Ad Soyad</label>
+                <input
+                  type="text"
+                  id="teklif-ad-soyad"
+                  name="adSoyad"
+                  required
+                  class="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-[#262322] placeholder-gray-400 focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17]"
+                  placeholder="Adınız Soyadınız"
+                />
+              </div>
+              <div>
+                <label for="teklif-telefon" class="block text-[#262322] text-sm font-medium mb-1.5">İletişim Telefonu</label>
+                <input
+                  type="tel"
+                  id="teklif-telefon"
+                  name="telefon"
+                  required
+                  class="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-[#262322] placeholder-gray-400 focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17]"
+                  placeholder="05XX XXX XX XX"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label for="teklif-email" class="block text-[#262322] text-sm font-medium mb-1.5">E-posta</label>
+              <input
+                type="email"
+                id="teklif-email"
+                name="email"
+                required
+                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-[#262322] placeholder-gray-400 focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17]"
+                placeholder="ornek@email.com"
+              />
+            </div>
+
+            <div>
+              <label for="teklif-apartman-adi" class="block text-[#262322] text-sm font-medium mb-1.5">Apartman Adı</label>
+              <input
+                type="text"
+                id="teklif-apartman-adi"
+                name="apartmanAdi"
+                required
+                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-[#262322] placeholder-gray-400 focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17]"
+                placeholder="Apartman adı"
+              />
+            </div>
+
+            <div>
+              <label for="teklif-adres" class="block text-[#262322] text-sm font-medium mb-1.5">Adres</label>
+              <input
+                type="text"
+                id="teklif-adres"
+                name="adres"
+                required
+                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-[#262322] placeholder-gray-400 focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17]"
+                placeholder="Adres bilgisi"
+              />
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+              <div>
+                <label for="teklif-daire-sayisi" class="block text-[#262322] text-sm font-medium mb-1.5">Daire Sayısı</label>
+                <input
+                  type="number"
+                  id="teklif-daire-sayisi"
+                  name="daireSayisi"
+                  min="1"
+                  required
+                  class="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-[#262322] placeholder-gray-400 focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17]"
+                  placeholder="Örn: 12"
+                />
+              </div>
+              <div>
+                <label for="teklif-dukkan-sayisi" class="block text-[#262322] text-sm font-medium mb-1.5">Dükkan Sayısı</label>
+                <input
+                  type="number"
+                  id="teklif-dukkan-sayisi"
+                  name="dukkanSayisi"
+                  min="0"
+                  class="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-[#262322] placeholder-gray-400 focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17]"
+                  placeholder="Örn: 2"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label for="teklif-mesaj" class="block text-[#262322] text-sm font-medium mb-1.5">Mesajınız</label>
+              <textarea
+                id="teklif-mesaj"
+                name="mesaj"
+                rows="4"
+                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-[#262322] placeholder-gray-400 focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17] resize-y min-h-[100px]"
+                placeholder="Mesajınızı yazınız..."
+              ></textarea>
+            </div>
+
+            <div class="flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 pt-2">
+              <button
+                type="submit"
+                class="w-full sm:flex-1 px-6 py-3 rounded-lg bg-[#E30A17] text-white font-medium hover:bg-[#c00914] transition-colors"
+              >
+                Gönder
+              </button>
+              <button
+                type="button"
+                id="teklif-form-iptal"
+                class="w-full sm:flex-1 px-6 py-3 rounded-lg bg-white border-2 border-[#E30A17] text-[#E30A17] font-medium hover:bg-[#E30A17]/5 transition-colors"
+              >
+                İptal
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("teklif-form-modal");
+    const closeBtn = document.getElementById("teklif-form-close");
+    const iptalBtn = document.getElementById("teklif-form-iptal");
+    const form = document.getElementById("teklif-form");
+
+    function openTeklifModal() {
+      if (!modal) return;
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeTeklifModal() {
+      if (!modal) return;
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll(".open-teklif-modal").forEach((el) => {
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        openTeklifModal();
+      });
+    });
+
+    closeBtn?.addEventListener("click", closeTeklifModal);
+    iptalBtn?.addEventListener("click", closeTeklifModal);
+    modal?.addEventListener("click", (e) => {
+      if (e.target === modal) closeTeklifModal();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal && !modal.classList.contains("hidden")) closeTeklifModal();
+    });
+    form?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      closeTeklifModal();
+    });
+  });
+</script>

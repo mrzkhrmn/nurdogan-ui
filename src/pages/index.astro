@@ -1,25 +1,22 @@
 ---
 import "../styles/global.css";
 import MainLayout from "../layouts/MainLayout.astro";
-import Landing from "../components/Landing.astro";
-import ProjectsCompletedSection from "../components/sections/ProjectsCompletedSection.astro";
-import AboutSection from "../components/sections/AboutSection.astro";
+import { LandingWithData, BinaYonetimiSectionWithData } from "../components/WebsiteTabFetcher.jsx";
 import EmployeeSection from "../components/sections/EmployeeSection.astro";
 import ServicesSection from "../components/sections/ServicesSection.astro";
-import BuildingManagementSection from "../components/sections/BuildingManagementSection.astro";
 import ProjectsSection from "../components/sections/ProjectsSection.astro";
 import ProjectsMapSection from "../components/sections/ProjectsMapSection.astro";
 import Footer from "../components/Footer.astro";
+
+const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
 ---
 
 <MainLayout isHomePage={true}>
-  <Landing />
-  <ProjectsCompletedSection />
-  <AboutSection />
+  <LandingWithData client:load baseUrl={baseUrl} />
   <EmployeeSection />
   <ServicesSection />
   <ProjectsSection />
   <ProjectsMapSection />
-  <BuildingManagementSection />
+  <BinaYonetimiSectionWithData client:load baseUrl={baseUrl} />
   <Footer />
 </MainLayout>
