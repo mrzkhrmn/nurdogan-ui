@@ -18,11 +18,11 @@ const ongoingProjects = ongoingData.map((p) => ({
 ---
 
 <MainLayout>
-  <div class="w-full min-h-screen bg-white">
+  <div class="w-full min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
     <!-- Header arkasında kalmaması için üst boşluk -->
     <section class="w-full pt-28 md:pt-42 pb-12 md:py-20 px-4 md:px-6">
       <div class="max-w-[1480px] mx-auto">
-        <h1 class="text-[#262322] text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight mb-4 md:mb-6">
+        <h1 class="text-[#262322] dark:text-gray-100 text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight mb-4 md:mb-6">
           Projeler
         </h1>
         <p class="inline-block text-[#E30A17] text-sm sm:text-base md:text-lg font-bold mb-2 tracking-wider uppercase bg-[#E30A17]/15 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl">
@@ -30,7 +30,7 @@ const ongoingProjects = ongoingData.map((p) => ({
         </p>
 
         <!-- Sekmeler: varsayılan Devam Eden -->
-        <div class="flex flex-wrap items-center gap-4 mb-8 border-b border-gray-200">
+        <div class="flex flex-wrap items-center gap-4 mb-8 border-b border-gray-200 dark:border-gray-600">
           <button
             type="button"
             class="project-page-tab px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-semibold border-b-2 border-transparent transition-colors active-tab"
@@ -56,10 +56,10 @@ const ongoingProjects = ongoingData.map((p) => ({
               type="search"
               id="projects-search"
               placeholder="Proje ara..."
-              class="w-full px-4 py-3 md:px-5 md:py-4 pl-11 md:pl-12 rounded-xl border-2 border-gray-200 text-[#262322] placeholder-gray-400 focus:border-[#E30A17] focus:outline-none transition-colors"
+              class="w-full px-4 py-3 md:px-5 md:py-4 pl-11 md:pl-12 rounded-xl border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 text-[#262322] placeholder-gray-400 dark:placeholder-gray-400 focus:border-[#E30A17] focus:outline-none transition-colors"
               aria-label="Proje ara"
             />
-            <svg class="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
@@ -71,7 +71,7 @@ const ongoingProjects = ongoingData.map((p) => ({
             {ongoingProjects.map((project) => (
               <a
                 href={`${baseUrl}projeler/${project.slug}`}
-                class="project-card relative w-full overflow-hidden rounded-2xl bg-white shadow-lg group border border-gray-100 block"
+                class="project-card relative w-full overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-lg group border border-gray-100 dark:border-gray-700 block transition-colors duration-200"
                 data-project-name={project.name.toLowerCase()}
               >
                 <div class="aspect-[3/4] md:aspect-[2/3] relative overflow-hidden">
@@ -102,7 +102,7 @@ const ongoingProjects = ongoingData.map((p) => ({
               </a>
             ))}
           </div>
-          <p class="text-gray-500 text-sm mt-4 hidden" id="ongoing-empty">
+          <p class="text-gray-500 dark:text-gray-400 text-sm mt-4 hidden" id="ongoing-empty">
             Arama kriterine uygun devam eden proje bulunamadı.
           </p>
         </div>
@@ -113,7 +113,7 @@ const ongoingProjects = ongoingData.map((p) => ({
             {completedProjects.map((project) => (
               <a
                 href={`${baseUrl}projeler/${project.slug}`}
-                class="project-card relative w-full overflow-hidden rounded-2xl bg-white shadow-lg group border border-gray-100 block"
+                class="project-card relative w-full overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-lg group border border-gray-100 dark:border-gray-700 block transition-colors duration-200"
                 data-project-name={project.name.toLowerCase()}
               >
                 <div class="aspect-[3/4] md:aspect-[2/3] relative overflow-hidden">
@@ -144,7 +144,7 @@ const ongoingProjects = ongoingData.map((p) => ({
               </a>
             ))}
           </div>
-          <p class="text-gray-500 text-sm mt-4 hidden" id="completed-empty">
+          <p class="text-gray-500 dark:text-gray-400 text-sm mt-4 hidden" id="completed-empty">
             Arama kriterine uygun tamamlanan proje bulunamadı.
           </p>
         </div>
@@ -175,10 +175,10 @@ const ongoingProjects = ongoingData.map((p) => ({
 
       tabs.forEach((t) => {
         t.classList.remove("active-tab", "border-[#E30A17]", "text-[#E30A17]");
-        t.classList.add("border-transparent", "text-[#262322]");
+        t.classList.add("border-transparent");
       });
       tab.classList.add("active-tab", "border-[#E30A17]", "text-[#E30A17]");
-      tab.classList.remove("border-transparent", "text-[#262322]");
+      tab.classList.remove("border-transparent");
 
       if (tabType === "ongoing") {
         panelOngoing?.classList.remove("hidden");
@@ -226,8 +226,13 @@ const ongoingProjects = ongoingData.map((p) => ({
 
 <style>
   .project-page-tab {
-    color: #262322;
     cursor: pointer;
+  }
+  .project-page-tab:not(.active-tab) {
+    color: #262322;
+  }
+  :global(.dark) .project-page-tab:not(.active-tab) {
+    color: #e5e7eb;
   }
   .project-page-tab:hover {
     color: #E30A17;

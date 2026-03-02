@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Dark mode: .dark sınıfı html üzerinde olduğunda dark: varyantları uygulanır */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-family-manrope: "Manrope", sans-serif;
   --font-family-playfair-display: "Playfair Display", serif;
@@ -8,6 +11,15 @@
 body {
   font-family: var(--font-family-montserrat);
   background-color: #f9f9f9;
+}
+
+.dark body {
+  background-color: #111827;
+}
+
+.dark body,
+.dark main {
+  color: #e5e7eb;
 }
 
 /* Anasayfa split landing (API verisi ile React’ta render edildiği için global) */

@@ -54,11 +54,11 @@ function HizmetlerHeroSection() {
 
   if (isLoading) {
     return (
-      <section className="w-full pt-24 sm:pt-28 md:pt-48 pb-16 md:pb-20 px-4 md:px-6">
+      <section className="w-full pt-24 sm:pt-28 md:pt-48 pb-16 md:pb-20 px-4 md:px-6 bg-white dark:bg-gray-900">
         <div className="max-w-[1200px] mx-auto">
           <div className="animate-pulse flex flex-col lg:flex-row gap-10 lg:gap-14">
-            <div className="flex-1 h-32 bg-gray-200 rounded-xl" />
-            <div className="flex-1 h-64 bg-gray-200 rounded-2xl" />
+            <div className="flex-1 h-32 bg-gray-200 dark:bg-gray-800 rounded-xl" />
+            <div className="flex-1 h-64 bg-gray-200 dark:bg-gray-800 rounded-2xl" />
           </div>
         </div>
       </section>
@@ -66,8 +66,8 @@ function HizmetlerHeroSection() {
   }
   if (error) {
     return (
-      <section className="w-full pt-24 sm:pt-28 md:pt-48 pb-16 md:pb-20 px-4 md:px-6">
-        <div className="max-w-[1200px] mx-auto text-[#525252]">
+      <section className="w-full pt-24 sm:pt-28 md:pt-48 pb-16 md:pb-20 px-4 md:px-6 bg-white dark:bg-gray-900">
+        <div className="max-w-[1200px] mx-auto text-[#525252] dark:text-gray-400">
           Hero içeriği yüklenemedi.
         </div>
       </section>
@@ -75,14 +75,14 @@ function HizmetlerHeroSection() {
   }
 
   return (
-    <section className="w-full pt-24 sm:pt-28 md:pt-48 pb-16 md:pb-20 px-4 md:px-6">
+    <section className="w-full pt-24 sm:pt-28 md:pt-48 pb-16 md:pb-20 px-4 md:px-6 bg-white dark:bg-gray-900 transition-colors duration-200">
       <div className="max-w-[1200px] mx-auto">
         <div className="flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-14">
           <div className="flex-1 order-2 lg:order-1">
-            <h1 className="text-[#262322] text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-5 md:mb-6">
+            <h1 className="text-[#262322] dark:text-gray-100 text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-5 md:mb-6">
               {title}
             </h1>
-            <p className="text-[#525252] text-base md:text-lg leading-relaxed mb-8 md:mb-10 max-w-xl">
+            <p className="text-[#525252] dark:text-gray-300 text-base md:text-lg leading-relaxed mb-8 md:mb-10 max-w-xl">
               {subTitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -103,7 +103,7 @@ function HizmetlerHeroSection() {
             </div>
           </div>
           <div className="flex-1 order-1 lg:order-2 shrink-0 max-w-lg lg:max-w-md xl:max-w-lg mx-auto lg:mx-0">
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl bg-gray-100">
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl bg-gray-100 dark:bg-gray-800">
               {heroImageSrc ? (
                 <img
                   src={heroImageSrc}
@@ -113,7 +113,7 @@ function HizmetlerHeroSection() {
                   height={420}
                 />
               ) : (
-                <div className="w-full h-full bg-gray-200" />
+                <div className="w-full h-full bg-gray-200 dark:bg-gray-700" />
               )}
             </div>
           </div>
@@ -170,15 +170,15 @@ function BinaYonetimiHeroSection({ baseUrl = "/" }) {
 
   if (isLoading) {
     return (
-      <section className="w-full bg-white pt-24 sm:pt-32 md:pt-36 lg:pt-44 pb-12 md:pb-20 px-4 md:px-6 mt-24">
+      <section className="w-full bg-white dark:bg-gray-900 pt-24 sm:pt-32 md:pt-36 lg:pt-44 pb-12 md:pb-20 px-4 md:px-6 mt-24 transition-colors duration-200">
         <div className="max-w-[1440px] mx-auto animate-pulse">
           <div className="flex flex-col lg:flex-row gap-10 lg:gap-12">
-            <div className="w-full lg:w-[50%] h-64 bg-gray-200 rounded-2xl" />
+            <div className="w-full lg:w-[50%] h-64 bg-gray-200 dark:bg-gray-800 rounded-2xl" />
             <div className="flex-1 space-y-4">
-              <div className="h-10 bg-gray-200 rounded w-3/4" />
-              <div className="h-24 bg-gray-200 rounded" />
-              <div className="h-4 bg-gray-200 rounded w-full" />
-              <div className="h-4 bg-gray-200 rounded w-5/6" />
+              <div className="h-10 bg-gray-200 dark:bg-gray-800 rounded w-3/4" />
+              <div className="h-24 bg-gray-200 dark:bg-gray-800 rounded" />
+              <div className="h-4 bg-gray-200 dark:bg-gray-800 rounded w-full" />
+              <div className="h-4 bg-gray-200 dark:bg-gray-800 rounded w-5/6" />
             </div>
           </div>
         </div>
@@ -187,8 +187,8 @@ function BinaYonetimiHeroSection({ baseUrl = "/" }) {
   }
   if (error) {
     return (
-      <section className="w-full bg-white pt-24 sm:pt-32 md:pt-36 lg:pt-44 pb-12 md:pb-20 px-4 md:px-6 mt-24">
-        <div className="max-w-[1440px] mx-auto text-[#525252]">
+      <section className="w-full bg-white dark:bg-gray-900 pt-24 sm:pt-32 md:pt-36 lg:pt-44 pb-12 md:pb-20 px-4 md:px-6 mt-24 transition-colors duration-200">
+        <div className="max-w-[1440px] mx-auto text-[#525252] dark:text-gray-400">
           Bina yönetimi içeriği yüklenemedi.
         </div>
       </section>
@@ -203,7 +203,7 @@ function BinaYonetimiHeroSection({ baseUrl = "/" }) {
   };
 
   return (
-    <section className="w-full bg-white pt-24 sm:pt-32 md:pt-36 lg:pt-44 pb-12 md:pb-20 px-4 md:px-6 mt-24">
+    <section className="w-full bg-white dark:bg-gray-900 pt-24 sm:pt-32 md:pt-36 lg:pt-44 pb-12 md:pb-20 px-4 md:px-6 mt-24 transition-colors duration-200">
       <div className="max-w-[1440px] mx-auto">
         <div className="flex flex-col lg:flex-row items-stretch gap-10 lg:gap-12">
           <div className="w-full lg:w-[50%] shrink-0 relative pb-[42%] md:pb-[38%]">
@@ -217,7 +217,7 @@ function BinaYonetimiHeroSection({ baseUrl = "/" }) {
                     loading="eager"
                   />
                 ) : (
-                  <div className="w-full h-full min-h-[200px] bg-gray-200" />
+                  <div className="w-full h-full min-h-[200px] bg-gray-200 dark:bg-gray-800" />
                 )}
               </div>
               {subImages.length >= 3 && (
@@ -247,7 +247,7 @@ function BinaYonetimiHeroSection({ baseUrl = "/" }) {
                         className={`absolute bottom-0 rounded-xl overflow-hidden border-2 shadow-lg pointer-events-auto transition-all duration-300 ${
                           isCenter
                             ? "border-[#E30A17] ring-2 ring-[#E30A17]/30"
-                            : "border-gray-200"
+                            : "border-gray-200 dark:border-gray-600"
                         }`}
                         style={style}
                       >
@@ -266,10 +266,10 @@ function BinaYonetimiHeroSection({ baseUrl = "/" }) {
           </div>
 
           <div className="w-full lg:flex-1 flex flex-col justify-center">
-            <h1 className="text-[#262322] text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6">
+            <h1 className="text-[#262322] dark:text-gray-100 text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6">
               {title}
             </h1>
-            <p className="text-[#585858] text-base md:text-lg leading-relaxed mb-8 whitespace-pre-line">
+            <p className="text-[#585858] dark:text-gray-300 text-base md:text-lg leading-relaxed mb-8 whitespace-pre-line">
               {description}
             </p>
             <div className="space-y-4 mb-10">
@@ -280,7 +280,7 @@ function BinaYonetimiHeroSection({ baseUrl = "/" }) {
                       <CheckmarkIcon />
                     </div>
                   </div>
-                  <p className="text-[#262322] text-base md:text-lg font-medium">
+                  <p className="text-[#262322] dark:text-gray-200 text-base md:text-lg font-medium">
                     {service}
                   </p>
                 </div>
@@ -296,10 +296,10 @@ function BinaYonetimiHeroSection({ baseUrl = "/" }) {
                   />
                 </div>
                 <div>
-                  <p className="text-[#262322] text-lg font-bold mb-1">
+                  <p className="text-[#262322] dark:text-gray-100 text-lg font-bold mb-1">
                     Nurdoğan Babadağ
                   </p>
-                  <p className="text-[#585858] text-sm">Kurucu, CEO</p>
+                  <p className="text-[#585858] dark:text-gray-400 text-sm">Kurucu, CEO</p>
                 </div>
               </div>
               <div className="w-24 h-24 rounded-full shrink-0">
@@ -560,18 +560,18 @@ function KentselDonusumTanitimContent({ baseUrl = "/" }) {
 
   if (isLoading) {
     return (
-      <section className="w-full py-20 px-6 relative bg-gray-50">
+      <section className="w-full py-20 px-6 relative bg-gray-50 dark:bg-gray-900">
         <div className="max-w-7xl mx-auto animate-pulse flex flex-col lg:flex-row gap-8 mb-20">
-          <div className="w-full lg:w-1/2 h-64 bg-gray-200 rounded-2xl" />
-          <div className="flex-1 h-32 bg-gray-200 rounded" />
+          <div className="w-full lg:w-1/2 h-64 bg-gray-200 dark:bg-gray-800 rounded-2xl" />
+          <div className="flex-1 h-32 bg-gray-200 dark:bg-gray-800 rounded" />
         </div>
       </section>
     );
   }
   if (error) {
     return (
-      <section className="w-full py-20 px-6 relative bg-gray-50">
-        <div className="max-w-7xl mx-auto text-[#525252]">
+      <section className="w-full py-20 px-6 relative bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto text-[#525252] dark:text-gray-300">
           Kentsel dönüşüm tanıtım içeriği yüklenemedi.
         </div>
       </section>
@@ -580,7 +580,7 @@ function KentselDonusumTanitimContent({ baseUrl = "/" }) {
 
   return (
     <section
-      className="w-full py-20 px-6 relative bg-gray-50 bg-cover bg-center bg-no-repeat"
+      className="w-full py-20 px-6 relative bg-gray-50 dark:bg-gray-900 bg-cover bg-center bg-no-repeat transition-colors duration-200"
       style={{ backgroundImage: "url('/scetchbg.png')" }}
     >
       <div
@@ -591,10 +591,14 @@ function KentselDonusumTanitimContent({ baseUrl = "/" }) {
         }}
         aria-hidden="true"
       />
+      <div
+        className="absolute inset-0 z-0 pointer-events-none hidden dark:block bg-gradient-to-r from-transparent via-gray-900/80 to-gray-900"
+        aria-hidden="true"
+      />
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col lg:flex-row items-stretch gap-8 lg:gap-12 mb-20">
           <div className="w-full lg:w-1/2 lg:max-w-xl lg:shrink-0 flex flex-col gap-4 order-2 lg:order-1">
-            <div className="relative w-full aspect-video min-h-[280px] rounded-2xl overflow-hidden bg-black/5">
+            <div className="relative w-full aspect-video min-h-[280px] rounded-2xl overflow-hidden bg-black/5 dark:bg-black/20">
               <iframe
                 src={videoSrc}
                 title="YouTube video"
@@ -633,10 +637,10 @@ function KentselDonusumTanitimContent({ baseUrl = "/" }) {
             <p className="inline-block text-[#E30A17] text-sm sm:text-base md:text-4xl font-bold mb-4 tracking-wider uppercase bg-[#E30A17]/15 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl">
               2012&apos;DEN GÜNÜMÜZE
             </p>
-            <h2 className="text-[#262322] text-2xl md:text-5xl font-semibold mb-6 leading-tight">
+            <h2 className="text-[#262322] dark:text-gray-100 text-2xl md:text-5xl font-semibold mb-6 leading-tight">
               {title}
             </h2>
-            <p className="text-[#585858] text-base md:text-lg leading-relaxed">
+            <p className="text-[#585858] dark:text-gray-300 text-base md:text-lg leading-relaxed">
               {description}
             </p>
           </div>
@@ -649,15 +653,15 @@ function KentselDonusumTanitimContent({ baseUrl = "/" }) {
           {statNumbers.map((num, index) => (
             <div
               key={index}
-              className={`${index !== 0 ? "border-l border-[#DFDEDC]" : ""} text-center stat-item flex flex-col items-center`}
+              className={`${index !== 0 ? "border-l border-[#DFDEDC] dark:border-gray-600" : ""} text-center stat-item flex flex-col items-center`}
             >
               <div className="stat-icon-wrapper opacity-0 scale-75 transition-all duration-500 ease-out">
-                <StatIcon type={STAT_ICONS[index]} />
+                <StatIcon type={STAT_ICONS[index]} className="w-10 h-10 md:w-12 md:h-12 text-[#E30A17] dark:text-gray-100 mx-auto mb-2" />
               </div>
-              <div className="text-[#262322] text-5xl md:text-6xl font-semibold mb-2 stat-number">
+              <div className="text-[#262322] dark:text-gray-100 text-5xl md:text-6xl font-semibold mb-2 stat-number">
                 0{STAT_PLUS[index] ? "+" : ""}
               </div>
-              <div className="text-[#262322] text-sm md:text-base">
+              <div className="text-[#262322] dark:text-gray-300 text-sm md:text-base">
                 {STAT_LABELS[index]}
               </div>
             </div>
@@ -808,9 +812,9 @@ function BinaYonetimiSectionContent({ baseUrl = "/" }) {
     return (
       <section
         id="bina-yonetimi"
-        className="relative w-full py-12 px-4 md:px-6"
+        className="relative w-full py-12 px-4 md:px-6 bg-gray-100 dark:bg-gray-900"
       >
-        <div className="max-w-[1440px] mx-auto text-white/90">
+        <div className="max-w-[1440px] mx-auto text-gray-700 dark:text-white/90">
           Bina yönetimi içeriği yüklenemedi.
         </div>
       </section>
@@ -820,7 +824,7 @@ function BinaYonetimiSectionContent({ baseUrl = "/" }) {
   return (
     <section
       id="bina-yonetimi"
-      className="relative w-full py-12 sm:py-16 md:py-20 lg:py-20 px-4 md:px-6 mb-12 md:mb-16 lg:mb-20"
+      className="relative w-full py-12 sm:py-16 md:py-20 lg:py-20 px-4 md:px-6 mb-12 md:mb-16 lg:mb-20 bg-gray-100 dark:bg-gray-900 transition-colors duration-200"
     >
       <div className="absolute inset-0 -z-10">
         <img
@@ -829,14 +833,14 @@ function BinaYonetimiSectionContent({ baseUrl = "/" }) {
           className="w-full h-full object-cover"
           aria-hidden="true"
         />
-        <div className="absolute inset-0 bg-black/40 md:bg-black/55" />
+        <div className="absolute inset-0 bg-white/60 md:bg-white/70 dark:bg-black/55 dark:md:bg-black/70 transition-colors duration-200" />
       </div>
       <div className="relative max-w-[1440px] mx-auto">
         <div className="text-center max-w-[980px] mx-auto">
-          <p className="inline-block text-white/95 text-sm sm:text-base md:text-4xl font-bold tracking-wider mb-4 uppercase bg-white/15 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl">
+          <p className="inline-block text-[#E30A17] dark:text-white/95 text-sm sm:text-base md:text-4xl font-bold tracking-wider mb-4 uppercase bg-[#E30A17]/15 dark:bg-white/15 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl">
             {title.toUpperCase()}
           </p>
-          <h2 className="text-white text-2xl md:text-5xl font-semibold leading-tight mb-4 sm:mb-6 md:mb-8">
+          <h2 className="text-gray-900 dark:text-white text-2xl md:text-5xl font-semibold leading-tight mb-4 sm:mb-6 md:mb-8">
             {description}
           </h2>
           <a
@@ -860,14 +864,14 @@ function BinaYonetimiSectionContent({ baseUrl = "/" }) {
             </div>
           </div>
           <div className="w-full lg:w-[40%]">
-            <div className="h-full bg-black/55 border border-white/10 rounded-2xl sm:rounded-3xl px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 lg:py-8 text-white backdrop-blur-md flex flex-col">
+            <div className="h-full bg-white/95 dark:bg-black/55 border border-gray-200 dark:border-white/10 rounded-2xl sm:rounded-3xl px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 lg:py-8 text-gray-900 dark:text-white backdrop-blur-md flex flex-col shadow-lg dark:shadow-none transition-colors duration-200">
               <div className="space-y-0 grow">
                 {buildings.map((building, index) => (
                   <button
                     key={index}
                     type="button"
                     onClick={() => setSelectedIndex(index)}
-                    className={`bina-yonetimi-secenek w-full flex items-center justify-between py-2 sm:py-3 md:py-4 border-b border-white/10 text-left transition-colors hover:text-white cursor-pointer text-white/85 ${
+                    className={`bina-yonetimi-secenek w-full flex items-center justify-between py-2 sm:py-3 md:py-4 border-b border-gray-200 dark:border-white/10 text-left transition-colors hover:text-[#E30A17] dark:hover:text-white cursor-pointer text-gray-700 dark:text-white/85 ${
                       index === selectedIndex
                         ? "active border-[#E30A17] border-b-2 text-[#E30A17]"
                         : ""
@@ -942,30 +946,30 @@ function IletisimContent({ baseUrl = "/" }) {
 
   if (isLoading) {
     return (
-      <div className="w-full min-h-screen bg-white">
+      <div className="w-full min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
         <section className="w-full pt-24 sm:pt-28 md:pt-44 pb-10 md:pb-14 px-4 md:px-6">
           <div className="max-w-[1200px] mx-auto animate-pulse">
-            <div className="h-10 bg-gray-200 rounded w-32 mb-4" />
-            <div className="h-12 bg-gray-200 rounded w-64 mb-4" />
-            <div className="h-6 bg-gray-200 rounded max-w-2xl" />
+            <div className="h-10 bg-gray-200 dark:bg-gray-800 rounded w-32 mb-4" />
+            <div className="h-12 bg-gray-200 dark:bg-gray-800 rounded w-64 mb-4" />
+            <div className="h-6 bg-gray-200 dark:bg-gray-800 rounded max-w-2xl" />
           </div>
         </section>
         <section className="w-full pb-16 md:pb-24 px-4 md:px-6">
-          <div className="max-w-[1200px] mx-auto h-96 bg-gray-100 rounded-2xl" />
+          <div className="max-w-[1200px] mx-auto h-96 bg-gray-100 dark:bg-gray-800 rounded-2xl" />
         </section>
       </div>
     );
   }
   if (error) {
     return (
-      <div className="w-full min-h-screen bg-white flex items-center justify-center p-8 text-[#525252]">
+      <div className="w-full min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center p-8 text-[#525252] dark:text-gray-400 transition-colors duration-200">
         İletişim içeriği yüklenemedi.
       </div>
     );
   }
 
   return (
-    <div className="w-full min-h-screen bg-white">
+    <div className="w-full min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
       <section
         id="iletisim"
         className="w-full pt-24 sm:pt-28 md:pt-44 pb-10 md:pb-14 px-4 md:px-6"
@@ -976,10 +980,10 @@ function IletisimContent({ baseUrl = "/" }) {
               <p className="inline-block text-[#E30A17] text-sm sm:text-base md:text-lg font-bold mb-2 tracking-wider uppercase bg-[#E30A17]/15 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl">
                 İLETİŞİM
               </p>
-              <h1 className="text-[#262322] text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4">
+              <h1 className="text-[#262322] dark:text-gray-100 text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4">
                 {title}
               </h1>
-              <p className="text-[#525252] text-base md:text-lg leading-relaxed max-w-2xl">
+              <p className="text-[#525252] dark:text-gray-300 text-base md:text-lg leading-relaxed max-w-2xl">
                 {subTitle}
               </p>
             </div>
@@ -1008,8 +1012,8 @@ function IletisimContent({ baseUrl = "/" }) {
         <div className="max-w-[1200px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 md:gap-8 items-stretch">
             <div className="lg:col-span-2">
-              <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 md:p-8 h-full">
-                <h2 className="text-[#262322] text-xl md:text-2xl font-bold mb-6">
+              <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 md:p-8 h-full transition-colors duration-200">
+                <h2 className="text-[#262322] dark:text-gray-100 text-xl md:text-2xl font-bold mb-6">
                   İletişim Bilgileri
                 </h2>
                 <div className="space-y-4 md:space-y-5">
@@ -1019,12 +1023,12 @@ function IletisimContent({ baseUrl = "/" }) {
                         <PhoneIcon color="#FFFFFF" />
                       </div>
                       <div className="min-w-0">
-                        <p className="text-[#262322] font-semibold leading-snug">
+                        <p className="text-[#262322] dark:text-gray-100 font-semibold leading-snug">
                           Telefon
                         </p>
                         <a
                           href={phoneHref}
-                          className="text-[#525252] hover:text-[#262322] transition-colors wrap-break-word"
+                          className="text-[#525252] dark:text-gray-300 hover:text-[#262322] dark:hover:text-gray-100 transition-colors wrap-break-word"
                         >
                           {phoneNumber}
                         </a>
@@ -1037,7 +1041,7 @@ function IletisimContent({ baseUrl = "/" }) {
                         <MailIcon />
                       </div>
                       <div className="min-w-0">
-                        <p className="text-[#262322] font-semibold leading-snug">
+                        <p className="text-[#262322] dark:text-gray-100 font-semibold leading-snug">
                           E-posta
                         </p>
                         <div className="space-y-1">
@@ -1045,7 +1049,7 @@ function IletisimContent({ baseUrl = "/" }) {
                             <a
                               key={email}
                               href={`mailto:${email}`}
-                              className="block text-[#525252] hover:text-[#262322] transition-colors wrap-break-word"
+                              className="block text-[#525252] dark:text-gray-300 hover:text-[#262322] dark:hover:text-gray-100 transition-colors wrap-break-word"
                             >
                               {email}
                             </a>
@@ -1060,10 +1064,10 @@ function IletisimContent({ baseUrl = "/" }) {
                         <LocationIcon />
                       </div>
                       <div className="min-w-0">
-                        <p className="text-[#262322] font-semibold leading-snug">
+                        <p className="text-[#262322] dark:text-gray-100 font-semibold leading-snug">
                           Adres
                         </p>
-                        <p className="text-[#525252] leading-relaxed">
+                        <p className="text-[#525252] dark:text-gray-300 leading-relaxed">
                           {address}
                         </p>
                       </div>
@@ -1077,12 +1081,12 @@ function IletisimContent({ baseUrl = "/" }) {
                         </div>
                       </div>
                       <div className="min-w-0">
-                        <p className="text-[#262322] font-semibold leading-snug">
+                        <p className="text-[#262322] dark:text-gray-100 font-semibold leading-snug">
                           KEP
                         </p>
                         <a
                           href={`mailto:${kepMail}`}
-                          className="text-[#525252] hover:text-[#262322] transition-colors wrap-break-word"
+                          className="text-[#525252] dark:text-gray-300 hover:text-[#262322] dark:hover:text-gray-100 transition-colors wrap-break-word"
                         >
                           {kepMail}
                         </a>
@@ -1090,8 +1094,8 @@ function IletisimContent({ baseUrl = "/" }) {
                     </div>
                   )}
                 </div>
-                <div className="mt-8 pt-6 border-t border-gray-200">
-                  <p className="text-sm text-[#525252] leading-relaxed">
+                <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                  <p className="text-sm text-[#525252] dark:text-gray-400 leading-relaxed">
                     Harita üzerinden rota oluşturmak için sağdaki konum kartını
                     kullanabilirsiniz.
                   </p>
@@ -1099,17 +1103,17 @@ function IletisimContent({ baseUrl = "/" }) {
               </div>
             </div>
             <div className="lg:col-span-3">
-              <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden h-full">
-                <div className="px-6 md:px-8 py-5 md:py-6 border-b border-gray-200">
-                  <h2 className="text-[#262322] text-xl md:text-2xl font-bold">
+              <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden h-full transition-colors duration-200">
+                <div className="px-6 md:px-8 py-5 md:py-6 border-b border-gray-200 dark:border-gray-700">
+                  <h2 className="text-[#262322] dark:text-gray-100 text-xl md:text-2xl font-bold">
                     Konum
                   </h2>
-                  <p className="text-[#525252] text-sm md:text-base mt-1">
+                  <p className="text-[#525252] dark:text-gray-300 text-sm md:text-base mt-1">
                     Google Maps üzerinden konumumuzu görüntüleyin.
                   </p>
                 </div>
                 <div className="p-4 md:p-6">
-                  <div className="rounded-xl overflow-hidden bg-gray-100 h-[360px] sm:h-[420px] md:h-[520px]">
+                  <div className="rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-700 h-[360px] sm:h-[420px] md:h-[520px] transition-colors duration-200">
                     {haritaUrl ? (
                       <iframe
                         src={haritaUrl}
@@ -1123,7 +1127,7 @@ function IletisimContent({ baseUrl = "/" }) {
                         title="Google Maps Konum"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-[#737373]">
+                      <div className="w-full h-full flex items-center justify-center text-[#737373] dark:text-gray-400">
                         Harita yüklenemedi.
                       </div>
                     )}

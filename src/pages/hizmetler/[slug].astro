@@ -37,12 +37,12 @@ const relatedServices = sameCategorySlugs
 ---
 
 <MainLayout>
-  <div class="w-full min-h-screen bg-white">
+  <div class="w-full min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
     <section class="w-full pt-24 sm:pt-28 md:pt-42 pb-16 md:pb-24 px-4 md:px-6">
       <div class="max-w-[1200px] mx-auto">
         <a
           href={`${baseUrl}hizmetler`}
-          class="inline-flex items-center gap-2 text-[#E30A17] text-sm md:text-base font-medium hover:underline mb-8"
+          class="inline-flex items-center gap-2 text-[#E30A17] text-sm md:text-base font-medium hover:underline mb-8 dark:hover:text-[#ff4d4d]"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -53,7 +53,7 @@ const relatedServices = sameCategorySlugs
         <div class="flex flex-col lg:flex-row lg:gap-12 gap-10">
           <!-- Sol: Servis görseli -->
           <div class="flex-1 lg:max-w-md xl:max-w-lg shrink-0 order-1 lg:order-1">
-            <div class="relative aspect-video lg:aspect-4/3 rounded-2xl overflow-hidden bg-gray-100 shadow-lg">
+            <div class="relative aspect-video lg:aspect-4/3 rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-800 shadow-lg">
               <Image
                 src={service.imageFull}
                 alt={service.title}
@@ -66,22 +66,22 @@ const relatedServices = sameCategorySlugs
 
           <!-- Sağ: Başlık, açıklama, avantajlar, butonlar -->
           <div class="flex-1 min-w-0 order-2 lg:order-2">
-            <h1 class="text-[#262322] text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-5 md:mb-6">
+            <h1 class="text-[#262322] dark:text-gray-100 text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-5 md:mb-6">
               {service.title}
             </h1>
-            <p class="text-[#525252] text-base md:text-lg leading-relaxed mb-8">
+            <p class="text-[#525252] dark:text-gray-300 text-base md:text-lg leading-relaxed mb-8">
               {service.description}
             </p>
 
             <ul class="space-y-3 mb-8">
               {service.advantages.map((adv) => (
                 <li class="flex items-start gap-3">
-                  <span class="shrink-0 w-6 h-6 rounded-full bg-[#E30A17]/10 flex items-center justify-center mt-0.5">
+                  <span class="shrink-0 w-6 h-6 rounded-full bg-[#E30A17]/10 dark:bg-[#E30A17]/20 flex items-center justify-center mt-0.5">
                     <svg class="w-4 h-4 text-[#E30A17]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
                   </span>
-                  <span class="text-[#262322] text-sm md:text-base">{adv}</span>
+                  <span class="text-[#262322] dark:text-gray-200 text-sm md:text-base">{adv}</span>
                 </li>
               ))}
             </ul>
@@ -89,7 +89,7 @@ const relatedServices = sameCategorySlugs
             <div class="flex flex-wrap gap-4">
               <a
                 href={`${baseUrl}#iletisim`}
-                class="inline-flex items-center justify-center rounded-lg border-2 border-[#E30A17] px-6 py-3 text-base font-medium text-[#E30A17] hover:bg-[#E30A17]/5 transition-colors"
+                class="inline-flex items-center justify-center rounded-lg border-2 border-[#E30A17] px-6 py-3 text-base font-medium text-[#E30A17] hover:bg-[#E30A17]/5 dark:hover:bg-[#E30A17]/10 transition-colors"
               >
                 Bilgi al
               </a>
@@ -108,18 +108,18 @@ const relatedServices = sameCategorySlugs
 
     <!-- İlgili Hizmetler (aynı kategoriden) -->
     {relatedServices.length > 0 && (
-      <section class="w-full py-16 md:py-20 px-4 md:px-6 bg-gray-50 border-t border-gray-100">
+      <section class="w-full py-16 md:py-20 px-4 md:px-6 bg-gray-50 dark:bg-gray-800/50 border-t border-gray-100 dark:border-gray-700 transition-colors duration-200">
         <div class="max-w-[1200px] mx-auto">
-          <h2 class="text-[#262322] text-xl md:text-2xl font-bold leading-tight mb-8">
+          <h2 class="text-[#262322] dark:text-gray-100 text-xl md:text-2xl font-bold leading-tight mb-8">
             Bu kategorideki diğer hizmetler
           </h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
             {relatedServices.map((item) => (
               <a
                 href={`${baseUrl}hizmetler/${item.slug}`}
-                class="group bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col"
+                class="group bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col"
               >
-                <div class="relative aspect-video overflow-hidden bg-gray-100">
+                <div class="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-700">
                   <Image
                     src={item.imageFull}
                     alt={item.title}
@@ -129,7 +129,7 @@ const relatedServices = sameCategorySlugs
                   />
                 </div>
                 <div class="p-4 md:p-5 flex flex-col flex-1">
-                  <h3 class="text-[#262322] text-base md:text-lg font-semibold leading-snug group-hover:text-[#E30A17] transition-colors">
+                  <h3 class="text-[#262322] dark:text-gray-100 text-base md:text-lg font-semibold leading-snug group-hover:text-[#E30A17] transition-colors">
                     {item.title}
                   </h3>
                   <span class="mt-3 inline-flex items-center gap-1.5 text-[#E30A17] text-sm font-medium">
@@ -152,41 +152,41 @@ const relatedServices = sameCategorySlugs
 
   <!-- Teklif formu modal (sayfada mevcut) -->
   <div id="teklif-form-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/50 p-4" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="bg-white rounded-2xl shadow-xl w-full max-w-xl max-h-[90vh] overflow-y-auto">
+    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-xl max-h-[90vh] overflow-y-auto transition-colors duration-200">
       <div class="relative p-6 sm:p-8">
-        <button type="button" id="teklif-form-close" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-[#404040] text-white hover:bg-[#525252] flex items-center justify-center transition-colors" aria-label="Kapat">
+        <button type="button" id="teklif-form-close" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-[#404040] dark:bg-gray-600 text-white hover:bg-[#525252] dark:hover:bg-gray-500 flex items-center justify-center transition-colors" aria-label="Kapat">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
         </button>
-        <h2 class="text-center text-[#262322] font-bold mb-6 sm:mb-8">
+        <h2 class="text-center text-[#262322] dark:text-gray-100 font-bold mb-6 sm:mb-8">
           <span class="block text-lg sm:text-xl">Apartman & Site Yönetimi</span>
           <span class="block text-xl sm:text-2xl mt-0.5">Teklif Formu</span>
         </h2>
         <form id="teklif-form" class="space-y-4 sm:space-y-5">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
             <div>
-              <label for="teklif-ad-soyad" class="block text-[#262322] text-sm font-medium mb-1.5">Ad Soyad</label>
-              <input type="text" id="teklif-ad-soyad" name="adSoyad" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-[#262322] focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17]" placeholder="Adınız Soyadınız" />
+              <label for="teklif-ad-soyad" class="block text-[#262322] dark:text-gray-200 text-sm font-medium mb-1.5">Ad Soyad</label>
+              <input type="text" id="teklif-ad-soyad" name="adSoyad" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-[#262322] dark:text-white focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17]" placeholder="Adınız Soyadınız" />
             </div>
             <div>
-              <label for="teklif-telefon" class="block text-[#262322] text-sm font-medium mb-1.5">İletişim Telefonu</label>
-              <input type="tel" id="teklif-telefon" name="telefon" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-[#262322] focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17]" placeholder="05XX XXX XX XX" />
+              <label for="teklif-telefon" class="block text-[#262322] dark:text-gray-200 text-sm font-medium mb-1.5">İletişim Telefonu</label>
+              <input type="tel" id="teklif-telefon" name="telefon" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-[#262322] dark:text-white focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17]" placeholder="05XX XXX XX XX" />
             </div>
           </div>
           <div>
-            <label for="teklif-email" class="block text-[#262322] text-sm font-medium mb-1.5">E-posta</label>
-            <input type="email" id="teklif-email" name="email" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-[#262322] focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17]" placeholder="ornek@email.com" />
+            <label for="teklif-email" class="block text-[#262322] dark:text-gray-200 text-sm font-medium mb-1.5">E-posta</label>
+            <input type="email" id="teklif-email" name="email" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-[#262322] dark:text-white focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17]" placeholder="ornek@email.com" />
           </div>
           <div>
-            <label for="teklif-bina-adi" class="block text-[#262322] text-sm font-medium mb-1.5">Bina Adı & Adresi</label>
-            <input type="text" id="teklif-bina-adi" name="binaAdi" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-[#262322] focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17]" placeholder="Bina adı ve adres bilgisi" />
+            <label for="teklif-bina-adi" class="block text-[#262322] dark:text-gray-200 text-sm font-medium mb-1.5">Bina Adı & Adresi</label>
+            <input type="text" id="teklif-bina-adi" name="binaAdi" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-[#262322] dark:text-white focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17]" placeholder="Bina adı ve adres bilgisi" />
           </div>
           <div>
-            <label for="teklif-mesaj" class="block text-[#262322] text-sm font-medium mb-1.5">Mesajınız</label>
-            <textarea id="teklif-mesaj" name="mesaj" rows="4" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-[#262322] focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17] resize-y min-h-[100px]" placeholder="Mesajınızı yazınız..."></textarea>
+            <label for="teklif-mesaj" class="block text-[#262322] dark:text-gray-200 text-sm font-medium mb-1.5">Mesajınız</label>
+            <textarea id="teklif-mesaj" name="mesaj" rows="4" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-[#262322] dark:text-white focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17] resize-y min-h-[100px]" placeholder="Mesajınızı yazınız..."></textarea>
           </div>
           <div class="flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 pt-2">
             <button type="submit" class="w-full sm:flex-1 px-6 py-3 rounded-lg bg-[#E30A17] text-white font-medium hover:bg-[#c00914] transition-colors">Gönder</button>
-            <button type="button" id="teklif-form-iptal" class="w-full sm:flex-1 px-6 py-3 rounded-lg bg-white border-2 border-[#E30A17] text-[#E30A17] font-medium hover:bg-[#E30A17]/5 transition-colors">İptal</button>
+            <button type="button" id="teklif-form-iptal" class="w-full sm:flex-1 px-6 py-3 rounded-lg bg-white dark:bg-gray-700 border-2 border-[#E30A17] text-[#E30A17] font-medium hover:bg-[#E30A17]/5 dark:hover:bg-[#E30A17]/10 transition-colors">İptal</button>
           </div>
         </form>
       </div>
