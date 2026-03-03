@@ -1,12 +1,73 @@
 ---
 import Image from "astro/components/Image.astro";
-import { completedProjects as completedData, ongoingProjects as ongoingData } from "../../data/projects";
 import { ArrowRightIcon } from "../icons";
+import { BASE_API_URL } from "../../api/constants";
+import { getImageUrl } from "../../api";
+import {
+  completedProjects as staticCompletedProjects,
+  ongoingProjects as staticOngoingProjects,
+} from "../../data/projects";
 
-const baseUrl = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
+const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
 const projectsPageUrl = `${baseUrl}projeler`;
-const completedProjects = completedData.map((p) => ({ ...p, image: `${baseUrl}${p.image}` }));
-const ongoingProjects = ongoingData.map((p) => ({ ...p, image: `${baseUrl}${p.image}` }));
+
+type ApiProject = {
+  id: string;
+  name: string;
+  description: string;
+  imageUrl: string;
+  shortAddress: string;
+  isFinished: boolean;
+};
+
+type UiProject = {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  location: string;
+};
+
+let apiProjects: ApiProject[] = [];
+
+try {
+  const response = await fetch(`${BASE_API_URL}/Website/get-projects`, {
+    headers: { Accept: "application/json" },
+  });
+
+  if (response.ok) {
+    apiProjects = await response.json();
+  }
+} catch (error) {
+  console.error("Projeler alınırken bir hata oluştu:", error);
+}
+
+const mapStaticToUi = (p: { slug: string; name: string; description: string; image: string; location: string }): UiProject => ({
+  id: p.slug,
+  name: p.name,
+  description: p.description,
+  image: `${baseUrl}${p.image}`,
+  location: p.location,
+});
+
+let completedProjects: UiProject[];
+let ongoingProjects: UiProject[];
+
+if (apiProjects.length > 0) {
+  const mapApiToUi = (p: ApiProject): UiProject => ({
+    id: p.id,
+    name: p.name,
+    description: p.description,
+    image: getImageUrl(p.imageUrl),
+    location: p.shortAddress,
+  });
+
+  completedProjects = apiProjects.filter((p) => p.isFinished).map(mapApiToUi);
+  ongoingProjects = apiProjects.filter((p) => !p.isFinished).map(mapApiToUi);
+} else {
+  completedProjects = staticCompletedProjects.map(mapStaticToUi);
+  ongoingProjects = staticOngoingProjects.map(mapStaticToUi);
+}
 ---
 
 <section id="projeler" class="w-full bg-white dark:bg-gray-900 pb-12 md:py-20 px-4 md:px-6 transition-colors duration-200">
@@ -52,75 +113,85 @@ const ongoingProjects = ongoingData.map((p) => ({ ...p, image: `${baseUrl}${p.im
 
     <div class="relative">
       <!-- Tamamlanan Projeler -->
-      <div class="projects-carousel-container overflow-x-auto overflow-y-hidden" id="carousel-completed">
-        <div class="projects-carousel-track flex" id="projects-carousel-track-completed">
-          {completedProjects.map((project, index) => (
-            <div class="projects-carousel-slide min-w-[85%] sm:min-w-[70%] md:min-w-[25%] px-2 md:px-3" data-index={index}>
-              <div class="relative w-full overflow-hidden rounded-2xl bg-white dark:bg-gray-700 shadow-lg group cursor-pointer transition-colors duration-200">
-                <div class="aspect-[3/4] md:aspect-[2/3] relative overflow-hidden">
-                  <Image 
-                    src={project.image}
-                    alt={project.name}
-                    width={600}
-                    height={450}
-                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <div class="absolute top-2 right-2 md:top-4 md:right-4 bg-white dark:bg-gray-600 px-2 py-1 md:px-4 md:py-2 rounded-lg shadow-md">
-                    <p class="text-[#262322] dark:text-gray-100 text-xs md:text-sm lg:text-base font-semibold">
-                      {project.name}
-                    </p>
-                  </div>
+      <div class="projects-panel" id="panel-completed">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+          {completedProjects.map((project) => (
+            <a
+              href={`${baseUrl}projeler/${project.id}`}
+              class="project-card relative w-full overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-lg group border border-gray-100 dark:border-gray-700 block transition-colors duration-200"
+            >
+              <div class="aspect-[3/4] md:aspect-[2/3] relative overflow-hidden">
+                <Image
+                  src={project.image}
+                  alt={project.name}
+                  width={400}
+                  height={300}
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div class="absolute bottom-0 left-0 right-0 p-3 md:p-4 bg-gradient-to-t from-black/70 to-transparent space-y-1.5">
+                  <p class="text-white text-sm md:text-base font-semibold flex items-center gap-2">
+                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    {project.name}
+                  </p>
+                  <p class="text-white/90 text-xs md:text-sm flex items-center gap-2">
+                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    {project.location}
+                  </p>
                 </div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>
 
-      <!-- Devam Eden Projeler -->
-      <div class="projects-carousel-container overflow-x-auto overflow-y-hidden hidden" id="carousel-ongoing">
-        <div class="projects-carousel-track flex" id="projects-carousel-track-ongoing">
-          {ongoingProjects.map((project, index) => (
-            <div class="projects-carousel-slide min-w-[85%] sm:min-w-[70%] md:min-w-[25%] px-2 md:px-3" data-index={index}>
-              <div class="relative w-full overflow-hidden rounded-2xl bg-white dark:bg-gray-700 shadow-lg group cursor-pointer transition-colors duration-200">
-                <div class="aspect-[3/4] md:aspect-[2/3] relative overflow-hidden">
-                  <Image 
-                    src={project.image}
-                    alt={project.name}
-                    width={600}
-                    height={450}
-                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <div class="absolute top-2 right-2 md:top-4 md:right-4 bg-white dark:bg-gray-600 px-2 py-1 md:px-4 md:py-2 rounded-lg shadow-md">
-                    <p class="text-[#262322] dark:text-gray-100 text-xs md:text-sm lg:text-base font-semibold">
-                      {project.name}
-                    </p>
-                  </div>
+      <!-- Devam Eden Projeler (isFinished: false) -->
+      <div class="projects-panel hidden" id="panel-ongoing">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+          {ongoingProjects.map((project) => (
+            <a
+              href={`${baseUrl}projeler/${project.id}`}
+              class="project-card relative w-full overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-lg group border border-gray-100 dark:border-gray-700 block transition-colors duration-200"
+            >
+              <div class="aspect-[3/4] md:aspect-[2/3] relative overflow-hidden">
+                <Image
+                  src={project.image}
+                  alt={project.name}
+                  width={400}
+                  height={300}
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div class="absolute bottom-0 left-0 right-0 p-3 md:p-4 bg-gradient-to-t from-black/70 to-transparent space-y-1.5">
+                  <p class="text-white text-sm md:text-base font-semibold flex items-center gap-2">
+                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    {project.name}
+                  </p>
+                  <p class="text-white/90 text-xs md:text-sm flex items-center gap-2">
+                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    {project.location}
+                  </p>
                 </div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>
-      
     </div>
   </div>
 </section>
 
 <style>
-  .projects-carousel-container {
-    position: relative;
-  }
-
-  .projects-carousel-track {
-    display: flex;
-    will-change: transform;
-  }
-
-  .projects-carousel-slide {
-    flex-shrink: 0;
-  }
-
   .project-tab {
     cursor: pointer;
   }
@@ -142,4 +213,34 @@ const ongoingProjects = ongoingData.map((p) => ({ ...p, image: `${baseUrl}${p.im
     border-bottom-color: #E30A17;
   }
 </style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const tabs = document.querySelectorAll("#projeler .project-tab");
+    const panelCompleted = document.getElementById("panel-completed");
+    const panelOngoing = document.getElementById("panel-ongoing");
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const tabType = tab.getAttribute("data-tab");
+        if (!tabType) return;
+
+        tabs.forEach((t) => {
+          t.classList.remove("active-tab", "border-[#E30A17]", "text-[#E30A17]");
+          t.classList.add("border-transparent");
+        });
+        tab.classList.add("active-tab", "border-[#E30A17]", "text-[#E30A17]");
+        tab.classList.remove("border-transparent");
+
+        if (tabType === "ongoing") {
+          panelCompleted?.classList.add("hidden");
+          panelOngoing?.classList.remove("hidden");
+        } else {
+          panelCompleted?.classList.remove("hidden");
+          panelOngoing?.classList.add("hidden");
+        }
+      });
+    });
+  });
+</script>
 

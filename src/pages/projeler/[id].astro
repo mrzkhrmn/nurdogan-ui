@@ -1,0 +1,330 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Footer from "../../components/Footer.astro";
+import Image from "astro/components/Image.astro";
+import { BASE_API_URL } from "../../api/constants";
+import { getImageUrl } from "../../api";
+import { completedProjects as staticCompleted, ongoingProjects as staticOngoing } from "../../data/projects";
+
+const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
+
+interface ProjectMediaDto {
+  id: string;
+  mediaUrl: string;
+  mediaType: string;
+  isCover: boolean;
+  order: number;
+}
+
+interface ProjectDetailDto {
+  id: string;
+  name: string;
+  description: string;
+  address: string;
+  shortAddress: string;
+  mapsUrl: string;
+  latitude: string;
+  longitude: string;
+  blockCount: string;
+  flatCount: string;
+  isActive: boolean;
+  isFinished: boolean;
+  medias: ProjectMediaDto[];
+}
+
+export async function getStaticPaths() {
+  const paths: { params: { id: string }; props?: object }[] = [];
+  try {
+    const res = await fetch(`${BASE_API_URL}/Website/get-projects`, {
+      headers: { Accept: "application/json" },
+    });
+    if (res.ok) {
+      const projects = (await res.json()) as { id: string }[];
+      projects.forEach((p) => paths.push({ params: { id: p.id } }));
+    }
+  } catch (_) {
+    // API yoksa statik proje slug'ları ile path üret (build hata vermesin)
+  }
+  if (paths.length === 0) {
+    const all = [...staticCompleted, ...staticOngoing];
+    all.forEach((p) => paths.push({ params: { id: p.slug } }));
+  }
+  return paths;
+}
+
+const { id } = Astro.params;
+let project: ProjectDetailDto | null = null;
+let notFound = true;
+
+if (id) {
+  try {
+    const res = await fetch(`${BASE_API_URL}/Website/get-project/${encodeURIComponent(id)}`, {
+      headers: { Accept: "application/json" },
+    });
+    if (res.ok) {
+      project = await res.json();
+      notFound = false;
+    }
+  } catch (_) {
+    notFound = true;
+  }
+}
+
+// Medias: kapak önce, sonra order'a göre; görsel URL'leri tam yap
+const coverMedia = project?.medias?.find((m) => m.isCover);
+const otherMedias = (project?.medias ?? []).filter((m) => !m.isCover).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+const galleryUrls: string[] = coverMedia ? [getImageUrl(coverMedia.mediaUrl)] : [];
+otherMedias.forEach((m) => {
+  const url = getImageUrl(m.mediaUrl);
+  if (url) galleryUrls.push(url);
+});
+if (galleryUrls.length === 0 && project?.medias?.length) {
+  project.medias.forEach((m) => {
+    const u = getImageUrl(m.mediaUrl);
+    if (u) galleryUrls.push(u);
+  });
+}
+const mainImage = galleryUrls[0] ?? "";
+const galleryImages = galleryUrls.length > 1 ? galleryUrls : galleryUrls;
+---
+
+<MainLayout>
+  <div class="w-full min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
+    <section class="w-full pt-30 sm:pt-28 md:pt-42 pb-12 sm:pb-16 md:pb-24 px-4 sm:px-5 md:px-6">
+      <div class="max-w-[1480px] mx-auto">
+        <a
+          href={`${baseUrl}projeler`}
+          class="inline-flex items-center gap-2 text-[#E30A17] text-sm sm:text-base font-medium hover:underline mb-6 sm:mb-8 dark:hover:text-[#ff4d4d]"
+        >
+          <svg class="w-4 h-4 sm:w-5 sm:h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Projelere dön
+        </a>
+
+        {notFound || !project ? (
+          <div class="py-12 text-center">
+            <p class="text-[#525252] dark:text-gray-400 text-lg mb-6">Proje bulunamadı.</p>
+            <a
+              href={`${baseUrl}projeler`}
+              class="inline-flex items-center gap-2 rounded-full bg-[#E30A17] px-6 py-3 text-white font-medium hover:bg-[#c00914] transition-colors"
+            >
+              Projelere dön
+            </a>
+          </div>
+        ) : (
+          <>
+            <div class="flex flex-col lg:flex-row lg:gap-8 xl:gap-12 gap-6">
+              <div class="w-full lg:max-w-md xl:max-w-lg shrink-0">
+                <div class="relative w-full aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-800 shadow-lg">
+                  {mainImage ? (
+                    <img
+                      src={mainImage}
+                      alt={project.name}
+                      width={900}
+                      height={675}
+                      class="w-full h-full object-cover object-center"
+                    />
+                  ) : (
+                    <div class="w-full h-full bg-gray-200 dark:bg-gray-700" />
+                  )}
+                </div>
+              </div>
+
+              <div class="flex flex-col min-w-0">
+                <h1 class="text-[#262322] dark:text-gray-100 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight mb-3 sm:mb-4 flex flex-wrap items-center gap-2 sm:gap-3">
+                  <span class="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#E30A17]/10 dark:bg-[#E30A17]/20 text-[#E30A17] shrink-0">
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                  </span>
+                  <span>{project.name}</span>
+                </h1>
+
+                {(project.shortAddress || project.address) && (
+                  <p class="text-[#525252] dark:text-gray-300 text-sm sm:text-base md:text-lg flex items-center gap-2 mb-4 sm:mb-6">
+                    <span class="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gray-100 dark:bg-gray-700 text-[#262322] dark:text-gray-200 shrink-0">
+                      <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                    </span>
+                    <span class="break-words">{project.shortAddress || project.address}</span>
+                  </p>
+                )}
+
+                {(project.blockCount || project.flatCount) && (
+                  <div class="flex flex-wrap gap-4 mb-4 sm:mb-6">
+                    {project.blockCount && (
+                      <span class="inline-flex items-center gap-2 text-[#525252] dark:text-gray-300 text-sm sm:text-base">
+                        <span class="font-semibold text-[#262322] dark:text-gray-100">Blok:</span>
+                        {project.blockCount}
+                      </span>
+                    )}
+                    {project.flatCount && (
+                      <span class="inline-flex items-center gap-2 text-[#525252] dark:text-gray-300 text-sm sm:text-base">
+                        <span class="font-semibold text-[#262322] dark:text-gray-100">Daire:</span>
+                        {project.flatCount}
+                      </span>
+                    )}
+                  </div>
+                )}
+
+                {project.description && (
+                  <p class="text-[#404040] dark:text-gray-300 text-sm sm:text-base leading-relaxed">
+                    {project.description}
+                  </p>
+                )}
+
+                {project.mapsUrl && (
+                  <a
+                    href={project.mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 mt-6 text-[#E30A17] font-medium hover:underline"
+                  >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    </svg>
+                    Haritada göster
+                  </a>
+                )}
+              </div>
+            </div>
+
+            {galleryImages.length > 0 && (
+              <div class="mt-10 sm:mt-14 md:mt-20">
+                <h2 class="text-[#262322] dark:text-gray-100 text-lg sm:text-xl md:text-2xl font-semibold mb-4 sm:mb-6">Proje Görselleri</h2>
+                <div
+                  class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3 md:gap-4"
+                  id="gallery-grid"
+                >
+                  {galleryImages.map((img, i) => (
+                    <button
+                      type="button"
+                      class="gallery-thumb relative aspect-[4/3] rounded-lg sm:rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800 shadow-md cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#E30A17] focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                      data-index={i}
+                      data-src={img}
+                      aria-label={`Görsel ${i + 1}'i aç`}
+                    >
+                      <img
+                        src={img}
+                        alt={`${project!.name} - Görsel ${i + 1}`}
+                        width={400}
+                        height={300}
+                        class="w-full h-full object-cover pointer-events-none"
+                      />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div
+              id="gallery-viewer"
+              class="fixed inset-0 z-100 hidden flex-col items-center justify-center bg-black/95 p-3 sm:p-4"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Proje görselleri"
+            >
+              <button
+                type="button"
+                id="gallery-viewer-close"
+                class="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/10 text-white hover:bg-white/20 flex items-center justify-center transition-colors touch-manipulation"
+                aria-label="Kapat"
+              >
+                <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+              <div class="flex items-center justify-center gap-1 sm:gap-2 md:gap-4 w-full max-w-6xl flex-1 min-w-0">
+                <button
+                  type="button"
+                  id="gallery-prev"
+                  class="shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 text-white hover:bg-white/20 flex items-center justify-center transition-colors touch-manipulation"
+                  aria-label="Önceki görsel"
+                >
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <div class="flex-1 flex items-center justify-center min-w-0 px-0 sm:px-1">
+                  <img
+                    id="gallery-viewer-img"
+                    src=""
+                    alt=""
+                    class="max-h-[75vh] sm:max-h-[80vh] md:max-h-[85vh] w-auto max-w-full object-contain rounded-lg"
+                  />
+                </div>
+                <button
+                  type="button"
+                  id="gallery-next"
+                  class="shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 text-white hover:bg-white/20 flex items-center justify-center transition-colors touch-manipulation"
+                  aria-label="Sonraki görsel"
+                >
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+              <p id="gallery-counter" class="mt-3 sm:mt-4 text-white/80 text-xs sm:text-sm md:text-base">1 / {galleryImages.length}</p>
+            </div>
+          </>
+        )}
+      </div>
+    </section>
+  </div>
+  <Footer />
+</MainLayout>
+
+<script define:vars={{ galleryLength: galleryImages.length }}>
+  document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById("gallery-grid");
+    const viewer = document.getElementById("gallery-viewer");
+    const viewerImg = document.getElementById("gallery-viewer-img");
+    const counterEl = document.getElementById("gallery-counter");
+    const closeBtn = document.getElementById("gallery-viewer-close");
+    const prevBtn = document.getElementById("gallery-prev");
+    const nextBtn = document.getElementById("gallery-next");
+
+    if (!grid || !viewer || !viewerImg || !counterEl) return;
+
+    const thumbs = grid.querySelectorAll(".gallery-thumb");
+    const gallery = Array.from(thumbs).map((btn) => btn.getAttribute("data-src") || "").filter(Boolean);
+    let currentIndex = 0;
+
+    function showImage(index) {
+      const i = ((index % gallery.length) + gallery.length) % gallery.length;
+      currentIndex = i;
+      viewerImg.src = gallery[i];
+      viewerImg.alt = `Görsel ${i + 1}`;
+      counterEl.textContent = `${i + 1} / ${galleryLength}`;
+    }
+
+    function openViewer(index) {
+      currentIndex = index;
+      showImage(index);
+      viewer.classList.remove("hidden");
+      viewer.classList.add("flex");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeViewer() {
+      viewer.classList.add("hidden");
+      viewer.classList.remove("flex");
+      document.body.style.overflow = "";
+    }
+
+    thumbs.forEach((btn, i) => btn.addEventListener("click", () => openViewer(i)));
+    closeBtn?.addEventListener("click", closeViewer);
+    prevBtn?.addEventListener("click", () => showImage(currentIndex - 1));
+    nextBtn?.addEventListener("click", () => showImage(currentIndex + 1));
+    viewer.addEventListener("click", (e) => { if (e.target === viewer) closeViewer(); });
+    document.addEventListener("keydown", (e) => {
+      if (viewer.classList.contains("hidden")) return;
+      if (e.key === "Escape") closeViewer();
+      if (e.key === "ArrowLeft") showImage(currentIndex - 1);
+      if (e.key === "ArrowRight") showImage(currentIndex + 1);
+    });
+  });
+</script>

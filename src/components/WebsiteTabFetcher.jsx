@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { useGetWebsiteTabQuery } from "../api/baseApi";
+import { useGetWebsiteTabQuery, useGetReferencesQuery } from "../api/baseApi";
 import { getImageUrl } from "../api";
 import StoreProvider from "./StoreProvider";
 import {
@@ -781,25 +781,18 @@ function HakkimizdaContent({ baseUrl = "/" }) {
   );
 }
 
-const MANAGED_BUILDINGS = [
-  {
-    number: "01",
-    name: "Çam Apartmanı",
-    imageKey: "bulding-management-interior.jpg",
-  },
+const MANAGED_BUILDINGS_FALLBACK = [
+  { number: "01", name: "Çam Apartmanı", imageKey: "bulding-management-interior.jpg" },
   { number: "02", name: "Ekşioğlu Apartmanı", imageKey: "building-modern.jpg" },
-  {
-    number: "03",
-    name: "Dostlar Apartmanı",
-    imageKey: "construction-image.png",
-  },
+  { number: "03", name: "Dostlar Apartmanı", imageKey: "construction-image.png" },
   { number: "04", name: "Şans Apartmanı", imageKey: "landing-photo.png" },
   { number: "05", name: "Güven Apartmanı", imageKey: "interior-1.png" },
 ];
 
-/** Anasayfa Bina Yönetimi bloğu: API'den main tab, section bina-yonetimi (başlık, açıklama) */
+/** Anasayfa Bina Yönetimi bloğu: API'den main tab (başlık, açıklama) + Referanslarımız (en fazla 5 bina adı ve görsel) */
 function BinaYonetimiSectionContent({ baseUrl = "/" }) {
   const { data, isLoading, error } = useGetWebsiteTabQuery("main");
+  const { data: referencesData = [] } = useGetReferencesQuery();
   const section = getSectionByCode(data, "bina-yonetimi");
   const title =
     getItemByCode(section, "bina-yonetimi-title") || "Bina Yönetimi";
@@ -807,10 +800,23 @@ function BinaYonetimiSectionContent({ baseUrl = "/" }) {
     getItemByCode(section, "bina-yonetimi-description") ||
     "7 Yıldan Bu Yana Kadıköy ve Çevre İlçelerde Apartman & Site Yönetimi Faaliyetlerimizi Başarı ile Sürdürmekteyiz.";
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const buildings = MANAGED_BUILDINGS.map((b) => ({
-    ...b,
-    image: `${baseUrl}${b.imageKey}`,
-  }));
+
+  const referencesSorted = Array.isArray(referencesData)
+    ? [...referencesData].sort((a, b) => (a.listOrder ?? 0) - (b.listOrder ?? 0))
+    : [];
+  const referencesSlice = referencesSorted.slice(0, 5);
+
+  const buildings =
+    referencesSlice.length > 0
+      ? referencesSlice.map((ref, i) => ({
+          number: String(i + 1).padStart(2, "0"),
+          name: ref.referenceName || "",
+          image: getImageUrl(ref.referenceImageUrl),
+        }))
+      : MANAGED_BUILDINGS_FALLBACK.map((b) => ({
+          ...b,
+          image: `${baseUrl}${b.imageKey}`,
+        }));
 
   if (isLoading) {
     return (

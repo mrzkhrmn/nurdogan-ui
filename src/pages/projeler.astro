@@ -2,19 +2,72 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import Footer from "../components/Footer.astro";
 import Image from "astro/components/Image.astro";
-import { completedProjects as completedData, ongoingProjects as ongoingData } from "../data/projects";
+import {
+  completedProjects as staticCompletedProjects,
+  ongoingProjects as staticOngoingProjects,
+} from "../data/projects";
+import { BASE_API_URL } from "../api/constants";
+import { getImageUrl } from "../api";
 
 const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
-const completedProjects = completedData.map((p) => ({
-  ...p,
+
+type ApiProject = {
+  id: string;
+  name: string;
+  description: string;
+  imageUrl: string;
+  shortAddress: string;
+  isFinished: boolean;
+};
+
+type UiProject = {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  location: string;
+};
+
+let apiProjects: ApiProject[] = [];
+
+try {
+  const response = await fetch(`${BASE_API_URL}/Website/get-projects`, {
+    headers: { Accept: "application/json" },
+  });
+
+  if (response.ok) {
+    apiProjects = await response.json();
+  }
+} catch (error) {
+  console.error("Projeler alınırken bir hata oluştu:", error);
+}
+
+const mapStaticToUi = (p: { slug: string; name: string; description: string; image: string; location: string }): UiProject => ({
+  id: p.slug,
+  name: p.name,
+  description: p.description,
   image: `${baseUrl}${p.image}`,
-  gallery: p.gallery.map((img) => `${baseUrl}${img}`),
-}));
-const ongoingProjects = ongoingData.map((p) => ({
-  ...p,
-  image: `${baseUrl}${p.image}`,
-  gallery: p.gallery.map((img) => `${baseUrl}${img}`),
-}));
+  location: p.location,
+});
+
+let completedProjects: UiProject[];
+let ongoingProjects: UiProject[];
+
+if (apiProjects.length > 0) {
+  const mapApiToUi = (p: ApiProject): UiProject => ({
+    id: p.id,
+    name: p.name,
+    description: p.description,
+    image: getImageUrl(p.imageUrl),
+    location: p.shortAddress,
+  });
+
+  completedProjects = apiProjects.filter((p) => p.isFinished).map(mapApiToUi);
+  ongoingProjects = apiProjects.filter((p) => !p.isFinished).map(mapApiToUi);
+} else {
+  completedProjects = staticCompletedProjects.map(mapStaticToUi);
+  ongoingProjects = staticOngoingProjects.map(mapStaticToUi);
+}
 ---
 
 <MainLayout>
@@ -70,7 +123,7 @@ const ongoingProjects = ongoingData.map((p) => ({
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6" id="ongoing-list">
             {ongoingProjects.map((project) => (
               <a
-                href={`${baseUrl}projeler/${project.slug}`}
+                href={`${baseUrl}projeler/${project.id}`}
                 class="project-card relative w-full overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-lg group border border-gray-100 dark:border-gray-700 block transition-colors duration-200"
                 data-project-name={project.name.toLowerCase()}
               >
@@ -112,7 +165,7 @@ const ongoingProjects = ongoingData.map((p) => ({
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6" id="completed-list">
             {completedProjects.map((project) => (
               <a
-                href={`${baseUrl}projeler/${project.slug}`}
+                href={`${baseUrl}projeler/${project.id}`}
                 class="project-card relative w-full overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-lg group border border-gray-100 dark:border-gray-700 block transition-colors duration-200"
                 data-project-name={project.name.toLowerCase()}
               >

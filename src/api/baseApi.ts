@@ -6,6 +6,15 @@ export interface WebsiteTabResponse {
   [key: string]: unknown;
 }
 
+export interface ReferenceDto {
+  id: string;
+  referenceName: string;
+  referenceImageUrl: string;
+  referenceUrl: string;
+  shortAddress: string;
+  listOrder: number;
+}
+
 export const baseApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
@@ -15,7 +24,7 @@ export const baseApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["WebsiteTab"],
+  tagTypes: ["WebsiteTab", "References"],
   endpoints: (builder) => ({
     getWebsiteTab: builder.query<WebsiteTabResponse, string>({
       query: (code: string) => `/Website/tab/${encodeURIComponent(code)}`,
@@ -23,7 +32,11 @@ export const baseApi = createApi({
         { type: "WebsiteTab", id: code },
       ],
     }),
+    getReferences: builder.query<ReferenceDto[], void>({
+      query: () => "/Website/get-references",
+      providesTags: ["References"],
+    }),
   }),
 });
 
-export const { useGetWebsiteTabQuery, useLazyGetWebsiteTabQuery } = baseApi;
+export const { useGetWebsiteTabQuery, useLazyGetWebsiteTabQuery, useGetReferencesQuery } = baseApi;
