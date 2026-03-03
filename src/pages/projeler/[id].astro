@@ -84,8 +84,10 @@ if (galleryUrls.length === 0 && project?.medias?.length) {
     if (u) galleryUrls.push(u);
   });
 }
-const mainImage = galleryUrls[0] ?? "";
+const mainImage = galleryUrls[0];
 const galleryImages = galleryUrls.length > 1 ? galleryUrls : galleryUrls;
+
+console.log(mainImage);
 ---
 
 <MainLayout>
@@ -119,7 +121,7 @@ const galleryImages = galleryUrls.length > 1 ? galleryUrls : galleryUrls;
                 <div class="relative w-full aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-800 shadow-lg">
                   {mainImage ? (
                     <img
-                      src={mainImage}
+                      src={`https://nurdogan-api.ranna.com.tr${mainImage}`}
                       alt={project.name}
                       width={900}
                       height={675}

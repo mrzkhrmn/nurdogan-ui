@@ -54,13 +54,16 @@ let completedProjects: UiProject[];
 let ongoingProjects: UiProject[];
 
 if (apiProjects.length > 0) {
-  const mapApiToUi = (p: ApiProject): UiProject => ({
-    id: p.id,
-    name: p.name,
-    description: p.description,
-    image: getImageUrl(p.imageUrl),
-    location: p.shortAddress,
-  });
+  const mapApiToUi = (p: ApiProject): UiProject => {
+    const imageUrl = getImageUrl(p.imageUrl);
+    return {
+      id: p.id,
+      name: p.name,
+      description: p.description,
+      image: imageUrl || `${baseUrl}construction1.png`,
+      location: p.shortAddress,
+    };
+  };
 
   completedProjects = apiProjects.filter((p) => p.isFinished).map(mapApiToUi);
   ongoingProjects = apiProjects.filter((p) => !p.isFinished).map(mapApiToUi);
