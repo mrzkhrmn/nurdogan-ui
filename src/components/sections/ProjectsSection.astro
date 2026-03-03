@@ -48,33 +48,12 @@ const ongoingProjects = ongoingData.map((p) => ({ ...p, image: `${baseUrl}${p.im
       >
         Devam Eden Projelerimiz
       </button>
-      <div class="hidden md:flex items-center gap-3 ml-auto">
-        <button 
-          class="projects-carousel-btn projects-carousel-btn-prev w-12 h-12 rounded-full bg-[#E30A17] flex items-center justify-center hover:bg-[#c00914] transition-colors z-10"
-          id="projects-prev-btn"
-          aria-label="Önceki"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-        
-        <button 
-          class="projects-carousel-btn projects-carousel-btn-next w-12 h-12 rounded-full bg-[#E30A17] flex items-center justify-center hover:bg-[#c00914] transition-colors z-10"
-          id="projects-next-btn"
-          aria-label="Sonraki"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-      </div>
     </div>
 
     <div class="relative">
       <!-- Tamamlanan Projeler -->
-      <div class="projects-carousel-container overflow-hidden" id="carousel-completed">
-        <div class="projects-carousel-track flex transition-transform duration-500 ease-in-out" id="projects-carousel-track-completed">
+      <div class="projects-carousel-container overflow-x-auto overflow-y-hidden" id="carousel-completed">
+        <div class="projects-carousel-track flex" id="projects-carousel-track-completed">
           {completedProjects.map((project, index) => (
             <div class="projects-carousel-slide min-w-[85%] sm:min-w-[70%] md:min-w-[25%] px-2 md:px-3" data-index={index}>
               <div class="relative w-full overflow-hidden rounded-2xl bg-white dark:bg-gray-700 shadow-lg group cursor-pointer transition-colors duration-200">
@@ -99,8 +78,8 @@ const ongoingProjects = ongoingData.map((p) => ({ ...p, image: `${baseUrl}${p.im
       </div>
 
       <!-- Devam Eden Projeler -->
-      <div class="projects-carousel-container overflow-hidden hidden" id="carousel-ongoing">
-        <div class="projects-carousel-track flex transition-transform duration-500 ease-in-out" id="projects-carousel-track-ongoing">
+      <div class="projects-carousel-container overflow-x-auto overflow-y-hidden hidden" id="carousel-ongoing">
+        <div class="projects-carousel-track flex" id="projects-carousel-track-ongoing">
           {ongoingProjects.map((project, index) => (
             <div class="projects-carousel-slide min-w-[85%] sm:min-w-[70%] md:min-w-[25%] px-2 md:px-3" data-index={index}>
               <div class="relative w-full overflow-hidden rounded-2xl bg-white dark:bg-gray-700 shadow-lg group cursor-pointer transition-colors duration-200">
@@ -124,218 +103,9 @@ const ongoingProjects = ongoingData.map((p) => ({ ...p, image: `${baseUrl}${p.im
         </div>
       </div>
       
-      <!-- Mobil butonlar -->
-      <div class="flex md:hidden items-center justify-center gap-4 mt-6">
-        <button 
-          class="projects-carousel-btn projects-carousel-btn-prev w-12 h-12 rounded-full bg-[#E30A17] flex items-center justify-center hover:bg-[#c00914] active:bg-[#a00811] transition-colors z-10"
-          id="projects-prev-btn-mobile"
-          aria-label="Önceki"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-        
-        <button 
-          class="projects-carousel-btn projects-carousel-btn-next w-12 h-12 rounded-full bg-[#E30A17] flex items-center justify-center hover:bg-[#c00914] active:bg-[#a00811] transition-colors z-10"
-          id="projects-next-btn-mobile"
-          aria-label="Sonraki"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-      </div>
     </div>
   </div>
 </section>
-
-<script>
-  let currentTab = 'completed';
-  let carouselInstances: { [key: string]: any } = {};
-
-  function initCarousel(tabType: string) {
-    const trackId = `projects-carousel-track-${tabType}`;
-    const track = document.getElementById(trackId);
-    if (!track) return null;
-
-    const slides = track.querySelectorAll('.projects-carousel-slide');
-    let currentIndex = 0;
-    let isMobile = window.innerWidth < 640;
-    let isTablet = window.innerWidth >= 640 && window.innerWidth < 768;
-    let slidesToShow = isMobile ? 1 : 4;
-    let autoPlayInterval: number | null = null;
-
-    function updateCarousel() {
-      if (!track) return;
-      
-      let translateX;
-      if (isMobile) {
-        translateX = -currentIndex * 85;
-      } else if (isTablet) {
-        translateX = -currentIndex * 70;
-      } else {
-        translateX = -currentIndex * (100 / slidesToShow);
-      }
-      
-      track.style.transform = `translateX(${translateX}%)`;
-    }
-
-    function goToNext() {
-      if (isMobile) {
-        currentIndex = (currentIndex + 1) % slides.length;
-      } else {
-        if (currentIndex >= slides.length - slidesToShow) {
-          currentIndex = 0;
-        } else {
-          currentIndex = currentIndex + 1;
-        }
-      }
-      updateCarousel();
-      stopAutoPlay();
-      startAutoPlay();
-    }
-
-    function goToPrev() {
-      if (isMobile) {
-        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-      } else {
-        currentIndex = Math.max(currentIndex - 1, 0);
-      }
-      updateCarousel();
-      stopAutoPlay();
-      startAutoPlay();
-    }
-    
-    function startAutoPlay() {
-      autoPlayInterval = setInterval(goToNext, 4000) as unknown as number;
-    }
-
-    function stopAutoPlay() {
-      if (autoPlayInterval) {
-        clearInterval(autoPlayInterval);
-        autoPlayInterval = null;
-      }
-    }
-
-    const carouselContainer = document.getElementById(`carousel-${tabType}`);
-    if (carouselContainer) {
-      carouselContainer.addEventListener('mouseenter', stopAutoPlay);
-      carouselContainer.addEventListener('mouseleave', startAutoPlay);
-    }
-
-    function handleResize() {
-      const wasMobile = isMobile;
-      const wasTablet = isTablet;
-      isMobile = window.innerWidth < 640;
-      isTablet = window.innerWidth >= 640 && window.innerWidth < 768;
-      slidesToShow = isMobile ? 1 : 4;
-      if (wasMobile !== isMobile || wasTablet !== isTablet) {
-        currentIndex = 0;
-        updateCarousel();
-      }
-    }
-
-    updateCarousel();
-    startAutoPlay();
-
-    return {
-      goToNext,
-      goToPrev,
-      stopAutoPlay,
-      handleResize
-    };
-  }
-
-  function initProjectsCarousel() {
-    // Sekme değiştirme
-    const tabs = document.querySelectorAll('.project-tab');
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const tabType = tab.getAttribute('data-tab');
-        if (!tabType) return;
-
-        // Sekme stillerini güncelle (metin rengi CSS ile light/dark uyumlu)
-        tabs.forEach(t => {
-          t.classList.remove('active-tab', 'border-[#E30A17]', 'text-[#E30A17]');
-          t.classList.add('border-transparent');
-        });
-        tab.classList.add('active-tab', 'border-[#E30A17]', 'text-[#E30A17]');
-        tab.classList.remove('border-transparent');
-
-        // Carousel'ları göster/gizle
-        const completedCarousel = document.getElementById('carousel-completed');
-        const ongoingCarousel = document.getElementById('carousel-ongoing');
-        
-        if (tabType === 'completed') {
-          if (completedCarousel) completedCarousel.classList.remove('hidden');
-          if (ongoingCarousel) ongoingCarousel.classList.add('hidden');
-          currentTab = 'completed';
-        } else {
-          if (completedCarousel) completedCarousel.classList.add('hidden');
-          if (ongoingCarousel) ongoingCarousel.classList.remove('hidden');
-          currentTab = 'ongoing';
-        }
-
-        // Aktif carousel'ı yeniden başlat
-        Object.keys(carouselInstances).forEach(key => {
-          if (carouselInstances[key] && carouselInstances[key].stopAutoPlay) {
-            carouselInstances[key].stopAutoPlay();
-          }
-        });
-        
-        if (carouselInstances[currentTab]) {
-          carouselInstances[currentTab].stopAutoPlay();
-        }
-        carouselInstances[currentTab] = initCarousel(currentTab);
-      });
-    });
-
-    // Her iki carousel'ı başlat
-    carouselInstances.completed = initCarousel('completed');
-    carouselInstances.ongoing = initCarousel('ongoing');
-
-    // Buton event listener'ları - aktif carousel'ı kontrol eder
-    const prevBtn = document.getElementById('projects-prev-btn');
-    const nextBtn = document.getElementById('projects-next-btn');
-    const prevBtnMobile = document.getElementById('projects-prev-btn-mobile');
-    const nextBtnMobile = document.getElementById('projects-next-btn-mobile');
-
-    function handlePrev() {
-      const currentCarousel = carouselInstances[currentTab];
-      if (currentCarousel) currentCarousel.goToPrev();
-    }
-
-    function handleNext() {
-      const currentCarousel = carouselInstances[currentTab];
-      if (currentCarousel) currentCarousel.goToNext();
-    }
-
-    if (prevBtn) prevBtn.addEventListener('click', handlePrev);
-    if (nextBtn) nextBtn.addEventListener('click', handleNext);
-    if (prevBtnMobile) prevBtnMobile.addEventListener('click', handlePrev);
-    if (nextBtnMobile) nextBtnMobile.addEventListener('click', handleNext);
-
-    // Resize handler
-    let resizeTimeout: number;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        Object.keys(carouselInstances).forEach(key => {
-          if (carouselInstances[key] && carouselInstances[key].handleResize) {
-            carouselInstances[key].handleResize();
-        }
-        });
-      }, 250) as unknown as number;
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initProjectsCarousel);
-  } else {
-    initProjectsCarousel();
-  }
-</script>
 
 <style>
   .projects-carousel-container {

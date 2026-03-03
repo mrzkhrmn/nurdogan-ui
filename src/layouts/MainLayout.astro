@@ -53,9 +53,8 @@ const { isHomePage = false } = Astro.props;
             </svg>
           </button>
 
-          <h2 id="teklif-form-title" class="text-center text-[#262322] dark:text-gray-100 font-bold mb-6 sm:mb-8">
-            <span class="block text-lg sm:text-xl">Apartman & Site Yönetimi</span>
-            <span class="block text-xl sm:text-2xl mt-0.5">Teklif Formu</span>
+          <h2 id="teklif-form-title" class="text-center text-[#262322] dark:text-gray-100 font-bold mb-6 sm:mb-8 text-xl sm:text-2xl">
+            Hemen Teklif Al
           </h2>
 
           <form id="teklif-form" class="space-y-4 sm:space-y-5">
@@ -202,11 +201,12 @@ const { isHomePage = false } = Astro.props;
       document.body.style.overflow = "";
     }
 
-    document.querySelectorAll(".open-teklif-modal").forEach((el) => {
-      el.addEventListener("click", (e) => {
+    document.addEventListener("click", (e) => {
+      const target = e.target as HTMLElement | null;
+      if (target && target.closest(".open-teklif-modal")) {
         e.preventDefault();
         openTeklifModal();
-      });
+      }
     });
 
     closeBtn?.addEventListener("click", closeTeklifModal);

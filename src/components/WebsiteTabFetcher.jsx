@@ -96,7 +96,16 @@ function HizmetlerHeroSection() {
               <button
                 type="button"
                 id="hizmetler-teklif-btn"
-                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#E30A17] px-6 py-3.5 text-base font-medium text-[#E30A17] hover:bg-[#E30A17]/5 transition-colors w-fit"
+                className="open-teklif-modal inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#E30A17] px-6 py-3.5 text-base font-medium text-[#E30A17] hover:bg-[#E30A17]/5 transition-colors w-fit"
+                onClick={() => {
+                  const modal = document.getElementById("teklif-form-modal");
+                  if (modal) {
+                    modal.classList.remove("hidden");
+                    modal.classList.add("flex");
+                    modal.setAttribute("aria-hidden", "false");
+                    document.body.style.overflow = "hidden";
+                  }
+                }}
               >
                 Hemen Teklif Al
               </button>
@@ -299,7 +308,9 @@ function BinaYonetimiHeroSection({ baseUrl = "/" }) {
                   <p className="text-[#262322] dark:text-gray-100 text-lg font-bold mb-1">
                     Nurdoğan Babadağ
                   </p>
-                  <p className="text-[#585858] dark:text-gray-400 text-sm">Kurucu, CEO</p>
+                  <p className="text-[#585858] dark:text-gray-400 text-sm">
+                    Kurucu, CEO
+                  </p>
                 </div>
               </div>
               <div className="w-24 h-24 rounded-full shrink-0">
@@ -656,7 +667,10 @@ function KentselDonusumTanitimContent({ baseUrl = "/" }) {
               className={`${index !== 0 ? "border-l border-[#DFDEDC] dark:border-gray-600" : ""} text-center stat-item flex flex-col items-center`}
             >
               <div className="stat-icon-wrapper opacity-0 scale-75 transition-all duration-500 ease-out">
-                <StatIcon type={STAT_ICONS[index]} className="w-10 h-10 md:w-12 md:h-12 text-[#E30A17] dark:text-gray-100 mx-auto mb-2" />
+                <StatIcon
+                  type={STAT_ICONS[index]}
+                  className="w-10 h-10 md:w-12 md:h-12 text-[#E30A17] dark:text-gray-100 mx-auto mb-2"
+                />
               </div>
               <div className="text-[#262322] dark:text-gray-100 text-5xl md:text-6xl font-semibold mb-2 stat-number">
                 0{STAT_PLUS[index] ? "+" : ""}
@@ -988,13 +1002,13 @@ function IletisimContent({ baseUrl = "/" }) {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:justify-end">
-              <a
-                href={`${baseUrl}teklif-al`}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#E30A17] px-6 py-3.5 text-base font-medium text-white hover:bg-[#c00914] transition-colors w-fit"
+              <button
+                type="button"
+                className="open-teklif-modal inline-flex items-center justify-center gap-2 rounded-full bg-[#E30A17] px-6 py-3.5 text-base font-medium text-white hover:bg-[#c00914] transition-colors w-fit"
               >
                 Teklif Al
                 <ArrowRightIcon color="#fff" />
-              </a>
+              </button>
               {emailList[0] && (
                 <a
                   href={`mailto:${emailList[0]}`}

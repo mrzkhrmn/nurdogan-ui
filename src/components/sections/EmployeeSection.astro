@@ -72,8 +72,8 @@ const employees = [
     </div>
 
     <div class="relative">
-      <div class="carousel-container overflow-hidden">
-        <div class="carousel-track flex transition-transform duration-500 ease-in-out py-8" id="carousel-track">
+      <div class="carousel-container overflow-x-auto overflow-y-hidden">
+        <div class="carousel-track flex py-8" id="carousel-track">
           {employees.map((employee, index) => (
             <div class="carousel-slide min-w-full sm:min-w-[50%] md:min-w-[33.333%] lg:min-w-[25%] px-2 md:px-3" data-index={index}>
               <div class="employee-card-container h-full">
@@ -162,153 +162,9 @@ const employees = [
         </div>
       </div>
 
-      <button 
-        class="carousel-btn carousel-btn-prev absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 w-12 h-12 rounded-full bg-white dark:bg-gray-600 shadow-lg flex items-center justify-center hover:bg-gray-50 dark:hover:bg-gray-500 transition-colors z-10 text-gray-900 dark:text-white"
-        id="prev-btn"
-        aria-label="Önceki"
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15 18L9 12L15 6" stroke="#262322" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      
-      <button 
-        class="carousel-btn carousel-btn-next absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 w-12 h-12 rounded-full bg-white dark:bg-gray-600 shadow-lg flex items-center justify-center hover:bg-gray-50 dark:hover:bg-gray-500 transition-colors z-10 text-gray-900 dark:text-white"
-        id="next-btn"
-        aria-label="Sonraki"
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M9 18L15 12L9 6" stroke="#262322" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-
     </div>
   </div>
 </section>
-
-<script>
-  function initCarousel() {
-    const track = document.getElementById('carousel-track');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const slides = document.querySelectorAll('.carousel-slide');
-    
-    if (!track || !prevBtn || !nextBtn) return;
-
-    let currentIndex = 0;
-    const totalSlides = slides.length;
-    
-    function getSlidesToShow() {
-      const width = window.innerWidth;
-      if (width < 640) return 1; // Mobile (< sm)
-      if (width < 768) return 2; // Small (sm to md)
-      if (width < 1024) return 3; // Tablet (md to lg)
-      return 4; // Desktop (lg and above)
-    }
-    
-    function isMobileView() {
-      return window.innerWidth < 640;
-    }
-    
-    let slidesToShow = getSlidesToShow();
-
-    function updateCarousel() {
-      if (!track) return;
-      
-      slidesToShow = getSlidesToShow();
-      const mobile = isMobileView();
-      const translateX = mobile 
-        ? -currentIndex * 100 
-        : -currentIndex * (100 / slidesToShow);
-      
-      track.style.transform = `translateX(${translateX}%)`;
-    }
-
-    function goToNext() {
-      slidesToShow = getSlidesToShow();
-      const mobile = isMobileView();
-      if (mobile) {
-        currentIndex = (currentIndex + 1) % totalSlides;
-      } else {
-        if (currentIndex >= totalSlides - slidesToShow) {
-          currentIndex = 0;
-        } else {
-          currentIndex = currentIndex + 1;
-        }
-      }
-      updateCarousel();
-      stopAutoPlay();
-      startAutoPlay();
-    }
-
-    function goToPrev() {
-      const mobile = isMobileView();
-      if (mobile) {
-        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-      } else {
-        currentIndex = Math.max(currentIndex - 1, 0);
-      }
-      updateCarousel();
-      stopAutoPlay();
-      startAutoPlay();
-    }
-
-    nextBtn.addEventListener('click', goToNext);
-    prevBtn.addEventListener('click', goToPrev);
-
-    let autoPlayInterval: number | null = null;
-    
-    function startAutoPlay() {
-      autoPlayInterval = setInterval(goToNext, 4000) as unknown as number;
-    }
-
-    function stopAutoPlay() {
-      if (autoPlayInterval) {
-        clearInterval(autoPlayInterval);
-        autoPlayInterval = null;
-      }
-    }
-
-    const carouselContainer = document.querySelector('.carousel-container');
-    if (carouselContainer) {
-      carouselContainer.addEventListener('mouseenter', stopAutoPlay);
-      carouselContainer.addEventListener('mouseleave', startAutoPlay);
-    }
-
-    let resizeTimeout: number;
-    let previousSlidesToShow = slidesToShow;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        const newSlidesToShow = getSlidesToShow();
-        if (previousSlidesToShow !== newSlidesToShow) {
-          currentIndex = 0;
-          previousSlidesToShow = newSlidesToShow;
-          updateCarousel();
-        }
-      }, 250) as unknown as number;
-    });
-
-    updateCarousel();
-    startAutoPlay();
-
-    // Touch support for mobile cards
-    const cardContainers = document.querySelectorAll('.employee-card-container');
-    cardContainers.forEach((container) => {
-      container.addEventListener('click', function(this: HTMLElement) {
-        if (window.innerWidth < 768) {
-          this.classList.toggle('touched');
-        }
-      });
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCarousel);
-  } else {
-    initCarousel();
-  }
-</script>
 
 <style>
   .carousel-container {

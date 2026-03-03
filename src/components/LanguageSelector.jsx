@@ -26,7 +26,7 @@ export default function LanguageSelector() {
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="flex items-center gap-1.5 xl:gap-2 shrink-0 h-8 xl:h-10 2xl:h-14 px-2 xl:px-2.5 2xl:px-3 rounded-full text-white hover:bg-white/20 transition-colors"
+        className="flex items-center gap-1 xl:gap-1.5 shrink-0 h-8 xl:h-10 2xl:h-14 pl-1 pr-2 xl:pl-1.5 xl:pr-2.5 2xl:pl-2 2xl:pr-3 rounded-full text-white hover:bg-white/20 transition-colors"
         aria-label="Dil seçimi"
         aria-expanded={isOpen}
         aria-haspopup="listbox"

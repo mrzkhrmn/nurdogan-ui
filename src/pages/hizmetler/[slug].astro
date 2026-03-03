@@ -34,6 +34,12 @@ const relatedServices = sameCategorySlugs
   .slice(0, RELATED_SERVICES_LIMIT)
   .map((slug) => serviceBySlug[slug])
   .filter(Boolean);
+
+const whatsappNumber = import.meta.env.PUBLIC_WHATSAPP_PHONE || "905306544317";
+const whatsappMessage = encodeURIComponent(
+  `Merhaba, "${service.title}" hizmeti hakkında bilgi almak istiyorum.`
+);
+const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 ---
 
 <MainLayout>
@@ -88,7 +94,9 @@ const relatedServices = sameCategorySlugs
 
             <div class="flex flex-wrap gap-4">
               <a
-                href={`${baseUrl}#iletisim`}
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 class="inline-flex items-center justify-center rounded-lg border-2 border-[#E30A17] px-6 py-3 text-base font-medium text-[#E30A17] hover:bg-[#E30A17]/5 dark:hover:bg-[#E30A17]/10 transition-colors"
               >
                 Bilgi al
@@ -96,7 +104,7 @@ const relatedServices = sameCategorySlugs
               <button
                 type="button"
                 id="hizmet-detay-teklif-btn"
-                class="inline-flex items-center justify-center rounded-lg bg-[#E30A17] px-6 py-3 text-base font-medium text-white hover:bg-[#c00914] transition-colors"
+                class="open-teklif-modal inline-flex items-center justify-center rounded-lg bg-[#E30A17] px-6 py-3 text-base font-medium text-white hover:bg-[#c00914] transition-colors"
               >
                 Teklif talep et
               </button>
@@ -159,7 +167,7 @@ const relatedServices = sameCategorySlugs
         </button>
         <h2 class="text-center text-[#262322] dark:text-gray-100 font-bold mb-6 sm:mb-8">
           <span class="block text-lg sm:text-xl">Apartman & Site Yönetimi</span>
-          <span class="block text-xl sm:text-2xl mt-0.5">Teklif Formu</span>
+          <span class="block text-xl sm:text-2xl mt-0.5">Hemen Teklif Al</span>
         </h2>
         <form id="teklif-form" class="space-y-4 sm:space-y-5">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">

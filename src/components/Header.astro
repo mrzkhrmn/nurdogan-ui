@@ -6,7 +6,7 @@ import LanguageSelector from "./LanguageSelector.jsx";
 import ThemeToggle from "./ThemeToggle.jsx";
 const base = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
 const navItems = [
-  { label: "Hakkımızda", href: "#hakkimizda" },
+  { label: "Hakkımızda", href: `${base}#hakkimizda` },
   { label: "Projeler", href: `${base}projeler` },
   { label: "Hizmetlerimiz", href: `${base}hizmetler` },
   { label: "Dernek", href: "https://www.marmarakentseldonusumdernegi.com" },
@@ -64,13 +64,17 @@ const headerClass = isHomePage
           Teklif Al
           <ArrowRightIcon color="#E30A17" />
         </a>
-        <a href="https://www.instagram.com/nurdoganbabadag/" target="_blank" rel="noopener noreferrer" class="cursor-pointer flex items-center justify-center shrink-0 text-white">
-          <div class="w-6 h-6 xl:w-7 xl:h-7 2xl:w-8 2xl:h-8 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full">
-            <InstagramIcon width={24} height={24} color="#FFFFFF" />
+        <div class="flex items-center gap-2 shrink-0">
+          <a href="https://www.instagram.com/nurdoganbabadag/" target="_blank" rel="noopener noreferrer" class="cursor-pointer flex items-center justify-center text-white">
+            <div class="w-6 h-6 xl:w-7 xl:h-7 2xl:w-8 2xl:h-8 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full">
+              <InstagramIcon width={24} height={24} color="#FFFFFF" />
+            </div>
+          </a>
+          <div class="flex items-center gap-0.5 shrink-0">
+            <ThemeToggle client:load />
+            <LanguageSelector client:load />
           </div>
-        </a>
-        <ThemeToggle client:load />
-        <LanguageSelector client:load />
+        </div>
       </nav>
 
       <div class="flex items-center gap-2 sm:gap-3 md:gap-4 lg:hidden">
@@ -230,21 +234,22 @@ const headerClass = isHomePage
     }
   }
 
-  // Smooth scroll link handler
+  // Smooth scroll link handler (hash-only veya anasayfa#hash aynı sayfadaysa)
   document.querySelectorAll('.smooth-scroll-link').forEach(link => {
     link.addEventListener('click', (e) => {
       const href = (link as HTMLAnchorElement).getAttribute('href');
-      if (href && href.startsWith('#')) {
+      if (!href || !href.includes('#')) return;
+      const [pathPart, hashPart] = href.split('#');
+      const hash = hashPart ? '#' + hashPart : '';
+      if (!hash) return;
+      const linkPath = (pathPart || '/').replace(/\/?$/, '') || '/';
+      const currentPath = (window.location.pathname || '/').replace(/\/?$/, '') || '/';
+      const isSamePage = linkPath === currentPath || (linkPath === '/' && currentPath === '') || (linkPath === '' && currentPath === '/');
+      if (isSamePage) {
         e.preventDefault();
-        smoothScrollTo(href);
-        
-        // Mobil menüyü kapat
-        if (mobileMenu) {
-          mobileMenu.classList.add('translate-x-full');
-        }
-        if (mobileMenuBtn) {
-          mobileMenuBtn.classList.remove('active');
-        }
+        smoothScrollTo(hash);
+        if (mobileMenu) mobileMenu.classList.add('translate-x-full');
+        if (mobileMenuBtn) mobileMenuBtn.classList.remove('active');
       }
     });
   });

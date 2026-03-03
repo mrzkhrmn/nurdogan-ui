@@ -2,107 +2,154 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import Footer from "../components/Footer.astro";
 import Image from "astro/components/Image.astro";
-import { allServicesList, projeTeknikSlugs, hukukiSlugs } from "../data/services";
+import { allServicesList } from "../data/services";
 import { HizmetlerWithData } from "../components/WebsiteTabFetcher.jsx";
+import { BASE_API_URL, IMAGE_BASE_URL } from "../api/constants";
+
+interface ServiceItemDto {
+  id: string;
+  text: string;
+  listOrder: number;
+}
+
+interface ServiceDto {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  listOrder: number;
+  serviceCategoryId: string;
+  serviceCategoryName: string;
+  serviceItems: ServiceItemDto[];
+}
+
+interface ServiceCategoryDto {
+  id: string;
+  name: string;
+  listOrder: number;
+  services: ServiceDto[];
+}
 
 const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
-const allServices = allServicesList.map((s) => ({ ...s, image: `${baseUrl}${s.image}` }));
-const serviceBySlug = Object.fromEntries(allServices.map((s) => [s.slug, s]));
+
+const slugByTitle = new Map(allServicesList.map((s) => [s.title.trim(), s.slug]));
+
+type ServiceCard = {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  slug?: string;
+};
+
+type ServiceCategory = {
+  id: string;
+  name: string;
+  services: ServiceCard[];
+};
+
+let categories: ServiceCategory[] = [];
+
+try {
+  const response = await fetch(`${BASE_API_URL}/Website/get-services`);
+
+  if (response.ok) {
+    const data = (await response.json()) as ServiceCategoryDto[];
+
+    categories = data
+      .slice()
+      .sort(
+        (a, b) =>
+          (a.listOrder ?? 0) - (b.listOrder ?? 0),
+      )
+      .map((category) => ({
+        id: category.id,
+        name: category.name,
+        services: (category.services ?? [])
+          .slice()
+          .sort(
+            (a, b) =>
+              (a.listOrder ?? 0) - (b.listOrder ?? 0),
+          )
+          .map((service) => ({
+            id: service.id,
+            title: service.title,
+            description: service.description,
+            image: service.imageUrl
+              ? `${IMAGE_BASE_URL}${service.imageUrl}`
+              : `${baseUrl}service-image2.png`,
+            slug: slugByTitle.get(service.title.trim()),
+          })),
+      }));
+  } else {
+    console.error("Failed to fetch services", response.status);
+  }
+} catch (error) {
+  console.error("Error while fetching services", error);
+}
 ---
 
 <MainLayout>
   <div class="w-full min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
     <HizmetlerWithData client:load />
 
-    <!-- Ne Sunuyoruz - icon + 2 kategori (Proje & Teknik / Hukuki & Resmi) + kartlar -->
+    <!-- Ne Sunuyoruz - kategorilere göre kartlar -->
     <section id="hizmetler-listesi" class="w-full py-16 md:py-24 px-4 md:px-6 scroll-mt-24 bg-gray-100 dark:bg-gray-900 transition-colors duration-200">
       <div class="max-w-[1200px] mx-auto">
-
-        <!-- Kategori 1: Proje & Teknik Hizmetler -->
-        <div class="mb-16 md:mb-20">
-          <div class="flex items-center gap-4 mb-8">
-            <div class="w-12 h-12 md:w-14 md:h-14 shrink-0 rounded-xl bg-[#E30A17] flex items-center justify-center text-white">
-              <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
+        {categories.map((category) => (
+          <div class="mb-16 md:mb-20">
+            <div class="flex items-center gap-4 mb-8">
+              <div class="w-12 h-12 md:w-14 md:h-14 shrink-0 rounded-xl bg-[#E30A17] flex items-center justify-center text-white">
+                <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <h3 class="text-[#262322] dark:text-gray-100 text-xl md:text-2xl font-bold">
+                {category.name}
+              </h3>
             </div>
-            <h3 class="text-[#262322] dark:text-gray-100 text-xl md:text-2xl font-bold">Proje & Teknik Hizmetler</h3>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-            {projeTeknikSlugs.map((slug) => {
-              const item = serviceBySlug[slug];
-              if (!item) return null;
-              return (
-                <a
-                  href={`${baseUrl}hizmetler/${item.slug}`}
-                  class="group bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col"
-                >
-                  <div class="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-700">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      width={400}
-                      height={225}
-                      class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </div>
-                  <div class="p-4 md:p-5 flex flex-col flex-1">
-                    <h4 class="text-[#262322] dark:text-gray-100 text-base md:text-lg font-semibold leading-snug group-hover:text-[#E30A17] transition-colors">
-                      {item.title}
-                    </h4>
-                    <span class="mt-3 inline-flex items-center gap-1.5 text-[#E30A17] text-sm font-medium">
-                      Detay
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-                    </span>
-                  </div>
-                </a>
-              );
-            })}
-          </div>
-        </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+              {category.services.map((item) => {
+                const href = item.slug ? `${baseUrl}hizmetler/${item.slug}` : undefined;
+                const content = (
+                  <>
+                    <div class="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-700">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        width={400}
+                        height={225}
+                        class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    </div>
+                    <div class="p-4 md:p-5 flex flex-col flex-1">
+                      <h4 class="text-[#262322] dark:text-gray-100 text-base md:text-lg font-semibold leading-snug group-hover:text-[#E30A17] transition-colors">
+                        {item.title}
+                      </h4>
+                      <span class="mt-3 inline-flex items-center gap-1.5 text-[#E30A17] text-sm font-medium">
+                        Detay
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                      </span>
+                    </div>
+                  </>
+                );
 
-        <!-- Kategori 2: Hukuki & Resmi Süreçler -->
-        <div>
-          <div class="flex items-center gap-4 mb-8">
-            <div class="w-12 h-12 md:w-14 md:h-14 shrink-0 rounded-xl bg-[#E30A17] flex items-center justify-center text-white">
-              <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
-              </svg>
+                return href ? (
+                  <a
+                    href={href}
+                    class="group bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col"
+                  >
+                    {content}
+                  </a>
+                ) : (
+                  <div class="group bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm flex flex-col">
+                    {content}
+                  </div>
+                );
+              })}
             </div>
-            <h3 class="text-[#262322] dark:text-gray-100 text-xl md:text-2xl font-bold">Hukuki & Resmi Süreçler</h3>
           </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-            {hukukiSlugs.map((slug) => {
-              const item = serviceBySlug[slug];
-              if (!item) return null;
-              return (
-                <a
-                  href={`${baseUrl}hizmetler/${item.slug}`}
-                  class="group bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col"
-                >
-                  <div class="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-700">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      width={400}
-                      height={225}
-                      class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </div>
-                  <div class="p-4 md:p-5 flex flex-col flex-1">
-                    <h4 class="text-[#262322] dark:text-gray-100 text-base md:text-lg font-semibold leading-snug group-hover:text-[#E30A17] transition-colors">
-                      {item.title}
-                    </h4>
-                    <span class="mt-3 inline-flex items-center gap-1.5 text-[#E30A17] text-sm font-medium">
-                      Detay
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-                    </span>
-                  </div>
-                </a>
-              );
-            })}
-          </div>
-        </div>
+        ))}
       </div>
     </section>
   </div>
