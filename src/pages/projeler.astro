@@ -37,6 +37,13 @@ try {
 
   if (response.ok) {
     apiProjects = await response.json();
+    console.log("Projeler endpoint verisi:", apiProjects);
+  } else {
+    console.warn(
+      "Projeler endpoint beklenmeyen yanıt döndürdü:",
+      response.status,
+      response.statusText,
+    );
   }
 } catch (error) {
   console.error("Projeler alınırken bir hata oluştu:", error);
@@ -67,9 +74,21 @@ if (apiProjects.length > 0) {
 
   completedProjects = apiProjects.filter((p) => p.isFinished).map(mapApiToUi);
   ongoingProjects = apiProjects.filter((p) => !p.isFinished).map(mapApiToUi);
+
+  console.log("Projeler endpoint - ham veri:", apiProjects);
+  console.log("Projeler endpoint - tamamlanan projeler:", completedProjects);
+  console.log("Projeler endpoint - devam eden projeler:", ongoingProjects);
 } else {
   completedProjects = staticCompletedProjects.map(mapStaticToUi);
   ongoingProjects = staticOngoingProjects.map(mapStaticToUi);
+
+  console.warn(
+    "Projeler endpoint boş döndü veya ulaşılamadı, statik projeler kullanılıyor.",
+    {
+      completedProjects,
+      ongoingProjects,
+    },
+  );
 }
 ---
 

@@ -13,7 +13,7 @@ interface ReferenceDto {
 
 const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
 
-let references: { image: string; name: string; location: string }[] = [];
+let references: { image: string; name: string; location: string; mapUrl: string }[] = [];
 
 try {
   const response = await fetch(`${BASE_API_URL}/Website/get-references`);
@@ -33,6 +33,7 @@ try {
           : `${baseUrl}construction1.png`,
         name: item.referenceName,
         location: item.shortAddress || item.referenceName,
+        mapUrl: item.referenceUrl?.trim() || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.shortAddress || item.referenceName)}`,
       }));
   } else {
     console.error("Failed to fetch references", response.status);
@@ -56,11 +57,9 @@ try {
       id="references-band"
       data-dragging="false"
     >
-      {references.map((ref) => {
-        const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ref.location)}`;
-        return (
+      {references.map((ref) => (
         <a
-          href={mapsUrl}
+          href={ref.mapUrl}
           target="_blank"
           rel="noopener noreferrer"
           class="references-band-item shrink-0 w-[280px] sm:w-[320px] md:w-[360px] rounded-2xl overflow-hidden bg-white/95 dark:bg-gray-800/95 shadow-lg group/card block"
@@ -110,8 +109,7 @@ try {
             </span>
           </div>
         </a>
-        );
-      })}
+      ))}
     </div>
   </div>
 </section>
