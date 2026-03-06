@@ -1,65 +1,52 @@
 ---
 import Image from "astro/components/Image.astro";
+import { BASE_API_URL } from "../../api/constants";
+import { getImageUrl } from "../../api";
 
 const baseUrl = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
-const employees = [
-  {
-    name: "Andrew Richard",
-    position: "Civil Engineer",
-    image: `${baseUrl}worker-1.png`,
-    description: "38 yılı aşkın inşaat sektörü deneyimiyle, kentsel dönüşüm projelerinde uzmanlaşmış bir mühendis. Projelerin teknik yönetiminden sorumlu.",
-    startDate: "2010",
-    email: "andrew@nurdogan.com",
-    experience: "14 Yıl"
-  },
-  {
-    name: "Amber Johnson",
-    position: "Engineer",
-    image: `${baseUrl}worker-2.png`,
-    description: "Kentsel dönüşüm süreçlerinde teknik danışmanlık sağlayan deneyimli mühendis. Proje planlama ve uygulama aşamalarında aktif rol alıyor.",
-    startDate: "2012",
-    email: "amber@nurdogan.com",
-    experience: "12 Yıl"
-  },
-  {
-    name: "Michel Smith",
-    position: "Architecture",
-    image: `${baseUrl}worker-3.png`,
-    description: "Mimari tasarım ve proje yönetiminde uzman. Modern ve güvenli yapıların tasarımında öncü rol oynuyor.",
-    startDate: "2015",
-    email: "michel@nurdogan.com",
-    experience: "9 Yıl"
-  },
-  {
-    name: "Mehmet Yılmaz",
-    position: "İnşaat Mühendisi",
-    image: `${baseUrl}worker-1.png`,
-    description: "Kentsel dönüşüm projelerinde teknik kontrol ve kalite yönetimi konusunda uzman. 300'den fazla projede görev aldı.",
-    startDate: "2013",
-    email: "mehmet@nurdogan.com",
-    experience: "11 Yıl"
-  },
-  {
-    name: "Ahmet Demir",
-    position: "Proje Müdürü",
-    image: `${baseUrl}worker-2.png`,
-    description: "Proje yönetimi ve koordinasyon alanında deneyimli. Müşteri ilişkileri ve proje takibinde başarılı bir geçmişe sahip.",
-    startDate: "2014",
-    email: "ahmet@nurdogan.com",
-    experience: "10 Yıl"
-  },
-  {
-    name: "Ali Kaya",
-    position: "Mimar",
-    image: `${baseUrl}worker-3.png`,
-    description: "Yenilikçi mimari çözümler üreten, kentsel dönüşüm projelerinde tasarım liderliği yapan deneyimli mimar.",
-    startDate: "2016",
-    email: "ali@nurdogan.com",
-    experience: "8 Yıl"
+
+type ApiPersonel = {
+  name: string;
+  photoUrl: string;
+  title: string;
+  description: string;
+  startYear: number;
+  experience: number;
+  email: string;
+};
+
+type UiEmployee = {
+  name: string;
+  position: string;
+  image: string;
+  description: string;
+  startDate: string;
+  email: string;
+  experience: string;
+};
+
+let employees: UiEmployee[] = [];
+
+try {
+  const response = await fetch(`${BASE_API_URL}/Website/get-personels`);
+  if (response.ok) {
+    const data: ApiPersonel[] = await response.json();
+    employees = (data || []).map((p) => ({
+      name: p.name ?? "",
+      position: p.title ?? "",
+      image: getImageUrl(p.photoUrl) || `${baseUrl}worker-1.png`,
+      description: p.description ?? "",
+      startDate: String(p.startYear ?? ""),
+      email: p.email ?? "",
+      experience: typeof p.experience === "number" ? `${p.experience} Yıl` : String(p.experience ?? ""),
+    }));
   }
-];
+} catch (err) {
+  console.error("Error while fetching personels", err);
+}
 ---
 
+{employees.length > 0 && (
 <section class="w-full bg-gray-100 dark:bg-gray-900 py-20 px-6 transition-colors duration-200">
   <div class="max-w-[1340px] mx-auto">
     <div class="text-center mb-12">
@@ -165,6 +152,7 @@ const employees = [
     </div>
   </div>
 </section>
+)}
 
 <style>
   .carousel-container {
