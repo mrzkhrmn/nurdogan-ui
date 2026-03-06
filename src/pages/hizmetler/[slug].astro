@@ -5,6 +5,7 @@ import ReferencesSection from "../../components/sections/ReferencesSection.astro
 import Image from "astro/components/Image.astro";
 import { allServicesList, projeTeknikSlugs, hukukiSlugs, RELATED_SERVICES_LIMIT } from "../../data/services";
 import type { AllServiceItem } from "../../data/services";
+import { BASE_API_URL } from "../../api/constants";
 
 const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
 
@@ -40,6 +41,29 @@ const whatsappMessage = encodeURIComponent(
   `Merhaba, "${service.title}" hizmeti hakkında bilgi almak istiyorum.`
 );
 const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+
+interface ServiceDtoFromApi {
+  id: string;
+  title: string;
+}
+
+let relatedServiceId: string | null = null;
+
+try {
+  const res = await fetch(`${BASE_API_URL}/Website/get-services`, {
+    headers: { Accept: "application/json" },
+  });
+  if (res.ok) {
+    const categories = (await res.json()) as {
+      services?: ServiceDtoFromApi[];
+    }[];
+    const all = categories.flatMap((c) => c.services ?? []);
+    const matched = all.find((s) => s.title === service.title);
+    relatedServiceId = matched?.id ?? null;
+  }
+} catch (_) {
+  relatedServiceId = null;
+}
 ---
 
 <MainLayout>
@@ -105,6 +129,7 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
                 type="button"
                 id="hizmet-detay-teklif-btn"
                 class="open-teklif-modal inline-flex items-center justify-center rounded-lg bg-[#E30A17] px-6 py-3 text-base font-medium text-white hover:bg-[#c00914] transition-colors"
+                data-related-service-id={relatedServiceId}
               >
                 Teklif talep et
               </button>
@@ -157,79 +182,4 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
   </div>
 
   <Footer />
-
-  <!-- Teklif formu modal (sayfada mevcut) -->
-  <div id="teklif-form-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/50 p-4" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-xl max-h-[90vh] overflow-y-auto transition-colors duration-200">
-      <div class="relative p-6 sm:p-8">
-        <button type="button" id="teklif-form-close" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-[#404040] dark:bg-gray-600 text-white hover:bg-[#525252] dark:hover:bg-gray-500 flex items-center justify-center transition-colors" aria-label="Kapat">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-        </button>
-        <h2 class="text-center text-[#262322] dark:text-gray-100 font-bold mb-6 sm:mb-8">
-          <span class="block text-lg sm:text-xl">Apartman & Site Yönetimi</span>
-          <span class="block text-xl sm:text-2xl mt-0.5">Hemen Teklif Al</span>
-        </h2>
-        <form id="teklif-form" class="space-y-4 sm:space-y-5">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-            <div>
-              <label for="teklif-ad-soyad" class="block text-[#262322] dark:text-gray-200 text-sm font-medium mb-1.5">Ad Soyad</label>
-              <input type="text" id="teklif-ad-soyad" name="adSoyad" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-[#262322] dark:text-white focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17]" placeholder="Adınız Soyadınız" />
-            </div>
-            <div>
-              <label for="teklif-telefon" class="block text-[#262322] dark:text-gray-200 text-sm font-medium mb-1.5">İletişim Telefonu</label>
-              <input type="tel" id="teklif-telefon" name="telefon" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-[#262322] dark:text-white focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17]" placeholder="05XX XXX XX XX" />
-            </div>
-          </div>
-          <div>
-            <label for="teklif-email" class="block text-[#262322] dark:text-gray-200 text-sm font-medium mb-1.5">E-posta</label>
-            <input type="email" id="teklif-email" name="email" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-[#262322] dark:text-white focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17]" placeholder="ornek@email.com" />
-          </div>
-          <div>
-            <label for="teklif-bina-adi" class="block text-[#262322] dark:text-gray-200 text-sm font-medium mb-1.5">Bina Adı & Adresi</label>
-            <input type="text" id="teklif-bina-adi" name="binaAdi" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-[#262322] dark:text-white focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17]" placeholder="Bina adı ve adres bilgisi" />
-          </div>
-          <div>
-            <label for="teklif-mesaj" class="block text-[#262322] dark:text-gray-200 text-sm font-medium mb-1.5">Mesajınız</label>
-            <textarea id="teklif-mesaj" name="mesaj" rows="4" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-[#262322] dark:text-white focus:border-[#E30A17] focus:outline-none focus:ring-1 focus:ring-[#E30A17] resize-y min-h-[100px]" placeholder="Mesajınızı yazınız..."></textarea>
-          </div>
-          <div class="flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 pt-2">
-            <button type="submit" class="w-full sm:flex-1 px-6 py-3 rounded-lg bg-[#E30A17] text-white font-medium hover:bg-[#c00914] transition-colors">Gönder</button>
-            <button type="button" id="teklif-form-iptal" class="w-full sm:flex-1 px-6 py-3 rounded-lg bg-white dark:bg-gray-700 border-2 border-[#E30A17] text-[#E30A17] font-medium hover:bg-[#E30A17]/5 dark:hover:bg-[#E30A17]/10 transition-colors">İptal</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
 </MainLayout>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-  const teklifBtn = document.getElementById("hizmet-detay-teklif-btn");
-  const modal = document.getElementById("teklif-form-modal");
-  const closeBtn = document.getElementById("teklif-form-close");
-  const iptalBtn = document.getElementById("teklif-form-iptal");
-  const form = document.getElementById("teklif-form");
-
-  function openModal() {
-    if (!modal) return;
-    modal.classList.remove("hidden");
-    modal.classList.add("flex");
-    modal.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
-  }
-  function closeModal() {
-    if (!modal) return;
-    modal.classList.add("hidden");
-    modal.classList.remove("flex");
-    modal.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
-  }
-
-  teklifBtn?.addEventListener("click", openModal);
-  closeBtn?.addEventListener("click", closeModal);
-  iptalBtn?.addEventListener("click", closeModal);
-  modal?.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && modal && !modal.classList.contains("hidden")) closeModal(); });
-  form?.addEventListener("submit", (e) => { e.preventDefault(); closeModal(); });
-  });
-</script>

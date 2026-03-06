@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import "../styles/global.css";
+import { BASE_API_URL } from "../api/constants";
 interface Props {
   isHomePage?: boolean;
 }
@@ -178,12 +179,14 @@ const { isHomePage = false } = Astro.props;
   </body>
 </html>
 
-<script>
+<script define:vars={{ apiBase: BASE_API_URL }}>
   document.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById("teklif-form-modal");
     const closeBtn = document.getElementById("teklif-form-close");
     const iptalBtn = document.getElementById("teklif-form-iptal");
     const form = document.getElementById("teklif-form");
+
+    let currentRelatedServiceId = null;
 
     function openTeklifModal() {
       if (!modal) return;
@@ -202,10 +205,16 @@ const { isHomePage = false } = Astro.props;
     }
 
     document.addEventListener("click", (e) => {
-      const target = e.target as HTMLElement | null;
-      if (target && target.closest(".open-teklif-modal")) {
-        e.preventDefault();
-        openTeklifModal();
+      const target = e.target;
+      if (target) {
+        const trigger = target.closest(".open-teklif-modal");
+        if (trigger) {
+          e.preventDefault();
+          const relatedId = trigger.getAttribute("data-related-service-id");
+          currentRelatedServiceId =
+            relatedId && relatedId.trim() ? relatedId.trim() : null;
+          openTeklifModal();
+        }
       }
     });
 
@@ -219,7 +228,52 @@ const { isHomePage = false } = Astro.props;
     });
     form?.addEventListener("submit", (e) => {
       e.preventDefault();
-      closeTeklifModal();
+      if (!form) return;
+
+      const adSoyadInput = document.getElementById("teklif-ad-soyad");
+      const telefonInput = document.getElementById("teklif-telefon");
+      const emailInput = document.getElementById("teklif-email");
+      const apartmanAdiInput = document.getElementById("teklif-apartman-adi");
+      const adresInput = document.getElementById("teklif-adres");
+      const daireSayisiInput = document.getElementById("teklif-daire-sayisi");
+      const dukkanSayisiInput = document.getElementById("teklif-dukkan-sayisi");
+      const mesajInput = document.getElementById("teklif-mesaj");
+
+      const payload = {
+        relatedServiceId: currentRelatedServiceId,
+        nameSurname: adSoyadInput?.value?.trim() || "",
+        phone: telefonInput?.value?.trim() || "",
+        email: emailInput?.value?.trim() || "",
+        apartmentName: apartmanAdiInput?.value?.trim() || "",
+        address: adresInput?.value?.trim() || "",
+        flatCount: daireSayisiInput?.value?.toString() || "",
+        shopCount: dukkanSayisiInput?.value?.toString() || "",
+        message: mesajInput?.value?.trim() || "",
+      };
+
+      fetch(`${apiBase}/ProposalRequest`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      })
+        .then((res) => {
+          if (res.ok) {
+            alert("Talebiniz başarıyla iletildi. En kısa sürede sizinle iletişime geçeceğiz.");
+          } else {
+            alert("Talebiniz gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.");
+          }
+        })
+        .catch((err) => {
+          console.error("Teklif formu gönderilirken hata oluştu:", err);
+          alert("Talebiniz gönderilemedi. Lütfen internet bağlantınızı kontrol edip tekrar deneyin.");
+        })
+        .finally(() => {
+          closeTeklifModal();
+          form.reset();
+        });
     });
   });
 </script>
