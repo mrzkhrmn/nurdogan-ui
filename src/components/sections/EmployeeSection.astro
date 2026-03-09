@@ -47,9 +47,9 @@ try {
 ---
 
 {employees.length > 0 && (
-<section class="w-full bg-gray-100 dark:bg-gray-900 py-20 px-6 transition-colors duration-200">
+<section class="w-full bg-gray-100 dark:bg-gray-900 py-12 sm:py-16 md:py-20 px-4 sm:px-6 transition-colors duration-200">
   <div class="max-w-[1340px] mx-auto">
-    <div class="text-center mb-12">
+    <div class="text-center mb-8 sm:mb-10 md:mb-12">
       <p class="inline-block text-[#E30A17] text-sm sm:text-base md:text-4xl font-bold mb-4 tracking-wider uppercase bg-[#E30A17]/15 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl">
         UZMAN KADROMUZ
       </p>
@@ -60,9 +60,9 @@ try {
 
     <div class="relative">
       <div class="carousel-container overflow-x-auto overflow-y-hidden">
-        <div class="carousel-track flex py-8" id="carousel-track">
+        <div class="carousel-track flex py-6 sm:py-8" id="carousel-track">
           {employees.map((employee, index) => (
-            <div class="carousel-slide min-w-full sm:min-w-[50%] md:min-w-[33.333%] lg:min-w-[25%] px-2 md:px-3" data-index={index}>
+            <div class="carousel-slide min-w-[70%] sm:min-w-[50%] md:min-w-[33.333%] lg:min-w-[25%] px-1 sm:px-2 md:px-3" data-index={index}>
               <div class="employee-card-container h-full">
                 <div class="employee-card h-full">
                   <div class="employee-card-front w-full h-full">
@@ -74,13 +74,13 @@ try {
                         height={533}
                         class="w-full h-full object-cover"
                       />
-                      <div class="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 via-black/70 to-transparent p-4 md:p-5">
+                      <div class="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 via-black/70 to-transparent p-3 sm:p-4 md:p-5">
                         <div class="flex items-center justify-between">
                           <div>
-                            <h3 class="text-white text-lg md:text-xl font-bold mb-1">
+                            <h3 class="text-white text-lg sm:text-lg md:text-xl font-bold mb-0.5 sm:mb-1 leading-tight">
                               {employee.name}
                             </h3>
-                            <p class="text-white text-sm md:text-base opacity-90">
+                            <p class="text-white text-sm sm:text-sm md:text-base opacity-90">
                               {employee.position}
                             </p>
                           </div>
@@ -90,53 +90,53 @@ try {
                   </div>
                   
                   <div class="employee-card-back w-full h-full">
-                    <div class="w-full h-full bg-linear-to-br from-[#262322] to-[#1a1817] rounded-2xl p-5 sm:p-6 md:p-4 lg:p-5 xl:p-6 flex flex-col justify-between text-white shadow-lg">
+                    <div class="w-full h-full bg-linear-to-br from-[#262322] to-[#1a1817] rounded-2xl p-3 sm:p-6 md:p-4 lg:p-5 xl:p-6 flex flex-col justify-between text-white shadow-lg">
                       <div>
-                        <h3 class="text-white text-lg sm:text-xl md:text-lg lg:text-xl xl:text-2xl font-bold mb-2 sm:mb-2 md:mb-1.5 lg:mb-2 xl:mb-2">
+                        <h3 class="text-white text-lg sm:text-xl md:text-lg lg:text-xl xl:text-2xl font-bold mb-1.5 sm:mb-2 md:mb-1.5 lg:mb-2 xl:mb-2 leading-tight">
                           {employee.name}
                         </h3>
-                        <p class="text-[#E30A17] text-sm sm:text-base md:text-xs lg:text-sm xl:text-base font-medium mb-3 sm:mb-4 md:mb-2.5 lg:mb-3 xl:mb-4">
+                        <p class="text-[#E30A17] text-sm sm:text-base md:text-xs lg:text-sm xl:text-base font-medium mb-2 sm:mb-4 md:mb-2.5 lg:mb-3 xl:mb-4">
                           {employee.position}
                         </p>
-                        <p class="text-white/90 text-sm sm:text-base md:text-xs lg:text-sm xl:text-base leading-relaxed mb-4 sm:mb-5 md:mb-3 lg:mb-4 xl:mb-6">
+                        <p class="text-white/90 text-sm sm:text-base md:text-xs lg:text-sm xl:text-base leading-relaxed mb-3 sm:mb-5 md:mb-3 lg:mb-4 xl:mb-6">
                           {employee.description}
                         </p>
                       </div>
                       
-                      <div class="space-y-3 sm:space-y-3 md:space-y-2 lg:space-y-2.5 xl:space-y-3 border-t border-white/20 pt-4 sm:pt-4 md:pt-2.5 lg:pt-3 xl:pt-4">
-                        <div class="flex items-center gap-3 sm:gap-3 md:gap-2 lg:gap-2.5 xl:gap-3">
-                          <div class="w-8 h-8 sm:w-8 sm:h-8 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-8 xl:h-8 rounded-full bg-[#E30A17]/20 flex items-center justify-center shrink-0">
-                            <svg width="16" height="16" class="sm:w-4 sm:h-4 md:w-3 md:h-3 lg:w-3.5 lg:h-3.5 xl:w-4 xl:h-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <div class="space-y-2.5 sm:space-y-3 md:space-y-2 lg:space-y-2.5 xl:space-y-3 border-t border-white/20 pt-3 sm:pt-4 md:pt-2.5 lg:pt-3 xl:pt-4">
+                        <div class="flex items-center gap-2.5 sm:gap-3 md:gap-2 lg:gap-2.5 xl:gap-3">
+                          <div class="w-7 h-7 sm:w-8 sm:h-8 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-8 xl:h-8 rounded-full bg-[#E30A17]/20 flex items-center justify-center shrink-0">
+                            <svg width="16" height="16" class="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-3 md:h-3 lg:w-3.5 lg:h-3.5 xl:w-4 xl:h-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M8 1V15M1 8H15" stroke="#E30A17" stroke-width="2" stroke-linecap="round"/>
                             </svg>
                           </div>
                           <div class="min-w-0">
-                            <p class="text-white/70 text-xs sm:text-xs md:text-[10px] lg:text-xs xl:text-xs">İşe Başlama</p>
-                            <p class="text-white font-semibold text-sm sm:text-sm md:text-xs lg:text-xs xl:text-sm">{employee.startDate}</p>
+                            <p class="text-white/70 text-[11px] sm:text-xs md:text-[10px] lg:text-xs xl:text-xs">İşe Başlama</p>
+                            <p class="text-white font-semibold text-xs sm:text-sm md:text-xs lg:text-xs xl:text-sm">{employee.startDate}</p>
                           </div>
                         </div>
                         
-                        <div class="flex items-center gap-3 sm:gap-3 md:gap-2 lg:gap-2.5 xl:gap-3">
-                          <div class="w-8 h-8 sm:w-8 sm:h-8 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-8 xl:h-8 rounded-full bg-[#E30A17]/20 flex items-center justify-center shrink-0">
-                            <svg width="16" height="16" class="sm:w-4 sm:h-4 md:w-3 md:h-3 lg:w-3.5 lg:h-3.5 xl:w-4 xl:h-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <div class="flex items-center gap-2.5 sm:gap-3 md:gap-2 lg:gap-2.5 xl:gap-3">
+                          <div class="w-7 h-7 sm:w-8 sm:h-8 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-8 xl:h-8 rounded-full bg-[#E30A17]/20 flex items-center justify-center shrink-0">
+                            <svg width="16" height="16" class="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-3 md:h-3 lg:w-3.5 lg:h-3.5 xl:w-4 xl:h-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M2 4L8 8L14 4M2 4H14M2 4V12H14V4" stroke="#E30A17" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                           </div>
                           <div class="min-w-0">
-                            <p class="text-white/70 text-xs sm:text-xs md:text-[10px] lg:text-xs xl:text-xs">E-posta</p>
-                            <p class="text-white font-semibold text-sm sm:text-sm md:text-xs lg:text-xs xl:text-sm truncate">{employee.email}</p>
+                            <p class="text-white/70 text-[11px] sm:text-xs md:text-[10px] lg:text-xs xl:text-xs">E-posta</p>
+                            <p class="text-white font-semibold text-xs sm:text-sm md:text-xs lg:text-xs xl:text-sm truncate">{employee.email}</p>
                           </div>
                         </div>
                         
-                        <div class="flex items-center gap-3 sm:gap-3 md:gap-2 lg:gap-2.5 xl:gap-3">
-                          <div class="w-8 h-8 sm:w-8 sm:h-8 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-8 xl:h-8 rounded-full bg-[#E30A17]/20 flex items-center justify-center shrink-0">
-                            <svg width="16" height="16" class="sm:w-4 sm:h-4 md:w-3 md:h-3 lg:w-3.5 lg:h-3.5 xl:w-4 xl:h-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <div class="flex items-center gap-2.5 sm:gap-3 md:gap-2 lg:gap-2.5 xl:gap-3">
+                          <div class="w-7 h-7 sm:w-8 sm:h-8 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-8 xl:h-8 rounded-full bg-[#E30A17]/20 flex items-center justify-center shrink-0">
+                            <svg width="16" height="16" class="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-3 md:h-3 lg:w-3.5 lg:h-3.5 xl:w-4 xl:h-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M8 1L10.5 5.5L15.5 6.5L12 10L12.5 15L8 12.5L3.5 15L4 10L0.5 6.5L5.5 5.5L8 1Z" stroke="#E30A17" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                           </div>
                           <div class="min-w-0">
-                            <p class="text-white/70 text-xs sm:text-xs md:text-[10px] lg:text-xs xl:text-xs">Deneyim</p>
-                            <p class="text-white font-semibold text-sm sm:text-sm md:text-xs lg:text-xs xl:text-sm">{employee.experience}</p>
+                            <p class="text-white/70 text-[11px] sm:text-xs md:text-[10px] lg:text-xs xl:text-xs">Deneyim</p>
+                            <p class="text-white font-semibold text-xs sm:text-sm md:text-xs lg:text-xs xl:text-sm">{employee.experience}</p>
                           </div>
                         </div>
                       </div>
@@ -172,6 +172,13 @@ try {
     perspective: 1000px;
     width: 100%;
     aspect-ratio: 3 / 4;
+  }
+
+  /* Mobilde kartı biraz daha kısa tut (daha kompakt) */
+  @media (max-width: 639px) {
+    .employee-card-container {
+      aspect-ratio: 4 / 5;
+    }
   }
 
   .employee-card {

@@ -1,0 +1,45 @@
+---
+import Image from "astro/components/Image.astro";
+
+interface Props {
+  href: string;
+  image: string;
+  name: string;
+  location: string;
+  class?: string;
+}
+
+const { href, image, name, location, class: className = "" } = Astro.props;
+---
+
+<a
+  href={href}
+  class={`project-card relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-lg group border border-gray-100 dark:border-gray-700 block transition-colors duration-200 ${className}`}
+>
+  <div class="aspect-3/4 md:aspect-2/3 relative overflow-hidden">
+    <Image
+      src={image}
+      alt={name}
+      width={400}
+      height={300}
+      class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+    />
+    <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+    <div class="absolute bottom-0 left-0 right-0 p-3 md:p-4 bg-linear-to-t from-black/70 to-transparent space-y-1.5">
+      <p class="text-white text-sm md:text-base font-semibold flex items-center gap-2">
+        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+        {name}
+      </p>
+      <p class="text-white/90 text-xs md:text-sm flex items-center gap-2">
+        <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        {location}
+      </p>
+    </div>
+  </div>
+</a>
+

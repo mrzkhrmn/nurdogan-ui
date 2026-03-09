@@ -1,6 +1,7 @@
 ---
 import Image from "astro/components/Image.astro";
 import { ArrowRightIcon } from "../icons";
+import ProjectCard from "../ProjectCard.astro";
 import { BASE_API_URL } from "../../api/constants";
 import { getImageUrl } from "../../api";
 import {
@@ -73,7 +74,7 @@ if (apiProjects.length > 0) {
 }
 ---
 
-<section id="projeler" class="w-full bg-white dark:bg-gray-900 pb-12 md:py-20 px-4 md:px-6 transition-colors duration-200">
+<section id="projeler" class="w-full bg-white dark:bg-gray-900 py-4 pb-12 md:py-20 px-4 md:px-6 transition-colors duration-200">
   <div class="max-w-[1480px] mx-auto">
     <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-6 md:mb-10 gap-4 md:gap-0">
       <div>
@@ -117,76 +118,32 @@ if (apiProjects.length > 0) {
     <div class="relative">
       <!-- Tamamlanan Projeler -->
       <div class="projects-panel" id="panel-completed">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+        <!-- Tüm ekranlar: yatay kaydırma -->
+        <div class="projects-scroll flex gap-4 overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory py-2 pb-4">
           {completedProjects.map((project) => (
-            <a
+            <ProjectCard
               href={`${baseUrl}projeler/${project.id}`}
-              class="project-card relative w-full overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-lg group border border-gray-100 dark:border-gray-700 block transition-colors duration-200"
-            >
-              <div class="aspect-[3/4] md:aspect-[2/3] relative overflow-hidden">
-                <Image
-                  src={project.image}
-                  alt={project.name}
-                  width={400}
-                  height={300}
-                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div class="absolute bottom-0 left-0 right-0 p-3 md:p-4 bg-gradient-to-t from-black/70 to-transparent space-y-1.5">
-                  <p class="text-white text-sm md:text-base font-semibold flex items-center gap-2">
-                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                    </svg>
-                    {project.name}
-                  </p>
-                  <p class="text-white/90 text-xs md:text-sm flex items-center gap-2">
-                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                    {project.location}
-                  </p>
-                </div>
-              </div>
-            </a>
+              image={project.image}
+              name={project.name}
+              location={project.location}
+              class="shrink-0 w-[260px] sm:w-[320px] md:w-[360px] lg:w-[380px] xl:w-[400px] snap-start"
+            />
           ))}
         </div>
       </div>
 
       <!-- Devam Eden Projeler (isFinished: false) -->
       <div class="projects-panel hidden" id="panel-ongoing">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+        <!-- Tüm ekranlar: yatay kaydırma -->
+        <div class="projects-scroll flex gap-4 overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory py-2 pb-4">
           {ongoingProjects.map((project) => (
-            <a
+            <ProjectCard
               href={`${baseUrl}projeler/${project.id}`}
-              class="project-card relative w-full overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-lg group border border-gray-100 dark:border-gray-700 block transition-colors duration-200"
-            >
-              <div class="aspect-[3/4] md:aspect-[2/3] relative overflow-hidden">
-                <Image
-                  src={project.image}
-                  alt={project.name}
-                  width={400}
-                  height={300}
-                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div class="absolute bottom-0 left-0 right-0 p-3 md:p-4 bg-gradient-to-t from-black/70 to-transparent space-y-1.5">
-                  <p class="text-white text-sm md:text-base font-semibold flex items-center gap-2">
-                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                    </svg>
-                    {project.name}
-                  </p>
-                  <p class="text-white/90 text-xs md:text-sm flex items-center gap-2">
-                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                    {project.location}
-                  </p>
-                </div>
-              </div>
-            </a>
+              image={project.image}
+              name={project.name}
+              location={project.location}
+              class="shrink-0 w-[260px] sm:w-[320px] md:w-[360px] lg:w-[380px] xl:w-[400px] snap-start"
+            />
           ))}
         </div>
       </div>
@@ -195,6 +152,14 @@ if (apiProjects.length > 0) {
 </section>
 
 <style>
+  .projects-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .projects-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
   .project-tab {
     cursor: pointer;
   }
