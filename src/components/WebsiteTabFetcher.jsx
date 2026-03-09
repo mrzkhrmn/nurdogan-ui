@@ -782,9 +782,17 @@ function HakkimizdaContent({ baseUrl = "/" }) {
 }
 
 const MANAGED_BUILDINGS_FALLBACK = [
-  { number: "01", name: "Çam Apartmanı", imageKey: "bulding-management-interior.jpg" },
+  {
+    number: "01",
+    name: "Çam Apartmanı",
+    imageKey: "bulding-management-interior.jpg",
+  },
   { number: "02", name: "Ekşioğlu Apartmanı", imageKey: "building-modern.jpg" },
-  { number: "03", name: "Dostlar Apartmanı", imageKey: "construction-image.png" },
+  {
+    number: "03",
+    name: "Dostlar Apartmanı",
+    imageKey: "construction-image.png",
+  },
   { number: "04", name: "Şans Apartmanı", imageKey: "landing-photo.png" },
   { number: "05", name: "Güven Apartmanı", imageKey: "interior-1.png" },
 ];
@@ -802,7 +810,9 @@ function BinaYonetimiSectionContent({ baseUrl = "/" }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const referencesSorted = Array.isArray(referencesData)
-    ? [...referencesData].sort((a, b) => (a.listOrder ?? 0) - (b.listOrder ?? 0))
+    ? [...referencesData].sort(
+        (a, b) => (a.listOrder ?? 0) - (b.listOrder ?? 0),
+      )
     : [];
   const referencesSlice = referencesSorted.slice(0, 5);
 
@@ -844,20 +854,14 @@ function BinaYonetimiSectionContent({ baseUrl = "/" }) {
   return (
     <section
       id="bina-yonetimi"
-      className="relative w-full py-12 sm:py-16 md:py-20 lg:py-20 px-4 md:px-6 mb-12 md:mb-16 lg:mb-20 bg-gray-100 dark:bg-gray-900 transition-colors duration-200"
+      className="relative w-full py-12 sm:py-16 md:py-20 lg:py-20 px-4 md:px-6 mb-12 md:mb-16 lg:mb-20 bg-gray-100 dark:bg-gray-900 bg-cover bg-center bg-no-repeat transition-colors duration-200"
+      style={{
+        backgroundImage: `url('${baseUrl}bina-yonetimi/bina-yonetimi-bg.png')`,
+      }}
     >
-      <div className="absolute inset-0 -z-10">
-        <img
-          src={`${baseUrl}building-management-bg.jpg`}
-          alt=""
-          className="w-full h-full object-cover"
-          aria-hidden="true"
-        />
-        <div className="absolute inset-0 bg-white/60 md:bg-white/70 dark:bg-black/55 dark:md:bg-black/70 transition-colors duration-200" />
-      </div>
       <div className="relative max-w-[1440px] mx-auto">
         <div className="text-center max-w-[980px] mx-auto">
-          <p className="inline-block text-[#E30A17] dark:text-white/95 text-sm sm:text-base md:text-4xl font-bold tracking-wider mb-4 uppercase bg-[#E30A17]/15 dark:bg-white/15 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl">
+          <p className="inline-block text-[#E30A17] text-sm sm:text-base md:text-4xl font-bold tracking-wider mb-4 uppercase bg-[#E30A17]/15 dark:bg-white/15 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl">
             {title.toUpperCase()}
           </p>
           <h2 className="text-gray-900 dark:text-white text-2xl md:text-5xl font-semibold leading-tight mb-4 sm:mb-6 md:mb-8">
@@ -865,9 +869,9 @@ function BinaYonetimiSectionContent({ baseUrl = "/" }) {
           </h2>
           <a
             href={`${baseUrl}bina-yonetimi`}
-            className="inline-flex items-center gap-3 rounded-full bg-[#E30A17] pl-2 pr-8 py-2 text-base font-medium text-white hover:bg-[#e30a18df] transition"
+            className="inline-flex items-center gap-3 rounded-full bg-[#E30A17] pl-1.5 pr-5 py-2 text-sm sm:pl-2 sm:pr-8 sm:py-2 sm:text-base font-medium text-white hover:bg-[#e30a18df] transition"
           >
-            <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shrink-0">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white flex items-center justify-center shrink-0">
               <ArrowRightIcon color="#E30A17" />
             </div>
             Daha Fazla
