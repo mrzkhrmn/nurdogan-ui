@@ -112,34 +112,6 @@ export default function EmployeeSectionClient() {
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
-                                d="M8 1V15M1 8H15"
-                                stroke="#E30A17"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                              />
-                            </svg>
-                          </div>
-                          <div className="min-w-0">
-                            <p className="text-white/70 text-[11px] sm:text-xs md:text-[10px] lg:text-xs xl:text-xs">
-                              İşe Başlama
-                            </p>
-                            <p className="text-white font-semibold text-xs sm:text-sm md:text-xs lg:text-xs xl:text-sm">
-                              {employee.startDate}
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="flex items-center gap-2.5 sm:gap-3 md:gap-2 lg:gap-2.5 xl:gap-3">
-                          <div className="w-7 h-7 sm:w-8 sm:h-8 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-8 xl:h-8 rounded-full bg-[#E30A17]/20 flex items-center justify-center shrink-0">
-                            <svg
-                              width="16"
-                              height="16"
-                              className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-3 md:h-3 lg:w-3.5 lg:h-3.5 xl:w-4 xl:h-4"
-                              viewBox="0 0 16 16"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
                                 d="M2 4L8 8L14 4M2 4H14M2 4V12H14V4"
                                 stroke="#E30A17"
                                 strokeWidth="1.5"
@@ -198,4 +170,3 @@ export default function EmployeeSectionClient() {
     </div>
   );
 }
-

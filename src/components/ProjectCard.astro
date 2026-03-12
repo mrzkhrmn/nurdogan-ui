@@ -24,7 +24,7 @@ const { href, image, name, location, class: className = "" } = Astro.props;
       height={300}
       class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
     />
-    <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
     <div class="absolute bottom-0 left-0 right-0 p-3 md:p-4 bg-linear-to-t from-black/70 to-transparent space-y-1.5">
       <p class="text-white text-sm md:text-base font-semibold flex items-center gap-2">
         <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
