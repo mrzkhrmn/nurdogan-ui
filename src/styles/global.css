@@ -29,6 +29,7 @@ body {
 .split-landing:has(.panel-left:hover) .panel-right {
   flex: 0 0 0%;
   min-width: 0;
+  min-height: 0;
   opacity: 0;
   pointer-events: none;
 }
@@ -38,6 +39,7 @@ body {
 .split-landing:has(.panel-right:hover) .panel-left {
   flex: 0 0 0%;
   min-width: 0;
+  min-height: 0;
   opacity: 0;
   pointer-events: none;
 }
@@ -131,5 +133,12 @@ body {
   .carousel-btn-prev,
   .carousel-btn-next {
     display: none;
+  }
+}
+
+/* taslak.png arka planı: mobilde gizli, md ve üzeri ekranlarda görünür */
+@media (max-width: 767px) {
+  .taslak-bg-desktop-only {
+    background-image: none !important;
   }
 }

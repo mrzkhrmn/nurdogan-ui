@@ -52,8 +52,28 @@ try {
   </div>
 
   <div class="references-band-wrapper relative max-w-[1440px] mx-auto px-4 md:px-6">
+    <button
+      type="button"
+      id="references-prev"
+      class="references-arrow absolute -left-2 sm:-left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-600 flex items-center justify-center text-[#262322] dark:text-white hover:bg-[#E30A17] hover:text-white hover:border-[#E30A17] transition-colors"
+      aria-label="Önceki referans"
+    >
+      <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+    <button
+      type="button"
+      id="references-next"
+      class="references-arrow absolute -right-2 sm:-right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-600 flex items-center justify-center text-[#262322] dark:text-white hover:bg-[#E30A17] hover:text-white hover:border-[#E30A17] transition-colors"
+      aria-label="Sonraki referans"
+    >
+      <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
     <div
-      class="references-band flex gap-6 md:gap-8 overflow-x-auto overflow-y-hidden scroll-smooth scrollbar-hide py-2 pb-4"
+      class="references-band flex gap-6 md:gap-8 overflow-x-auto overflow-y-hidden scroll-smooth scrollbar-hide py-2 pb-4 pl-6 sm:pl-8 pr-6 sm:pr-8"
       id="references-band"
       data-dragging="false"
     >
@@ -140,7 +160,17 @@ try {
 <script>
   (function () {
     const band = document.getElementById("references-band");
+    const prevBtn = document.getElementById("references-prev");
+    const nextBtn = document.getElementById("references-next");
     if (!band) return;
+
+    const scrollAmount = 320;
+    prevBtn?.addEventListener("click", () => {
+      band.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    });
+    nextBtn?.addEventListener("click", () => {
+      band.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    });
 
     let isDown = false;
     let didDrag = false;

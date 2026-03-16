@@ -386,13 +386,13 @@ function LandingContent({ baseUrl = "/" }) {
   if (isLoading) {
     return (
       <section
-        className="split-landing relative flex w-full min-h-[calc(100vh-5rem)] overflow-hidden"
+        className="split-landing relative flex flex-col md:flex-row w-full min-h-[calc(100vh-5rem)] overflow-hidden"
         aria-label="Hizmet seçimi"
       >
-        <div className="flex-1 flex items-center justify-center bg-gray-200 animate-pulse">
+        <div className="flex-1 flex min-h-[50vh] md:min-h-0 items-center justify-center bg-gray-200 animate-pulse">
           <div className="h-12 w-64 bg-gray-300 rounded" />
         </div>
-        <div className="flex-1 flex items-center justify-center bg-gray-300 animate-pulse">
+        <div className="flex-1 flex min-h-[50vh] md:min-h-0 items-center justify-center bg-gray-300 animate-pulse">
           <div className="h-12 w-64 bg-gray-400 rounded" />
         </div>
       </section>
@@ -408,13 +408,13 @@ function LandingContent({ baseUrl = "/" }) {
 
   return (
     <section
-      className="split-landing relative flex w-full min-h-[calc(100vh-5rem)] overflow-hidden"
+      className="split-landing relative flex flex-col md:flex-row w-full min-h-[calc(100vh-5rem)] overflow-hidden"
       id="hero-slider"
       aria-label="Hizmet seçimi"
     >
       <a
         href={leftHref}
-        className="panel panel-left relative flex-1 flex items-center justify-center min-w-0 overflow-hidden transition-all duration-[800ms] ease-out cursor-pointer group"
+        className="panel panel-left relative flex-1 flex min-h-[50vh] md:min-h-0 items-center justify-center min-w-0 overflow-hidden transition-all duration-[800ms] ease-out cursor-pointer group"
       >
         <div className="absolute inset-0 z-0">
           <img
@@ -434,13 +434,12 @@ function LandingContent({ baseUrl = "/" }) {
         </div>
       </a>
       <div
-        className="center-line absolute top-0 bottom-0 w-1 sm:w-1.5 bg-white z-30 pointer-events-none transition-opacity duration-300 shadow-[0_0_16px_rgba(255,255,255,0.5)]"
-        style={{ left: "50%", transform: "translateX(-50%)" }}
+        className="center-line absolute left-0 right-0 top-1/2 md:top-0 md:bottom-0 md:left-1/2 md:right-auto md:w-1 md:h-auto w-auto h-1 sm:h-1.5 -translate-y-1/2 md:translate-y-0 md:-translate-x-1/2 bg-white z-30 pointer-events-none transition-opacity duration-300 shadow-[0_0_16px_rgba(255,255,255,0.5)]"
         aria-hidden="true"
       />
       <a
         href={rightHref}
-        className="panel panel-right relative flex-1 flex items-center justify-center min-w-0 overflow-hidden transition-all duration-500 ease-out cursor-pointer group"
+        className="panel panel-right relative flex-1 flex min-h-[50vh] md:min-h-0 items-center justify-center min-w-0 overflow-hidden transition-all duration-500 ease-out cursor-pointer group"
       >
         <div className="absolute inset-0 z-0">
           <img
@@ -591,7 +590,7 @@ function KentselDonusumTanitimContent({ baseUrl = "/" }) {
 
   return (
     <section
-      className="w-full py-20 px-6 relative bg-gray-50 dark:bg-gray-900 bg-cover bg-center bg-no-repeat transition-colors duration-200"
+      className="taslak-bg-desktop-only w-full py-20 px-6 relative bg-gray-50 dark:bg-gray-900 bg-cover bg-center bg-no-repeat transition-colors duration-200"
       style={{ backgroundImage: `url('${baseUrl}taslak.png')` }}
     >
       <div
@@ -854,7 +853,7 @@ function BinaYonetimiSectionContent({ baseUrl = "/" }) {
   return (
     <section
       id="bina-yonetimi"
-      className="relative w-full py-12 sm:py-16 md:py-20 lg:py-20 px-4 md:px-6 mb-12 md:mb-16 lg:mb-20 bg-gray-100 dark:bg-gray-900 transition-colors duration-200 overflow-hidden"
+      className="relative w-full py-12 sm:py-16 md:py-20 lg:py-20 px-4 md:px-6 mb-12 md:mb-16 lg:mb-20 bg-gray-100 dark:bg-gray-900 transition-colors duration-200"
     >
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.15] dark:opacity-[0.12]"
@@ -882,7 +881,35 @@ function BinaYonetimiSectionContent({ baseUrl = "/" }) {
           </a>
         </div>
         <div className="mt-6 sm:mt-8 md:mt-12 lg:mt-14 flex flex-col lg:flex-row items-stretch gap-4 sm:gap-6 md:gap-8 lg:gap-8">
-          <div className="w-full lg:w-[60%]">
+          <div className="w-full lg:w-[60%] relative">
+            <button
+              type="button"
+              onClick={() =>
+                setSelectedIndex((i) =>
+                  i === 0 ? buildings.length - 1 : i - 1,
+                )
+              }
+              className="absolute -left-4 sm:-left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/90 dark:bg-gray-800/90 shadow-lg border border-gray-200 dark:border-gray-600 flex items-center justify-center text-[#262322] dark:text-white hover:bg-[#E30A17] hover:text-white hover:border-[#E30A17] transition-colors"
+              aria-label="Önceki referans"
+            >
+              <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              onClick={() =>
+                setSelectedIndex((i) =>
+                  i === buildings.length - 1 ? 0 : i + 1,
+                )
+              }
+              className="absolute -right-4 sm:-right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/90 dark:bg-gray-800/90 shadow-lg border border-gray-200 dark:border-gray-600 flex items-center justify-center text-[#262322] dark:text-white hover:bg-[#E30A17] hover:text-white hover:border-[#E30A17] transition-colors"
+              aria-label="Sonraki referans"
+            >
+              <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
             <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl min-h-[250px] sm:min-h-[300px] md:min-h-[380px] lg:min-h-[420px]">
               {/* Beyaz boşluklara aynı görsel, cover, düşük opacity */}
               <div

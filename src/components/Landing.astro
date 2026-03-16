@@ -16,13 +16,13 @@ const right = {
 ---
 
 <section
-  class="split-landing relative flex w-full min-h-[calc(100vh-5rem)] overflow-hidden"
+  class="split-landing relative flex flex-col md:flex-row w-full min-h-[calc(100vh-5rem)] overflow-hidden"
   id="hero-slider"
   aria-label="Hizmet seçimi"
 >
   <a
     href={left.href}
-    class="panel panel-left relative flex-1 flex items-center justify-center min-w-0 overflow-hidden transition-all duration-800 ease-out cursor-pointer group"
+    class="panel panel-left relative flex-1 flex min-h-[50vh] md:min-h-0 items-center justify-center min-w-0 overflow-hidden transition-all duration-800 ease-out cursor-pointer group"
   >
     <div class="absolute inset-0 z-0">
       <Image
@@ -45,14 +45,13 @@ const right = {
   </a>
 
   <div
-    class="center-line absolute top-0 bottom-0 w-1 sm:w-1.5 bg-white z-30 pointer-events-none transition-opacity duration-300 shadow-[0_0_16px_rgba(255,255,255,0.5)]"
-    style="left: 50%; transform: translateX(-50%);"
+    class="center-line absolute left-0 right-0 top-1/2 md:top-0 md:bottom-0 md:left-1/2 md:right-auto md:w-1 md:h-auto w-auto h-1 sm:h-1.5 -translate-y-1/2 md:translate-y-0 md:-translate-x-1/2 bg-white z-30 pointer-events-none transition-opacity duration-300 shadow-[0_0_16px_rgba(255,255,255,0.5)]"
     aria-hidden="true"
   ></div>
 
   <a
     href={right.href}
-    class="panel panel-right relative flex-1 flex items-center justify-center min-w-0 overflow-hidden transition-all duration-500 ease-out cursor-pointer group"
+    class="panel panel-right relative flex-1 flex min-h-[50vh] md:min-h-0 items-center justify-center min-w-0 overflow-hidden transition-all duration-500 ease-out cursor-pointer group"
   >
     <div class="absolute inset-0 z-0">
       <Image
