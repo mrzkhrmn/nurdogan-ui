@@ -425,10 +425,10 @@ function LandingContent({ baseUrl = "/" }) {
         </div>
         <div className="absolute inset-0 z-10 bg-black/20 group-hover:bg-black/30 transition-colors duration-500" />
         <div className="relative z-20 flex flex-col items-center justify-center gap-3 sm:gap-4 px-4 text-center">
-          <h2 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold tracking-wide drop-shadow-lg">
+          <h2 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold tracking-wide drop-shadow-lg bg-black/40 p-4 rounded-2xl">
             {leftTitle}
           </h2>
-          <p className="panel-desc text-white text-lg sm:text-xl md:text-2xl max-w-2xl transition-all duration-500 ease-out drop-shadow-md">
+          <p className="panel-desc text-white text-lg sm:text-xl md:text-2xl max-w-2xl transition-all duration-500 ease-out drop-shadow-md bg-black/40 p-2 rounded-lg">
             {leftDesc}
           </p>
         </div>
@@ -451,10 +451,10 @@ function LandingContent({ baseUrl = "/" }) {
         </div>
         <div className="absolute inset-0 z-10 bg-black/20 group-hover:bg-black/30 transition-colors duration-500" />
         <div className="relative z-20 flex flex-col items-center justify-center gap-3 sm:gap-4 px-4 text-center">
-          <h2 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold tracking-wide drop-shadow-lg">
+          <h2 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold tracking-wide drop-shadow-lg bg-black/40 p-4 rounded-2xl">
             {rightTitle}
           </h2>
-          <p className="panel-desc text-white text-lg sm:text-xl md:text-2xl max-w-2xl transition-all duration-500 ease-out drop-shadow-md">
+          <p className="panel-desc text-white text-lg sm:text-xl md:text-2xl max-w-2xl transition-all duration-500 ease-out drop-shadow-md bg-black/40 p-2 rounded-lg">
             {rightDesc}
           </p>
         </div>
@@ -592,7 +592,7 @@ function KentselDonusumTanitimContent({ baseUrl = "/" }) {
   return (
     <section
       className="w-full py-20 px-6 relative bg-gray-50 dark:bg-gray-900 bg-cover bg-center bg-no-repeat transition-colors duration-200"
-      style={{ backgroundImage: "url('/scetchbg.png')" }}
+      style={{ backgroundImage: "url('/taslak.png')" }}
     >
       <div
         className="absolute inset-0 z-0 pointer-events-none"
@@ -854,12 +854,16 @@ function BinaYonetimiSectionContent({ baseUrl = "/" }) {
   return (
     <section
       id="bina-yonetimi"
-      className="relative w-full py-12 sm:py-16 md:py-20 lg:py-20 px-4 md:px-6 mb-12 md:mb-16 lg:mb-20 bg-gray-100 dark:bg-gray-900 bg-cover bg-center bg-no-repeat transition-colors duration-200"
-      style={{
-        backgroundImage: `url('${baseUrl}bina-yonetimi/bina-yonetimi-bg.png')`,
-      }}
+      className="relative w-full py-12 sm:py-16 md:py-20 lg:py-20 px-4 md:px-6 mb-12 md:mb-16 lg:mb-20 bg-gray-100 dark:bg-gray-900 transition-colors duration-200 overflow-hidden"
     >
-      <div className="relative max-w-[1440px] mx-auto">
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.15] dark:opacity-[0.12]"
+        style={{
+          backgroundImage: `url('${baseUrl}bina-yonetimi/bina-yonetimi-bg.png')`,
+        }}
+        aria-hidden
+      />
+      <div className="relative z-10 max-w-[1440px] mx-auto">
         <div className="text-center max-w-[980px] mx-auto">
           <p className="inline-block text-[#E30A17] text-sm sm:text-base md:text-4xl font-bold tracking-wider mb-4 uppercase bg-[#E30A17]/15 dark:bg-white/15 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl">
             {title.toUpperCase()}
@@ -879,11 +883,24 @@ function BinaYonetimiSectionContent({ baseUrl = "/" }) {
         </div>
         <div className="mt-6 sm:mt-8 md:mt-12 lg:mt-14 flex flex-col lg:flex-row items-stretch gap-4 sm:gap-6 md:gap-8 lg:gap-8">
           <div className="w-full lg:w-[60%]">
-            <div className="bg-white/95 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl">
+            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl min-h-[250px] sm:min-h-[300px] md:min-h-[380px] lg:min-h-[420px]">
+              {/* Beyaz boşluklara aynı görsel, cover, düşük opacity */}
+              <div
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.4] dark:opacity-[0.2]"
+                style={{
+                  backgroundImage: `url('${buildings[selectedIndex].image}')`,
+                }}
+                aria-hidden
+              />
+              {/* Siyah karartma katmanı */}
+              <div
+                className="absolute inset-0 bg-black/55 dark:bg-black/40"
+                aria-hidden
+              />
               <img
                 src={buildings[selectedIndex].image}
                 alt="Yönetilen apartman örneği"
-                className="w-full h-[250px] sm:h-[300px] md:h-[380px] lg:h-[420px] object-cover transition-opacity duration-300"
+                className="relative z-10 w-full h-[250px] sm:h-[300px] md:h-[380px] lg:h-[420px] object-contain transition-opacity duration-300"
               />
             </div>
           </div>
