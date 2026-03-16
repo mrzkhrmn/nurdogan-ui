@@ -592,7 +592,7 @@ function KentselDonusumTanitimContent({ baseUrl = "/" }) {
   return (
     <section
       className="w-full py-20 px-6 relative bg-gray-50 dark:bg-gray-900 bg-cover bg-center bg-no-repeat transition-colors duration-200"
-      style={{ backgroundImage: "url('/taslak.png')" }}
+      style={{ backgroundImage: `url('${baseUrl}taslak.png')` }}
     >
       <div
         className="absolute inset-0 z-0 pointer-events-none"
