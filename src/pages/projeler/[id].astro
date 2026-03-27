@@ -10,7 +10,9 @@ const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
 
 interface ProjectMediaDto {
   id: string;
-  mediaUrl: string;
+  mediaUrl?: string;
+  /** Bazı API yanıtlarında PascalCase */
+  MediaUrl?: string;
   mediaType: string;
   isCover: boolean;
   order: number;
@@ -29,7 +31,14 @@ interface ProjectDetailDto {
   flatCount: string;
   isActive: boolean;
   isFinished: boolean;
+  /** Liste endpoint’indeki kapak; medias boşken detayda kullanılır */
+  imageUrl?: string | null;
   medias: ProjectMediaDto[];
+}
+
+function resolveMediaPath(m: ProjectMediaDto): string {
+  const raw = m.mediaUrl ?? m.MediaUrl;
+  return typeof raw === "string" ? raw : "";
 }
 
 export async function getStaticPaths() {
@@ -73,21 +82,32 @@ if (id) {
 // Medias: kapak önce, sonra order'a göre; görsel URL'leri tam yap
 const coverMedia = project?.medias?.find((m) => m.isCover);
 const otherMedias = (project?.medias ?? []).filter((m) => !m.isCover).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-const galleryUrls: string[] = coverMedia ? [getImageUrl(coverMedia.mediaUrl)] : [];
+const galleryUrls: string[] = [];
+if (coverMedia) {
+  const u = getImageUrl(resolveMediaPath(coverMedia));
+  if (u) galleryUrls.push(u);
+}
 otherMedias.forEach((m) => {
-  const url = getImageUrl(m.mediaUrl);
+  const url = getImageUrl(resolveMediaPath(m));
   if (url) galleryUrls.push(url);
 });
 if (galleryUrls.length === 0 && project?.medias?.length) {
   project.medias.forEach((m) => {
-    const u = getImageUrl(m.mediaUrl);
+    const u = getImageUrl(resolveMediaPath(m));
     if (u) galleryUrls.push(u);
   });
 }
+// medias boş ama listede kapak URL'i varsa (API sık bu şekilde dönüyor)
+if (galleryUrls.length === 0 && project?.imageUrl) {
+  const u = getImageUrl(project.imageUrl);
+  if (u) galleryUrls.push(u);
+}
+// Liste kartıyla aynı yedek görsel
+if (galleryUrls.length === 0 && project) {
+  galleryUrls.push(`${baseUrl}construction1.png`);
+}
 const mainImage = galleryUrls[0];
-const galleryImages = galleryUrls.length > 1 ? galleryUrls : galleryUrls;
-
-console.log(mainImage);
+const galleryImages = galleryUrls;
 ---
 
 <MainLayout>
