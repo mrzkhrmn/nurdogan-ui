@@ -408,26 +408,28 @@ function LandingContent({ baseUrl = "/" }) {
           />
         </div>
         <div className="absolute inset-0 z-10 bg-black/35 dark:bg-black/45" />
-        <div className="relative z-20 flex w-full flex-col items-center px-[clamp(1rem,calc(0.5rem+1.6vw),2rem)] text-center">
-          <div className="flex w-full flex-col items-center gap-[clamp(0.875rem,calc(0.5rem+1.4vw),1.5rem)]">
-            <h2 className="w-full max-w-[min(100%,60rem)] text-[clamp(1.75rem,calc(0.92rem+2vw),3rem)] font-semibold leading-[1.12] tracking-wide text-white drop-shadow-md">
+        <div className="relative z-20 flex w-full flex-col items-center px-[clamp(1rem,calc(0.5rem+1.6vw),2.5rem)] text-center">
+          <div className="flex w-full flex-col items-center gap-[clamp(0.875rem,calc(0.5rem+1.15vw),1.75rem)] min-[1600px]:gap-[clamp(1.25rem,calc(0.45rem+1.6vw),2.25rem)]">
+            <h2 className="w-full max-w-[min(100%,60rem)] text-[clamp(1.625rem,calc(0.88rem+1.05vw),2.875rem)] font-semibold leading-[1.1] tracking-wide text-white drop-shadow-md max-[1439px]:max-w-[min(100%,46rem)] max-[1439px]:text-[clamp(1.5rem,calc(0.82rem+0.75vw),2.25rem)] min-[1600px]:max-w-[min(100%,72rem)] min-[1600px]:text-[clamp(2rem,calc(0.78rem+2.35vw),4.5rem)] min-[1920px]:max-w-[min(100%,80rem)]">
               {title}
             </h2>
-            <p className="w-full max-w-[min(100%,44rem)] text-[clamp(1rem,calc(0.72rem+0.75vw),1.4375rem)] leading-relaxed text-white drop-shadow-sm">
+            <p className="w-full max-w-[min(100%,44rem)] text-[clamp(0.9375rem,calc(0.7rem+0.55vw),1.3125rem)] leading-relaxed text-white drop-shadow-sm max-[1439px]:max-w-[min(100%,34rem)] min-[1600px]:max-w-[min(100%,52rem)] min-[1600px]:text-[clamp(1.0625rem,calc(0.58rem+1vw),1.9375rem)] min-[1920px]:max-w-[min(100%,60rem)]">
               {description}
             </p>
           </div>
-          <div className="mt-6 flex w-full max-w-[min(100%,44rem)] flex-col items-stretch justify-center gap-3 sm:mt-8 sm:max-w-none sm:flex-row sm:items-center sm:gap-4">
+          <div className="mt-[clamp(1.25rem,calc(0.75rem+1.8vw),3rem)] flex w-full max-w-[min(100%,48rem)] flex-col items-stretch justify-center gap-[clamp(0.5rem,calc(0.35rem+0.65vw),2rem)] max-[1439px]:max-w-[min(100%,38rem)] sm:max-w-none sm:flex-row sm:items-center sm:justify-center max-[1439px]:sm:max-w-[min(100%,38rem)]">
             <a
               href={hizmetlerHref}
-              className="inline-flex min-h-[3rem] flex-1 items-center justify-center gap-2 rounded-full bg-[#E30A17] px-6 py-3.5 text-base font-medium text-white shadow-md shadow-black/25 transition-colors hover:bg-[#c00914] sm:min-h-0 sm:flex-initial sm:px-7 sm:py-4 sm:text-lg"
+              className="inline-flex w-full flex-1 cursor-pointer items-center justify-center gap-[clamp(0.35rem,calc(0.2rem+0.45vw),0.75rem)] rounded-full bg-[#E30A17] px-[clamp(0.875rem,calc(0.5rem+2.2vw),3.5rem)] py-[clamp(0.5rem,calc(0.38rem+0.85vw),1.5rem)] text-[clamp(0.8125rem,calc(0.74rem+0.55vw),1.625rem)] font-medium leading-tight text-white shadow-md shadow-black/25 transition-colors hover:bg-[#c00914] max-[1439px]:min-h-[2.125rem] max-[1439px]:gap-1.5 max-[1439px]:px-4 max-[1439px]:py-2 max-[1439px]:text-[0.8125rem] max-[1439px]:sm:px-5 max-[1439px]:sm:text-sm sm:w-auto sm:flex-initial sm:min-w-[12rem] max-[1439px]:sm:min-w-[10rem] min-h-[clamp(2.35rem,calc(1.95rem+1.1vw),4.25rem)] [&_svg]:h-[1.1em] [&_svg]:w-[1.1em] [&_svg]:min-w-[1.1em] max-[1439px]:[&_svg]:h-[0.95em] max-[1439px]:[&_svg]:w-[0.95em] max-[1439px]:[&_svg]:min-w-[0.95em]"
             >
               Hizmetleri Keşfedin
-              <ArrowRightIcon color="#fff" />
+              <span className="inline-flex shrink-0 items-center">
+                <ArrowRightIcon color="#fff" />
+              </span>
             </a>
             <button
               type="button"
-              className="open-teklif-modal inline-flex min-h-[3rem] flex-1 cursor-pointer items-center justify-center rounded-full border-2 border-white bg-white/5 px-6 py-3.5 text-base font-medium text-white backdrop-blur-[2px] transition-colors hover:bg-white/20 sm:min-h-0 sm:flex-initial sm:px-7 sm:py-4 sm:text-lg"
+              className="open-teklif-modal inline-flex w-full flex-1 cursor-pointer items-center justify-center rounded-full border-[length:clamp(1.5px,calc(1px+0.12vw),2px)] border-white bg-white/5 px-[clamp(0.875rem,calc(0.5rem+2.2vw),3.5rem)] py-[clamp(0.5rem,calc(0.38rem+0.85vw),1.5rem)] text-[clamp(0.8125rem,calc(0.74rem+0.55vw),1.625rem)] font-medium leading-tight text-white backdrop-blur-[2px] transition-colors hover:bg-white/20 max-[1439px]:min-h-[2.125rem] max-[1439px]:px-4 max-[1439px]:py-2 max-[1439px]:text-[0.8125rem] max-[1439px]:sm:px-5 max-[1439px]:sm:text-sm sm:w-auto sm:flex-initial sm:min-w-[12rem] max-[1439px]:sm:min-w-[10rem] min-h-[clamp(2.35rem,calc(1.95rem+1.1vw),4.25rem)]"
             >
               Hemen Teklif Al
             </button>
