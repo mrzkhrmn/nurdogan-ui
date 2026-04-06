@@ -1,120 +1,55 @@
 ---
 import Image from "astro/components/Image.astro";
-const base = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
-const left = {
+import { ArrowRightIcon } from "./icons";
+const base = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
+const hero = {
   title: `KENTSEL DÖNÜŞÜM HİZMETLERİ`,
-  description: "Riskli yapı tespitinden yenileme projelerine kadar kentsel dönüşüm süreçlerinizin tüm aşamalarında yanınızdayız.",
+  description:
+    "Riskli yapı tespitinden yenileme projelerine kadar kentsel dönüşüm süreçlerinizin tüm aşamalarında yanınızdayız.",
   image: `${base}nurdoganlanding1.jpeg`,
-  href: `${base}hizmetler`,
-};
-const right = {
-  title: "BİNA SİTE YÖNETİM HİZMETİ",
-  description: "Profesyonel bina ve site yönetimi ile güvenli, düzenli ve değerini koruyan yaşam alanları sunuyoruz.",
-  image: `${base}nurdoganlanding3.jpeg`,
-  href: `${base}bina-yonetimi`,
 };
 ---
 
 <section
-  class="split-landing relative flex flex-col md:flex-row w-full min-h-[calc(100vh-5rem)] overflow-hidden"
+  class="relative w-full min-h-[calc(100vh-5rem)] overflow-hidden"
   id="hero-slider"
-  aria-label="Hizmet seçimi"
+  aria-label="Ana tanıtım"
 >
-  <a
-    href={left.href}
-    class="panel panel-left relative flex-1 flex min-h-[50vh] md:min-h-0 items-center justify-center min-w-0 overflow-hidden transition-all duration-800 ease-out cursor-pointer group"
-  >
+  <div class="relative flex min-h-[calc(100vh-5rem)] w-full flex-col items-center justify-center px-4 py-16 md:py-24">
     <div class="absolute inset-0 z-0">
       <Image
-        src={left.image}
-        alt="Kentsel dönüşüm"
+        src={hero.image}
+        alt=""
         width={1920}
         height={1080}
-        class="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
+        class="h-full w-full object-cover"
       />
     </div>
-    <div class="absolute inset-0 z-10 bg-black/20 group-hover:bg-black/30 dark:bg-black/40 dark:group-hover:bg-black/50 transition-colors duration-500"></div>
-    <div class="relative z-20 flex flex-col items-center justify-center gap-3 sm:gap-4 px-4 text-center">
-      <h2 class="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold tracking-wide drop-shadow-lg">
-        {left.title}
-      </h2>
-      <p class="panel-desc text-white text-lg sm:text-xl md:text-2xl max-w-2xl transition-all duration-500 ease-out drop-shadow-md">
-        {left.description}
-      </p>
+    <div class="absolute inset-0 z-10 bg-black/35 dark:bg-black/45"></div>
+    <div class="relative z-20 flex w-full flex-col items-center px-[clamp(1rem,calc(0.5rem+1.6vw),2rem)] text-center">
+      <div class="flex w-full flex-col items-center gap-[clamp(0.875rem,calc(0.5rem+1.4vw),1.5rem)]">
+        <h2 class="w-full max-w-[min(100%,60rem)] text-[clamp(1.75rem,calc(0.92rem+2vw),3rem)] font-semibold leading-[1.12] tracking-wide text-white drop-shadow-md">
+          {hero.title}
+        </h2>
+        <p class="w-full max-w-[min(100%,44rem)] text-[clamp(1rem,calc(0.72rem+0.75vw),1.4375rem)] leading-relaxed text-white drop-shadow-sm">
+          {hero.description}
+        </p>
+      </div>
+      <div class="mt-6 flex w-full max-w-[min(100%,44rem)] flex-col items-stretch justify-center gap-3 sm:mt-8 sm:max-w-none sm:flex-row sm:items-center sm:gap-4">
+        <a
+          href={`${base}hizmetler`}
+          class="inline-flex min-h-[3rem] flex-1 items-center justify-center gap-2 rounded-full bg-[#E30A17] px-6 py-3.5 text-base font-medium text-white shadow-md shadow-black/25 transition-colors hover:bg-[#c00914] sm:min-h-0 sm:flex-initial sm:px-7 sm:py-4 sm:text-lg"
+        >
+          Hizmetleri Keşfedin
+          <ArrowRightIcon color="#fff" />
+        </a>
+        <button
+          type="button"
+          class="open-teklif-modal inline-flex min-h-[3rem] flex-1 cursor-pointer items-center justify-center rounded-full border-2 border-white bg-white/5 px-6 py-3.5 text-base font-medium text-white backdrop-blur-[2px] transition-colors hover:bg-white/20 sm:min-h-0 sm:flex-initial sm:px-7 sm:py-4 sm:text-lg"
+        >
+          Hemen Teklif Al
+        </button>
+      </div>
     </div>
-  </a>
-
-  <div
-    class="center-line absolute left-0 right-0 top-1/2 md:top-0 md:bottom-0 md:left-1/2 md:right-auto md:w-1 md:h-auto w-auto h-1 sm:h-1.5 -translate-y-1/2 md:translate-y-0 md:-translate-x-1/2 bg-white z-30 pointer-events-none transition-opacity duration-300 shadow-[0_0_16px_rgba(255,255,255,0.5)]"
-    aria-hidden="true"
-  ></div>
-
-  <a
-    href={right.href}
-    class="panel panel-right relative flex-1 flex min-h-[50vh] md:min-h-0 items-center justify-center min-w-0 overflow-hidden transition-all duration-500 ease-out cursor-pointer group"
-  >
-    <div class="absolute inset-0 z-0">
-      <Image
-        src={right.image}
-        alt="Bina site yönetimi"
-        width={1920}
-        height={1080}
-        class="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
-      />
-    </div>
-    <div class="absolute inset-0 z-10 bg-black/20 group-hover:bg-black/30 dark:bg-black/40 dark:group-hover:bg-black/50 transition-colors duration-500"></div>
-    <div class="relative z-20 flex flex-col items-center justify-center gap-3 sm:gap-4 px-4 text-center">
-      <h2 class="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold tracking-wide drop-shadow-lg">
-        {right.title}
-      </h2>
-      <p class="panel-desc text-white text-lg sm:text-xl md:text-2xl max-w-2xl transition-all duration-500 ease-out drop-shadow-md">
-        {right.description}
-      </p>
-    </div>
-  </a>
+  </div>
 </section>
-
-<style>
-  .split-landing {
-    /* Hover: sol panel üzerindeyken sol genişler, sağ daralır */
-  }
-  .split-landing:has(.panel-left:hover) .panel-left {
-    flex: 1 1 100%;
-  }
-  .split-landing:has(.panel-left:hover) .panel-right {
-    flex: 0 0 0%;
-    min-width: 0;
-    opacity: 0;
-    pointer-events: none;
-  }
-  .split-landing:has(.panel-right:hover) .panel-right {
-    flex: 1 1 100%;
-  }
-  .split-landing:has(.panel-right:hover) .panel-left {
-    flex: 0 0 0%;
-    min-width: 0;
-    opacity: 0;
-    pointer-events: none;
-  }
-  .split-landing:has(.panel-left:hover) .center-line,
-  .split-landing:has(.panel-right:hover) .center-line {
-    opacity: 0;
-  }
-  .panel {
-    flex: 1 1 50%;
-  }
-  .panel-desc {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  .panel:hover .panel-desc {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .panel,
-    .panel img {
-      transition: none;
-    }
-  }
-</style>

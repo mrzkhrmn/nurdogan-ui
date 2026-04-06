@@ -356,45 +356,29 @@ export function BinaYonetimiWithData({ baseUrl = "/" }) {
   );
 }
 
-/** Anasayfa landing: API'den main tab, section landing-anasayfa (başlıklar, açıklamalar, görseller) */
+/** Anasayfa landing: API'den main tab, section landing-anasayfa (tek blok — sol içerik) */
 function LandingContent({ baseUrl = "/" }) {
   const { data, isLoading, error } = useGetWebsiteTabQuery("main");
   const section = getSectionByCode(data, "landing-anasayfa");
-  const leftTitle =
+  const title =
     getItemByCode(section, "landing-left-title") ||
     "Kentsel Dönüşüm Hizmetleri";
-  const rightTitle =
-    getItemByCode(section, "landing-right-title") ||
-    "Bina Site Yönetim Hizmeti";
-  const leftDesc =
+  const description =
     String(getItemByCode(section, "landing-left-description") || "").trim() ||
     "Riskli yapı tespitinden yenileme projelerine kadar kentsel dönüşüm süreçlerinizin tüm aşamalarında yanınızdayız.";
-  const rightDesc =
-    String(getItemByCode(section, "landing-right-description") || "").trim() ||
-    "Profesyonel bina ve site yönetimi ile güvenli, düzenli ve değerini koruyan yaşam alanları sunuyoruz.";
   const leftImageContent = getItemByCode(section, "landing-left-image");
-  const rightImageContent = getItemByCode(section, "landing-right-image");
-  const leftImageSrc = leftImageContent
+  const imageSrc = leftImageContent
     ? getImageUrl(leftImageContent)
     : `${baseUrl}nurdoganlanding1.jpeg`;
-  const rightImageSrc = rightImageContent
-    ? getImageUrl(rightImageContent)
-    : `${baseUrl}nurdoganlanding3.jpeg`;
-  const leftHref = `${baseUrl}hizmetler`;
-  const rightHref = `${baseUrl}bina-yonetimi`;
+  const hizmetlerHref = `${baseUrl}hizmetler`;
 
   if (isLoading) {
     return (
       <section
-        className="split-landing relative flex flex-col md:flex-row w-full min-h-[calc(100vh-5rem)] overflow-hidden"
-        aria-label="Hizmet seçimi"
+        className="relative flex w-full min-h-[calc(100vh-5rem)] items-center justify-center overflow-hidden bg-gray-200"
+        aria-label="Yükleniyor"
       >
-        <div className="flex-1 flex min-h-[50vh] md:min-h-0 items-center justify-center bg-gray-200 animate-pulse">
-          <div className="h-12 w-64 bg-gray-300 rounded" />
-        </div>
-        <div className="flex-1 flex min-h-[50vh] md:min-h-0 items-center justify-center bg-gray-300 animate-pulse">
-          <div className="h-12 w-64 bg-gray-400 rounded" />
-        </div>
+        <div className="h-10 w-56 rounded bg-gray-300" />
       </section>
     );
   }
@@ -408,56 +392,48 @@ function LandingContent({ baseUrl = "/" }) {
 
   return (
     <section
-      className="split-landing relative flex flex-col md:flex-row w-full min-h-[calc(100vh-5rem)] overflow-hidden"
+      className="relative w-full min-h-[calc(100vh-5rem)] overflow-hidden"
       id="hero-slider"
-      aria-label="Hizmet seçimi"
+      aria-label="Ana tanıtım"
     >
-      <a
-        href={leftHref}
-        className="panel panel-left relative flex-1 flex min-h-[50vh] md:min-h-0 items-center justify-center min-w-0 overflow-hidden transition-all duration-[800ms] ease-out cursor-pointer group"
-      >
+      <div className="relative flex min-h-[calc(100vh-5rem)] w-full flex-col items-center justify-center px-4 py-16 md:py-24">
         <div className="absolute inset-0 z-0">
           <img
-            src={leftImageSrc}
-            alt="Kentsel dönüşüm"
-            className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
+            src={imageSrc}
+            alt=""
+            className="h-full w-full object-cover"
+            width={1920}
+            height={1080}
+            decoding="async"
           />
         </div>
-        <div className="absolute inset-0 z-10 bg-black/20 group-hover:bg-black/30 transition-colors duration-500" />
-        <div className="relative z-20 flex flex-col items-center justify-center gap-3 sm:gap-4 px-4 text-center">
-          <h2 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold tracking-wide drop-shadow-lg bg-black/40 p-4 rounded-2xl">
-            {leftTitle}
-          </h2>
-          <p className="panel-desc text-white text-lg sm:text-xl md:text-2xl max-w-2xl transition-all duration-500 ease-out drop-shadow-md bg-black/40 p-2 rounded-lg">
-            {leftDesc}
-          </p>
+        <div className="absolute inset-0 z-10 bg-black/35 dark:bg-black/45" />
+        <div className="relative z-20 flex w-full flex-col items-center px-[clamp(1rem,calc(0.5rem+1.6vw),2rem)] text-center">
+          <div className="flex w-full flex-col items-center gap-[clamp(0.875rem,calc(0.5rem+1.4vw),1.5rem)]">
+            <h2 className="w-full max-w-[min(100%,60rem)] text-[clamp(1.75rem,calc(0.92rem+2vw),3rem)] font-semibold leading-[1.12] tracking-wide text-white drop-shadow-md">
+              {title}
+            </h2>
+            <p className="w-full max-w-[min(100%,44rem)] text-[clamp(1rem,calc(0.72rem+0.75vw),1.4375rem)] leading-relaxed text-white drop-shadow-sm">
+              {description}
+            </p>
+          </div>
+          <div className="mt-6 flex w-full max-w-[min(100%,44rem)] flex-col items-stretch justify-center gap-3 sm:mt-8 sm:max-w-none sm:flex-row sm:items-center sm:gap-4">
+            <a
+              href={hizmetlerHref}
+              className="inline-flex min-h-[3rem] flex-1 items-center justify-center gap-2 rounded-full bg-[#E30A17] px-6 py-3.5 text-base font-medium text-white shadow-md shadow-black/25 transition-colors hover:bg-[#c00914] sm:min-h-0 sm:flex-initial sm:px-7 sm:py-4 sm:text-lg"
+            >
+              Hizmetleri Keşfedin
+              <ArrowRightIcon color="#fff" />
+            </a>
+            <button
+              type="button"
+              className="open-teklif-modal inline-flex min-h-[3rem] flex-1 cursor-pointer items-center justify-center rounded-full border-2 border-white bg-white/5 px-6 py-3.5 text-base font-medium text-white backdrop-blur-[2px] transition-colors hover:bg-white/20 sm:min-h-0 sm:flex-initial sm:px-7 sm:py-4 sm:text-lg"
+            >
+              Hemen Teklif Al
+            </button>
+          </div>
         </div>
-      </a>
-      <div
-        className="center-line absolute left-0 right-0 top-1/2 md:top-0 md:bottom-0 md:left-1/2 md:right-auto md:w-1 md:h-auto w-auto h-1 sm:h-1.5 -translate-y-1/2 md:translate-y-0 md:-translate-x-1/2 bg-white z-30 pointer-events-none transition-opacity duration-300 shadow-[0_0_16px_rgba(255,255,255,0.5)]"
-        aria-hidden="true"
-      />
-      <a
-        href={rightHref}
-        className="panel panel-right relative flex-1 flex min-h-[50vh] md:min-h-0 items-center justify-center min-w-0 overflow-hidden transition-all duration-500 ease-out cursor-pointer group"
-      >
-        <div className="absolute inset-0 z-0">
-          <img
-            src={rightImageSrc}
-            alt="Bina site yönetimi"
-            className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
-          />
-        </div>
-        <div className="absolute inset-0 z-10 bg-black/20 group-hover:bg-black/30 transition-colors duration-500" />
-        <div className="relative z-20 flex flex-col items-center justify-center gap-3 sm:gap-4 px-4 text-center">
-          <h2 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold tracking-wide drop-shadow-lg bg-black/40 p-4 rounded-2xl">
-            {rightTitle}
-          </h2>
-          <p className="panel-desc text-white text-lg sm:text-xl md:text-2xl max-w-2xl transition-all duration-500 ease-out drop-shadow-md bg-black/40 p-2 rounded-lg">
-            {rightDesc}
-          </p>
-        </div>
-      </a>
+      </div>
     </section>
   );
 }

@@ -11,7 +11,6 @@ const navItems = [
   { label: "Hizmetlerimiz", href: `${base}hizmetler` },
   { label: "Dernek", href: "https://www.marmarakentseldonusumdernegi.com" },
   { label: "İletişim", href: `${base}iletisim` },
-  { label: "Bina Yönetimi", href: `${base}bina-yonetimi` },
 ];
 interface Props {
   isHomePage?: boolean;
@@ -32,7 +31,7 @@ const headerClass = isHomePage
           alt="Logo" 
           width={170} 
           height={100} 
-          class="w-32 sm:w-36 md:w-40 lg:w-24 xl:w-48 h-auto"
+          class="w-32 sm:w-36 md:w-40 lg:w-24 xl:w-28 min-[1440px]:w-40 2xl:w-44 h-auto"
         />
       </a>
 
@@ -49,21 +48,24 @@ const headerClass = isHomePage
             </a>
           );
         })}
-        <div class="hidden lg:flex items-center bg-white/20 rounded-full px-3 py-2 lg:px-4 lg:py-2 xl:px-5 xl:py-2.5 2xl:px-6 2xl:py-3 w-32 lg:w-36 xl:w-40 2xl:w-44 focus:ring-2 shrink-0 text-white">
-          <input
-            type="text"
-            placeholder="Ara"
-            class="w-full text-xs lg:text-sm xl:text-base outline-none text-white placeholder:text-white/80 bg-transparent"
-          />
-          <SearchIcon />
+        <div class="flex items-center gap-4 shrink-0">
+          <a
+            href={`${base}bina-yonetimi`}
+            class="rounded-full bg-white px-3 lg:px-4 xl:px-5 py-2.5 lg:py-3 xl:py-3 min-[1440px]:py-3.5 2xl:px-6 2xl:py-4 text-xs xl:text-sm 2xl:text-base font-medium text-[#E30A17] hover:bg-gray-100 transition flex items-center gap-1 xl:gap-1.5 whitespace-nowrap shrink-0"
+          >
+            <svg class="w-4 h-4 xl:w-4.5 xl:h-4.5 2xl:w-5 2xl:h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            Bina Yönetimi
+          </a>
+          <a
+            href="#"
+            class="open-teklif-modal rounded-full bg-white px-3 lg:px-4 xl:px-5 py-2.5 lg:py-3 xl:py-3 min-[1440px]:py-3.5 2xl:px-6 2xl:py-4 text-xs xl:text-sm 2xl:text-base font-medium text-[#E30A17] hover:bg-gray-100 transition flex items-center gap-1 xl:gap-1.5 whitespace-nowrap shrink-0"
+          >
+            Teklif Al
+            <ArrowRightIcon color="#E30A17" />
+          </a>
         </div>
-        <a
-          href="#"
-          class="open-teklif-modal rounded-full bg-white px-3 xl:px-5 py-2 2xl:px-6 2xl:py-3 text-xs xl:text-sm 2xl:text-base font-medium text-[#E30A17] hover:bg-gray-100 transition flex items-center gap-1 xl:gap-1.5 whitespace-nowrap shrink-0"
-        >
-          Teklif Al
-          <ArrowRightIcon color="#E30A17" />
-        </a>
         <div class="flex items-center gap-2 shrink-0">
           <a href="https://www.instagram.com/nurdoganbabadag/" target="_blank" rel="noopener noreferrer" class="cursor-pointer flex items-center justify-center text-white">
             <div class="w-6 h-6 xl:w-7 xl:h-7 2xl:w-8 2xl:h-8 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full">
@@ -142,6 +144,16 @@ const headerClass = isHomePage
       </nav>
       
       <div class="mt-8 flex flex-col gap-4">
+        <a
+          href={`${base}bina-yonetimi`}
+          class="rounded-full bg-white px-8 py-4 text-lg font-medium text-[#E30A17] hover:bg-gray-100 transition flex items-center justify-center gap-2"
+          onclick="document.getElementById('mobile-menu').classList.add('translate-x-full'); document.getElementById('mobile-menu-btn').classList.remove('active');"
+        >
+          <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+          Bina Yönetimi
+        </a>
         <a
           href="#"
           class="open-teklif-modal rounded-full bg-white px-8 py-4 text-lg font-medium text-[#E30A17] hover:bg-gray-100 transition flex items-center justify-center gap-2"
