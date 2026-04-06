@@ -17,13 +17,13 @@ interface Props {
 }
 const { isHomePage = false } = Astro.props;
 const headerClass = isHomePage
-  ? "relative z-50 py-5 sm:py-7 md:py-9 lg:py-8 w-full bg-[#E30A17] dark:bg-gray-950 transition-colors duration-200"
-  : "absolute top-0 left-0 right-0 z-50 py-5 sm:py-7 md:py-9 lg:py-8 w-full bg-[#E30A17] dark:bg-gray-950 transition-colors duration-200";
+  ? "relative z-50 py-2 xl:py-3 min-[1440px]:py-4 2xl:py-5 w-full bg-[#E30A17] dark:bg-gray-950 transition-colors duration-200"
+  : "absolute top-0 left-0 right-0 z-50 py-2 xl:py-3 min-[1440px]:py-4 2xl:py-5 w-full bg-[#E30A17] dark:bg-gray-950 transition-colors duration-200";
 ---
 
 <header class={headerClass}>
   <div class="w-full mx-auto max-w-[1920px]">
-    <div class="flex items-center justify-between lg:justify-center h-14 sm:h-16 md:h-18 lg:h-20 gap-4 lg:gap-6 xl:gap-8 2xl:gap-12">
+    <div class="flex items-center justify-between lg:justify-center h-14 sm:h-16 md:h-18 lg:h-14 min-[1440px]:h-16 2xl:h-18 gap-4 lg:gap-6 xl:gap-8 2xl:gap-12">
 
       <a href={base} class="text-xl font-bold tracking-tight shrink-0 bg-white rounded-lg p-1 inline-flex items-center justify-center">
         <Image 
@@ -51,16 +51,16 @@ const headerClass = isHomePage
         <div class="flex items-center gap-4 shrink-0">
           <a
             href={`${base}bina-yonetimi`}
-            class="rounded-full bg-white px-3 lg:px-4 xl:px-5 py-2.5 lg:py-3 xl:py-3 min-[1440px]:py-3.5 2xl:px-6 2xl:py-4 text-xs xl:text-sm 2xl:text-base font-medium text-[#E30A17] hover:bg-gray-100 transition flex items-center gap-1 xl:gap-1.5 whitespace-nowrap shrink-0"
+            class="rounded-full bg-white px-2.5 lg:px-3 xl:px-4 lg:py-2 2xl:px-5 text-[11px] xl:text-xs 2xl:text-sm font-medium text-[#E30A17] hover:bg-gray-100 transition flex items-center gap-1 xl:gap-1.5 whitespace-nowrap shrink-0"
           >
-            <svg class="w-4 h-4 xl:w-4.5 xl:h-4.5 2xl:w-5 2xl:h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            <svg class="w-3.5 h-3.5 xl:w-4 xl:h-4 2xl:w-4 2xl:h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
             </svg>
             Bina Yönetimi
           </a>
           <a
             href="#"
-            class="open-teklif-modal rounded-full bg-white px-3 lg:px-4 xl:px-5 py-2.5 lg:py-3 xl:py-3 min-[1440px]:py-3.5 2xl:px-6 2xl:py-4 text-xs xl:text-sm 2xl:text-base font-medium text-[#E30A17] hover:bg-gray-100 transition flex items-center gap-1 xl:gap-1.5 whitespace-nowrap shrink-0"
+            class="open-teklif-modal rounded-full bg-white px-2.5 lg:px-3 xl:px-4 lg:py-2 2xl:px-5 text-[11px] xl:text-xs 2xl:text-sm font-medium text-[#E30A17] hover:bg-gray-100 transition flex items-center gap-1 xl:gap-1.5 whitespace-nowrap shrink-0 [&_svg]:w-3 [&_svg]:h-3 xl:[&_svg]:w-3.5 xl:[&_svg]:h-3.5"
           >
             Teklif Al
             <ArrowRightIcon color="#E30A17" />
@@ -143,24 +143,26 @@ const headerClass = isHomePage
         })}
       </nav>
       
-      <div class="mt-8 flex flex-col gap-4">
+      <div class="mt-8 flex flex-col gap-3 sm:gap-4 max-w-[min(100%,18rem)] mx-auto w-full">
         <a
           href={`${base}bina-yonetimi`}
-          class="rounded-full bg-white px-8 py-4 text-lg font-medium text-[#E30A17] hover:bg-gray-100 transition flex items-center justify-center gap-2"
+          class="w-full rounded-full bg-white px-5 py-2.5 text-sm font-medium text-[#E30A17] hover:bg-gray-100 transition flex items-center justify-center gap-1.5"
           onclick="document.getElementById('mobile-menu').classList.add('translate-x-full'); document.getElementById('mobile-menu-btn').classList.remove('active');"
         >
-          <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
           </svg>
           Bina Yönetimi
         </a>
         <a
           href="#"
-          class="open-teklif-modal rounded-full bg-white px-8 py-4 text-lg font-medium text-[#E30A17] hover:bg-gray-100 transition flex items-center justify-center gap-2"
+          class="open-teklif-modal w-full rounded-full bg-white px-5 py-2.5 text-sm font-medium text-[#E30A17] hover:bg-gray-100 transition flex items-center justify-center gap-1.5"
           onclick="document.getElementById('mobile-menu').classList.add('translate-x-full'); document.getElementById('mobile-menu-btn').classList.remove('active');"
         >
           Teklif Al
-          <ArrowRightIcon color="#E30A17" />
+          <span class="inline-flex shrink-0 [&_svg]:w-3.5 [&_svg]:h-3.5" aria-hidden="true">
+            <ArrowRightIcon color="#E30A17" />
+          </span>
         </a>
         <div class="flex items-center justify-center gap-4">
           <ThemeToggle client:load />

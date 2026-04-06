@@ -356,39 +356,10 @@ export function BinaYonetimiWithData({ baseUrl = "/" }) {
   );
 }
 
-/** Anasayfa landing: API'den main tab, section landing-anasayfa (tek blok — sol içerik) */
+/** Anasayfa landing: başlık ve açıklama şimdilik statik; görsel varsayılan dosya */
 function LandingContent({ baseUrl = "/" }) {
-  const { data, isLoading, error } = useGetWebsiteTabQuery("main");
-  const section = getSectionByCode(data, "landing-anasayfa");
-  const title =
-    getItemByCode(section, "landing-left-title") ||
-    "Kentsel Dönüşüm Hizmetleri";
-  const description =
-    String(getItemByCode(section, "landing-left-description") || "").trim() ||
-    "Riskli yapı tespitinden yenileme projelerine kadar kentsel dönüşüm süreçlerinizin tüm aşamalarında yanınızdayız.";
-  const leftImageContent = getItemByCode(section, "landing-left-image");
-  const imageSrc = leftImageContent
-    ? getImageUrl(leftImageContent)
-    : `${baseUrl}nurdoganlanding1.jpeg`;
+  const imageSrc = `${baseUrl}nurdoganlanding1.jpeg`;
   const hizmetlerHref = `${baseUrl}hizmetler`;
-
-  if (isLoading) {
-    return (
-      <section
-        className="relative flex w-full min-h-[calc(100vh-5rem)] items-center justify-center overflow-hidden bg-gray-200"
-        aria-label="Yükleniyor"
-      >
-        <div className="h-10 w-56 rounded bg-gray-300" />
-      </section>
-    );
-  }
-  if (error) {
-    return (
-      <section className="relative flex w-full min-h-[200px] items-center justify-center bg-gray-100 text-[#525252] px-4">
-        Landing içeriği yüklenemedi.
-      </section>
-    );
-  }
 
   return (
     <section
@@ -396,7 +367,7 @@ function LandingContent({ baseUrl = "/" }) {
       id="hero-slider"
       aria-label="Ana tanıtım"
     >
-      <div className="relative flex min-h-[calc(100vh-5rem)] w-full flex-col items-center justify-center px-4 py-16 md:py-24">
+      <div className="relative flex min-h-[calc(100vh-5rem)] w-full flex-col items-start justify-center py-[clamp(2.5rem,calc(2rem+2vw),6rem)]">
         <div className="absolute inset-0 z-0">
           <img
             src={imageSrc}
@@ -408,19 +379,23 @@ function LandingContent({ baseUrl = "/" }) {
           />
         </div>
         <div className="absolute inset-0 z-10 bg-black/35 dark:bg-black/45" />
-        <div className="relative z-20 flex w-full flex-col items-center px-[clamp(1rem,calc(0.5rem+1.6vw),2.5rem)] text-center">
-          <div className="flex w-full flex-col items-center gap-[clamp(0.875rem,calc(0.5rem+1.15vw),1.75rem)] min-[1600px]:gap-[clamp(1.25rem,calc(0.45rem+1.6vw),2.25rem)]">
-            <h2 className="w-full max-w-[min(100%,60rem)] text-[clamp(1.625rem,calc(0.88rem+1.05vw),2.875rem)] font-semibold leading-[1.1] tracking-wide text-white drop-shadow-md max-[1439px]:max-w-[min(100%,46rem)] max-[1439px]:text-[clamp(1.5rem,calc(0.82rem+0.75vw),2.25rem)] min-[1600px]:max-w-[min(100%,72rem)] min-[1600px]:text-[clamp(2rem,calc(0.78rem+2.35vw),4.5rem)] min-[1920px]:max-w-[min(100%,80rem)]">
-              {title}
+        <div className="relative z-20 mx-auto flex w-full max-w-[min(100%,92rem)] flex-col items-start px-[clamp(1rem,calc(0.35rem+2.85vw),4rem)] text-left">
+          <div className="flex w-full flex-col items-start gap-[clamp(0.75rem,calc(0.45rem+1.1vw),2.25rem)]">
+            <h2 className="hero-entrance hero-entrance-delay-1 w-full text-[clamp(1.75rem,calc(0.7rem+3.6vw),5rem)] font-semibold leading-[1.1] tracking-wide text-white drop-shadow-md">
+              Kentsel Dönüşüm ve Proje Yönetimi
+              <br />
+              Danışmanlık Hizmetleri
             </h2>
-            <p className="w-full max-w-[min(100%,44rem)] text-[clamp(0.9375rem,calc(0.7rem+0.55vw),1.3125rem)] leading-relaxed text-white drop-shadow-sm max-[1439px]:max-w-[min(100%,34rem)] min-[1600px]:max-w-[min(100%,52rem)] min-[1600px]:text-[clamp(1.0625rem,calc(0.58rem+1vw),1.9375rem)] min-[1920px]:max-w-[min(100%,60rem)]">
-              {description}
+            <p className="hero-entrance hero-entrance-delay-2 w-full text-[clamp(1.1875rem,calc(0.88rem+0.68vw),2.5rem)] leading-relaxed text-white drop-shadow-sm">
+              Riskli yapı tespitinden yenileme projelerine kadar kentsel dönüşüm
+              <br />
+              süreçlerinizin tüm aşamalarında yanınızdayız.
             </p>
           </div>
-          <div className="mt-[clamp(1.25rem,calc(0.75rem+1.8vw),3rem)] flex w-full max-w-[min(100%,48rem)] flex-col items-stretch justify-center gap-[clamp(0.5rem,calc(0.35rem+0.65vw),2rem)] max-[1439px]:max-w-[min(100%,38rem)] sm:max-w-none sm:flex-row sm:items-center sm:justify-center max-[1439px]:sm:max-w-[min(100%,38rem)]">
+          <div className="mt-[clamp(1.25rem,calc(0.6rem+2.2vw),3.5rem)] flex w-full max-w-[min(100%,64rem,calc(24rem+28vw))] flex-col items-stretch justify-start gap-[clamp(0.5rem,calc(0.35rem+0.65vw),2rem)] sm:flex-row sm:items-center sm:justify-start">
             <a
               href={hizmetlerHref}
-              className="inline-flex w-full flex-1 cursor-pointer items-center justify-center gap-[clamp(0.35rem,calc(0.2rem+0.45vw),0.75rem)] rounded-full bg-[#E30A17] px-[clamp(0.875rem,calc(0.5rem+2.2vw),3.5rem)] py-[clamp(0.5rem,calc(0.38rem+0.85vw),1.5rem)] text-[clamp(0.8125rem,calc(0.74rem+0.55vw),1.625rem)] font-medium leading-tight text-white shadow-md shadow-black/25 transition-colors hover:bg-[#c00914] max-[1439px]:min-h-[2.125rem] max-[1439px]:gap-1.5 max-[1439px]:px-4 max-[1439px]:py-2 max-[1439px]:text-[0.8125rem] max-[1439px]:sm:px-5 max-[1439px]:sm:text-sm sm:w-auto sm:flex-initial sm:min-w-[12rem] max-[1439px]:sm:min-w-[10rem] min-h-[clamp(2.35rem,calc(1.95rem+1.1vw),4.25rem)] [&_svg]:h-[1.1em] [&_svg]:w-[1.1em] [&_svg]:min-w-[1.1em] max-[1439px]:[&_svg]:h-[0.95em] max-[1439px]:[&_svg]:w-[0.95em] max-[1439px]:[&_svg]:min-w-[0.95em]"
+              className="hero-entrance hero-entrance-delay-3 inline-flex w-full max-w-[min(100%,calc(15rem+12vw))] cursor-pointer items-center justify-center gap-[clamp(0.35rem,calc(0.2rem+0.45vw),0.75rem)] rounded-full bg-[#E30A17] px-[clamp(0.9375rem,calc(0.55rem+1.9vw),2.875rem)] py-[clamp(0.5625rem,calc(0.4rem+0.72vw),1.5rem)] text-[clamp(1rem,calc(0.82rem+0.52vw),1.625rem)] font-medium leading-tight text-white shadow-md shadow-black/25 transition-colors hover:bg-[#c00914] min-h-[clamp(2.875rem,calc(2.2rem+1.15vw),4.125rem)] min-w-[clamp(10rem,calc(7rem+5vw),16rem)] sm:w-auto [&_svg]:h-[1.1em] [&_svg]:w-[1.1em] [&_svg]:min-w-[1.1em]"
             >
               Hizmetleri Keşfedin
               <span className="inline-flex shrink-0 items-center">
@@ -429,7 +404,7 @@ function LandingContent({ baseUrl = "/" }) {
             </a>
             <button
               type="button"
-              className="open-teklif-modal inline-flex w-full flex-1 cursor-pointer items-center justify-center rounded-full border-[length:clamp(1.5px,calc(1px+0.12vw),2px)] border-white bg-white/5 px-[clamp(0.875rem,calc(0.5rem+2.2vw),3.5rem)] py-[clamp(0.5rem,calc(0.38rem+0.85vw),1.5rem)] text-[clamp(0.8125rem,calc(0.74rem+0.55vw),1.625rem)] font-medium leading-tight text-white backdrop-blur-[2px] transition-colors hover:bg-white/20 max-[1439px]:min-h-[2.125rem] max-[1439px]:px-4 max-[1439px]:py-2 max-[1439px]:text-[0.8125rem] max-[1439px]:sm:px-5 max-[1439px]:sm:text-sm sm:w-auto sm:flex-initial sm:min-w-[12rem] max-[1439px]:sm:min-w-[10rem] min-h-[clamp(2.35rem,calc(1.95rem+1.1vw),4.25rem)]"
+              className="open-teklif-modal hero-entrance hero-entrance-delay-4 inline-flex w-full max-w-[min(100%,calc(15rem+12vw))] cursor-pointer items-center justify-center rounded-full border-[length:clamp(1.5px,calc(1px+0.12vw),2px)] border-white bg-white/5 px-[clamp(0.9375rem,calc(0.55rem+1.9vw),2.875rem)] py-[clamp(0.5625rem,calc(0.4rem+0.72vw),1.5rem)] text-[clamp(1rem,calc(0.82rem+0.52vw),1.625rem)] font-medium leading-tight text-white backdrop-blur-[2px] transition-colors hover:bg-white/20 min-h-[clamp(2.875rem,calc(2.2rem+1.15vw),4.125rem)] min-w-[clamp(10rem,calc(7rem+5vw),16rem)] sm:w-auto"
             >
               Hemen Teklif Al
             </button>

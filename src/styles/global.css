@@ -99,3 +99,43 @@ body {
     background-image: none !important;
   }
 }
+
+/* Landing hero: sağdan sola sırayla giriş */
+@keyframes hero-slide-in-rtl {
+  from {
+    opacity: 0;
+    transform: translateX(1.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.hero-entrance {
+  animation: hero-slide-in-rtl 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-entrance-delay-1 {
+  animation-delay: 0.08s;
+}
+
+.hero-entrance-delay-2 {
+  animation-delay: 0.22s;
+}
+
+.hero-entrance-delay-3 {
+  animation-delay: 0.38s;
+}
+
+.hero-entrance-delay-4 {
+  animation-delay: 0.54s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-entrance {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
