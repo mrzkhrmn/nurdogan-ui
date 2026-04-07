@@ -358,25 +358,67 @@ export function BinaYonetimiWithData({ baseUrl = "/" }) {
 
 /** Anasayfa landing: başlık ve açıklama şimdilik statik; görsel varsayılan dosya */
 function LandingContent({ baseUrl = "/" }) {
-  const imageSrc = `${baseUrl}nurdoganlanding1.jpeg`;
+  const imageSrc = `${baseUrl}landing-page.jpeg`;
   const hizmetlerHref = `${baseUrl}hizmetler`;
+  const sectionRef = useRef(null);
+  const parallaxLayerRef = useRef(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const layer = parallaxLayerRef.current;
+    if (!section || !layer) return;
+
+    const mqReduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const updateParallax = () => {
+      if (mqReduce.matches) {
+        layer.style.transform = "";
+        return;
+      }
+      const scrollY = window.scrollY;
+      const h = section.offsetHeight || 1;
+      const capped = Math.min(Math.max(scrollY, 0), h);
+      const factor = window.innerWidth < 768 ? 0.22 : 0.4;
+      layer.style.transform = `translate3d(0, ${capped * factor}px, 0)`;
+    };
+
+    updateParallax();
+    window.addEventListener("scroll", updateParallax, { passive: true });
+    window.addEventListener("resize", updateParallax);
+    mqReduce.addEventListener("change", updateParallax);
+    const ro = new ResizeObserver(updateParallax);
+    ro.observe(section);
+
+    return () => {
+      window.removeEventListener("scroll", updateParallax);
+      window.removeEventListener("resize", updateParallax);
+      mqReduce.removeEventListener("change", updateParallax);
+      ro.disconnect();
+    };
+  }, []);
 
   return (
     <section
+      ref={sectionRef}
       className="relative w-full min-h-[calc(100vh-5rem)] overflow-hidden"
       id="hero-slider"
       aria-label="Ana tanıtım"
     >
       <div className="relative flex min-h-[calc(100vh-5rem)] w-full flex-col items-start justify-center py-[clamp(2.5rem,calc(2rem+2vw),6rem)]">
-        <div className="absolute inset-0 z-0">
-          <img
-            src={imageSrc}
-            alt=""
-            className="h-full w-full object-cover"
-            width={1920}
-            height={1080}
-            decoding="async"
-          />
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <div
+            ref={parallaxLayerRef}
+            className="absolute -inset-[12%] will-change-transform transform-[translateZ(0)]"
+          >
+            <img
+              src={imageSrc}
+              alt=""
+              className="h-full w-full object-cover"
+              width={1920}
+              height={1080}
+              decoding="async"
+            />
+          </div>
         </div>
         <div className="absolute inset-0 z-10 bg-black/35 dark:bg-black/45" />
         <div className="relative z-20 mx-auto flex w-full max-w-[min(100%,92rem)] flex-col items-start px-[clamp(1rem,calc(0.35rem+2.85vw),4rem)] text-left">
