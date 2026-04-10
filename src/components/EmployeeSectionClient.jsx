@@ -7,7 +7,7 @@ function mapApiToUi(p) {
   return {
     name: p?.name || "",
     position: p?.title || "",
-    image: getImageUrl(p?.photoUrl) || `${baseUrl}worker-1.png`,
+    image: getImageUrl(p?.photoUrl) || "",
     description: p?.description || "",
     startDate: String(p?.startYear ?? ""),
     email: p?.email || "",

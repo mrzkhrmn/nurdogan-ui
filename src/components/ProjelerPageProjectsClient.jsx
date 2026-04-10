@@ -42,15 +42,42 @@ function ProjectCard({ href, image, name, location, searchName }) {
         <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
         <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 bg-gradient-to-t from-black/70 to-transparent space-y-1.5">
           <p className="text-white text-sm md:text-base font-semibold flex items-center gap-2">
-            <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            <svg
+              className="w-4 h-4 shrink-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              />
             </svg>
             {name}
           </p>
           <p className="text-white/90 text-xs md:text-sm flex items-center gap-2">
-            <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            <svg
+              className="w-3.5 h-3.5 shrink-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+              />
             </svg>
             {location}
           </p>
@@ -79,8 +106,12 @@ export default function ProjelerPageProjectsClient({ baseUrl: baseUrlProp }) {
         if (!res.ok) return;
         const data = await res.json();
         if (!cancelled && Array.isArray(data)) {
-          const completed = data.filter((p) => p.isFinished).map((p) => mapApiToUi(p, baseUrl));
-          const ongoing = data.filter((p) => !p.isFinished).map((p) => mapApiToUi(p, baseUrl));
+          const completed = data
+            .filter((p) => p.isFinished)
+            .map((p) => mapApiToUi(p, baseUrl));
+          const ongoing = data
+            .filter((p) => !p.isFinished)
+            .map((p) => mapApiToUi(p, baseUrl));
           setCompletedProjects(completed);
           setOngoingProjects(ongoing);
         }
@@ -109,10 +140,16 @@ export default function ProjelerPageProjectsClient({ baseUrl: baseUrlProp }) {
     return ongoingProjects.filter((p) => normalize(p.name).includes(q));
   }, [ongoingProjects, q]);
 
-  if (loading && completedProjects.length === 0 && ongoingProjects.length === 0) {
+  if (
+    loading &&
+    completedProjects.length === 0 &&
+    ongoingProjects.length === 0
+  ) {
     return (
       <div className="py-12">
-        <div className="flex justify-center text-gray-500 dark:text-gray-400">Yükleniyor...</div>
+        <div className="flex justify-center text-gray-500 dark:text-gray-400">
+          Yükleniyor...
+        </div>
       </div>
     );
   }
@@ -151,18 +188,31 @@ export default function ProjelerPageProjectsClient({ baseUrl: baseUrlProp }) {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Proje ara..."
-            className="w-full px-4 py-3 md:px-5 md:py-4 pl-11 md:pl-12 rounded-xl border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 text-[#262322] placeholder-gray-400 dark:placeholder-gray-400 focus:border-[#E30A17] focus:outline-none transition-colors"
+            className="w-full px-4 py-3 md:px-5 md:py-4 pl-11 md:pl-12 rounded-xl border-2 bg-white/25 text-[#262322] placeholder-gray-500 border-gray-300 shadow-md backdrop-blur-sm focus:border-[#E30A17] focus:outline-none transition-colors dark:bg-gray-950/70 dark:text-gray-100 dark:placeholder-gray-300 dark:border-gray-500 dark:shadow-black/30"
             aria-label="Proje ara"
           />
-          <svg className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          <svg
+            className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-600 dark:text-gray-300 pointer-events-none"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
           </svg>
         </div>
       </div>
 
       {activeTab === "ongoing" && (
         <div className="projects-panel">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6" id="ongoing-list">
+          <div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6"
+            id="ongoing-list"
+          >
             {filteredOngoing.map((project) => (
               <ProjectCard
                 key={project.id}
@@ -174,8 +224,11 @@ export default function ProjelerPageProjectsClient({ baseUrl: baseUrlProp }) {
               />
             ))}
           </div>
-          {(filteredOngoing.length === 0 && searchQuery) && (
-            <p className="text-gray-500 dark:text-gray-400 text-sm mt-4" id="ongoing-empty">
+          {filteredOngoing.length === 0 && searchQuery && (
+            <p
+              className="text-gray-500 dark:text-gray-400 text-sm mt-4"
+              id="ongoing-empty"
+            >
               Arama kriterine uygun devam eden proje bulunamadı.
             </p>
           )}
@@ -184,7 +237,10 @@ export default function ProjelerPageProjectsClient({ baseUrl: baseUrlProp }) {
 
       {activeTab === "completed" && (
         <div className="projects-panel">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6" id="completed-list">
+          <div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6"
+            id="completed-list"
+          >
             {filteredCompleted.map((project) => (
               <ProjectCard
                 key={project.id}
@@ -196,8 +252,11 @@ export default function ProjelerPageProjectsClient({ baseUrl: baseUrlProp }) {
               />
             ))}
           </div>
-          {(filteredCompleted.length === 0 && searchQuery) && (
-            <p className="text-gray-500 dark:text-gray-400 text-sm mt-4" id="completed-empty">
+          {filteredCompleted.length === 0 && searchQuery && (
+            <p
+              className="text-gray-500 dark:text-gray-400 text-sm mt-4"
+              id="completed-empty"
+            >
               Arama kriterine uygun tamamlanan proje bulunamadı.
             </p>
           )}

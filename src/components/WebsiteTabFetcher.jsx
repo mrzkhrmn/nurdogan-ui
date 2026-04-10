@@ -658,7 +658,11 @@ function KentselDonusumTanitimContent({ baseUrl = "/" }) {
           {statNumbers.map((num, index) => (
             <div
               key={index}
-              className={`${index !== 0 ? "border-l border-[#DFDEDC] dark:border-gray-600" : ""} text-center stat-item flex flex-col items-center`}
+              className={`${
+                index !== 0
+                  ? "border-l border-[#DFDEDC] dark:border-gray-600"
+                  : ""
+              } text-center stat-item flex flex-col items-center`}
             >
               <div className="stat-icon-wrapper opacity-0 scale-75 transition-all duration-500 ease-out">
                 <StatIcon
@@ -731,12 +735,20 @@ function HakkimizdaContent({ baseUrl = "/" }) {
     >
       <div className="absolute inset-0 z-0">
         <img
-          src={`${baseUrl}building-modern.jpg`}
+          src={`${baseUrl}about-us.jpg`}
           alt=""
           className="w-full h-full object-cover"
           aria-hidden="true"
         />
       </div>
+      <div
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to right, rgba(255,255,255,0.50) 0%, rgba(255,255,255,0.52) 55%, rgba(255,255,255,0.5) 100%)",
+        }}
+        aria-hidden="true"
+      />
       <div className="relative z-10 max-w-7xl mx-auto w-full">
         <div className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-10 lg:p-12 xl:p-16 shadow-2xl">
           <p className="inline-block text-[#E30A17] text-sm sm:text-base md:text-4xl font-bold mb-4 tracking-wider uppercase bg-[#E30A17]/15 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl">
@@ -781,7 +793,7 @@ const MANAGED_BUILDINGS_FALLBACK = [
     name: "Çam Apartmanı",
     imageKey: "bulding-management-interior.jpg",
   },
-  { number: "02", name: "Ekşioğlu Apartmanı", imageKey: "building-modern.jpg" },
+  { number: "02", name: "Ekşioğlu Apartmanı", imageKey: "about-us.jpg" },
   {
     number: "03",
     name: "Dostlar Apartmanı",

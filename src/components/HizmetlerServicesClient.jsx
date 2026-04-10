@@ -18,19 +18,13 @@ export default function HizmetlerServicesClient({ baseUrl = "/" }) {
 
         const mapped = data
           .slice()
-          .sort(
-            (a, b) =>
-              (a?.listOrder ?? 0) - (b?.listOrder ?? 0),
-          )
+          .sort((a, b) => (a?.listOrder ?? 0) - (b?.listOrder ?? 0))
           .map((category) => ({
             id: category?.id || "",
             name: category?.name || "",
             services: (category?.services ?? [])
               .slice()
-              .sort(
-                (a, b) =>
-                  (a?.listOrder ?? 0) - (b?.listOrder ?? 0),
-              )
+              .sort((a, b) => (a?.listOrder ?? 0) - (b?.listOrder ?? 0))
               .map((service) => ({
                 id: service?.id || "",
                 title: service?.title || "",
@@ -62,9 +56,11 @@ export default function HizmetlerServicesClient({ baseUrl = "/" }) {
   return (
     <section
       id="hizmetler-listesi"
-      className="w-full py-16 md:py-24 px-4 md:px-6 scroll-mt-24 bg-gray-100 dark:bg-gray-900 transition-colors duration-200"
+      className="relative w-full py-16 md:py-24 px-4 md:px-6 scroll-mt-24 bg-cover bg-center bg-no-repeat transition-colors duration-200"
+      style={{ backgroundImage: `url('${baseUrl}hizmetlerimiz-bg.png')` }}
     >
-      <div className="max-w-[1200px] mx-auto">
+      <div className="absolute inset-0 z-0 bg-white/75 dark:bg-gray-900/75" aria-hidden="true" />
+      <div className="relative z-10 max-w-[1200px] mx-auto">
         {categories.map((category) => (
           <div key={category.id || category.name} className="mb-16 md:mb-20">
             <div className="flex items-center gap-4 mb-8">
@@ -133,4 +129,3 @@ export default function HizmetlerServicesClient({ baseUrl = "/" }) {
     </section>
   );
 }
-
