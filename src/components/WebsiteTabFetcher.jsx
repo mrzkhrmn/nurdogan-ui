@@ -610,15 +610,7 @@ function KentselDonusumTanitimContent({ baseUrl = "/" }) {
       style={{ backgroundImage: `url('${baseUrl}taslak.png')` }}
     >
       <div
-        className="absolute inset-0 z-0 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(to right, transparent 0%, rgba(249, 250, 251, 1) 50%)",
-        }}
-        aria-hidden="true"
-      />
-      <div
-        className="absolute inset-0 z-0 pointer-events-none hidden dark:block bg-gradient-to-r from-transparent via-gray-900/80 to-gray-900"
+        className="absolute inset-0 z-0 pointer-events-none bg-white/50 dark:bg-gray-900/50"
         aria-hidden="true"
       />
       <div className="max-w-7xl mx-auto relative z-10">
@@ -763,11 +755,7 @@ function HakkimizdaContent({ baseUrl = "/" }) {
         />
       </div>
       <div
-        className="absolute inset-0 z-0 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(to right, rgba(255,255,255,0.50) 0%, rgba(255,255,255,0.52) 55%, rgba(255,255,255,0.5) 100%)",
-        }}
+        className="absolute inset-0 z-0 pointer-events-none bg-white/50 dark:bg-gray-900/50"
         aria-hidden="true"
       />
       <div className="relative z-10 max-w-7xl mx-auto w-full">
@@ -884,11 +872,15 @@ function BinaYonetimiSectionContent({ baseUrl = "/" }) {
       className="relative w-full py-12 sm:py-16 md:py-20 lg:py-20 px-4 md:px-6 mb-12 md:mb-16 lg:mb-20 bg-gray-100 dark:bg-gray-900 transition-colors duration-200"
     >
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.3] dark:opacity-[0.12]"
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: `url('${baseUrl}bina-yonetimi-main.png')`,
         }}
         aria-hidden
+      />
+      <div
+        className="absolute inset-0 z-1 bg-white/50 dark:bg-gray-900/50 pointer-events-none"
+        aria-hidden="true"
       />
       <div className="relative z-10 max-w-[1440px] mx-auto">
         <div className="text-center max-w-[980px] mx-auto">
