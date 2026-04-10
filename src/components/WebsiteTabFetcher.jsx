@@ -884,9 +884,9 @@ function BinaYonetimiSectionContent({ baseUrl = "/" }) {
       className="relative w-full py-12 sm:py-16 md:py-20 lg:py-20 px-4 md:px-6 mb-12 md:mb-16 lg:mb-20 bg-gray-100 dark:bg-gray-900 transition-colors duration-200"
     >
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.15] dark:opacity-[0.12]"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.3] dark:opacity-[0.12]"
         style={{
-          backgroundImage: `url('${baseUrl}bina-yonetimi/bina-yonetimi-bg.png')`,
+          backgroundImage: `url('${baseUrl}bina-yonetimi-main.png')`,
         }}
         aria-hidden
       />
