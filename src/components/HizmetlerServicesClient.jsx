@@ -56,11 +56,9 @@ export default function HizmetlerServicesClient({ baseUrl = "/" }) {
   return (
     <section
       id="hizmetler-listesi"
-      className="relative w-full py-16 md:py-24 px-4 md:px-6 scroll-mt-24 bg-cover bg-center bg-no-repeat transition-colors duration-200"
-      style={{ backgroundImage: `url('${baseUrl}hizmetlerimiz-bg.png')` }}
+      className="w-full py-16 md:py-24 px-4 md:px-6 scroll-mt-24 bg-transparent transition-colors duration-200"
     >
-      <div className="absolute inset-0 z-0 bg-white/75 dark:bg-gray-900/75" aria-hidden="true" />
-      <div className="relative z-10 max-w-[1200px] mx-auto">
+      <div className="max-w-[1200px] mx-auto">
         {categories.map((category) => (
           <div key={category.id || category.name} className="mb-16 md:mb-20">
             <div className="flex items-center gap-4 mb-8">

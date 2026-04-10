@@ -54,7 +54,7 @@ function HizmetlerHeroSection() {
 
   if (isLoading) {
     return (
-      <section className="w-full pt-24 sm:pt-28 md:pt-48 pb-16 md:pb-20 px-4 md:px-6 bg-white dark:bg-gray-900">
+      <section className="w-full pt-24 sm:pt-28 md:pt-48 pb-16 md:pb-20 px-4 md:px-6 bg-transparent">
         <div className="max-w-[1200px] mx-auto">
           <div className="animate-pulse flex flex-col lg:flex-row gap-10 lg:gap-14">
             <div className="flex-1 h-32 bg-gray-200 dark:bg-gray-800 rounded-xl" />
@@ -66,7 +66,7 @@ function HizmetlerHeroSection() {
   }
   if (error) {
     return (
-      <section className="w-full pt-24 sm:pt-28 md:pt-48 pb-16 md:pb-20 px-4 md:px-6 bg-white dark:bg-gray-900">
+      <section className="w-full pt-24 sm:pt-28 md:pt-48 pb-16 md:pb-20 px-4 md:px-6 bg-transparent">
         <div className="max-w-[1200px] mx-auto text-[#525252] dark:text-gray-400">
           Hero içeriği yüklenemedi.
         </div>
@@ -75,7 +75,7 @@ function HizmetlerHeroSection() {
   }
 
   return (
-    <section className="w-full pt-24 sm:pt-28 md:pt-48 pb-16 md:pb-20 px-4 md:px-6 bg-white dark:bg-gray-900 transition-colors duration-200">
+    <section className="w-full pt-24 sm:pt-28 md:pt-48 pb-16 md:pb-20 px-4 md:px-6 bg-transparent transition-colors duration-200">
       <div className="max-w-[1200px] mx-auto">
         <div className="flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-14">
           <div className="flex-1 order-2 lg:order-1">
@@ -179,8 +179,15 @@ function BinaYonetimiHeroSection({ baseUrl = "/" }) {
 
   if (isLoading) {
     return (
-      <section className="w-full bg-white dark:bg-gray-900 pt-24 sm:pt-32 md:pt-36 lg:pt-44 pb-12 md:pb-20 px-4 md:px-6 mt-24 transition-colors duration-200">
-        <div className="max-w-[1440px] mx-auto animate-pulse">
+      <section
+        className="relative w-full pt-24 sm:pt-32 md:pt-36 lg:pt-44 pb-12 md:pb-20 px-4 md:px-6 mt-24 bg-cover bg-center bg-no-repeat transition-colors duration-200"
+        style={{ backgroundImage: `url('${baseUrl}yonetim-arkaplan.png')` }}
+      >
+        <div
+          className="absolute inset-0 z-0 bg-white/75 dark:bg-gray-900/75"
+          aria-hidden="true"
+        />
+        <div className="relative z-10 max-w-[1440px] mx-auto animate-pulse">
           <div className="flex flex-col lg:flex-row gap-10 lg:gap-12">
             <div className="w-full lg:w-[50%] h-64 bg-gray-200 dark:bg-gray-800 rounded-2xl" />
             <div className="flex-1 space-y-4">
@@ -196,8 +203,15 @@ function BinaYonetimiHeroSection({ baseUrl = "/" }) {
   }
   if (error) {
     return (
-      <section className="w-full bg-white dark:bg-gray-900 pt-24 sm:pt-32 md:pt-36 lg:pt-44 pb-12 md:pb-20 px-4 md:px-6 mt-24 transition-colors duration-200">
-        <div className="max-w-[1440px] mx-auto text-[#525252] dark:text-gray-400">
+      <section
+        className="relative w-full pt-24 sm:pt-32 md:pt-36 lg:pt-44 pb-12 md:pb-20 px-4 md:px-6 mt-24 bg-cover bg-center bg-no-repeat transition-colors duration-200"
+        style={{ backgroundImage: `url('${baseUrl}yonetim-arkaplan.png')` }}
+      >
+        <div
+          className="absolute inset-0 z-0 bg-white/75 dark:bg-gray-900/75"
+          aria-hidden="true"
+        />
+        <div className="relative z-10 max-w-[1440px] mx-auto text-[#525252] dark:text-gray-400">
           Bina yönetimi içeriği yüklenemedi.
         </div>
       </section>
@@ -212,8 +226,15 @@ function BinaYonetimiHeroSection({ baseUrl = "/" }) {
   };
 
   return (
-    <section className="w-full bg-white dark:bg-gray-900 pt-24 sm:pt-32 md:pt-36 lg:pt-44 pb-12 md:pb-20 px-4 md:px-6 mt-24 transition-colors duration-200">
-      <div className="max-w-[1440px] mx-auto">
+    <section
+      className="relative w-full pt-24 sm:pt-32 md:pt-36 lg:pt-44 pb-12 md:pb-20 px-4 md:px-6 mt-24 bg-cover bg-center bg-no-repeat transition-colors duration-200"
+      style={{ backgroundImage: `url('${baseUrl}yonetim-arkaplan.png')` }}
+    >
+      <div
+        className="absolute inset-0 z-0 bg-white/75 dark:bg-gray-900/75"
+        aria-hidden="true"
+      />
+      <div className="relative z-10 max-w-[1440px] mx-auto">
         <div className="flex flex-col lg:flex-row items-stretch gap-10 lg:gap-12">
           <div className="w-full lg:w-[50%] shrink-0 relative pb-[42%] md:pb-[38%]">
             <div className="absolute inset-0 flex flex-col">

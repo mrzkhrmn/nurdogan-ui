@@ -10,8 +10,13 @@ const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
   crossorigin=""
 />
 
-<section id="projelerimiz-harita" class="w-full py-16 md:py-24 px-4 md:px-6 bg-white dark:bg-gray-900 transition-colors duration-200">
-  <div class="max-w-[1480px] mx-auto">
+<section
+  id="projelerimiz-harita"
+  class="relative w-full py-16 md:py-24 px-4 md:px-6 bg-cover bg-center bg-no-repeat transition-colors duration-200"
+  style={`background-image: url('${baseUrl}map-image.png')`}
+>
+  <div class="absolute inset-0 z-0 bg-white/20 dark:bg-gray-900/80" aria-hidden="true" />
+  <div class="relative z-10 max-w-[1480px] mx-auto">
     <p class="inline-block text-[#E30A17] text-sm sm:text-base md:text-4xl font-bold mb-4 tracking-wider uppercase bg-[#E30A17]/15 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl">
       PROJELERİMİZ
     </p>
@@ -25,7 +30,7 @@ const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
         {mapDistricts.map((district, index) => (
           <button
             type="button"
-            class="map-district-btn group flex items-center justify-between w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 text-left transition-all duration-300 data-[active=true]:border-transparent data-[active=true]:bg-gradient-to-r data-[active=true]:from-[#E30A17] data-[active=true]:to-[#E30A17]/80 dark:bg-gray-700/50"
+            class="map-district-btn group flex items-center justify-between w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 text-left transition-all duration-300 data-[active=true]:border-transparent data-[active=true]:bg-linear-to-r data-[active=true]:from-[#E30A17] data-[active=true]:to-[#E30A17]/80 dark:bg-gray-700/50"
             data-district-id={district.id}
             data-active={index === 0}
             data-lat={district.lat}

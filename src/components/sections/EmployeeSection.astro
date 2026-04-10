@@ -1,9 +1,14 @@
 ---
 import EmployeeSectionClient from "../EmployeeSectionClient.jsx";
+const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
 ---
 
-<section class="w-full bg-gray-100 dark:bg-gray-900 py-12 sm:py-16 md:py-20 px-4 sm:px-6 transition-colors duration-200">
-  <div class="max-w-[1340px] mx-auto">
+<section
+  class="relative w-full py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-cover bg-center bg-no-repeat transition-colors duration-200"
+  style={`background-image: url('${baseUrl}uzman-kadro.png')`}
+>
+  <div class="absolute inset-0 z-0 bg-white/10 dark:bg-gray-900/55" aria-hidden="true" />
+  <div class="relative z-10 max-w-[1340px] mx-auto">
     <div class="text-center mb-8 sm:mb-10 md:mb-12">
       <p class="inline-block text-[#E30A17] text-sm sm:text-base md:text-4xl font-bold mb-4 tracking-wider uppercase bg-[#E30A17]/15 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl">
         UZMAN KADROMUZ
