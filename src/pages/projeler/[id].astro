@@ -33,11 +33,27 @@ interface ProjectDetailDto {
   isFinished: boolean;
   /** Liste endpoint’indeki kapak; medias boşken detayda kullanılır */
   imageUrl?: string | null;
+  /** Bazı API yanıtlarında PascalCase */
+  ImageUrl?: string | null;
   medias: ProjectMediaDto[];
+  /** Bazı API yanıtlarında PascalCase */
+  Medias?: ProjectMediaDto[];
 }
 
 function resolveMediaPath(m: ProjectMediaDto): string {
   const raw = m.mediaUrl ?? m.MediaUrl;
+  return typeof raw === "string" ? raw : "";
+}
+
+function resolveProjectMedias(p: ProjectDetailDto | null): ProjectMediaDto[] {
+  if (!p) return [];
+  const raw = (p.medias ?? p.Medias) as unknown;
+  return Array.isArray(raw) ? (raw as ProjectMediaDto[]) : [];
+}
+
+function resolveProjectImageUrl(p: ProjectDetailDto | null): string {
+  if (!p) return "";
+  const raw = (p.imageUrl ?? p.ImageUrl) as unknown;
   return typeof raw === "string" ? raw : "";
 }
 
@@ -79,9 +95,11 @@ if (id) {
   }
 }
 
+const resolvedMedias = resolveProjectMedias(project);
+
 // Medias: kapak önce, sonra order'a göre; görsel URL'leri tam yap
-const coverMedia = project?.medias?.find((m) => m.isCover);
-const otherMedias = (project?.medias ?? []).filter((m) => !m.isCover).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+const coverMedia = resolvedMedias.find((m) => m.isCover);
+const otherMedias = resolvedMedias.filter((m) => !m.isCover).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 const galleryUrls: string[] = [];
 if (coverMedia) {
   const u = getImageUrl(resolveMediaPath(coverMedia));
@@ -91,15 +109,16 @@ otherMedias.forEach((m) => {
   const url = getImageUrl(resolveMediaPath(m));
   if (url) galleryUrls.push(url);
 });
-if (galleryUrls.length === 0 && project?.medias?.length) {
-  project.medias.forEach((m) => {
+if (galleryUrls.length === 0 && resolvedMedias.length) {
+  resolvedMedias.forEach((m) => {
     const u = getImageUrl(resolveMediaPath(m));
     if (u) galleryUrls.push(u);
   });
 }
 // medias boş ama listede kapak URL'i varsa (API sık bu şekilde dönüyor)
-if (galleryUrls.length === 0 && project?.imageUrl) {
-  const u = getImageUrl(project.imageUrl);
+const resolvedImageUrl = resolveProjectImageUrl(project);
+if (galleryUrls.length === 0 && resolvedImageUrl) {
+  const u = getImageUrl(resolvedImageUrl);
   if (u) galleryUrls.push(u);
 }
 // Liste kartıyla aynı yedek görsel
