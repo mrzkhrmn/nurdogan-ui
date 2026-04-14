@@ -30,7 +30,7 @@ const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
         {mapDistricts.map((district, index) => (
           <button
             type="button"
-            class="map-district-btn group flex items-center justify-between w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 text-left transition-all duration-300 data-[active=true]:border-transparent data-[active=true]:bg-linear-to-r data-[active=true]:from-[#E30A17] data-[active=true]:to-[#E30A17]/80 dark:bg-gray-700/50"
+            class="map-district-btn group flex items-center justify-between w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 text-left transition-all duration-300 data-[active=true]:border-transparent data-[active=true]:bg-[#E30A17] bg-gray-50 dark:bg-gray-700/50"
             data-district-id={district.id}
             data-active={index === 0}
             data-lat={district.lat}

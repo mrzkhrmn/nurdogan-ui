@@ -24,7 +24,7 @@ import { stores } from "../../data/stores";
         {stores.map((store, index) => (
           <button
             type="button"
-            class="store-map-btn group flex flex-col w-full px-4 py-3 rounded-xl border border-gray-200 text-left transition-all duration-300 hover:border-[#E30A17]/40 data-[active=true]:border-transparent data-[active=true]:bg-gradient-to-r data-[active=true]:from-[#E30A17] data-[active=true]:to-[#E30A17]/80"
+            class="store-map-btn group flex flex-col w-full px-4 py-3 rounded-xl border border-gray-200 text-left transition-all duration-300 hover:border-[#E30A17]/40 data-[active=true]:border-transparent data-[active=true]:bg-[#E30A17]"
             data-store-id={store.id}
             data-active={index === 0}
             data-lat={store.lat}

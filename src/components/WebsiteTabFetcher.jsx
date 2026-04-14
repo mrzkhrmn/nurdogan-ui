@@ -606,11 +606,23 @@ function KentselDonusumTanitimContent({ baseUrl = "/" }) {
 
   return (
     <section
-      className="taslak-bg-desktop-only w-full py-20 px-6 relative bg-gray-50 dark:bg-gray-900 bg-cover bg-center bg-no-repeat transition-colors duration-200"
+      className="taslak-bg-desktop-only w-full py-20 px-6 relative bg-gray-50  dark:bg-gray-900 bg-cover bg-center bg-no-repeat transition-colors duration-200"
       style={{ backgroundImage: `url('${baseUrl}taslak.png')` }}
     >
       <div
-        className="absolute inset-0 z-0 pointer-events-none bg-white/50 dark:bg-gray-900/50"
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to right, rgba(249, 250, 251, 0) 0%, rgba(249, 250, 251, 0) 0%, rgba(249, 250, 251, 1) 75%)",
+        }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-0 z-0 pointer-events-none hidden dark:block"
+        style={{
+          background:
+            "linear-gradient(to right, rgba(17, 24, 39, 0) 0%, rgba(17, 24, 39, 0) 42%, rgba(17, 24, 39, 1) 100%)",
+        }}
         aria-hidden="true"
       />
       <div className="max-w-7xl mx-auto relative z-10">
@@ -755,7 +767,7 @@ function HakkimizdaContent({ baseUrl = "/" }) {
         />
       </div>
       <div
-        className="absolute inset-0 z-0 pointer-events-none bg-white/50 dark:bg-gray-900/50"
+        className="absolute inset-0 z-0 pointer-events-none bg-white/85 dark:bg-gray-900/50"
         aria-hidden="true"
       />
       <div className="relative z-10 max-w-7xl mx-auto w-full">

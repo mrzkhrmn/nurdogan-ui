@@ -20,20 +20,13 @@ export default function ServicesSectionClient() {
         const data = await res.json();
         if (!Array.isArray(data)) return;
 
-        // data: ServiceCategoryDto[]
         const flatServices = data
           .slice()
-          .sort(
-            (a, b) =>
-              (a?.listOrder ?? 0) - (b?.listOrder ?? 0),
-          )
+          .sort((a, b) => (a?.listOrder ?? 0) - (b?.listOrder ?? 0))
           .flatMap((category) =>
             (category?.services ?? [])
               .slice()
-              .sort(
-                (a, b) =>
-                  (a?.listOrder ?? 0) - (b?.listOrder ?? 0),
-              ),
+              .sort((a, b) => (a?.listOrder ?? 0) - (b?.listOrder ?? 0)),
           );
 
         const baseUrl = buildBaseUrl();
@@ -73,7 +66,7 @@ export default function ServicesSectionClient() {
         {services.map((service, index) => (
           <div
             key={index}
-            className="group flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-4 px-4 md:px-12 lg:px-[72px] py-6 rounded-3xl bg-gray-50/50 dark:bg-gray-700/50 hover:bg-[#E30A17] hover:py-8 md:hover:py-16 transition-all duration-400 relative w-[400px] sm:w-[620px] md:w-[820px] lg:min-w-full shrink-0 md:shrink border border-transparent dark:border-gray-600"
+            className="group flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-4 px-4 md:px-12 lg:px-[72px] py-6 rounded-3xl bg-gray-50 dark:bg-gray-700/50 hover:bg-[#E30A17] hover:py-8 md:hover:py-16 transition-all duration-400 relative w-[400px] sm:w-[620px] md:w-[820px] lg:min-w-full shrink-0 md:shrink border border-transparent dark:border-gray-600"
           >
             <div className="flex items-start gap-2 md:gap-4 md:w-[25%]">
               <p className="text-[#E30A17] group-hover:text-white text-2xl md:text-3xl lg:text-4xl font-semibold leading-none transition-colors duration-300 shrink-0">
@@ -100,4 +93,3 @@ export default function ServicesSectionClient() {
     </div>
   );
 }
-
