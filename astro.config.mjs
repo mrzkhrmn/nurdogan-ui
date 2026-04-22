@@ -16,5 +16,8 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    preview: {
+      allowedHosts: ["nurdoganbabadag.com", "www.nurdoganbabadag.com"],
+    },    
   },
 });
