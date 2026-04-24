@@ -62,12 +62,12 @@ const safeInitial = Number.isFinite(initialPercent)
   {showLabels && (
     <div class="before-after__labels" aria-hidden="true">
       <div class="before-after__label before-after__label--before">
-        <span class="before-after__label-sub"><</span>
+        <span class="before-after__label-sub">&lt;</span>
         <span class="before-after__label-title">{beforeLabel}</span>
       </div>
       <div class="before-after__label before-after__label--after">
-        <span class="before-after__label-title">Yeni</span>
-        <span class="before-after__label-title">></span>
+        <span class="before-after__label-title">{afterLabel}</span>
+        <span class="before-after__label-sub">&gt;</span>
       </div>
     </div>
   )}
@@ -121,7 +121,7 @@ const safeInitial = Number.isFinite(initialPercent)
   .before-after__media {
     position: relative;
     width: 100%;
-    height: clamp(220px, 28vw, 420px);
+    height: clamp(320px, 38vw, 600px);
     border-radius: 1.25rem;
     overflow: hidden;
     background: rgba(0, 0, 0, 0.05);

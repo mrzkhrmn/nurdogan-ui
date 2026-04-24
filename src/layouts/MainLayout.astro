@@ -28,7 +28,9 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    <title>Site</title>
+    <title>Nurdoğan Babadağ</title>
+    <link rel="icon" type="image/png" href={`${(import.meta.env.BASE_URL || "/").replace(/\/?$/, "/")}nurdogan-logo.png`} />
+    <link rel="apple-touch-icon" href={`${(import.meta.env.BASE_URL || "/").replace(/\/?$/, "/")}nurdogan-logo.png`} />
   </head>
   <body class="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200">
     <Header isHomePage={isHomePage} />

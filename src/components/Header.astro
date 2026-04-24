@@ -2,7 +2,6 @@
 import Image from "astro/components/Image.astro";
 import SearchIcon from "./icons/SearchIcon.jsx";
 import { ArrowRightIcon, InstagramIcon } from "./icons";
-import LanguageSelector from "./LanguageSelector.jsx";
 import ThemeToggle from "./ThemeToggle.jsx";
 const base = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
 const navItems = [
@@ -74,7 +73,7 @@ const headerClass = isHomePage
           </a>
           <div class="flex items-center gap-0.5 shrink-0">
             <ThemeToggle client:load />
-            <LanguageSelector client:load />
+            <!-- <LanguageSelector client:load /> -->
           </div>
         </div>
       </nav>
@@ -166,7 +165,7 @@ const headerClass = isHomePage
         </a>
         <div class="flex items-center justify-center gap-4">
           <ThemeToggle client:load />
-          <LanguageSelector client:load />
+          <!-- <LanguageSelector client:load /> -->
         </div>
       </div>
     </div>

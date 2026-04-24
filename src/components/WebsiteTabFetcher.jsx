@@ -859,7 +859,7 @@ function BinaYonetimiSectionContent({ baseUrl = "/" }) {
     return (
       <section
         id="bina-yonetimi"
-        className="relative w-full py-12 sm:py-16 md:py-20 lg:py-20 px-4 md:px-6 mb-12 md:mb-16 lg:mb-20 min-h-[300px] flex items-center justify-center"
+        className="relative w-full py-12 sm:py-16 md:py-20 lg:py-20 px-4 md:px-6 min-h-[300px] flex items-center justify-center"
       >
         <div className="animate-pulse h-12 w-64 bg-white/20 rounded" />
       </section>
@@ -881,7 +881,7 @@ function BinaYonetimiSectionContent({ baseUrl = "/" }) {
   return (
     <section
       id="bina-yonetimi"
-      className="relative w-full py-12 sm:py-16 md:py-20 lg:py-20 px-4 md:px-6 mb-12 md:mb-16 lg:mb-20 bg-gray-100 dark:bg-gray-900 transition-colors duration-200"
+      className="relative w-full py-12 sm:py-16 md:py-20 lg:py-20 px-4 md:px-6 bg-gray-100 dark:bg-gray-900 transition-colors duration-200"
     >
       <div
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
