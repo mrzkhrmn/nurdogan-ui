@@ -85,6 +85,11 @@ export default function HizmetlerServicesClient({ baseUrl = "/" }) {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
               {category.services.map((item) => {
                 const detailSlug = resolveServiceDetailSlug(item.title);
+                const detailHref = detailSlug
+                  ? `${baseUrl}hizmetler/${detailSlug}`
+                  : item.id
+                    ? `${baseUrl}hizmetler/detay?id=${encodeURIComponent(item.id)}`
+                    : null;
                 const cardClassName =
                   "group bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col";
                 const inner = (
@@ -122,10 +127,10 @@ export default function HizmetlerServicesClient({ baseUrl = "/" }) {
                     </div>
                   </>
                 );
-                return detailSlug ? (
+                return detailHref ? (
                   <a
                     key={item.id || item.title}
-                    href={`${baseUrl}hizmetler/${detailSlug}`}
+                    href={detailHref}
                     className={`${cardClassName} text-inherit no-underline block rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E30A17] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900`}
                   >
                     {inner}
