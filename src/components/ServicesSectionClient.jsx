@@ -76,15 +76,17 @@ export default function ServicesSectionClient() {
                 {service.title}
               </p>
             </div>
-            <img
-              src={service.image}
-              alt={service.title}
-              width={50}
-              height={50}
-              className="w-[40%] md:w-[30%] absolute scale-0 group-hover:scale-100 transition-all duration-300 top-[50%] left-[50%] md:left-[46%] transform -translate-x-1/2 -translate-y-1/2 rotate-0 group-hover:-rotate-12 hidden md:block"
-              loading="lazy"
-            />
-            <p className="text-[#585858] dark:text-gray-300 group-hover:text-white text-sm md:text-base lg:text-lg leading-relaxed w-full md:w-1/3">
+            <div className="w-[40%] md:w-[30%] max-w-[220px] md:max-w-[280px] aspect-4/3 absolute scale-0 group-hover:scale-100 transition-all duration-300 top-[50%] left-[50%] md:left-[46%] -translate-x-1/2 -translate-y-1/2 rotate-0 group-hover:-rotate-12 hidden md:block overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-500">
+              <img
+                src={service.image}
+                alt={service.title}
+                width={280}
+                height={210}
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <p className="min-w-0 text-[#585858] dark:text-gray-300 group-hover:text-white text-sm md:text-base lg:text-lg leading-relaxed w-full md:w-1/3 line-clamp-3">
               {service.description}
             </p>
           </div>

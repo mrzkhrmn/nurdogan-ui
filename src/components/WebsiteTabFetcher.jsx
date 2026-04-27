@@ -664,7 +664,7 @@ function KentselDonusumTanitimContent({ baseUrl = "/" }) {
             </a>
           </div>
           <div className="w-full lg:flex-1 flex flex-col justify-start text-left order-1 lg:order-2">
-            <p className="inline-block text-[#E30A17] text-sm sm:text-base md:text-4xl font-bold mb-4 tracking-wider uppercase bg-[#E30A17]/15 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl">
+            <p className="inline-block text-[#E30A17] dark:text-red-200 text-sm sm:text-base md:text-4xl font-bold mb-4 tracking-wider uppercase bg-[#E30A17]/15 dark:bg-red-950/50 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl">
               2012&apos;DEN GÜNÜMÜZE
             </p>
             <h2 className="text-[#262322] dark:text-gray-100 text-2xl md:text-5xl font-semibold mb-6 leading-tight">
@@ -896,7 +896,7 @@ function BinaYonetimiSectionContent({ baseUrl = "/" }) {
       />
       <div className="relative z-10 max-w-[1440px] mx-auto">
         <div className="text-center max-w-[980px] mx-auto">
-          <p className="inline-block text-[#E30A17] text-sm sm:text-base md:text-4xl font-bold tracking-wider mb-4 uppercase bg-[#E30A17]/15 dark:bg-white/15 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl">
+          <p className="inline-block text-[#E30A17] dark:text-red-200 text-sm sm:text-base md:text-4xl font-bold tracking-wider mb-4 uppercase bg-[#E30A17]/15 dark:bg-red-950/50 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl">
             {title.toUpperCase()}
           </p>
           <h2 className="text-gray-900 dark:text-white text-2xl md:text-5xl font-semibold leading-tight mb-4 sm:mb-6 md:mb-8">
@@ -1097,7 +1097,7 @@ function IletisimContent({ baseUrl = "/" }) {
         <div className="max-w-[1200px] mx-auto">
           <div className="flex flex-col lg:flex-row lg:items-end gap-8 lg:gap-12">
             <div className="flex-1">
-              <p className="inline-block text-[#E30A17] text-sm sm:text-base md:text-lg font-bold mb-2 tracking-wider uppercase bg-[#E30A17]/15 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl">
+              <p className="inline-block text-[#E30A17] dark:text-red-200 text-sm sm:text-base md:text-lg font-bold mb-2 tracking-wider uppercase bg-[#E30A17]/15 dark:bg-red-950/50 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl">
                 İLETİŞİM
               </p>
               <h1 className="text-[#262322] dark:text-gray-100 text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4">
