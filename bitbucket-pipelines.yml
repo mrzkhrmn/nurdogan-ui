@@ -1,0 +1,18 @@
+image: node:20
+
+pipelines:
+  branches:
+    master:
+        - step:
+            name: Install, Build and Deploy
+            caches:
+              - node
+            script:
+              - npm install
+              - npm run build
+              - echo "Installing FTP client (lftp)..."
+              - apt-get update && apt-get install -y lftp
+              - echo "Deploying files via FTP..."
+              - lftp -u $FTP_USER,$FTP_PASSWORD -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate false; put App_Offline.htm; quit" $FTP_HOST
+              - lftp -u $FTP_USER,$FTP_PASSWORD -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate false; mirror -R --exclude=web.config ./dist .; quit" $FTP_HOST
+              - lftp -u $FTP_USER,$FTP_PASSWORD -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate false; rm App_Offline.htm; quit" $FTP_HOST
