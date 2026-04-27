@@ -323,3 +323,15 @@ export const allServicesList: AllServiceItem[] = [
     advantages: ["Avukat desteği", "Uyuşmazlık çözümü", "Süreç danışmanlığı"],
   },
 ];
+
+export function resolveServiceDetailSlug(title: string): string | null {
+  const t = title.trim().replace(/\s+/g, " ");
+  if (!t) return null;
+  const byExact = allServicesList.find((s) => s.title === t);
+  if (byExact) return byExact.slug;
+  const inputSlug = slugify(t);
+  const bySlug = allServicesList.find(
+    (s) => s.slug === inputSlug || slugify(s.title) === inputSlug
+  );
+  return bySlug?.slug ?? null;
+}

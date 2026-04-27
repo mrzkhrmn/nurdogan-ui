@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { BASE_API_URL, IMAGE_BASE_URL } from "../api/constants";
+import { resolveServiceDetailSlug } from "../data/services";
 
 export default function HizmetlerServicesClient({ baseUrl = "/" }) {
   const [categories, setCategories] = useState([]);
@@ -82,44 +83,62 @@ export default function HizmetlerServicesClient({ baseUrl = "/" }) {
               </h3>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-              {category.services.map((item) => (
-                <div
-                  key={item.id || item.title}
-                  className="group bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col"
-                >
-                  <div className="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-700">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      width={400}
-                      height={225}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      loading="lazy"
-                    />
+              {category.services.map((item) => {
+                const detailSlug = resolveServiceDetailSlug(item.title);
+                const cardClassName =
+                  "group bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col";
+                const inner = (
+                  <>
+                    <div className="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-700">
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        width={400}
+                        height={225}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="p-4 md:p-5 flex flex-col flex-1">
+                      <h4 className="text-[#262322] dark:text-gray-100 text-base md:text-lg font-semibold leading-snug group-hover:text-[#E30A17] transition-colors">
+                        {item.title}
+                      </h4>
+                      <span className="mt-3 inline-flex items-center gap-1.5 text-[#E30A17] text-sm font-medium">
+                        Detay
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </span>
+                    </div>
+                  </>
+                );
+                return detailSlug ? (
+                  <a
+                    key={item.id || item.title}
+                    href={`${baseUrl}hizmetler/${detailSlug}`}
+                    className={`${cardClassName} text-inherit no-underline block rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E30A17] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900`}
+                  >
+                    {inner}
+                  </a>
+                ) : (
+                  <div
+                    key={item.id || item.title}
+                    className={cardClassName}
+                  >
+                    {inner}
                   </div>
-                  <div className="p-4 md:p-5 flex flex-col flex-1">
-                    <h4 className="text-[#262322] dark:text-gray-100 text-base md:text-lg font-semibold leading-snug group-hover:text-[#E30A17] transition-colors">
-                      {item.title}
-                    </h4>
-                    <span className="mt-3 inline-flex items-center gap-1.5 text-[#E30A17] text-sm font-medium">
-                      Detay
-                      <svg
-                        className="w-4 h-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
-                    </span>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         ))}
