@@ -1,0 +1,87 @@
+---
+import LegalPageShell from "../components/LegalPageShell.astro";
+
+const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
+---
+
+<LegalPageShell
+  title="Gizlilik Politikası"
+  lead="6698 sayılı Kişisel Verilerin Korunması Kanunu (“KVKK”) ve ilgili mevzuata uygun olarak kişisel verilerinizi nasıl işlediğimize dair özet bilgi sunuyoruz."
+>
+  <section>
+    <h2>1. Veri sorumlusu</h2>
+    <p>
+      Web sitesi ve iletişim kanalları kapsamında toplanan kişisel verileriniz, hizmet ve tanıtım faaliyetleri çerçevesinde veri sorumlusu sıfatıyla Nurdoğan Babadağ tarafından işlenebilir. İletişim için <a href={`${baseUrl}iletisim`}>İletişim</a> sayfasındaki bilgileri kullanabilirsiniz.
+    </p>
+  </section>
+
+  <section>
+    <h2>2. İşlenen veri kategorileri</h2>
+    <p>Örnek olarak şu tür veriler işlenebilir:</p>
+    <ul>
+      <li>Kimlik ve iletişim: ad-soyad, telefon, e-posta, adres (form veya talep üzerinden paylaştığınız ölçüde),</li>
+      <li>Talep içeriği: teklif, bilgi veya destek mesajınızda yer alan açıklamalar,</li>
+      <li>İşlem güvenliği: IP adresi, tarayıcı ve cihaz bilgisi, oturum ve güvenlik logları (teknik gereklilik ve meşru menfaat çerçevesinde),</li>
+      <li>Pazarlama tercihleri: açık rızanız bulunması hâlinde ticari elektronik ileti veya çerez tercihleri.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>3. İşleme amaçları ve hukuki sebepler</h2>
+    <p>Kişisel verileriniz özetle;</p>
+    <ul>
+      <li>Taleplerinizi yanıtlamak, teklif ve sözleşme süreçlerini yürütmek (sözleşmenin kurulması veya ifası, meşru menfaat),</li>
+      <li>Hukuki yükümlülükleri yerine getirmek,</li>
+      <li>Site güvenliğini sağlamak ve kötüye kullanımı önlemek (meşru menfaat),</li>
+      <li>Açık rızanız olması hâlinde tanıtım ve bilgilendirme iletileri göndermek</li>
+    </ul>
+    <p>amaçlarıyla, KVKK’nın 5 ve 6. maddelerinde öngörülen şartlara uygun şekilde işlenir.</p>
+  </section>
+
+  <section>
+    <h2>4. Aktarım</h2>
+    <p>
+      Verileriniz, hizmetin gerektirdiği ölçüde; barındırma ve e-posta sağlayıcıları, danışmanlık veya IT tedarikçileri gibi iş ortaklarına veya yasal zorunluluk hâlinde yetkili kamu kurumlarına aktarılabilir. Aktarımlarda tabi olduğumuz hukuki düzenlemelere uygunluk gözetilir.
+    </p>
+  </section>
+
+  <section>
+    <h2>5. Saklama süresi</h2>
+    <p>
+      Kişisel veriler, işleme amacının gerektirdiği süre ve ilgili mevzuatta öngörülen zamanaşımı / saklama yükümlülükleri kadar muhafaza edilir; süre sonunda silinir, yok edilir veya anonim hâle getirilir.
+    </p>
+  </section>
+
+  <section>
+    <h2>6. Güvenlik</h2>
+    <p>
+      Verilerin gizliliği ve bütünlüğünü korumak için uygun teknik ve idari tedbirler alınır. İnternet üzerinden veri iletiminin %100 güvenli olmadığını hatırlatırız.
+    </p>
+  </section>
+
+  <section>
+    <h2>7. Haklarınız (KVKK md. 11)</h2>
+    <p>KVKK kapsamında;</p>
+    <ul>
+      <li>Kişisel verilerinizin işlenip işlenmediğini öğrenme,</li>
+      <li>İşlenmişse buna ilişkin bilgi talep etme,</li>
+      <li>İşlenme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme,</li>
+      <li>Yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme,</li>
+      <li>Eksik veya yanlış işlenmişse düzeltilmesini isteme,</li>
+      <li>KVKK’da öngörülen şartlar çerçevesinde silinmesini veya yok edilmesini isteme,</li>
+      <li>Düzeltme, silme, yok etme işlemlerinin aktarıldığı üçüncü kişilere bildirilmesini isteme,</li>
+      <li>Münhasıran otomatik sistemler vasıtasıyla analiz edilmesi suretiyle aleyhinize bir sonucun ortaya çıkmasına itiraz etme,</li>
+      <li>Kanuna aykırı işlenmesi sebebiyle zarara uğramanız hâlinde zararın giderilmesini talep etme</li>
+    </ul>
+    <p>
+      haklarına sahipsiniz. Başvurularınızı yazılı olarak veya Kişisel Verileri Koruma Kurulu’nun öngördüğü yöntemlerle iletebilirsiniz.
+    </p>
+  </section>
+
+  <section>
+    <h2>8. Politika güncellemeleri ve çerezler</h2>
+    <p>
+      Bu politika güncellenebilir. Çerezler ve tercih yönetimi için <a href={`${baseUrl}cerezler`}>Çerez Politikası</a> sayfasına bakınız.
+    </p>
+  </section>
+</LegalPageShell>

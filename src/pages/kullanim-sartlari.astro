@@ -1,0 +1,70 @@
+---
+import LegalPageShell from "../components/LegalPageShell.astro";
+
+const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
+---
+
+<LegalPageShell
+  title="Kullanım Şartları ve Koşulları"
+  lead="Bu web sitesini kullanarak aşağıdaki şartları okuduğunuzu ve kabul ettiğinizi beyan etmiş olursunuz."
+>
+  <section>
+    <h2>1. Taraflar ve kapsam</h2>
+    <p>
+      Bu site, Nurdoğan Babadağ ve bağlı hizmetlerin tanıtımı amacıyla sunulmaktadır. Siteye erişim ve kullanım, işbu Kullanım Şartları’na tabidir. Şartlarda değişiklik yapılabilir; güncel metin sitede yayımlandığı tarihte yürürlüğe girer.
+    </p>
+  </section>
+
+  <section>
+    <h2>2. Hizmetin niteliği</h2>
+    <p>
+      Sitedeki bilgiler genel bilgilendirme amaçlıdır. Teklif, sözleşme veya taahhüt oluşturmaz. Proje, fiyat, teknik özellik veya süreçlere ilişkin kesin bilgi için doğrudan iletişime geçmeniz gerekir.
+    </p>
+  </section>
+
+  <section>
+    <h2>3. Kullanıcı yükümlülükleri</h2>
+    <p>Kullanıcı olarak;</p>
+    <ul>
+      <li>Siteyi yürürlükteki mevzuata ve iyi niyet kurallarına uygun kullanmayı,</li>
+      <li>Başkalarının haklarına saygı göstermeyi, yanıltıcı veya zararlı içerik üretmemeyi,</li>
+      <li>Sitenin güvenliğini tehdit edecek girişimlerde bulunmamayı</li>
+    </ul>
+    <p>kabul edersiniz.</p>
+  </section>
+
+  <section>
+    <h2>4. Fikri mülkiyet</h2>
+    <p>
+      Sitedeki metinler, görseller, logo, tasarım ve yazılım unsurları ilgili mevzuat kapsamında korunmaktadır. İzinsiz çoğaltma, dağıtma veya ticari kullanım yasaktır; aksi yazılı olarak bildirilmedikçe haklar saklıdır.
+    </p>
+  </section>
+
+  <section>
+    <h2>5. Bağlantılar (üçüncü taraf siteler)</h2>
+    <p>
+      Sitede üçüncü taraf web sitelerine bağlantılar bulunabilir. Bu sitelerin içeriği, gizlilik uygulamaları veya hizmetlerinden doğan sorumluluk bağlantı verilen tarafa aittir.
+    </p>
+  </section>
+
+  <section>
+    <h2>6. Sorumluluk sınırı</h2>
+    <p>
+      Site “olduğu gibi” sunulur. Mümkün olan ölçüde doğru ve güncel içerik hedeflenir; buna karşın kesintisiz erişim, hatasız içerik veya teknik uyumluluk garanti edilmez. Doğrudan veya dolaylı zararlardan, veri kaybından veya iş kaybından kaynaklanan talepler, yürürlükteki hukukun izin verdiği azami ölçüde sınırlandırılabilir.
+    </p>
+  </section>
+
+  <section>
+    <h2>7. Uygulanacak hukuk ve uyuşmazlıklar</h2>
+    <p>
+      Uyuşmazlıklarda Türkiye Cumhuriyeti kanunları uygulanır. Yetkili mahkeme ve icra daireleri, mevzuattaki zorunlu düzenlemeler çerçevesinde İstanbul merkezli çözüm mercileri olarak kabul edilebilir.
+    </p>
+  </section>
+
+  <section>
+    <h2>8. İletişim</h2>
+    <p>
+      Kullanım şartları ile ilgili sorularınız için <a href={`${baseUrl}iletisim`}>İletişim</a> sayfamızı kullanabilir veya hukuki bildirimlerinizi kayıtlı iletişim kanallarımız üzerinden iletebilirsiniz.
+    </p>
+  </section>
+</LegalPageShell>

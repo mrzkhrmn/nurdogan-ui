@@ -1,6 +1,6 @@
 ---
 import Image from "astro/components/Image.astro";
-import { ArrowRightIcon, LocationIcon, MailIcon, FacebookIcon, TwitterIcon, LinkedInIcon, YouTubeIcon, InstagramIcon, KepIcon } from "./icons";
+import { ArrowRightIcon, LocationIcon, MailIcon, FacebookIcon, TwitterIcon, LinkedInIcon, YouTubeIcon, InstagramIcon, KepIcon, PhoneIcon } from "./icons";
 
 const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
 ---
@@ -10,20 +10,8 @@ const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
 
   <div class="border-b border-white/10">
     <div class="max-w-[1600px] mx-auto px-4 md:px-6 lg:px-12 py-12 md:py-16">
-      <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-10 lg:gap-12">
-        <div class="space-y-6 w-full lg:w-1/4">
-          <Image src={`${baseUrl}new-logo.png`} alt="Nurdoğan Babadağ" width={170} height={100} class="w-28 sm:w-32 md:w-40 lg:w-42.5 h-auto bg-white p-2 rounded-lg" />
-          <div class="flex items-center gap-4">
-            <a href="https://www.youtube.com/@nurdoganb" target="_blank" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-[#E30A17] hover:border-[#E30A17] transition-colors">
-              <YouTubeIcon width={20} height={20}/>
-            </a>
-            <a href="https://www.instagram.com/nurdoganbabadag/" target="_blank" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-[#E30A17] hover:border-[#E30A17] transition-colors">
-              <InstagramIcon width={20} height={20}/>
-            </a>
-          </div>
-        </div>
-
-        <div class="space-y-6 w-full lg:w-1/5">
+      <div class="flex flex-col lg:flex-row items-stretch lg:items-center gap-10 lg:gap-10">
+        <div class="space-y-6 w-full min-w-0 lg:flex-1">
           <h4 class="text-white text-lg md:text-xl font-semibold">İletişim</h4>
           <div class="space-y-4">
             <div class="flex items-center gap-3">
@@ -34,16 +22,24 @@ const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
                 <a href="mekakentseldonusum@hs01.kep.tr" class="block text-white text-sm md:text-base hover:text-white transition-colors">mekakentseldonusum@hs01.kep.tr</a>
               </div>
             </div>
-            <div class="flex items-start gap-3">
-              <div class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center shrink-0 mt-1">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center shrink-0">
                 <LocationIcon />
               </div>
-              <p class="text-white text-sm md:text-base leading-relaxed">
+              <p class="min-w-0 max-w-60 text-white text-sm md:text-base leading-relaxed">
                 Caddebostan Mah. Bağdat Cd. Alevok Apt. No:275 Kat:1 Daire:2 Kadıköy / İSTANBUL
               </p>
             </div>
-            <div class="flex items-start gap-3">
-              <div class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center shrink-0 mt-1">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center shrink-0">
+                <PhoneIcon />
+              </div>
+              <a href="tel:+905326126544" class="text-white text-sm md:text-base hover:text-white transition-colors whitespace-nowrap">
+                0532 612 65 44
+              </a>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center shrink-0">
                 <MailIcon />
               </div>
               <div class="space-y-1">
@@ -58,8 +54,7 @@ const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
           </div>
         </div>
 
-        <!-- Right Column - Navigation Links -->
-        <div class="space-y-6 w-full lg:w-auto">
+        <div class="space-y-6 w-full min-w-0 lg:flex-1">
           <h4 class="text-white text-lg md:text-xl font-semibold">Bağlantılar</h4>
           <nav class="space-y-3">
             <a href={`${baseUrl}#hakkimizda`} class="flex items-center gap-2 text-white text-sm md:text-base hover:text-white transition-colors group">
@@ -68,31 +63,43 @@ const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
               </svg>
               Hakkımızda
             </a>
-            <a href="/iletisim" class="flex items-center gap-2 text-white text-sm md:text-base hover:text-white transition-colors group">
+            <a href={`${baseUrl}iletisim`} class="flex items-center gap-2 text-white text-sm md:text-base hover:text-white transition-colors group">
               <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-50 group-hover:opacity-100 transition-opacity">
                 <path d="M1 1L5 5L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               İletişim
             </a>
-            <a href="/projeler" class="flex items-center gap-2 text-white text-sm md:text-base hover:text-white transition-colors group">
+            <a href={`${baseUrl}projeler`} class="flex items-center gap-2 text-white text-sm md:text-base hover:text-white transition-colors group">
               <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-50 group-hover:opacity-100 transition-opacity">
                 <path d="M1 1L5 5L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               Projeler
             </a>
-            <a href="/haberler" class="flex items-center gap-2 text-white text-sm md:text-base hover:text-white transition-colors group">
+            <a href={`${baseUrl}haberler`} class="flex items-center gap-2 text-white text-sm md:text-base hover:text-white transition-colors group">
               <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-50 group-hover:opacity-100 transition-opacity">
                 <path d="M1 1L5 5L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               Haberler
             </a>
-            <a href="/teklif-al" class="flex items-center gap-2 text-white text-sm md:text-base hover:text-white transition-colors group">
+            <a href={`${baseUrl}teklif-al`} class="flex items-center gap-2 text-white text-sm md:text-base hover:text-white transition-colors group">
               <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-50 group-hover:opacity-100 transition-opacity">
                 <path d="M1 1L5 5L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               Teklif Al
             </a>
           </nav>
+        </div>
+
+        <div class="flex flex-col gap-4 shrink-0 w-full lg:w-auto">
+          <Image src={`${baseUrl}new-logo.png`} alt="Nurdoğan Babadağ" width={104} height={61} loading="lazy" class="block w-23 sm:w-24 lg:w-24 h-auto bg-white p-1.5 rounded-lg" />
+          <div class="flex items-center gap-4">
+            <a href="https://www.youtube.com/@nurdoganb" target="_blank" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-[#E30A17] hover:border-[#E30A17] transition-colors">
+              <YouTubeIcon width={20} height={20}/>
+            </a>
+            <a href="https://www.instagram.com/nurdoganbabadag/" target="_blank" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-[#E30A17] hover:border-[#E30A17] transition-colors">
+              <InstagramIcon width={20} height={20}/>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -105,13 +112,13 @@ const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
         Copyright © {new Date().getFullYear()} <span class="text-[#E30A17]">Nurdoğan Babadağ</span>, tüm hakları saklıdır.
       </p>
       <div class="flex flex-wrap items-center justify-center gap-4 md:gap-6">
-        <a href={`${(import.meta.env.BASE_URL || '/').replace(/\/?$/, '/')}kullanim-sartlari`} class="text-white hover:text-white transition-colors">
+        <a href={`${baseUrl}kullanim-sartlari`} class="text-white hover:text-white transition-colors">
           Kullanım Şartları
         </a>
-        <a href={`${(import.meta.env.BASE_URL || '/').replace(/\/?$/, '/')}gizlilik-politikasi`} class="text-white hover:text-white transition-colors">
+        <a href={`${baseUrl}gizlilik-politikasi`} class="text-white hover:text-white transition-colors">
           Gizlilik Politikası
         </a>
-        <a href={`${(import.meta.env.BASE_URL || '/').replace(/\/?$/, '/')}cerezler`} class="text-white hover:text-white transition-colors">
+        <a href={`${baseUrl}cerezler`} class="text-white hover:text-white transition-colors">
           Çerezler
         </a>
       </div>

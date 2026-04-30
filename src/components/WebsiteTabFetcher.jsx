@@ -1027,7 +1027,6 @@ export function LandingWithData({ baseUrl = "/" }) {
   );
 }
 
-/** Anasayfa en alttaki Bina Yönetimi bloğu (ayrı store ile; sıralama için index’te ayrı render) */
 export function BinaYonetimiSectionWithData({ baseUrl = "/" }) {
   return (
     <StoreProvider>
@@ -1037,7 +1036,6 @@ export function BinaYonetimiSectionWithData({ baseUrl = "/" }) {
   );
 }
 
-/** E-posta content JSON string ise parse eder: "[\"a@x.com\",\"b@x.com\"]" -> ["a@x.com","b@x.com"] */
 function parseEmailList(content) {
   if (!content) return [];
   try {
@@ -1048,7 +1046,10 @@ function parseEmailList(content) {
   }
 }
 
-/** İletişim sayfası: API'den main section (title, sub-title, address, phone, kep, email, harita-url) */
+const ILETISIM_PUBLIC_PHONE = "0532 612 65 44";
+const ILETISIM_PUBLIC_PHONE_TEL = "tel:+905326126544";
+
+/** İletişim sayfası: API'den main section (title, sub-title, address, kep, email, harita-url); telefon sabit */
 function IletisimContent({ baseUrl = "/" }) {
   const { data, isLoading, error } = useGetWebsiteTabQuery("iletisim");
   const main = getSectionByCode(data, "main");
@@ -1057,12 +1058,10 @@ function IletisimContent({ baseUrl = "/" }) {
     getItemByCode(main, "sub-title") ||
     "Adres ve iletişim bilgilerimize aşağıdan ulaşabilir, konumumuzu harita üzerinden görüntüleyebilirsiniz.";
   const address = getItemByCode(main, "address") || "";
-  const phoneNumber = getItemByCode(main, "phone-number") || "";
   const kepMail = getItemByCode(main, "kep-mail") || "";
   const emailContent = getItemByCode(main, "email");
   const emailList = parseEmailList(emailContent);
   const haritaUrl = getItemByCode(main, "harita-url") || "";
-  const phoneHref = phoneNumber ? `tel:${phoneNumber.replace(/\s/g, "")}` : "#";
 
   if (isLoading) {
     return (
@@ -1137,24 +1136,22 @@ function IletisimContent({ baseUrl = "/" }) {
                   İletişim Bilgileri
                 </h2>
                 <div className="space-y-4 md:space-y-5">
-                  {phoneNumber && (
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-[#E30A17] flex items-center justify-center shrink-0">
-                        <PhoneIcon color="#FFFFFF" />
-                      </div>
-                      <div className="min-w-0">
-                        <p className="text-[#262322] dark:text-gray-100 font-semibold leading-snug">
-                          Telefon
-                        </p>
-                        <a
-                          href={phoneHref}
-                          className="text-[#525252] dark:text-gray-300 hover:text-[#262322] dark:hover:text-gray-100 transition-colors wrap-break-word"
-                        >
-                          {phoneNumber}
-                        </a>
-                      </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-[#E30A17] flex items-center justify-center shrink-0">
+                      <PhoneIcon color="#FFFFFF" />
                     </div>
-                  )}
+                    <div className="min-w-0">
+                      <p className="text-[#262322] dark:text-gray-100 font-semibold leading-snug">
+                        Telefon
+                      </p>
+                      <a
+                        href={ILETISIM_PUBLIC_PHONE_TEL}
+                        className="text-[#525252] dark:text-gray-300 hover:text-[#262322] dark:hover:text-gray-100 transition-colors wrap-break-word"
+                      >
+                        {ILETISIM_PUBLIC_PHONE}
+                      </a>
+                    </div>
+                  </div>
                   {emailList.length > 0 && (
                     <div className="flex items-start gap-4">
                       <div className="w-12 h-12 rounded-xl bg-[#E30A17] flex items-center justify-center shrink-0">
