@@ -188,31 +188,30 @@ const cerezlerUrl = `${baseUrl}cerezler`;
     <div
       id="cookie-consent-banner"
       class="fixed inset-x-0 bottom-0 z-[92] hidden p-4 pb-[max(1rem,env(safe-area-inset-bottom))] pointer-events-none"
-      role="dialog"
+      role="region"
       aria-labelledby="cookie-consent-title"
       aria-describedby="cookie-consent-desc"
-      aria-modal="false"
     >
       <div
         class="pointer-events-auto max-w-3xl mx-auto mr-16 sm:mr-auto rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-lg px-4 py-3 sm:px-5 sm:py-4 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4"
       >
         <p id="cookie-consent-desc" class="text-sm leading-relaxed flex-1 min-w-0">
-          <span id="cookie-consent-title" class="sr-only">Çerez tercihleri</span>
-          Deneyimi geliştirmek için çerezler kullanıyoruz. <strong class="font-semibold text-[#262322] dark:text-gray-100">Çerezlere izin ver</strong>erek kabul edebilir veya tercihlerinizi <a href={cerezlerUrl} class="text-[#E30A17] dark:text-red-400 font-medium underline underline-offset-2 hover:opacity-90">yönetebilirsiniz</a>.
+          <span id="cookie-consent-title" class="sr-only">Site veri kullanımı</span>
+          Reklam veya uygulamalar arası izleme için çerez kullanılmaz; yalnızca site ve tema gibi gerekli teknik veriler saklanabilir.
         </p>
         <div class="flex flex-wrap items-center gap-2 shrink-0">
           <a
             href={cerezlerUrl}
             class="px-4 py-2 rounded-lg text-sm font-medium border-2 border-gray-300 dark:border-gray-500 text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
           >
-            Yönet
+            Çerez politikası
           </a>
           <button
             type="button"
-            id="cookie-consent-accept"
+            id="cookie-consent-dismiss"
             class="px-4 py-2 rounded-lg text-sm font-medium bg-[#E30A17] text-white hover:bg-[#c00914] transition-colors"
           >
-            İzin Ver
+            Anladım
           </button>
         </div>
       </div>
@@ -239,16 +238,17 @@ const cerezlerUrl = `${baseUrl}cerezler`;
     const iptalBtn = document.getElementById("teklif-form-iptal");
     const form = document.getElementById("teklif-form");
     const cookieBanner = document.getElementById("cookie-consent-banner");
-    const cookieAccept = document.getElementById("cookie-consent-accept");
+    const cookieDismiss = document.getElementById("cookie-consent-dismiss");
+    /** İlk görüntülemeden sonra saklanır; tracking onayı değil, bildirimin kapatılmasıdır. */
     const COOKIE_CONSENT_KEY = "nurdogan-cookie-consent";
 
     if (cookieBanner && !localStorage.getItem(COOKIE_CONSENT_KEY)) {
       cookieBanner.classList.remove("hidden");
     }
 
-    cookieAccept?.addEventListener("click", () => {
+    cookieDismiss?.addEventListener("click", () => {
       try {
-        localStorage.setItem(COOKIE_CONSENT_KEY, "accepted");
+        localStorage.setItem(COOKIE_CONSENT_KEY, "dismissed");
       } catch (_) {}
       cookieBanner?.classList.add("hidden");
     });

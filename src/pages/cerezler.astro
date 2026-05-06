@@ -4,65 +4,24 @@ import LegalPageShell from "../components/LegalPageShell.astro";
 const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
 ---
 
-<LegalPageShell
-  title="Çerez Politikası"
-  lead="Çerezler, ziyaret ettiğiniz web sitesinin tarayıcınıza veya cihazınıza küçük metin dosyaları yerleştirmesi yoluyla çalışır. Bu sayfada kullanılan çerez türleri ve tercihlerinizi nasıl yönetebileceğiniz özetlenmektedir."
->
-  <section>
-    <h2>1. Çerez nedir ve neden kullanılıyor?</h2>
+<LegalPageShell title="Çerez Politikası">
+  <section class="space-y-4">
     <p>
-      Çerezler; siteyi nasıl kullandığınızı anlamamıza, tercihlerinizi hatırlamamıza (örneğin tema), güvenlik ve temel işlevleri sürdürmemize yardımcı olur. Ayrıca, açık rızanız ve ilgili mevzuattaki düzenlemelere uygun şekilde, içerik iyileştirme ve pazarlama amaçlı çerezler de kullanılabilir.
-    </p>
-  </section>
-
-  <section>
-    <h2>2. Kullandığımız çerez kategorileri</h2>
-    <h3>Zorunlu (temel) çerezler</h3>
-    <p>
-      Siteye giriş, güvenlik, form ve oturum bütünlüğü gibi temel özellikler için gereklidir. Bu çerezler olmadan site düzgün çalışmayabilir.
-    </p>
-    <h3>İşlevsel çerezler</h3>
-    <p>
-      Dil, tema (açık/koyu mod) veya benzeri tercihleri hatırlamak için kullanılır. Çoğu zaman cihazınızda yerel depolama ile birlikte çalışabilir.
-    </p>
-    <h3>Analitik / performans çerezleri</h3>
-    <p>
-      Ziyaret sayıları, sayfa görüntülemeleri ve hata raporları gibi istatistiksel bilgileri anonim veya toplu düzeyde toplamak için kullanılabilir. Kullanım, açık rızanıza veya ilgili hizmet sağlayıcı politikalarına bağlıdır.
-    </p>
-    <h3>Pazarlama / hedefleme çerezleri</h3>
-    <p>
-      Sosyal medya veya reklam ağları üzerinden ilgi alanınıza uygun içerik sunulması amacıyla kullanılabilir. Bu tür çerezler yalnızca yasal dayanak ve tercihleriniz uyarınca devreye alınır.
-    </p>
-  </section>
-
-  <section>
-    <h2>3. Birinci ve üçüncü taraf çerezler</h2>
-    <p>
-      Birinci taraf çerezler doğrudan bu alan adı üzerinden ayarlanır. Üçüncü taraf çerezler ise gömülü haritalar, video oynatıcılar, analitik veya sosyal eklentiler gibi bileşenler aracılığıyla ilgili sağlayıcılar tarafından yerleştirilebilir. Bu sağlayıcıların kendi gizlilik politikaları geçerlidir.
-    </p>
-  </section>
-
-  <section>
-    <h2>4. Saklama süreleri</h2>
-    <p>
-      Oturum çerezleri tarayıcıyı kapattığınızda sona erer. Kalıcı çerezler ise amaçlarına göre birkaç günden aya veya daha uzun süreye kadar cihazınızda kalabilir. Süreler, çerezin türüne ve kullanım amacına göre değişir.
-    </p>
-  </section>
-
-  <section>
-    <h2>5. Tercihlerinizi nasıl yönetirsiniz?</h2>
-    <p>
-      Siteyi ilk ziyaretinizde ekranda görünen çerez bildiriminden <strong>İzin Ver</strong> ile tercihinizi kaydedebilirsiniz. Tarayıcı ayarlarınızdan çerezleri engelleyebilir veya silebilirsiniz; bu durumda bazı özellikler kısıtlanabilir.
+      Reklam ağları veya başka uygulama ve siteler arasında kullanıcıyı tanıma amacıyla çerez veya benzeri tanılayıcı <strong>kullanılmaz</strong>. Bu nedenle bu tür izleme için (ör. Apple App Tracking Transparency kapsamı) ayrı izin istenmez.
     </p>
     <p>
-      Kayıtlı tercihinizi sıfırlamak için tarayıcınızda site verilerini temizleyebilir veya yerel depolamada <code class="text-sm bg-gray-200 dark:bg-gray-800 px-1.5 py-0.5 rounded">nurdogan-cookie-consent</code> anahtarını kaldırıp sayfayı yeniden yükleyebilirsiniz (yalnızca bu site için bildirimin tekrar görünmesi amacıyla).
+      Yalnızca sitenin çalışması ve örneğin tema tercihiniz gibi birinci taraf işlevler için gerekli teknik veriler söz konusudur. Analitik ve pazarlama çerezleri <strong>kullanılmamaktadır</strong>.
     </p>
-  </section>
-
-  <section>
-    <h2>6. Kişisel veriler ve daha fazla bilgi</h2>
     <p>
-      Çerezler aracılığıyla işlenebilecek verilere ilişkin açıklama için <a href={`${baseUrl}gizlilik-politikasi`}>Gizlilik Politikası</a> ve siteyi kullanımınıza ilişkin şartlar için <a href={`${baseUrl}kullanim-sartlari`}>Kullanım Şartları</a> sayfalarına bakınız.
+      Sosyal medya bağlantıları site dışına yönlendirir; o platformların uygulamaları kendi kurallarına tabidir.
+    </p>
+    <p>
+      Sayfanın altında ilk ziyarette görünen kısa çubuk, izleme izni değildir; <strong>Anladım</strong> yalnızca bu metnin tekrar gösterilmemesi için tercihinizi kaydeder.
+    </p>
+    <p>
+      <a href={`${baseUrl}gizlilik-politikasi`}>Gizlilik Politikası</a>
+      ·
+      <a href={`${baseUrl}kullanim-sartlari`}>Kullanım Şartları</a>
     </p>
   </section>
 </LegalPageShell>
