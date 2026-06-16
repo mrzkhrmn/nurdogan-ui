@@ -37,12 +37,23 @@ function resolveProjectImageUrl(project) {
   return typeof raw === "string" ? raw : "";
 }
 
-function buildGalleryUrls(project, baseUrl) {
-  const medias = resolveProjectMedias(project);
+function resolveMediaType(m) {
+  const raw = m?.mediaType ?? m?.MediaType ?? "photo";
+  return String(raw).toLowerCase();
+}
+
+function isVideoMedia(m) {
+  return resolveMediaType(m) === "video";
+}
+
+function sortMedias(medias) {
+  return [...medias].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+}
+
+function buildPhotoGalleryUrls(project, baseUrl) {
+  const medias = resolveProjectMedias(project).filter((m) => !isVideoMedia(m));
   const coverMedia = medias.find((m) => m.isCover);
-  const otherMedias = medias
-    .filter((m) => !m.isCover)
-    .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+  const otherMedias = sortMedias(medias.filter((m) => !m.isCover));
 
   const galleryUrls = [];
   if (coverMedia) {
@@ -54,7 +65,7 @@ function buildGalleryUrls(project, baseUrl) {
     if (url) galleryUrls.push(url);
   });
   if (galleryUrls.length === 0 && medias.length) {
-    medias.forEach((m) => {
+    sortMedias(medias).forEach((m) => {
       const u = getImageUrl(resolveMediaPath(m));
       if (u) galleryUrls.push(u);
     });
@@ -69,6 +80,12 @@ function buildGalleryUrls(project, baseUrl) {
     galleryUrls.push(`${baseUrl}construction1.png`);
   }
   return galleryUrls;
+}
+
+function buildVideoUrls(project) {
+  return sortMedias(resolveProjectMedias(project).filter(isVideoMedia))
+    .map((m) => getImageUrl(resolveMediaPath(m)))
+    .filter(Boolean);
 }
 
 function GalleryViewer({ images, projectName }) {
@@ -186,6 +203,35 @@ function GalleryViewer({ images, projectName }) {
   );
 }
 
+function ProjectVideos({ videos, projectName }) {
+  if (videos.length === 0) return null;
+
+  return (
+    <div className="mt-10 sm:mt-14 md:mt-20">
+      <h2 className="text-[#262322] dark:text-gray-100 text-lg sm:text-xl md:text-2xl font-semibold mb-4 sm:mb-6">
+        Proje Videoları
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        {videos.map((url, i) => (
+          <div
+            key={`${url}-${i}`}
+            className="relative aspect-video rounded-xl sm:rounded-2xl overflow-hidden bg-black shadow-lg"
+          >
+            <video
+              src={url}
+              controls
+              playsInline
+              preload="metadata"
+              className="w-full h-full object-contain"
+              aria-label={`${projectName} - Video ${i + 1}`}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function ProjeDetayDinamik({ baseUrl: baseUrlProp }) {
   const baseUrl = baseUrlProp || buildBaseUrl();
   const projelerHref = `${baseUrl}projeler`;
@@ -226,8 +272,13 @@ export default function ProjeDetayDinamik({ baseUrl: baseUrlProp }) {
 
   const galleryUrls = useMemo(() => {
     if (state.status !== "ready" || !state.project) return [];
-    return buildGalleryUrls(state.project, baseUrl);
+    return buildPhotoGalleryUrls(state.project, baseUrl);
   }, [state, baseUrl]);
+
+  const videoUrls = useMemo(() => {
+    if (state.status !== "ready" || !state.project) return [];
+    return buildVideoUrls(state.project);
+  }, [state]);
 
   if (state.status === "loading") {
     return (
@@ -358,6 +409,7 @@ export default function ProjeDetayDinamik({ baseUrl: baseUrlProp }) {
           </div>
 
           <GalleryViewer images={galleryUrls} projectName={project.name} />
+          <ProjectVideos videos={videoUrls} projectName={project.name} />
         </div>
       </section>
     </div>
