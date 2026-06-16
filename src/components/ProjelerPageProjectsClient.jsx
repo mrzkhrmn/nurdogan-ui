@@ -216,7 +216,7 @@ export default function ProjelerPageProjectsClient({ baseUrl: baseUrlProp }) {
             {filteredOngoing.map((project) => (
               <ProjectCard
                 key={project.id}
-                href={`${baseUrl}projeler/${project.id}`}
+                href={`${baseUrl}projeler/detay?id=${encodeURIComponent(project.id)}`}
                 image={project.image}
                 name={project.name}
                 location={project.location}
@@ -244,7 +244,7 @@ export default function ProjelerPageProjectsClient({ baseUrl: baseUrlProp }) {
             {filteredCompleted.map((project) => (
               <ProjectCard
                 key={project.id}
-                href={`${baseUrl}projeler/${project.id}`}
+                href={`${baseUrl}projeler/detay?id=${encodeURIComponent(project.id)}`}
                 image={project.image}
                 name={project.name}
                 location={project.location}

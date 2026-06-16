@@ -1,0 +1,28 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+
+const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
+---
+
+<MainLayout>
+  <section class="w-full min-h-[50vh] flex items-center justify-center px-4 py-24">
+    <div class="text-center">
+      <p class="text-[#525252] dark:text-gray-400 text-lg mb-6">Sayfa bulunamadı.</p>
+      <a
+        href={baseUrl}
+        class="inline-flex items-center gap-2 rounded-full bg-[#E30A17] px-6 py-3 text-white font-medium hover:bg-[#c00914] transition-colors"
+      >
+        Anasayfaya dön
+      </a>
+    </div>
+  </section>
+</MainLayout>
+
+<script is:inline define:vars={{ baseUrl }}>
+  (function () {
+    var match = window.location.pathname.match(/\/projeler\/([^/?#]+)\/?$/);
+    if (!match || !match[1] || match[1] === "detay") return;
+    var id = decodeURIComponent(match[1]);
+    window.location.replace(baseUrl + "projeler/detay?id=" + encodeURIComponent(id));
+  })();
+</script>

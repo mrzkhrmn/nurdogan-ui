@@ -130,7 +130,7 @@ export default function ProjectsSectionClient({ baseUrl: baseUrlProp }) {
           {completedProjects.map((project) => (
             <ProjectCard
               key={project.id}
-              href={`${baseUrl}projeler/${project.id}`}
+              href={`${baseUrl}projeler/detay?id=${encodeURIComponent(project.id)}`}
               image={project.image}
               name={project.name}
               location={project.location}
@@ -145,7 +145,7 @@ export default function ProjectsSectionClient({ baseUrl: baseUrlProp }) {
           {ongoingProjects.map((project) => (
             <ProjectCard
               key={project.id}
-              href={`${baseUrl}projeler/${project.id}`}
+              href={`${baseUrl}projeler/detay?id=${encodeURIComponent(project.id)}`}
               image={project.image}
               name={project.name}
               location={project.location}

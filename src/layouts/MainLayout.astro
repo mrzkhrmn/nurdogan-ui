@@ -239,7 +239,6 @@ const cerezlerUrl = `${baseUrl}cerezler`;
     const form = document.getElementById("teklif-form");
     const cookieBanner = document.getElementById("cookie-consent-banner");
     const cookieDismiss = document.getElementById("cookie-consent-dismiss");
-    /** İlk görüntülemeden sonra saklanır; tracking onayı değil, bildirimin kapatılmasıdır. */
     const COOKIE_CONSENT_KEY = "nurdogan-cookie-consent";
 
     if (cookieBanner && !localStorage.getItem(COOKIE_CONSENT_KEY)) {
