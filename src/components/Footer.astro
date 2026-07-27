@@ -1,128 +1,132 @@
 ---
 import Image from "astro/components/Image.astro";
-import { ArrowRightIcon, LocationIcon, MailIcon, FacebookIcon, TwitterIcon, LinkedInIcon, YouTubeIcon, InstagramIcon, KepIcon, PhoneIcon } from "./icons";
+import { YouTubeIcon, InstagramIcon } from "./icons";
 
 const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
+
+const pages = [
+  { label: "Ana Sayfa", href: baseUrl },
+  { label: "Hakkımızda", href: `${baseUrl}#hakkimizda` },
+  { label: "Projeler", href: `${baseUrl}projeler` },
+  { label: "Haberler", href: `${baseUrl}haberler` },
+  { label: "İletişim", href: `${baseUrl}iletisim` },
+  { label: "Teklif Al", href: `${baseUrl}teklif-al` },
+];
 ---
 
 <footer id="iletisim" class="w-full bg-[#E30A17] dark:bg-gray-950 text-white transition-colors duration-200">
-
-
   <div class="border-b border-white/10">
-    <div class="max-w-[1600px] mx-auto px-4 md:px-6 lg:px-12 py-12 md:py-16">
-      <div class="flex flex-col lg:flex-row items-stretch lg:items-center gap-10 lg:gap-10">
-        <div class="space-y-6 w-full min-w-0 lg:flex-1">
-          <h4 class="text-white text-lg md:text-xl font-semibold">İletişim</h4>
-          <div class="space-y-4">
-            <div class="flex items-center gap-3">
-              <div>
-                <KepIcon />
-              </div>
-              <div class="space-y-1">
-                <a href="mekakentseldonusum@hs01.kep.tr" class="block text-white text-sm md:text-base hover:text-white transition-colors">mekakentseldonusum@hs01.kep.tr</a>
-              </div>
-            </div>
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center shrink-0">
-                <LocationIcon />
-              </div>
-              <p class="min-w-0 max-w-60 text-white text-sm md:text-base leading-relaxed">
-                Caddebostan Mah. Bağdat Cd. Alevok Apt. No:275 Kat:1 Daire:2 Kadıköy / İSTANBUL
-              </p>
-            </div>
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center shrink-0">
-                <PhoneIcon />
-              </div>
-              <a href="tel:+905326126544" class="text-white text-sm md:text-base hover:text-white transition-colors whitespace-nowrap">
-                0532 612 65 44
-              </a>
-            </div>
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center shrink-0">
-                <MailIcon />
-              </div>
-              <div class="space-y-1">
-                <a href="mailto:infomailrealar@gmail.com" class="block text-white text-sm md:text-base hover:text-white transition-colors">
-                  infomailrealar@gmail.com
-                </a>
-                <a href="mailto:supportmail01@gmail.com" class="block text-white text-sm md:text-base hover:text-white transition-colors">
-                  supportmail01@gmail.com
-                </a>
-              </div>
-            </div>
+    <div class="max-w-[1200px] mx-auto px-4 md:px-6 lg:px-8 py-12 md:py-14">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+        <!-- Logo / marka -->
+        <div class="space-y-5">
+          <Image
+            src={`${baseUrl}new-logo.png`}
+            alt="Nurdoğan Babadağ"
+            width={140}
+            height={82}
+            loading="lazy"
+            class="block w-28 h-auto bg-white p-1.5 rounded-lg"
+          />
+          <p class="text-white/90 text-sm leading-relaxed max-w-[240px]">
+            Kentsel dönüşüm ve proje yönetiminde güvenilir çözüm ortağınız.
+          </p>
+          <div class="flex items-center gap-3 pt-1">
+            <a
+              href="https://www.youtube.com/@nurdoganb"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-9 h-9 rounded-full border border-white/30 flex items-center justify-center hover:bg-white/10 transition-colors"
+              aria-label="YouTube"
+            >
+              <YouTubeIcon width={18} height={18} />
+            </a>
+            <a
+              href="https://www.instagram.com/nurdoganbabadag/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-9 h-9 rounded-full border border-white/30 flex items-center justify-center hover:bg-white/10 transition-colors"
+              aria-label="Instagram"
+            >
+              <InstagramIcon width={18} height={18} />
+            </a>
           </div>
         </div>
 
-        <div class="space-y-6 w-full min-w-0 lg:flex-1">
-          <h4 class="text-white text-lg md:text-xl font-semibold">Bağlantılar</h4>
-          <nav class="space-y-3">
-            <a href={`${baseUrl}#hakkimizda`} class="flex items-center gap-2 text-white text-sm md:text-base hover:text-white transition-colors group">
-              <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-50 group-hover:opacity-100 transition-opacity">
-                <path d="M1 1L5 5L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              Hakkımızda
+        <!-- Sayfalar -->
+        <div>
+          <h4 class="text-white text-base md:text-lg font-semibold mb-5 pb-2 border-b border-white/20">
+            Sayfalar
+          </h4>
+          <nav class="flex flex-col gap-2.5">
+            {pages.map((page) => (
+              <a
+                href={page.href}
+                class="text-white/90 text-sm md:text-[15px] hover:text-white transition-colors"
+              >
+                {page.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+
+        <!-- Yasal -->
+        <div>
+          <h4 class="text-white text-base md:text-lg font-semibold mb-5 pb-2 border-b border-white/20">
+            Yasal
+          </h4>
+          <nav class="flex flex-col gap-2.5">
+            <a href={`${baseUrl}kullanim-sartlari`} class="text-white/90 text-sm md:text-[15px] hover:text-white transition-colors">
+              Kullanım Şartları
             </a>
-            <a href={`${baseUrl}iletisim`} class="flex items-center gap-2 text-white text-sm md:text-base hover:text-white transition-colors group">
-              <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-50 group-hover:opacity-100 transition-opacity">
-                <path d="M1 1L5 5L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              İletişim
+            <a href={`${baseUrl}gizlilik-politikasi`} class="text-white/90 text-sm md:text-[15px] hover:text-white transition-colors">
+              Gizlilik Politikası
             </a>
-            <a href={`${baseUrl}projeler`} class="flex items-center gap-2 text-white text-sm md:text-base hover:text-white transition-colors group">
-              <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-50 group-hover:opacity-100 transition-opacity">
-                <path d="M1 1L5 5L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              Projeler
-            </a>
-            <a href={`${baseUrl}haberler`} class="flex items-center gap-2 text-white text-sm md:text-base hover:text-white transition-colors group">
-              <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-50 group-hover:opacity-100 transition-opacity">
-                <path d="M1 1L5 5L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              Haberler
-            </a>
-            <a href={`${baseUrl}teklif-al`} class="flex items-center gap-2 text-white text-sm md:text-base hover:text-white transition-colors group">
-              <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-50 group-hover:opacity-100 transition-opacity">
-                <path d="M1 1L5 5L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              Teklif Al
+            <a href={`${baseUrl}cerezler`} class="text-white/90 text-sm md:text-[15px] hover:text-white transition-colors">
+              Çerezler
             </a>
           </nav>
         </div>
 
-        <div class="flex flex-col gap-4 shrink-0 w-full lg:w-auto">
-          <Image src={`${baseUrl}new-logo.png`} alt="Nurdoğan Babadağ" width={104} height={61} loading="lazy" class="block w-23 sm:w-24 lg:w-24 h-auto bg-white p-1.5 rounded-lg" />
-          <div class="flex items-center gap-4">
-            <a href="https://www.youtube.com/@nurdoganb" target="_blank" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-[#E30A17] hover:border-[#E30A17] transition-colors">
-              <YouTubeIcon width={20} height={20}/>
-            </a>
-            <a href="https://www.instagram.com/nurdoganbabadag/" target="_blank" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-[#E30A17] hover:border-[#E30A17] transition-colors">
-              <InstagramIcon width={20} height={20}/>
-            </a>
+        <!-- İletişim -->
+        <div>
+          <h4 class="text-white text-base md:text-lg font-semibold mb-5 pb-2 border-b border-white/20">
+            İletişim
+          </h4>
+          <div class="space-y-5 text-sm md:text-[15px]">
+            <div>
+              <p class="font-semibold text-white mb-1.5">Telefon:</p>
+              <a href="tel:+905306544317" class="block text-white/90 hover:text-white transition-colors">
+                +90 530 654 43 17
+              </a>
+              <a href="tel:+905326126544" class="block text-white/90 hover:text-white transition-colors">
+                +90 532 612 65 44
+              </a>
+            </div>
+            <div>
+              <p class="font-semibold text-white mb-1.5">E-Posta:</p>
+              <a href="mailto:info@nurdoganbabadag.com" class="block text-white/90 hover:text-white transition-colors break-all">
+                info@nurdoganbabadag.com
+              </a>
+              <a href="mailto:mekakentseldonusum@hs01.kep.tr" class="block text-white/90 hover:text-white transition-colors break-all mt-1">
+                mekakentseldonusum@hs01.kep.tr
+              </a>
+            </div>
+            <div>
+              <p class="font-semibold text-white mb-1.5">Adres:</p>
+              <p class="text-white/90 leading-relaxed">
+                Caddebostan Mah. Bağdat Cd. Alevok Apt. No:275 Kat:1 Daire:2 Kadıköy / İSTANBUL
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Copyright Section -->
-  <div class="w-full bg-[#333333] mx-auto px-4 md:px-6 lg:px-12 py-6 md:py-8">
-    <div class="max-w-[1600px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm md:text-base">
-      <p class="text-white text-center md:text-left">
-        Copyright © {new Date().getFullYear()} <span class="text-[#E30A17]">Nurdoğan Babadağ</span>, tüm hakları saklıdır.
-      </p>
-      <div class="flex flex-wrap items-center justify-center gap-4 md:gap-6">
-        <a href={`${baseUrl}kullanim-sartlari`} class="text-white hover:text-white transition-colors">
-          Kullanım Şartları
-        </a>
-        <a href={`${baseUrl}gizlilik-politikasi`} class="text-white hover:text-white transition-colors">
-          Gizlilik Politikası
-        </a>
-        <a href={`${baseUrl}cerezler`} class="text-white hover:text-white transition-colors">
-          Çerezler
-        </a>
-      </div>
-    </div>
+  <div class="w-full bg-[#333333] px-4 md:px-6 lg:px-8 py-5 md:py-6">
+    <p class="max-w-[1200px] mx-auto text-white text-center text-sm md:text-base">
+      Copyright © {new Date().getFullYear()} <span class="text-[#E30A17]">Nurdoğan Babadağ</span> — Tüm Hakları Saklıdır.
+    </p>
   </div>
 </footer>
-

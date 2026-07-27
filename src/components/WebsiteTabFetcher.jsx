@@ -445,7 +445,9 @@ function LandingContent({ baseUrl = "/" }) {
         <div className="relative z-20 mx-auto flex w-full max-w-[min(100%,92rem)] flex-col items-start px-[clamp(1rem,calc(0.35rem+2.85vw),4rem)] text-left">
           <div className="flex w-full flex-col items-start gap-[clamp(0.75rem,calc(0.45rem+1.1vw),2.25rem)]">
             <h2 className="hero-entrance hero-entrance-delay-1 w-full text-[clamp(1.75rem,calc(0.7rem+3.6vw),5rem)] font-semibold leading-[1.1] tracking-wide text-white drop-shadow-md">
-              Kentsel Dönüşüm ve Proje Yönetimi
+              Kentsel Dönüşüm
+              <br />
+              Proje Yönetimi ve
               <br />
               Danışmanlık Hizmetleri
             </h2>
