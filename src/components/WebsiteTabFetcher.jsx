@@ -1048,8 +1048,6 @@ function parseEmailList(content) {
   }
 }
 
-const ILETISIM_PUBLIC_PHONE = "0532 612 65 44";
-const ILETISIM_PUBLIC_PHONE_TEL = "tel:+905326126544";
 
 /** İletişim sayfası: API'den main section (title, sub-title, address, kep, email, harita-url); telefon sabit */
 function IletisimContent({ baseUrl = "/" }) {
@@ -1147,10 +1145,10 @@ function IletisimContent({ baseUrl = "/" }) {
                         Telefon
                       </p>
                       <a
-                        href={ILETISIM_PUBLIC_PHONE_TEL}
                         className="text-[#525252] dark:text-gray-300 hover:text-[#262322] dark:hover:text-gray-100 transition-colors wrap-break-word"
                       >
-                        {ILETISIM_PUBLIC_PHONE}
+                        +90 530 654 43 17
+                        +90 532 612 65 44
                       </a>
                     </div>
                   </div>
@@ -1164,7 +1162,7 @@ function IletisimContent({ baseUrl = "/" }) {
                           E-posta
                         </p>
                         <div className="space-y-1">
-                          {emailList.map((email) => (
+                          {/*{emailList.map((email) => (
                             <a
                               key={email}
                               href={`mailto:${email}`}
@@ -1172,7 +1170,14 @@ function IletisimContent({ baseUrl = "/" }) {
                             >
                               {email}
                             </a>
-                          ))}
+                          ))}*/}
+                           <a
+                              key="info@nurdoganbabadag.com"
+                              href={`mailto:info@nurdoganbabadag.com`}
+                              className="block text-[#525252] dark:text-gray-300 hover:text-[#262322] dark:hover:text-gray-100 transition-colors wrap-break-word"
+                            >
+                              info@nurdoganbabadag.com
+                            </a>
                         </div>
                       </div>
                     </div>
