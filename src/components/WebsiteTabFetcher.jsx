@@ -712,7 +712,7 @@ function KentselDonusumTanitimContent({ baseUrl = "/" }) {
 }
 
 const HAKKIMIZDA_DEFAULT_TEXT =
-  "İnşaat sektöründe 38 yılı aşkın sürede oluşan tecrübesini, 2012 yılından buyana kentsel dönüşüm alanında uygulayarak 300 adedi aşkın binanın kentsel dönüşümünü başarıyla tamamlayan ve MEKA KENTSEL DÖNÜŞÜM PROJE YÖNETİMİ VE DANIŞMANLIK LTD. ŞİRKETİNİN sahibi olan NURDOĞAN BABADAĞ, bu alanda ilk olduğu gibi bundan sonra da konusunda yüksek tecrübeye sahip 3 avukat, 3 inşaat mühendisi, 2 mimar, 1 iç mimar, 1 elektrik mühendisi ve diğer yardımcı idari personelden oluşan toplam 16 kişilik uzman kadrosuyla kentsel dönüşüme ihtiyaç duyan bina maliklerine sürecin başından sonuna kadar tam kapsamlı olarak hizmet verilmesinde öncü kuruluş olmaya devam edecektir. Özellikle Türkiye'nin kalbi niteliğindeki İstanbul'un Kadıköy ilçesinde yoğun kentsel dönüşüm faaliyetleri ile bilinen NURDOĞAN BABADAĞ, yine kentsel dönüşüm ihtiyacının en çok görüldüğü İstanbul'un Etiler, Şişli, Beşiktaş ve Küçükyalı bölgeleri ile Antalya'nın Lara mevkiinde de dönüşüm faaliyetlerini yoğun bir şekilde sürdürmektedir.";
+  "İnşaat sektöründe 39 yılı aşkın sürede oluşan tecrübesini, 2012 yılından buyana kentsel dönüşüm alanında uygulayarak 300 adedi aşkın binanın kentsel dönüşümünü başarıyla tamamlayan ve MEKA KENTSEL DÖNÜŞÜM PROJE YÖNETİMİ VE DANIŞMANLIK LTD. ŞİRKETİNİN sahibi olan NURDOĞAN BABADAĞ, bu alanda ilk olduğu gibi bundan sonra da konusunda yüksek tecrübeye sahip 3 avukat, 3 inşaat mühendisi, 2 mimar, 1 iç mimar, 1 elektrik mühendisi ve diğer yardımcı idari personelden oluşan toplam 16 kişilik uzman kadrosuyla kentsel dönüşüme ihtiyaç duyan bina maliklerine sürecin başından sonuna kadar tam kapsamlı olarak hizmet verilmesinde öncü kuruluş olmaya devam edecektir. Özellikle Türkiye'nin kalbi niteliğindeki İstanbul'un Kadıköy ilçesinde yoğun kentsel dönüşüm faaliyetleri ile bilinen NURDOĞAN BABADAĞ, yine kentsel dönüşüm ihtiyacının en çok görüldüğü İstanbul'un Etiler, Şişli, Beşiktaş ve Küçükyalı bölgeleri ile Antalya'nın Lara mevkiinde de dönüşüm faaliyetlerini yoğun bir şekilde sürdürmektedir.";
 
 /** Anasayfa Hakkımızda: API'den main tab, section hakkimizda (hakkimizda-text, hakkimizda-list) */
 function HakkimizdaContent({ baseUrl = "/" }) {
@@ -775,7 +775,7 @@ function HakkimizdaContent({ baseUrl = "/" }) {
       <div className="relative z-10 max-w-7xl mx-auto w-full">
         <div className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-10 lg:p-12 xl:p-16 shadow-2xl">
           <p className="inline-block text-[#E30A17] text-sm sm:text-base md:text-4xl font-bold mb-4 tracking-wider uppercase bg-[#E30A17]/15 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl">
-            38 YILI AŞKIN TECRÜBE
+            39 YILI AŞKIN TECRÜBE
           </p>
           <h2 className="text-[#262322] text-2xl md:text-5xl font-semibold mb-4 sm:mb-5 md:mb-6 leading-tight">
             Hakkımızda
