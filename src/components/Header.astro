@@ -1,7 +1,7 @@
 ---
 import Image from "astro/components/Image.astro";
 import SearchIcon from "./icons/SearchIcon.jsx";
-import { ArrowRightIcon, InstagramIcon } from "./icons";
+import { ArrowRightIcon, InstagramIcon, LocationIcon, MailIcon, PhoneIcon } from "./icons";
 import ThemeToggle from "./ThemeToggle.jsx";
 const base = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
 const navItems = [
@@ -16,12 +16,53 @@ interface Props {
 }
 const { isHomePage = false } = Astro.props;
 const headerClass = isHomePage
-  ? "relative z-50 py-2 xl:py-3 min-[1440px]:py-4 2xl:py-5 w-full bg-[#E30A17] dark:bg-gray-950 transition-colors duration-200"
-  : "absolute top-0 left-0 right-0 z-50 py-2 xl:py-3 min-[1440px]:py-4 2xl:py-5 w-full bg-[#E30A17] dark:bg-gray-950 transition-colors duration-200";
+  ? "home-header fixed top-0 left-0 right-0 z-50 w-full bg-transparent transition-all duration-300"
+  : "absolute top-0 left-0 right-0 z-50 w-full bg-[#E30A17] dark:bg-gray-950 transition-colors duration-200";
 ---
 
-<header class={headerClass}>
-  <div class="w-full mx-auto max-w-[1920px]">
+<header class={headerClass} data-home-header={isHomePage ? "true" : "false"}>
+  <div class="header-topbar hidden lg:block border-b border-white/20">
+    <div class="mx-auto flex h-10 w-full max-w-[1920px] items-center justify-between px-4 xl:px-8 2xl:px-12">
+      <div class="flex items-center gap-5 text-xs text-white/90 xl:gap-7">
+        <a href="tel:+905326126544" class="header-contact-link flex items-center gap-2 transition-colors hover:text-white">
+          <span class="flex h-4 w-4 items-center justify-center [&_svg]:h-4 [&_svg]:w-4">
+            <PhoneIcon color="currentColor" width={16} height={16} />
+          </span>
+          0532 612 65 44
+        </a>
+        <span class="header-topbar-divider h-4 w-px bg-white/25" aria-hidden="true"></span>
+        <a href="mailto:info@nurdoganbabadag.com" class="header-contact-link flex items-center gap-2 transition-colors hover:text-white">
+          <span class="flex h-4 w-4 items-center justify-center [&_svg]:h-4 [&_svg]:w-4">
+            <MailIcon color="currentColor" />
+          </span>
+          info@nurdoganbabadag.com
+        </a>
+        <span class="header-topbar-divider h-4 w-px bg-white/25" aria-hidden="true"></span>
+        <span class="header-contact-link flex items-center gap-2">
+          <span class="flex h-4 w-4 items-center justify-center [&_svg]:h-4 [&_svg]:w-4">
+            <LocationIcon color="currentColor" />
+          </span>
+          Kadıköy / İstanbul
+        </span>
+      </div>
+
+      <div class="flex items-center gap-3 text-white">
+        <a
+          href="https://www.instagram.com/nurdoganbabadag/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="header-icon-link flex h-7 w-7 items-center justify-center transition-opacity hover:opacity-80"
+          aria-label="Instagram"
+        >
+          <InstagramIcon width={17} height={17} color="currentColor" />
+        </a>
+        <span class="header-topbar-divider h-5 w-px bg-white/25" aria-hidden="true"></span>
+        <ThemeToggle client:load className="header-theme-toggle !h-7 !w-7 !rounded-md [&_svg]:!h-4 [&_svg]:!w-4" />
+      </div>
+    </div>
+  </div>
+
+  <div class="w-full mx-auto max-w-[1920px] py-2 xl:py-3 min-[1440px]:py-4 2xl:py-5">
     <div class="flex items-center justify-between lg:justify-center h-14 sm:h-16 md:h-18 lg:h-14 min-[1440px]:h-16 2xl:h-18 gap-4 lg:gap-6 xl:gap-8 2xl:gap-12">
 
 
@@ -42,7 +83,7 @@ const headerClass = isHomePage
           return (
             <a
               href={item.href}
-              class={`text-sm xl:text-base 2xl:text-lg font-medium text-white hover:text-white/90 transition whitespace-nowrap ${!isExternal ? "smooth-scroll-link" : ""}`}
+              class={`header-nav-link text-sm xl:text-base 2xl:text-lg font-medium text-white hover:text-white/90 transition whitespace-nowrap ${!isExternal ? "smooth-scroll-link" : ""}`}
               {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             >
               {item.label}
@@ -52,7 +93,7 @@ const headerClass = isHomePage
         <div class="flex items-center gap-4 shrink-0">
           <a
             href={`${base}bina-yonetimi`}
-            class="rounded-full bg-white px-2.5 lg:px-3 xl:px-4 lg:py-2 2xl:px-5 text-[11px] xl:text-xs 2xl:text-sm font-medium text-[#E30A17] hover:bg-gray-100 transition flex items-center gap-1 xl:gap-1.5 whitespace-nowrap shrink-0"
+            class="header-cta-btn rounded-full bg-white px-2.5 lg:px-3 xl:px-4 lg:py-2 2xl:px-5 text-[11px] xl:text-xs 2xl:text-sm font-medium text-[#E30A17] hover:bg-gray-100 transition flex items-center gap-1 xl:gap-1.5 whitespace-nowrap shrink-0"
           >
             <svg class="w-3.5 h-3.5 xl:w-4 xl:h-4 2xl:w-4 2xl:h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -61,29 +102,18 @@ const headerClass = isHomePage
           </a>
           <a
             href="#"
-            class="open-teklif-modal rounded-full bg-white px-2.5 lg:px-3 xl:px-4 lg:py-2 2xl:px-5 text-[11px] xl:text-xs 2xl:text-sm font-medium text-[#E30A17] hover:bg-gray-100 transition flex items-center gap-1 xl:gap-1.5 whitespace-nowrap shrink-0 [&_svg]:w-3 [&_svg]:h-3 xl:[&_svg]:w-3.5 xl:[&_svg]:h-3.5"
+            class="open-teklif-modal header-cta-btn rounded-full bg-white px-2.5 lg:px-3 xl:px-4 lg:py-2 2xl:px-5 text-[11px] xl:text-xs 2xl:text-sm font-medium text-[#E30A17] hover:bg-gray-100 transition flex items-center gap-1 xl:gap-1.5 whitespace-nowrap shrink-0 [&_svg]:w-3 [&_svg]:h-3 xl:[&_svg]:w-3.5 xl:[&_svg]:h-3.5"
           >
             Teklif Al
             <ArrowRightIcon color="#E30A17" />
           </a>
-        </div>
-        <div class="flex items-center gap-2 shrink-0">
-          <a href="https://www.instagram.com/nurdoganbabadag/" target="_blank" rel="noopener noreferrer" class="cursor-pointer flex items-center justify-center text-white">
-            <div class="w-6 h-6 xl:w-7 xl:h-7 2xl:w-8 2xl:h-8 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full">
-              <InstagramIcon width={24} height={24} color="#FFFFFF" />
-            </div>
-          </a>
-          <div class="flex items-center gap-0.5 shrink-0">
-            <ThemeToggle client:load />
-            <!-- <LanguageSelector client:load /> -->
-          </div>
         </div>
       </nav>
 
       <div class="flex items-center gap-2 sm:gap-3 md:gap-4 lg:hidden">
 <button 
         id="mobile-search-btn"
-        class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center bg-white/20 rounded-full text-white"
+        class="header-mobile-btn w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center bg-white/20 rounded-full text-white"
         aria-label="Ara"
       >
         <SearchIcon />
@@ -91,7 +121,7 @@ const headerClass = isHomePage
         
         <button 
           id="mobile-menu-btn"
-          class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex flex-col items-center justify-center gap-1.5 text-white"
+          class="header-mobile-menu-btn w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex flex-col items-center justify-center gap-1.5 text-white"
           aria-label="Menü"
         >
           <span class="mobile-menu-line w-7 h-0.5 sm:w-8 sm:h-1 bg-white transition-all"></span>
@@ -102,7 +132,7 @@ const headerClass = isHomePage
     </div>
 
     <div id="mobile-search" class="hidden mt-4">
-      <div class="flex items-center bg-white/20 rounded-full px-5 py-3 w-full text-white">
+      <div class="header-mobile-search flex items-center bg-white/20 rounded-full px-5 py-3 w-full text-white">
         <input
           type="text"
           placeholder="Ara"
@@ -235,6 +265,21 @@ const headerClass = isHomePage
     });
   }
 
+  // Home page: transparent -> scrolled themed sticky header
+  const homeHeader = document.querySelector('header[data-home-header="true"]');
+  if (homeHeader) {
+    const SCROLL_THRESHOLD = 24;
+    const updateScrolledState = () => {
+      if (window.scrollY > SCROLL_THRESHOLD) {
+        homeHeader.classList.add('is-scrolled');
+      } else {
+        homeHeader.classList.remove('is-scrolled');
+      }
+    };
+    updateScrolledState();
+    window.addEventListener('scroll', updateScrolledState, { passive: true });
+  }
+
   // Smooth scroll functionality
   function smoothScrollTo(targetId: string) {
     const targetElement = document.querySelector(targetId);
@@ -281,6 +326,169 @@ const headerClass = isHomePage
   
   #mobile-menu-btn.active .mobile-menu-line:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -6px);
+  }
+
+  /* Ana sayfa: scroll sonrası tema yüzey rengi */
+  :global(header.home-header.is-scrolled) {
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  }
+
+  :global(header.home-header.is-scrolled .header-topbar) {
+    border-color: rgb(38 35 34 / 0.14);
+  }
+
+  :global(header.home-header.is-scrolled .header-contact-link) {
+    color: #525252;
+  }
+
+  :global(header.home-header.is-scrolled .header-contact-link:hover) {
+    color: #E30A17;
+  }
+
+  :global(header.home-header.is-scrolled .header-topbar-divider) {
+    background-color: rgb(38 35 34 / 0.18);
+  }
+
+  :global(html.dark header.home-header.is-scrolled) {
+    background-color: #030712; /* gray-950 */
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.4);
+  }
+
+  :global(html.dark header.home-header.is-scrolled .header-topbar) {
+    border-color: rgb(255 255 255 / 0.2);
+  }
+
+  :global(html.dark header.home-header.is-scrolled .header-contact-link) {
+    color: rgb(255 255 255 / 0.9);
+  }
+
+  :global(html.dark header.home-header.is-scrolled .header-contact-link:hover) {
+    color: #ffffff;
+  }
+
+  :global(html.dark header.home-header.is-scrolled .header-topbar-divider) {
+    background-color: rgb(255 255 255 / 0.25);
+  }
+
+  /* Scroll sonrası açık tema: koyu metin / ikon */
+  :global(header.home-header.is-scrolled .header-nav-link) {
+    color: #262322;
+  }
+
+  :global(header.home-header.is-scrolled .header-nav-link:hover) {
+    color: #E30A17;
+  }
+
+  :global(header.home-header.is-scrolled .header-icon-link) {
+    color: #262322;
+  }
+
+  :global(header.home-header.is-scrolled .header-theme-toggle) {
+    color: #262322;
+  }
+
+  :global(header.home-header.is-scrolled .header-theme-toggle:hover) {
+    background-color: rgb(0 0 0 / 0.06);
+  }
+
+  :global(header.home-header.is-scrolled .header-cta-btn) {
+    background-color: #E30A17;
+    color: #ffffff;
+  }
+
+  :global(header.home-header.is-scrolled .header-cta-btn:hover) {
+    background-color: #c00914;
+  }
+
+  :global(header.home-header.is-scrolled .header-cta-btn path) {
+    stroke: #ffffff;
+  }
+
+  :global(header.home-header.is-scrolled .header-mobile-btn) {
+    background-color: rgb(0 0 0 / 0.08);
+    color: #262322;
+  }
+
+  :global(header.home-header.is-scrolled .header-mobile-menu-btn) {
+    color: #262322;
+  }
+
+  :global(header.home-header.is-scrolled .header-mobile-menu-btn .mobile-menu-line) {
+    background-color: #262322;
+  }
+
+  :global(header.home-header.is-scrolled .header-mobile-search) {
+    background-color: rgb(0 0 0 / 0.06);
+    color: #262322;
+  }
+
+  :global(header.home-header.is-scrolled .header-mobile-search input) {
+    color: #262322;
+  }
+
+  :global(header.home-header.is-scrolled .header-mobile-search input::placeholder) {
+    color: rgb(38 35 34 / 0.6);
+  }
+
+  /* Scroll sonrası koyu tema: beyaz içerik */
+  :global(html.dark header.home-header.is-scrolled .header-nav-link) {
+    color: #ffffff;
+  }
+
+  :global(html.dark header.home-header.is-scrolled .header-nav-link:hover) {
+    color: rgb(255 255 255 / 0.9);
+  }
+
+  :global(html.dark header.home-header.is-scrolled .header-icon-link) {
+    color: #ffffff;
+  }
+
+  :global(html.dark header.home-header.is-scrolled .header-theme-toggle) {
+    color: #ffffff;
+  }
+
+  :global(html.dark header.home-header.is-scrolled .header-theme-toggle:hover) {
+    background-color: rgb(255 255 255 / 0.2);
+  }
+
+  :global(html.dark header.home-header.is-scrolled .header-cta-btn) {
+    background-color: #ffffff;
+    color: #E30A17;
+  }
+
+  :global(html.dark header.home-header.is-scrolled .header-cta-btn:hover) {
+    background-color: #f3f4f6;
+  }
+
+  :global(html.dark header.home-header.is-scrolled .header-cta-btn path) {
+    stroke: #E30A17;
+  }
+
+  :global(html.dark header.home-header.is-scrolled .header-mobile-btn) {
+    background-color: rgb(255 255 255 / 0.2);
+    color: #ffffff;
+  }
+
+  :global(html.dark header.home-header.is-scrolled .header-mobile-menu-btn) {
+    color: #ffffff;
+  }
+
+  :global(html.dark header.home-header.is-scrolled .header-mobile-menu-btn .mobile-menu-line) {
+    background-color: #ffffff;
+  }
+
+  :global(html.dark header.home-header.is-scrolled .header-mobile-search) {
+    background-color: rgb(255 255 255 / 0.2);
+    color: #ffffff;
+  }
+
+  :global(html.dark header.home-header.is-scrolled .header-mobile-search input) {
+    color: #ffffff;
+  }
+
+  :global(html.dark header.home-header.is-scrolled .header-mobile-search input::placeholder) {
+    color: rgb(255 255 255 / 0.8);
   }
 
   /* 1650px altı için özel optimizasyon */

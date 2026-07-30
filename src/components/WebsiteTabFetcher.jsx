@@ -421,11 +421,11 @@ function LandingContent({ baseUrl = "/" }) {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full min-h-[calc(100vh-5rem)] overflow-hidden"
+      className="relative w-full min-h-screen overflow-hidden"
       id="hero-slider"
       aria-label="Ana tanıtım"
     >
-      <div className="relative flex min-h-[calc(100vh-5rem)] w-full flex-col items-start justify-center py-[clamp(2.5rem,calc(2rem+2vw),6rem)]">
+      <div className="relative flex min-h-screen w-full flex-col items-start justify-center py-[clamp(2.5rem,calc(2rem+2vw),6rem)]">
         <div className="absolute inset-0 z-0 overflow-hidden">
           <div
             ref={parallaxLayerRef}

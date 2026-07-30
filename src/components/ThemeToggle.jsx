@@ -14,7 +14,7 @@ function applyTheme(theme) {
   localStorage.setItem(STORAGE_KEY, theme);
 }
 
-export default function ThemeToggle() {
+export default function ThemeToggle({ className = "" }) {
   const [theme, setTheme] = useState("light");
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      className="w-8 h-8 xl:w-10 xl:h-10 2xl:w-14 2xl:h-14 shrink-0 flex items-center justify-center rounded-full text-white hover:bg-white/20 transition-colors"
+      className={`w-8 h-8 xl:w-10 xl:h-10 2xl:w-14 2xl:h-14 shrink-0 flex items-center justify-center rounded-full text-white hover:bg-white/20 transition-colors ${className}`.trim()}
       aria-label={theme === "dark" ? "Açık temaya geç" : "Koyu temaya geç"}
       title={theme === "dark" ? "Açık mod" : "Koyu mod"}
     >
