@@ -1116,7 +1116,7 @@ function IletisimContent({ baseUrl = "/" }) {
               </button>
               {emailList[0] && (
                 <a
-                  href={`mailto:${emailList[0]}`}
+                  href="mailto:info@nurdoganbabadag.com"
                   className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#E30A17] px-6 py-3.5 text-base font-medium text-[#E30A17] hover:bg-[#E30A17]/5 transition-colors w-fit"
                 >
                   E-posta Gönder
