@@ -1106,10 +1106,10 @@ function IletisimContent({ baseUrl = "/" }) {
                 {subTitle}
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:justify-end">
+            <div className="flex flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 lg:justify-end">
               <button
                 type="button"
-                className="open-teklif-modal inline-flex items-center justify-center gap-2 rounded-full bg-[#E30A17] px-6 py-3.5 text-base font-medium text-white hover:bg-[#c00914] transition-colors w-fit"
+                className="open-teklif-modal inline-flex items-center justify-center gap-2 rounded-full bg-[#E30A17] px-4 sm:px-6 py-3 sm:py-3.5 text-sm sm:text-base font-medium text-white hover:bg-[#c00914] transition-colors w-fit"
               >
                 Teklif Al
                 <ArrowRightIcon color="#fff" />
@@ -1117,7 +1117,7 @@ function IletisimContent({ baseUrl = "/" }) {
               {emailList[0] && (
                 <a
                   href="mailto:info@nurdoganbabadag.com"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#E30A17] px-6 py-3.5 text-base font-medium text-[#E30A17] hover:bg-[#E30A17]/5 transition-colors w-fit"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#E30A17] px-4 sm:px-6 py-3 sm:py-3.5 text-sm sm:text-base font-medium text-[#E30A17] hover:bg-[#E30A17]/5 transition-colors w-fit"
                 >
                   E-posta Gönder
                 </a>
