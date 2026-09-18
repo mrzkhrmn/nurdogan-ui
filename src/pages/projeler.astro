@@ -14,12 +14,32 @@ const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
     <section class="relative w-full pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-12 md:pb-20 px-4 md:px-6 bg-cover bg-top bg-no-repeat" style={`background-image: url('${baseUrl}projelerim-bg.png')`}>
       <div class="absolute inset-0 z-0 bg-white/80 dark:bg-gray-900/70" aria-hidden="true" />
       <div class="relative z-10 max-w-[1480px] mx-auto">
-        <h1 class="text-[#262322] dark:text-gray-100 text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight mb-4 md:mb-6">
-          Projeler
+        <h1 class="text-[#262322] dark:text-gray-100 text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight mb-6 md:mb-8">
+          Projelerimiz ve Referanslarımız
         </h1>
-        <p class="inline-block text-[#E30A17] dark:text-red-200 text-sm sm:text-base md:text-lg font-bold mb-2 tracking-wider uppercase bg-[#E30A17]/15 dark:bg-red-950/50 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl">
-          342+ TAMAMLANAN PROJE
-        </p>
+
+        <div class="projeler-intro  mb-10 md:mb-14 space-y-6 md:space-y-8 ">
+          <p class="text-[#525252] dark:text-gray-300 text-base sm:text-lg md:text-xl leading-relaxed md:leading-[1.75]">
+            <span class=" text-[#E30A17] dark:text-red-400 font-semibold text-lg sm:text-xl md:text-2xl tracking-tight">
+              NURDOĞAN BABADAĞ
+            </span>
+            <span class="text-[#262322] dark:text-gray-100 font-medium">, Kentsel Dönüşüm Proje Yönetimi ve Danışmanlık Ltd. Şti.</span>
+            olarak; mimari projelendirme ve sözleşme hazırlığından
+            <span class="text-[#E30A17] dark:text-red-400 font-semibold"> Yüklenici seçimine</span>,
+            riskli yapı tespitinden inşaat imalat sürecinin takibi ve iskân alımına kadar
+            kentsel dönüşümün tüm aşamalarında maliklerin haklarını koruyan
+            <span class="text-[#262322] dark:text-gray-100 font-semibold"> profesyonel danışmanlık hizmeti</span>
+            sunuyoruz.
+          </p>
+          <p class="text-[#585858] dark:text-gray-400 text-sm sm:text-base md:text-lg leading-relaxed md:leading-[1.8] font-[family-name:var(--font-family-manrope)]">
+            <span class="text-[#E30A17] dark:text-red-400 font-bold">15 yılı aşkın</span>
+            bilgi ve tecrübemizle yürüttüğümüz
+            <span class="text-[#262322] dark:text-gray-200 font-semibold"> devam eden projelerimizi</span>
+            ve başarıyla tamamlanan
+            <span class="text-[#262322] dark:text-gray-200 font-semibold"> proje referanslarımızı</span>
+            sayfamızda detaylıca inceleyebilirsiniz.
+          </p>
+        </div>
 
         <ProjelerPageProjectsClient client:load baseUrl={baseUrl} />
       </div>
